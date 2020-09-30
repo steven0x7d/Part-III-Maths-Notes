@@ -1,0 +1,65 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{../../zyancamlec}
+\usepackage[compat=1.1.0]{tikz-feynhand}
+
+\def\ntripos{Mathematical Tripos}
+\def\npart{III}
+\def\ncourse{Quantum Field Theory}
+\def\nscourse{QFT}
+\def\nlecturer{B.\ Allanach}
+\def\nterm{Michaelmas}
+\def\nyear{2020}
+
+
+\begin{document}
+	\maketitlepage
+	\preliminaries
+
+	\section*{Introduction}
+	
+	\noindent Quantum Field Theory is the marriage of quantum mechanics with special relativity and provides the mathematical framework in which to describe the interactions of elementary particles.
+
+	\noindent This first Quantum Field Theory course introduces the basic types of fields which play an important role in high energy physics: scalar, spinor (Dirac), and vector (gauge) fields. The relativistic invariance and symmetry properties of these fields are discussed using the language of Lagrangians and Noether’s theorem.
+
+	\noindent The quantisation of the basic non-interacting free fields is firstly developed using the Hamiltonian and canonical methods in terms of operators which create and annihilate particles and anti-particles. The associated Fock space of quantum physical states is explained together with ideas about how particles propagate in spacetime and their statistics.
+
+	\noindent Interactions betweeen fields are examined next, using the interaction picture, Dyson’s formula and Wick’s theorem. A ‘short version’ of these techniques is introduced: Feynman diagrams. Decay rates and interaction cross-sections are introduced, along with the associated kinematics and Mandelstam variables.
+
+	\noindent Spinors and the Dirac equation are explored in detail, along with parity and $\gamma^{5}$. Fermionic quantisation is developed, along with Feynman rules and Feynman propagators for fermions.
+
+	\noindent Finally, quantum electrodynamics (QED) is developed. A connection between the field strength tensor and Maxwell’s equations is carefully made, before gauge symmetry is introduced. Lorentz gauge is used as an example, before quantisation of the electromagnetic field and the Gupta-Bleuler condition. The interactions between photons and charged matter is governed by the principal of minimal coupling. Finally, an example QED cross-section calculation is performed.
+
+	\section*{Pre-requisites}
+
+	You will need to be comfortable with the Lagrangian and Hamiltonian formulations of classical mechanics and with special relativity. You will also need to have taken an advanced course on quantum mechanics.
+
+	\newpage
+	\tableofcontents
+	\newpage
+	\maintext
+	Let's test a very simple Feynman diagram.
+
+	
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{feynhand}
+				\vertex (i1) at (0,0) {$e^-$};
+				\vertex (i2) at (0,4) {$e^+$};
+				\vertex [particle] (a) at (2,2);
+				\vertex [particle] (b) at (5,2);
+				\vertex (f1) at (7,4) {$e^-$};
+				\vertex (f2) at (7,0) {$e^+$};
+				\propag [fer] (i1) to [] (a);
+				\propag [antfer] (i2) to [] (a);
+				\propag [pho] (a) to [ edge label = $\gamma$] (b);
+				\propag [fer] (b) to [] (f1);
+				\propag [antfer] (b) to [] (f2);
+			\end{feynhand}
+		\end{tikzpicture}
+	\end{center}
+		
+	Update till \today.
+
+	
+\end{document}
