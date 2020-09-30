@@ -34,7 +34,7 @@ These notes cannot fully reflect what was actually lectured. Any typo or mistake
 
 ## Contact
 
-Please report any typo or mistake to me via email: [zy286@cam.ac.uk](). Your contribution will be highly appreciated. Thank you.
+Please report any typo or mistake to me via email: [zy286@cam.ac.uk](mailto:zy286@cam.ac.uk). Your contribution will be highly appreciated. Thank you.
 
 
 
