@@ -1,7 +1,7 @@
 # Part III Maths Notes
 Cambridge Part III Mathematics Notes taken by *Zihan Yan*
 
-##Content Plan:
+## Content Plan
 
 (Might not be fulfilled completely.)
 
