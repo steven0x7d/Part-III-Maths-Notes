@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{zyancamlec}[2020/09/29 Z. Yan's Cambridge Lecture Notes Package]
+\ProvidesPackage{zyancamlec}[2020/10/03 Z. Yan's Cambridge Lecture Notes Package]
 
 %----------Dependencies----------
 
@@ -7,6 +7,7 @@
 \RequirePackage{amssymb}
 \RequirePackage{amsfonts}
 \RequirePackage{amsthm}
+\RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{physics}
 \RequirePackage{url}
 \RequirePackage{tensor}
@@ -125,12 +126,14 @@
 \renewcommand{\tableofcontents}{{\sffamily\@real@tableofcontents}}
 
 \RequirePackage{titlesec}
-\titleformat*{\section}{\Large\sffamily\bfseries}
-\titleformat*{\subsection}{\Large\sffamily}
-\titleformat*{\subsubsection}{\large\sffamily\itshape}
-\titleformat*{\paragraph}{\sffamily}
+\titleformat*{\section}{\Large\bfseries\sffamily}
+\titleformat*{\subsection}{\large\bfseries\sffamily}
+\titleformat*{\subsubsection}{\bfseries\sffamily}
+\titleformat*{\paragraph}{\large\sffamily}
 
 \setlength{\parskip}{0.5em}
+\setlength{\parindent}{0em}
+\linespread{1.1}
 
 %----------Theorem Style Section----------
 
@@ -154,7 +157,7 @@
 {.5em}                       % Space after theorem head
 {}  % Theorem head spec (can be left empty, meaning ‘normal’)
 
-\newcommand{\genthmsty}[2]{\surroundwithmdframed[linecolor={#1},linewidth=2pt, topline=false, bottomline=false, rightline=false, leftmargin=0pt, innerleftmargin=0.4em, rightmargin=0pt, innerrightmargin=0pt, innertopmargin=0pt , innerbottommargin=0pt, splittopskip=\topskip, splitbottomskip=0.3\topskip,skipabove=0.6\topsep]{#2}}
+\newcommand{\genthmsty}[2]{\surroundwithmdframed[linecolor={#1},backgroundcolor=#1!10, linewidth=2pt, topline=false, bottomline=false, rightline=false, leftmargin=0pt, innerleftmargin=0.4em, rightmargin=0pt, innerrightmargin=0.5em, innertopmargin=0.4em, innerbottommargin=0.5em, splittopskip=\topskip, splitbottomskip=0.3\topskip,skipabove=0.6\topsep]{#2}}
 
 \theoremstyle{scdef}
 \newtheorem{defi}{Definition}[section]
@@ -200,7 +203,9 @@
 \newtheorem*{ntc}{Comment by Note Taker}
 \newtheorem*{prpt}{Properties}
 \newtheorem*{ex}{Example}
+\genthmsty{green}{ex}
 \newtheorem*{exs}{Examples}
+\genthmsty{green}{exs}
 \newtheorem*{rmk}{Remark}
 \newtheorem*{exer}{Exercise}
 \newtheorem*{deri}{Derivation}
