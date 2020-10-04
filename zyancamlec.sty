@@ -122,14 +122,11 @@
 \newcommand{\preliminaries}{\setcounter{page}{1}\pagenumbering{roman}}
 \newcommand{\maintext}{\setcounter{page}{1}\pagenumbering{arabic}}
 
-\let\@real@tableofcontents\tableofcontents
-\renewcommand{\tableofcontents}{{\sffamily\@real@tableofcontents}}
-
 \RequirePackage{titlesec}
-\titleformat*{\section}{\Large\bfseries\sffamily}
-\titleformat*{\subsection}{\large\bfseries\sffamily}
-\titleformat*{\subsubsection}{\bfseries\sffamily}
-\titleformat*{\paragraph}{\large\sffamily}
+\titleformat*{\section}{\Large\scshape\centering}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titleformat*{\paragraph}{\large}
 
 \setlength{\parskip}{0.5em}
 \setlength{\parindent}{0em}
@@ -157,7 +154,7 @@
 {.5em}                       % Space after theorem head
 {}  % Theorem head spec (can be left empty, meaning ‘normal’)
 
-\newcommand{\genthmsty}[2]{\surroundwithmdframed[linecolor={#1},backgroundcolor=#1!10, linewidth=2pt, topline=false, bottomline=false, rightline=false, leftmargin=0pt, innerleftmargin=0.4em, rightmargin=0pt, innerrightmargin=0.5em, innertopmargin=0.4em, innerbottommargin=0.5em, splittopskip=\topskip, splitbottomskip=0.3\topskip,skipabove=0.6\topsep]{#2}}
+\newcommand{\genthmsty}[2]{\surroundwithmdframed[linecolor={#1},backgroundcolor=#1!10, linewidth=2pt, topline=false, bottomline=false, rightline=false, leftmargin=0pt, innerleftmargin=0.4em, rightmargin=0pt, innerrightmargin=0.5em, innertopmargin=0.4em, innerbottommargin=0.5em]{#2}}
 
 \theoremstyle{scdef}
 \newtheorem{defi}{Definition}[section]
