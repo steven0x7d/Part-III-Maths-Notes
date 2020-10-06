@@ -6,27 +6,25 @@ Cambridge Part III Mathematics Notes taken by *Zihan Yan*
 (Might not be fulfilled completely.)
 
 - Michaelmas 2020:
-  - **Analysis of Partial Differential Equations** by *C. Warnick*
   - **Algebraic Topology** by *I. Smith*
   - **Differential Geometry** by *J. Smith*
   - **General Relativity** by *H. Reall*
   - **Non-Equilibrium Statistical Field Theory** (Non-Examinable) by *J. Pausch*
-  - **Quantum Field Theory** by *B. Allanach*
+  - **Quantum Field Theory** by *N. Dorey*
   - **Symmetries, Fields and Particles** by *B. Allanach*
   - **Statistical Field Theory** by *C. Thomas*
 - Lent 2021:
-  - **Applications of Analysis in Physics** (Non-Examinable)
-  - **Applications of Differential Geometry in Physics**
-  - **Advanced Quantum Field Theory**
-  - **Black Holes**
-  - **Standard Model**
-  - **String Theory**
-  - **Supersymmetry**
-  - **Symplectic Topology**
-  - **Theoretical Physics of Soft Condensed Matter**
+  - **Applications of Analysis in Physics** (Non-Examinable) by *C. Warnick*
+  - **Applications of Differential Geometry in Physics** by *M. Dunajski*
+  - **Advanced Quantum Field Theory** by *M. Wingate*
+  - **Black Holes** by *J. Santos*
+  - **Standard Model** by *F. Quevedo*
+  - **String Theory** by *R. Reid-Edwards*
+  - **Supersymmetry** by *D. Skinner*
+  - **Symplectic Topology** by *A. Keating*
 - Easter 2021:
-  - **Beyond Standard Model** (Non-Examinable)
-  - **Gauge-Gravity Duality**
+  - **Physics Beyond the Standard Model** (Non-Examinable) by *M. Ubiali*
+  - **Gauge-Gravity Duality** by *A. Wall*
 
 ## Disclaimer
 
