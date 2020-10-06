@@ -38,28 +38,7 @@
 	\tableofcontents
 	\newpage
 	\maintext
-	Let's test a very simple Feynman diagram.
-
 	
-	\begin{center}
-		\begin{tikzpicture}
-			\begin{feynhand}
-				\vertex (i1) at (0,0) {$e^-$};
-				\vertex (i2) at (0,4) {$e^+$};
-				\vertex [particle] (a) at (2,2);
-				\vertex [particle] (b) at (5,2);
-				\vertex (f1) at (7,4) {$e^-$};
-				\vertex (f2) at (7,0) {$e^+$};
-				\propag [fer] (i1) to [] (a);
-				\propag [antfer] (i2) to [] (a);
-				\propag [pho] (a) to [ edge label = $\gamma$] (b);
-				\propag [fer] (b) to [] (f1);
-				\propag [antfer] (b) to [] (f2);
-			\end{feynhand}
-		\end{tikzpicture}
-	\end{center}
-		
-	Update till \today.
-
+	Will be updated soon.
 	
 \end{document}
