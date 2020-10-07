@@ -22,7 +22,8 @@
 \RequirePackage{mdframed}
 \RequirePackage[pdftex,hidelinks]{hyperref}
 \RequirePackage{fancyhdr}
-
+\RequirePackage{marginnote}
+\reversemarginpar
 %----------Title----------
 
 \fancypagestyle{firstpagestyle}{
@@ -274,3 +275,5 @@
 \newcommand{\circled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {#1}}}}
 \newcommand{\ii}{\mathrm{i}}
 \newcommand{\Rq}{\Rightarrow\qquad}
+\newcommand{\lecnr}[1]{\marginnote{\sffamily\centering Lecture {#1}\\No-Revise}[0.5em]}
+\newcommand{\lec}[1]{\marginnote{\sffamily\centering Lecture {#1}}[0.5em]}
