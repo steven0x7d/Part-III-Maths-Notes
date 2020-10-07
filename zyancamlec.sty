@@ -59,6 +59,15 @@
 		\vspace{1cm}%
 		{\large \@date\par}%
 		\vspace*{\fill}%
+		\newpage
+		\thispagestyle{empty}
+		\vspace*{\fill}
+		\begin{center}
+		\begin{minipage}[c]{0.9\textwidth}
+			\textit{These notes may not reflect the full format and content that are actually lectured. I usually modify the notes heavily after the lectures and sometimes my own thinking or interpretation might be blended in. Any mistake or typo should surely be mine. Be cautious if you are using this for self-study or revision.}
+		\end{minipage}
+		\end{center}
+		\vspace*{\fill}
 \end{titlepage}}
 
 %----------Course Information----------
@@ -154,7 +163,7 @@
 {.5em}                       % Space after theorem head
 {}  % Theorem head spec (can be left empty, meaning ‘normal’)
 
-\newcommand{\genthmsty}[2]{\surroundwithmdframed[linecolor={#1},backgroundcolor=#1!10, linewidth=2pt, topline=false, bottomline=false, rightline=false, leftmargin=0pt, innerleftmargin=0.4em, rightmargin=0pt, innerrightmargin=0.5em, innertopmargin=0em, innerbottommargin=0.3em]{#2}}
+\newcommand{\genthmsty}[2]{\surroundwithmdframed[linecolor={#1}, linewidth=2pt, topline=false, bottomline=false, rightline=false, leftmargin=0pt, innerleftmargin=0.4em, rightmargin=0pt, innerrightmargin=0.5em, innertopmargin=0em, innerbottommargin=0em]{#2}}
 
 \theoremstyle{scdef}
 \newtheorem{defi}{Definition}[section]

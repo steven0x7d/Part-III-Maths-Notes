@@ -12,6 +12,7 @@
 
 \begin{document}
 	\maketitlepage
+
 	\preliminaries
 
 	\section*{Introduction}
@@ -30,6 +31,62 @@
 	\tableofcontents
 	\newpage
 	\maintext
-	Hi
 	
+	\section{Manifolds and Tensors}
+	Motivation: We study Differential Geometry because in General Relativity, there will not be a preferred coordinate system.
+
+	\subsection{Introduction}
+
+	\begin{ex}
+		Unit sphere $S^2$ in $\mathbb{R}^3$: choose spherical polar coordinates, we find that they are not well-defined at poles $\theta = 0, \pi$ as $\phi$ is discontinuous at $\phi = 0$ or $2\pi$.
+
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{fig/default}
+		\end{figure}
+	\end{ex}
+
+	\subsection{Differentiable Manifolds}
+
+	\begin{defi}
+		An $n$-dimensional \emph{differentiable manifold} is a set $M$ together with a collection of subsets $\mathcal{O}_{\alpha}$ such that
+		\begin{enumerate}
+			\item $\bigcup_{\alpha} \mathcal{O}_\alpha = M$, i.e.\ the subsets $\mathcal{O}_{\alpha}$ cover $M$;
+			\item For each $\alpha$ there is a one-to-one and onto map $\phi_{\alpha}: \mathcal{O}_{\alpha} \to \mathcal{U}_{\alpha}$ where $\mathcal{U}_{\alpha}$ is an open subset of $\mathbb{R}^n$;
+			\item If $\mathcal{O}_{\alpha}$ and $\mathcal{O}_{\beta}$ overlap, i.e.\ $\mathcal{O}_\alpha \cap \mathcal{O}_\beta \neq \varnothing$ then $\phi_{\beta} \ \circ \ \phi_{\alpha}^{-1}$ maps from $\phi_{\alpha}(\mathcal{O}_{\alpha} \cap \mathcal{O}_{\beta}) \subset \mathcal{U}_{\alpha} \subset \mathbb{R}^n$ to $\phi_{\beta}(\mathcal{O}_\alpha \cap \mathcal{O}_\beta) \subset \mathcal{U}_\beta \subset \mathbb{R}^n$. We require this map to be smooth (infinitely differentiable).    
+		\end{enumerate}
+		
+		The maps $\phi_\alpha$ are called \emph{charts} or \emph{coordinate systems}. The set $\{\phi_\alpha\}$ is called an \emph{atlas}.
+	
+	\end{defi}
+
+	The above can be illustrated in the following figure:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/default}
+	\end{figure}
+
+	Sometimes write $\phi_\alpha(p) = (x_\alpha^1 (p), x_\alpha^2 (p), \cdots, x_\alpha^n (p))$ and refer to $x^i_\alpha(p)$ as the coordinates of $p$.
+
+	Define a topology on $M: \mathcal{R} \subset M$ is \emph{open} iff $\phi_\alpha (\mathcal{R}\cap \mathcal{O}_\alpha) \subset \mathcal{U}_{\alpha}$ is open $\forall \alpha$.  
+
+	\begin{ex}
+		$\mathbb{R}^n$: single chart $\phi: (x^1, \dots, x^n) \to (x^1, \dots, x^n)$. 
+	\end{ex}
+
+	\begin{ex}
+		$S^1 = \{(\cos \theta, \sin \theta): \theta \in \mathbb{R}\}$ is a 1d differentiable manifold. $\theta\in [0,2\pi)$ is not a good chart because $[0,2\pi)$ is not open. Instead, we use two charts. 
+		
+		Let $\mathcal{O}_1 = S^1 - \{P\}$ and $\mathcal{U}_1 = (0,2\pi)$. Define: $\phi_1: \mathcal{O}_1 \to \mathcal{U}_1$ by $\phi_1(p) = \theta_1$. 
+		
+		Let $\mathcal{O}_2 = S^1 - \{Q\}$ and $\mathcal{U}_2 = (-\pi,\pi)$. Define: $\phi_2: \mathcal{O}_2 \to \mathcal{U}_2$ by $\phi_2(p) = \theta_2$. 
+		
+		$\mathcal{O}_1 \cap \mathcal{O}_2$ is union of ``upper'' and ``lower'' semi-circles. On ``upper'' semi-circle, $\phi_2 \ \circ \ \phi_1^{-1}(\theta_1) = \theta_2 = \theta_1$ is smooth. On ``lower'' semi-circle, $\phi_2 \ \circ \ \phi_1^{-1}(\theta_1) = \theta_2 = \theta_1 - 2\pi$ is also smooth.
+	\end{ex}
+
+	\begin{ex}
+		$S^2 = \{(x,y,z)\in \mathbb{R}^3 : x^2+y^2+z^2 = 1\}$ is a 2d differentiable manifold. Consider the conventional coordinate transformation $$x = \sin \theta \cos \phi,\qquad y = \sin \theta \sin \phi,\qquad z = \cos\theta$$ which is defined on $\theta \in [0,\pi]$ and $\phi \in [0,2\pi)$. The map $(x,y,z) \mapsto (\theta, \phi)$ is not a chart because $[0,2\pi]\times [0,2\pi)$ is not an open set.
+		
+		Let $\mathcal{O}$ be $S^2$ with points with $\theta = 0, \pi$ or $\phi = 0$ deleted.
+	\end{ex}
 \end{document}
