@@ -25,10 +25,132 @@
 	It will be very beneficial to take the Part III course \emph{Statistical Field Theory} (SFT) alongside this course. Although both courses talk about different statistical field theories, they explore many of the same concepts.
 
 	\newpage
+	\section*{Overview}
+	\begin{enumerate}
+		\item Master Equations
+		\item Second Quantisation
+		\item Doi-Peliti Field Theory
+		\item Langevin Equation
+		\item Response-Field Formalism
+	\end{enumerate}
+
+	Q: What does \emph{non-equilibrium} mean? 
+	
+	A: It means we consider the statistical field theory under \emph{stochastic processes}.
+
+	Q: What does \emph{field} mean? 
+	
+	A: It means an approach using \emph{path integrals} or say, \emph{Feynman diagrams}.
+	\newpage
 	\tableofcontents
 	\newpage
 	\maintext
-	Hi
 
+	\section{Master Equations}
+
+	Master equations encloses how particles move in time and space on a statistical basis.
+
+	\subsection{Derivation}
+
+	We use discrete steps in time: $t \in \Delta t \mathbb{Z}$. The convention for indices follows 
+	$$\cdots > t_3 > t_2 > t_1 > \cdots$$
+
+	Note that strangely, we put later times to the left. (Using conditions from probability theory, etc.)
+
+	We regard particle numbers $N(t) \in \mathbb{N}_0$ are random variables.
+
+	The conditional probability
+	\[
+		P\left(N(t) = n | N(s) = m\right) = \frac{P\left(N(t) = n , N(s) = m\right)}{P\left(N(s) = m\right)}
+	\]
+	
+	Markov property
+	\[
+		P(N(t_{n+1})| N(t_n), \cdots, N(t_1)) = P(N(t_{n+1})|N(t_n))
+	\]
+	As known as ``memoryless'' stochastic property.
+
+	\paragraph{\underline{Chapman-Kolmogorov Equation}} 
+	\ 
+
+	By the definition of conditional probability, we can compute
+	\[
+		P(N(t_3), N(t_2), N(t_1)) = P(N(t_3)| N(t_2), N(t_1))\ P(N(t_2)|N(t_1))\ P(N(t_1))
+	\]
+	
+	If we sum all possible intermediate particle numbers, we have the C-K equation
+	\begin{equation}
+		\boxed{P(N(t_3)| N(t_1)) = \sum_{N(t_2)} P(N(t_3)|N(t_2))\ P(N(t_2)|N(t_1))}
+	\end{equation}
+	
+	The above equation can be seen as sum over all possible paths between $(t_1, N(t_1))$ and $(t_3, N(t_3))$ in the space $\{t, N(t)\}$.
+
+	We may have multiple intermediate points:
+	\begin{equation}
+		P(N(t_4)| N(t_1)) = \sum_{N(t_3)} \sum_{N(t_2)} P(N(t_4)|N(t_3))\ P(N(t_3)|N(t_2))\ P(N(t_2)|N(t_1))
+	\end{equation}
+
+	If we could extend this to a continuous limit in time to get a \emph{path integral}. To show this, we first define
+	\[
+		W_t (N'|N) = \pdv{P(N'(t')|N(t))}{t'}\Bigg|_{t' = t}
+	\]
+
+	Then if we Taylor expand
+	\[
+		P(N'(t + \Delta t)|N(t)) = \underbrace{P(N'(t)|N(t))}_{\delta_{N'(t),N(t)}} + \Delta t\ W_t(N'|N) + \mathcal{O}(\Delta t^2)
+	\]
+	where the $\delta$ is Kronecker delta.
+
+	We can re-write the C-K equation as 
+	\[
+		P(N(t_3)| N(t_1)) = \sum_{N(t_2)} \left\{\underbrace{\delta_{N_3,N_2}}_{1} + \Delta t\ W_{t_2}(N(t_3)|N(t_2)) \right\} P(N(t_2)|N(t_1))
+	\]
+	and rearrange
+	\[
+		P(N(t_3)|N(t_1)) - P(N(t_2)|N(t_1))\big|_{t_2 = t_3} = \sum_{N(t_2)} \Delta t\ W_{t_2}(N(t_3)|N(t_2))  P(N(t_2)|N(t_1))
+	\]
+	
+	Note that
+	\[
+		\sum_{N'} P(N'|N) = 1 \quad \Rightarrow\quad \sum_{N'} W_t (N' | N) = 0 \quad \Rightarrow\quad W_t(N|N) = - \sum_{N' \neq N} W_t (N' | N)
+	\]
+	
+	Thus
+	\[
+		P(N(t_3)|N(t_1)) - P(N(t_2)|N(t_1)) = \Delta t \sum_{N_2 \neq N_3} \left\{ W_{t_2}(N_3|N_2) P (N_2 | N_1) - W_{t_3}(N_2 | N_3)P(N_3|N_1)\right\}
+	\]
+
+	Then the final result is
+	\begin{equation}
+		\pdv{P(N(t) | N(t_1))}{t} = \sum_{N' \neq N} \left\{ W_t(N | N')P(N'(t) | N(t_1)) - W_t (N' | N)P(N(t) | N(t_1))\right\}
+	\end{equation}
+
+	Or, we can write it as the \emph{master equation} compactly
+	\begin{equation}
+		\pdv{P(N)}{t} = \sum_{N' \neq N} \left\{ W_t (N | N')P(N') - W_t(N'|N)P(N)\right\}
+	\end{equation}
+
+	The interpretation of this equation is
+	\[
+		\pdv{P(N)}{t} = \sum_{N' \neq N} \left\{ \underbrace{W_t (N | N')P(N')}_{\text{gain}} - \underbrace{W_t(N'|N)P(N)}_{\text{loss}}\right\}
+	\]
+
+	\begin{ex}[Extinction]
+		A system with particles of species $A$ is undergoing a reaction $A \to \varnothing$.
+
+		The transition function of decreasing by one particle is \[
+			W(N-1|N) = N \epsilon
+		\]
+		with reaction rate $\epsilon$.
+
+		Plug this into the master equation, we get
+		\[
+			\pdv{P(N)}{t} = \underbrace{\epsilon (N+1) P(N+1)}_{\text{gain}} - \underbrace{\epsilon N P(N)}_{\text{loss}}
+		\]
+		
+		This also gives the hint that there is only one way that the particles decrease --- one by one.
+	\end{ex}
+	
+	
 	
 \end{document}
