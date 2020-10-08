@@ -166,38 +166,38 @@
 
 \newcommand{\genthmsty}[2]{\surroundwithmdframed[linecolor={#1}, linewidth=2pt, topline=false, bottomline=false, rightline=false, leftmargin=0pt, innerleftmargin=0.4em, rightmargin=0pt, innerrightmargin=0.5em, innertopmargin=0em, innerbottommargin=0em]{#2}}
 
-\theoremstyle{scdef}
-\newtheorem{defi}{Definition}[section]
-\newtheorem*{defi*}{Definition}
-\genthmsty{gray}{defi}
-\genthmsty{gray}{defi*}
-
-
 \theoremstyle{scthm}
+
 \newtheorem{thm}{Theorem}[section]
 \newtheorem*{thm*}{Theorem}
 \genthmsty{cyan}{thm}
 \genthmsty{cyan}{thm*}
+
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem*{lem*}{Lemma}
 \genthmsty{cyan}{lem}
 \genthmsty{cyan}{lem*}
+
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem*{prop*}{Proposition}
 \genthmsty{cyan}{prop}
 \genthmsty{cyan}{prop*}
+
 \newtheorem{clm}[thm]{Claim}
 \newtheorem*{clm*}{Claim}
 \genthmsty{cyan}{clm}
 \genthmsty{cyan}{clm*}
-\newtheorem{cor}{Corollary}[thm]
+
+\newtheorem{cor}[thm]{Corollary}
 \newtheorem*{cor*}{Corollary}
 \genthmsty{cyan}{cor}
 \genthmsty{cyan}{cor*}
-\newtheorem{law}{Law}[section]
+
+\newtheorem{law}[thm]{Law}
 \newtheorem*{law*}{Law}
 \genthmsty{magenta}{law}
 \genthmsty{magenta}{law*}
+
 \newtheorem{pos}{Postulate}
 \newtheorem*{pos*}{Postulate}
 \genthmsty{magenta}{pos}
@@ -205,17 +205,29 @@
 
 
 \theoremstyle{scdef}
+
+\newtheorem{defi}[thm]{Definition}
+\newtheorem*{defi*}{Definition}
+\genthmsty{gray}{defi}
+\genthmsty{gray}{defi*}
+
 \newtheorem*{nt}{Note}
+
 \newtheorem*{cmt}{Comment}
 \newtheorem*{ntc}{Comment by Note Taker}
 \newtheorem*{prpt}{Properties}
-\newtheorem*{ex}{Example}
+
+\newtheorem{ex}[thm]{Example}
+\newtheorem*{ex*}{Example}
 \genthmsty{green}{ex}
-\newtheorem*{exs}{Examples}
-\genthmsty{green}{exs}
-\newtheorem*{rmk}{Remark}
-\newtheorem*{exer}{Exercise}
+\genthmsty{green}{ex*}
+
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem{exer}[thm]{Exercise}
+\newtheorem*{rmk*}{Remark}
+\newtheorem*{exer*}{Exercise}
 \genthmsty{orange}{exer}
+\genthmsty{orange}{exer*}
 \newtheorem*{deri}{Derivation}
 \newtheorem*{hint}{Hint}
 
@@ -276,11 +288,11 @@
 \newcommand{\circled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {#1}}}}
 \newcommand{\ii}{\mathrm{i}}
 \newcommand{\Rq}{\Rightarrow\qquad}
-\newcommand{\lecnr}[1]{\marginnote{\sffamily\centering Lecture {#1}\\No-Revise}[0.5em]}
-\newcommand{\lec}[1]{\marginnote{\sffamily\centering Lecture {#1}}[0.5em]}
-\newcommand{\recnr}[1]{\marginnote{\sffamily\centering Rec {#1}\\No-Revise}[0.5em]}
-\newcommand{\rec}[1]{\marginnote{\sffamily\centering Rec {#1}}[0.5em]}
+\newcommand{\lecnr}[1]{\marginnote{\sffamily\centering\color{Blue} Lecture {#1}\\No-Revise}[0.5em]}
+\newcommand{\lec}[1]{\marginnote{\sffamily\centering\color{Blue} Lecture {#1}}[0.5em]}
+\newcommand{\recnr}[1]{\marginnote{\sffamily\centering\color{Blue} Rec {#1}\\No-Revise}[0.5em]}
+\newcommand{\rec}[1]{\marginnote{\sffamily\centering\color{Blue} Rec {#1}}[0.5em]}
 \DeclareMathOperator{\cpf}{\circ}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\hme}{\xrightarrow{\sim}}
-\newcommand{\needfig}[1]{{\color{orange}[Need a figure of {#1} here.]}}
+\newcommand{\needfig}[1]{{\color{Purple}[Need figure {#1} here.]}}
