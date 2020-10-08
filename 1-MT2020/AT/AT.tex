@@ -26,5 +26,57 @@
 	\tableofcontents
 	\newpage
 	\maintext
-	Hi
+	\setcounter{section}{-1}
+	\section{Introduction} \lecnr{1}
+	
+	\emph{Algebraic Topology} concerns the \emph{connectivity} properties of topological spaces.
+
+	\begin{defi}
+		A space $X$ is \emph{path-connected} if for $p,q\in X$, $\exists \gamma: [0,1] \to X$ continuous with $\gamma(0) = p, \gamma(1) = q$. 
+	\end{defi}
+
+	\begin{ex}
+		$\mathbb{R}$ is path-connected; $\mathbb{R} \backslash \{0\}$ is not.
+	\end{ex}
+
+	\begin{cor}[The intermediate value theorem]
+		If $f : \mathbb{R} \to \mathbb{R}$ is continuous and $x < y$ satisfy $f(x)<0, f(y)>0$ then $f$ takes the value 0 on $[x,y]$.
+	\end{cor}
+
+	\begin{proof}
+		Otherwise, $f^{-1}(-\infty,0)\cup f^{-1}(0,\infty)$ disconnects $[x,y]$, \#. 
+	\end{proof}
+
+	\begin{defi}
+		Let $X,Y$ be topological spaces. We say maps $f_0, f_1 : Y \to X$ are \emph{homotopic} if $\exists F : Y \times [0,1] \to X$ continuous such that
+		\[
+			F|_{Y \times \{0\}} = f_0, \qquad F|_{Y \times \{1\}} = f_1
+		\]
+		
+		We write $f_0 \simeq f_1$ (or $f_0 \simeq_F f_1)$.
+	\end{defi}
+	\needfig{square}
+
+	\begin{exer}
+		(On example sheet 1) $\simeq$ is an equivalence relation on the set of maps from $Y$ to $X$.
+	\end{exer}
+
+	\begin{nt}
+		$X$ is \emph{path-connected} iff every two maps $\{\text{point}\} \to X$ are homotopic.
+	\end{nt}
+
+	\begin{defi}
+		$X$ is \emph{simply-connected} if every two maps $S^1 \to X$ are homotopic.
+	\end{defi}
+
+	\begin{nt}
+		We often denote
+		\[
+			S^1 = \{z \in \mathbb{C} : \abs{z} = 1\}, \qquad S^n = \{x\in \mathbb{R}^{n+1} : \norm{x} = 1\}
+		\]
+	\end{nt}
+
+	\begin{ex}
+		$\mathbb{R}^2$ is simply connected; $\mathbb{R}^2 \backslash \{0\}$ is not.
+	\end{ex}	
 \end{document}
