@@ -16,7 +16,7 @@
 	\maketitlepage
 	\preliminaries
 
-	\section*{Introduction}
+	\section*{Course Information}
 	
 	\noindent Quantum Field Theory is the marriage of quantum mechanics with special relativity and provides the mathematical framework in which to describe the interactions of elementary particles.
 
@@ -35,10 +35,198 @@
 	You will need to be comfortable with the Lagrangian and Hamiltonian formulations of classical mechanics and with special relativity. You will also need to have taken an advanced course on quantum mechanics.
 
 	\newpage
+
+	\section*{Introduction}
+	\subsection*{Why do we need QFT?}
+	If we consider the description of the interaction between two charged particles, for an accurate prediction, we need 
+	\begin{itemize}
+		\item \emph{Maxwell's theory} using a field theoretic perspective (using electric field $\vb{E}(\vb x, t)$ and magnetic field $\vb B(\vb x, t)$), which embodies \emph{locality} and encodes \emph{Lorentz invariance};
+		\item And \emph{quantum mechanics} as the charged particles are too small to be considered classically. This encodes the \emph{``discrete''} and \emph{probabilistic} nature.
+	\end{itemize}
+
+	The reconcile of special relativity and quantum mechanics leads to \emph{Quantum Field Theory}, where new phenomena emerge:
+	\begin{itemize}
+		\item Particle creation;
+		\item Bose/Fermi statistics;
+		\item And more...
+	\end{itemize}
+
+	It is typical to consider experiments where some initial state $\ket{i}$ transitions to $\ket{f}$. The challenge we are facing is to calculate the probability 
+	\[
+		P_{i \to f} = \abs{\mathcal{A}_{i \to f}}^2
+	\]
+	where $A_{i \to f} \in \mathbb{C}$ is the amplitude of such transition.
+
+	The properties of such probability are
+	\begin{itemize}
+		\item Unitarity: $\sum_f P_{i \to f} = 1$;
+		\item Lorentz covariance.
+	\end{itemize}
+
+	\subsection*{What is QFT?}
+	Instead of QM, we start from classical field theory.
+
+	For a classical field $\phi(\vb x, t)$, we can use \emph{canonical quantisation} analogous to that in particle QM to obtain a quantum field operator $\hat{\phi}(\vb x,t)$. We will mainly follow this route in this course.
+
+	Quantum field operators are very complicated things --- they are operator-valued functions in space and time.
+
+	There are some key facts in QFT:
+	\begin{itemize}
+		\item Eigenstates of \emph{Hamiltonian} $\hat{H}[\hat{\phi}, \hat{\pi}]$ describes \emph{multi-particle states}. (We can obtain the eigenstates at least in a free field theory);
+		\item We can calculate \[
+			\mathcal{A}_{i \to f} = \mel{f}{e^{\mathrm{i} \hat{H} T}}{i}.
+		\]
+	\end{itemize}
+
+	The remarkable feature of field theories is that there are very few which they can be consistently calculated. Thus we are left to limited, confined choices, which is an attractive character QFTs. Among these, \emph{gauge theories} are a special type, using which we can successfully describe our universe to some extent.
+
+	\subsection*{Outline}
+	\begin{enumerate}
+		\item Classical Field Theory
+		\item Free QFT
+		\item Interacting QFT
+		\item Fermions
+		\item QED
+	\end{enumerate}
+
+	\newpage
+	
 	\tableofcontents
 	\newpage
 	\maintext
+	\setcounter{section}{-1}
+	\section{Preliminaries}
+	\lecnr{1}
+	\subsection{Units}
+	In SI units, we know the dimensions of several fundamental constants are
+	\begin{align*}
+		c & \sim LT^{-1}\\
+		\hbar & \sim L^2 M T^{-1}\\
+		G & \sim L^3 M^{-1} T^{-2}
+	\end{align*}
+
+	In this course, we choose \emph{natural units} such that
+	\[
+		\hbar = c = 1
+	\]
 	
-	Will be updated soon.
+	Note that we are eliminating several dimensions identified in SI units, thus all quantities scale with some power of \emph{mass} or \emph{energy}.
+	\[
+		X \sim M^\delta
+	\]
+	where we call $\delta$ the dimension of the quantity and write
+	\[
+		[X] = \delta
+	\]
+	
+	\begin{ex}
+		\[
+			[E] = +1 \qquad [L] = -1
+		\]
+	\end{ex}
+
+	\subsection{Relativity}
+
+	Unless otherwise stated, we use Einstein summation convention throughout the course.
+
+	We work in Minkowski spacetime $\mathbb{R}^{3,1}$ with metric tensor
+	\[
+		\eta_{\mu\nu} = \diag \{+1, -1, -1, -1\}
+	\]
+	with the above conventional signature.
+
+	We denote the coordinates in spacetime as 
+	\[
+		x^\mu = (t, \vb x)
+	\]
+	and using the metric, we have
+	\[
+		x_\mu = \eta_{\mu\nu} x^\nu
+	\]
+	known as ``lowering'' the indices. 
+	
+	Similarly, for ``raising'' the indices we use the inverse metric tensor $\eta^{\mu\nu}$ defined by
+	\[
+		\eta^{\mu\nu} \eta_{\nu\rho} = \delta^\mu_\rho
+	\]
+	\newpage
+	\section{Classical Field Theory}
+
+	Firstly, let's recall that the Minkowski metric is invariant under Lorentz transformations. And we consider the Lorentz transformation of coordinates:
+	\begin{equation}
+		x^\mu \mapsto (x')^\mu = \LT{\mu}{\nu}x^\nu
+	\end{equation}
+	where $\LT{\mu}{\nu}$ is a $4\times 4$ matrix encoding the Lorentz transformation. To find the properties of such $\Lambda$, we write
+	\begin{equation}
+		\LT{\mu}{\sigma}\LT{\nu}{\tau} \eta^{\sigma\tau} = \eta^{\mu\nu}
+	\end{equation}
+
+	Also, we exclude the time-reversal transformations by imposing
+	\[
+		\det \Lambda = + 1
+	\]
+	
+	The conditions above fix \emph{proper orthochronous} Lorentz transformations. These have 6 degrees of freedom: 3 rotations + 3 boosts. 
+
+	Lorentz transformations form a group under composition. It is actually a Lie group, called \emph{Lorentz group}, denoted as $\mathrm{SO}(3,1)$.
+	
+	Now we bring out the main characters --- \emph{fields}.
+
+	\begin{defi}
+		A \emph{scalar field} is a function $\phi(x) = \phi(t, \vb x)$
+		\[
+			\phi : \underbrace{\mathbb{R}^{3,1}}_{\text{spacetime}} \to \underbrace{ \mathbb{R}}_{\text{field space}}
+		\]
+		such that it transforms as 
+		\begin{equation}
+			\phi(x) \to \phi'(x) := \phi(\Lambda^{-1} \cdot x)
+		\end{equation}
+		under (active) Lorentz transformation.
+	\end{defi}
+
+	\begin{nt}
+		By the group property of Lorentz transformations, we can write
+		\[
+			\left( \Lambda^{-1} \cdot x \right)^\mu = \left( \Lambda^{-1} \right)\indices{^\mu_\nu} x^\nu
+		\]
+		where
+		\[
+			\left( \Lambda^{-1} \right)\indices{^\mu_\nu} \LT{\nu}{\rho} = \delta_\rho^\mu
+		\]
+
+		Often we denote $\left( \Lambda^{-1} \right)\indices{^\mu_\nu}$ as $\iLT{\nu}{\mu}$.
+	\end{nt}
+
+	Now consider the spacetime derivatives of some scalar field $\phi$:
+	\[
+		\partial_\mu \phi(x) := \pdv{\phi(x)}{x^\mu}
+	\]
+
+	We find it transforms as 
+	\[
+		\partial_\mu \phi(x) \to \iLT{\mu}{\nu} \partial_\nu \phi(\Lambda^{-1} \cdot x)
+	\]
+	
+	We can raise the index as 
+	\[
+		\partial^\mu \phi(x) = \eta^{\mu\nu} \partial_\nu \phi(x)
+	\]
+	
+	\begin{exer}
+		Show $\partial^\mu \phi(x)$ transforms as a \emph{4-vector field} such that
+		\[
+			\partial^\mu \phi(x) \to \LT{\mu}{\nu} \partial^\nu \phi(\Lambda^{-1} \cdot x)
+		\]
+	\end{exer}
+
+	The consequence is that 
+	\[
+		\partial_\mu \phi(x) \partial^\mu \phi(x) = \eta^{\mu\nu} \partial_\mu \phi(x) \partial_\nu \phi(x)
+	\]
+	transforms as a scalar field. That is
+	\[
+		\partial_\mu \phi \partial^\mu \phi(x) \to \partial_\mu \phi\partial^\mu \phi(\Lambda^{-1} \cdot x)
+	\]
+	
 	
 \end{document}

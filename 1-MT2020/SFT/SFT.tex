@@ -14,7 +14,7 @@
 	\maketitlepage
 	\preliminaries
 
-	\section*{Introduction}
+	\section*{Course Information}
 	
 	This course introduces the renormalization group, focusing on statistical systems such as spin models with further connections to quantum field theory.
 
@@ -23,12 +23,163 @@
 	\section*{Pre-requisites}
 
 	Background knowledge of Statistical Mechanics at an undergraduate level is essential. This course complements the Quantum Field Theory and Advanced Quantum Field Theory courses.
+
+	\newpage
+
+	\section*{Overview}
+	\begin{enumerate}
+		\item Phase Transitions (discontinuous, sudden change of properties)
+		\item Critical Points, e.g.\ \[
+			C \sim \frac{1}{|T - T_C|^{0.11008\dots}}
+		\]
+		\item Universality:
+		\begin{itemize}
+			\item Symmetry
+			\item Physics of different length scales, Renormalisation Group
+		\end{itemize}
+	\end{enumerate}
+
+
   
 	\newpage
 	\tableofcontents
 	\newpage
 	\maintext
-	Hi
+	\section{From Spin to Fields}
+	\recnr{1-1}
+	\subsection{The Ising Model}
+	Think about a simple model for a magnet. Consider a lattice in $d$ spatial dimensions with $N$ sites. On each site $i = 1, \dots , N$ there is a discrete variable, called `spin', which takes values:
+	\begin{align*}
+		S_i = + 1 = \uparrow\\
+		S_i = - 1 = \downarrow
+	\end{align*}
 
+	\needfig{Ising Lattice}
+
+	The system of spins $\{S_i\}$ has energy
+	\[
+		E = -B \sum_i S_i - J \sum_{\expval{ij}}S_i S_j
+	\]
+	where $\expval{ij} = $ nearest neighbour pairs, $B$ is an external magnetic field:
+	\begin{align*}
+		B>0 \qquad \Rightarrow\qquad \text{spins prefer }\uparrow\\
+		B<0 \qquad \Rightarrow\qquad \text{spins prefer }\downarrow
+	\end{align*}
+	\begin{align*}
+		J > 0 &\qquad \Rightarrow\qquad \text{spins want to align}\\
+		J < 0 &\qquad \Rightarrow\qquad \text{spins want to anti-align}
+	\end{align*}
+	and we call $\uparrow\uparrow$ ferromagnet and $\downarrow\uparrow$ anti-ferromagnet.
+	
+	In the scope of this course, we take $J > 0$.
+
+	For a finite temperature $T$, spins want to randomise to increase entropy.
+
+	For canonical ensemble, the probability of configuration $\{S_i\}$ is 
+	$$P[S_i] = \frac{e^{- \beta E[S_i]}}{Z}$$ 
+	where $Z(T,J,B) = \sum_{\{S_i\}} e ^{-\beta E[S_i]}$ is the \emph{partition function}, $\beta = 1/T$ and we choose units such that $k_B = 1$.
+
+	All physics can be extracted from $Z$.
+
+	\begin{ex} \ 
+		\begin{itemize}
+			\item Thermodynamic free energy $F_{\text{thermo}}(T,J,B) = \expval{E} - TS = - T \ln Z$. For this we have 
+			\[
+				\dd{F} = -S \dd{T} - p \dd{V} - M \dd{B}
+			\]
+			\[
+				-S = \pdv{F}{T}\Bigg|_{V,B} \qquad -p = \pdv{F}{V}\Bigg|_{T,B} \qquad - M = \pdv{F}{B}\Bigg|_{T,V}
+			\]
+			\item Equilibrium magnetisation \[
+				[-1,+1] \ni m = \frac{1}{N}\sum_i \expval{S_i} = \frac{1}{N}\sum_{\{S_i\}} \frac{e^{-\beta E[S_i]}}{Z} \sum_i S_i = \frac{1}{N\beta} \pdv{\ln Z}{\beta}
+			\]
+			We want to understand how this changes as we vary $T$ and $B$ (equation of state).
+		\end{itemize}
+	\end{ex}
+
+	All we need to do is compute $Z$. But this is very difficult and sometimes impossible. We need a different approach... 
+
+	\paragraph{\underline{Effective Free Energy}} \ 
+
+	We rewrite $Z$ as
+	\[
+		Z = \sum_m \sum_{\{S_i\}|m} e^{-\beta E[S_i]} : = \sum_m e^{-\beta F(m)}
+	\]
+	where the expression $\{S_i\} | m$ means we choose $\{S_i\}$ such that $m = \frac{1}{N} \sum_i S_i$.
+
+	For large $N ( N \approx 10^{23})$, $m$ is essentially continuous, we can write
+	\[
+		Z = \frac{N}{2} \int_{-1}^{+1} \dd{m} e^{-\beta F(m)}
+	\]
+	where $N/2$ is there to make the normalisation correct.
+
+	It is easy to see that effective free energy $F(m,T,J,B)$ contains more information than $F_{\text{thermo}}$.
+
+	We can determine the equilibrium value of $m$ from it. Define 
+	\[
+		f(m):= \frac{F(m)}{N} \qquad \text{such that} \qquad Z = \frac{N}{2} \int_{-1}^{+1} \dd{m} e^{\beta N f(m)}
+	\]
+	where $N$ is large and $\beta f(m)$ is of order 1.
+
+	The above integral is dominated by the minimum value of $f(m)$ where $m = m_{\text{min}}$ at $\pdv{f}{m}\bigg|_{m = m_{\text{min}}} = 0$. This is known as the saddle point/steepest descent technique. With this approximation, we have
+	\[
+		Z \approx e^{-\beta N f(m_{\text{min}})} \qquad \text{so} \qquad F_{\text{thermo}} \approx F(m_{\text{min}})
+	\]
+	
+	We want to compute $f(m)$ but this is also hard.
+
+	\paragraph{\underline{Mean Field `Approximation'}} \ 
+
+	For each $\{S_i\}$ s.t.\ $\sum_i S_i = Nm$, we guess that the energy is approximately
+	\begin{align*}
+		E & \approx - B \sum_i m - J \sum_{\expval{ij}} m^2\\
+		& = - B N m - \frac{1}{2} N J q m^2
+	\end{align*}
+	where the factor of half comes from the fact that we are summing over pairs but not sites, and $q$ is the number of nearest neighbours. (E.g.\ $q=2$ for $d=1$, $q=4$ for $d=2$ square lattice, $q=6$ for $d=3$ simple cubic lattice.)
+
+	Now we just need to count the number of configurations. If there are $N_{\uparrow}$ up spins and $N_{\downarrow} = N - N_{\uparrow}$ down spins, we have
+	\[
+		m = \frac{N_{\uparrow} - N_\downarrow}{N} = \frac{2 N_\uparrow - N}{N}
+	\]
+	and the number of configurations is
+	\[
+		\Omega = \frac{N!}{N_\uparrow ! (N - N_\downarrow)!}
+	\]
+	
+	Using Stirling's formula
+	\[
+		\ln \Omega \approx N \ln N - N_\uparrow \ln N_\uparrow - (N - N_\uparrow) \ln (N - N_\uparrow) - N + N_\uparrow + N - N_\uparrow + \cdots
+	\]
+	so that
+	\[
+		\frac{1}{N} \ln \Omega = \ln 2 - \frac{1}{2} (1+m)\ln(1+m) - \frac{1}{2} (1-m)\ln(1-m)
+	\]
+	
+	Therefore, in the mean field approximation, we have
+	\begin{align*}
+		e_{-\beta N f(m)} & = \sum_{\{S_i\}|m} e^{-\beta E[S_i]}\\
+		& \approx \Omega(m) e^{-\beta E(m)}\\
+		- \beta N f(m) & \approx \ln \Omega(m) - \beta E(m)
+	\end{align*}
+
+	Then we have
+	\[
+		f(m) \approx - Bm - \frac{1}{2} J q m^2 - \frac{1}{\beta} \left[ \ln 2 - \frac{1}{2} (1+m)\ln(1+m) - \frac{1}{2} (1-m)\ln(1-m) \right]
+	\]
+	
+	Then to get the minimum value of $m$,
+	\[
+		\pdv{f}{m} = 0 \qquad \Rightarrow\qquad \beta (B + Jqm) = \frac{1}{2} \ln \left( \frac{1+m}{1-m} \right)
+	\]
+	and rearrange, we get
+	\[
+		m = \tanh [\beta (B + Jqm)]
+	\]
+	
+	We can think about this as if
+	\[
+		B \to B_{\text{eff}} = B + J q m
+	\]
+	as the background magnetic field seen from some site can be seen as modified by the magnetisation of neighbouring sites.
 	
 \end{document}

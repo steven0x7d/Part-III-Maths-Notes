@@ -14,7 +14,7 @@
 	\maketitlepage
 	\preliminaries
 
-	\section*{Introduction}
+	\section*{Course Information}
 
 	Differential geometry is the study of manifolds --- spaces built from smoothly gluing together open sets in Euclidean space —-- and structures that live on or in them. The goal of this course is to introduce the main ideas on both the abstract conceptual (‘coordinate-free’) level and the concrete computational (‘in coordinates’) level, and to develop fluency in passing between them. This will lay the foundation for future study in geometry and topology, and provide the language for modern theoretical physics. Throughout the emphasis will be on building up geometric intuition. Topics will include:
 
@@ -35,6 +35,197 @@
 	\tableofcontents
 	\newpage
 	\maintext
-	Hi
+	\section{Manifolds and Smooth Maps}
+	\recnr{1}
+	\subsection{Manifolds} A manifold is a space which locally looks like $\mathbb{R}^n$.
+
+	\begin{defi}
+		A \emph{topological $n$-manifold} is a topological space $X$ such that for every point $p$ in $X$ there exists an open neighbourhood $U$ of $p$ in $X$, an open set $V$ in $\mathbb{R}^n$, and a homeomorphism $\varphi: U \xrightarrow{\sim} V$.
+		
+		We also require $X$ to be 
+		\begin{itemize}
+			\item \emph{Hausdorff}: given distinct points $p_1$ and $p_2$ in $X$ there exist disjoint open neighbourhoods $U_1$ and $U_2$ of $p_1$ and $p_2$ respectively.
+			\item \emph{second-countable}: there exists a countable collection of open sets which form a basis for the topology, i.e.\ every open set is a union of sets in the collection.
+		\end{itemize}
+	\end{defi}
 	
+	\begin{ex}
+		$\mathbb{R}^n$ is a topological $n$-manifold:
+		\begin{itemize}
+			\item For every $p$ take $U = V = \mathbb{R}^n$ and $\varphi = \id_{\mathbb{R}^n}$.
+			\item Hausdorffness is obvious (e.g.\ since $\mathbb{R}^n$ is metrisable).
+			\item A countable basis for the topology is given by open balls of rational radius with rational centre. 
+		\end{itemize}
+	\end{ex}
+
+	\begin{rmk}
+		\begin{enumerate}
+			\item Hausdorff and second-countable are important but are not restrictive in practice.
+			\item They're automatic for embedded submanifolds of $\mathbb{R}^n$.
+			\item They're equivalent to `$X$ is metrisable and has countably many components'.
+		\end{enumerate}
+	\end{rmk}
+
+	Terminology:
+	\begin{itemize}
+		\item Each map $\varphi$ is a \emph{chart} (about $p$).
+		\item The set $U$ is a \emph{coordinate patch}.
+		\item If $x_1, \dots, x_n$ are the standard coordinates on $\mathbb{R}^n$ then
+		\[
+			x_1 \cpf \varphi, \dots , x_n \cpf \varphi
+		\]
+		are \emph{local coordinates on $U$} or \emph{local coordinates about $p$}. Usually we'll just call these $x_1, \dots , x_n$ or similar.
+		\item The inverse of a chart is called a \emph{parametrisation}. (It's easier to remember which direction a parametrisation goes than a chart!)
+	\end{itemize}
+
+	\begin{ex}
+		If $X$ is a topological $n$-manifold, so is any open $W \subset X$:
+		\begin{itemize}
+			\item If $p \in W$ and $\varphi: U \xrightarrow{\sim} V$ is a chart about $p$ in $X$ then \[
+				\varphi|_{U \cap W}: W \cap W \xrightarrow{\sim} \varphi(U \cap W)
+			\]
+			is a chart about $p$ in $W$.
+			\item Hausdorffness and second-countability are inherited from $X$.
+		\end{itemize}
+	\end{ex}
+
+	More terminology:
+
+	Given overlapping charts $\varphi: U_1 \to V_1$ and $\varphi_2 : U_2 \to V_2$, the corresponding local coordinates $x_1, \dots , x_n$ and $y_1, \dots, y_n$ are related by the \emph{transition map}
+	\[
+		\varphi_2 \cpf \varphi_1^{-1} : \varphi_1 (U_1 \cap U_2) \to \varphi_2 (U_1 \cap U_2).
+	\]
+	
+	This is a map between open subsets of $\mathbb{R}^n$. Such a map is \emph{smooth} if each component has all partial derivatives of all orders, i.e.\ if when we express each $y_i$ as a function of $x_1, \dots , x_n$ using $\varphi_2 \cpf \varphi_1^{-1}$ 
+	\[
+		\frac{\partial^k y_i}{\partial x_{j_1} \cdots \partial x_{j_k}}
+	\]
+	exists for all $k \geq 1$ and all $j_1, \dots , j_k$.
+
+	We want a notion of smoothness for functions on manifolds.
+
+	A function $f: W \to \mathbb{R}$ on an open subset $W \subset X$ may be written locally on a coordinate patch as a function $f(x_1,\dots,x_n)$ of the local coordinates.
+	{\large \scshape Preliminary Definition.}\ \ $f$ is \emph{smooth} if and only if this local expression has all partial derivatives of all orders.
+	{\large \scshape Problem.}\ \ On overlaps between coordinate patches this depends on the choice of local coordinates.
+
+	A natural solution is to require all transition maps to be smooth. Then smoothness in one chart implies smoothness in other charts on overlaps, by the chain rule.
+
+	\begin{defi}
+		\begin{itemize}
+			\item An \emph{atlas} for a topological $n$-manifold $X$ is a collection of charts \[
+				\{\varphi_\alpha: U_\alpha \xrightarrow{\sim} V_\alpha\}_{\alpha\in \mathcal{A}}
+			\]
+			that covers $X$, i.e.\ such that $\bigcup_{\alpha} U_\alpha = X$.
+			\item An atlas is \emph{smooth} if every transition map $\varphi_\beta \cpf \varphi_\alpha^{-1}$ is smooth.
+			\item Given an atlas $\mathfrak{A}$ and open $W \subset X$, a function $f: W \to \mathbb{R}$ is \emph{smooth with respect to $\mathfrak{A}$} if $f \cpf \varphi_\alpha^{-1}$ is smooth for all $\alpha$, i.e.\ if all local coordinate expressions $f(x_1,\dots,x_n)$ are smooth.
+		\end{itemize}
+	\end{defi}
+
+	\begin{lem}
+		If $\mathfrak{A}$ is smooth then $f$ is smooth if and only if for all $p$ in $W$ there exists $U_\alpha$ containing $p$ such that $f \cpf \varphi_\alpha^{-1}$ is smooth, i.e.\ if $f(x_1,\dots,x_n)$ is smooth for \emph{some} local coordinates $x_1, \dots,x_n$ about $p$. 
+	\end{lem}
+
+	\begin{cor}
+		Given a smooth atlas $\mathfrak{A}$ all local coordinate functions are smooth with respect to the atlas.
+	\end{cor}
+
+	We'll think of two smooth atlases as being the same if they have the same smooth functions.
+
+	\begin{defi}
+		\begin{itemize}
+			\item Two smooth atlases are \emph{smoothly equivalent} if and only if their union is smooth (this is an equivalence relation).
+			\item A \emph{smooth structure} of $X$ is an equivalence class of smooth atlases under this relation.
+			\item A \emph{smooth $n$-manifold} is a topological $n$-manifold equipped with a choice of smooth structure. We'll abbreviate it to `$n$-manifold' or even just `manifold'.
+		\end{itemize}
+	\end{defi}
+
+	\begin{lem}
+		If $\mathfrak{A}$ and $\mathfrak{B}$ are smoothly equivalent then $f: W \to \mathbb{R}$ is smooth with respect to $\mathfrak{A}$ if and only if it's smooth with respect to $\mathfrak{B}$.
+	\end{lem}
+
+	\begin{defi}
+		Given a smooth $n$-manifold $X$, a function $F: W \to \mathbb{R}$ is \emph{smooth} if and only if it's smooth with respect to some (or, equivalently, all) smooth atlas(es) representing the smooth structure.
+	\end{defi}
+
+	\begin{ex}
+		$\mathbb{R}^n$ is naturally an $n$-manifold via the atlas
+		\[
+			\{\id: \mathbb{R}^n \xrightarrow{\sim}\mathbb{R}^n\}
+		\]
+	\end{ex}
+	\begin{ex}
+		If $X$ is an $n$-manifold, then any open $W \subset X$ inherits the structure of an $n$-manifold, by restricting charts on $X$ to $W$.
+	\end{ex}
+
+	\begin{ex}
+		If $X$ is an $n$-manifold and $Y$ and $m$-manifold then $X \times Y$ is naturally an $(m+n)$-manifold, by equipping it with the product topology and the smooth structure induced by products of charts on $X$ and $Y$.
+	\end{ex}
+
+	\begin{rmk}
+		\begin{enumerate}
+			\item Being a topological $n$-manifold is a \emph{property}.
+			\item Being a smooth $n$-manifold is a property (being a topological $n$-manifold and admitting a smooth structure) \emph{plus} a choice of smooth structure.
+			\item When $n = 1,2,$ or $3$, every topological $n$-manifold admits an essentially unique smooth structure.
+			\item For $n \geq 4$ a topological $n$-manifold may admit no smooth structure (e.g.\ the $E_8$ manifold) or many essentially different smooth structures (e.g.\ exotic 7-spheres, or exotic $\mathbb{R}^4$). But these results are hard. 
+		\end{enumerate}
+	\end{rmk}
+
+	\begin{defi}
+		The integer $n$ is the \emph{dimension} of $X$, denoted $\dim X$.
+	\end{defi}
+
+	\begin{rmk}
+		\begin{enumerate}
+			\item We'll show that a (non=empty!) smooth manifold has a unique dimension.
+			\item A topological manifold also has a unique dimension but this requires algebraic topology to prove. It's at least as hard as showing $\mathbb{R}^m$ and $\mathbb{R}^n$ are not homeomorphic for $m \neq n$.
+			\item A manifold of negative dimension is empty.
+		\end{enumerate}
+	\end{rmk}
+
+	Conventions:
+	\begin{itemize}
+		\item Whenever we talk about an atlas on a manifold, it will always implicitly be a representative of the smooth structure.
+		\item If we construct a new chart then we'll say that it's \emph{compatible (with the smooth structure)} if it can be added to an atlas representing the smooth structure whilst preserving smoothness.
+		\item If we say `take a chart satisfying...', or `we may assume our chart satisfies...', or similar, we mean that either our atlas already contains such a chart, or we may add the chart to our atlas (i.e.\ the chart is compatible). Adding charts in this way makes no real difference.
+		\begin{ex}
+			We may want a chart about $p$ contained in a given open neighbourhood $W$. To do this we can take an arbitrary chart $\varphi: U \xrightarrow{\sim} V$ about $p$ and then choose the chart
+			\[
+				\varphi|_{U\cap W} : U \cap W \xrightarrow{\sim} \varphi(U \cap W),
+			\]
+			adding it to the atlas first if necessary. 
+		\end{ex}
+		\item Likewise `take local coordinates satisfying...' or similar, means choose a chart whose associated coordinates have these properties, or add such a chart to the atlas if non exists.
+		\begin{ex}
+			Given a point $p$ in a manifold $X$ we may always choose local coordinates $x_1, \dots, x_n$ about $p$ in which $p$ is given by $\vb{x} = 0$: take any chart $\varphi: U \xrightarrow{\sim} V$ about $p$ and add the chart
+			\[
+				\varphi - \varphi(p): U \hme \{\vb{v} - \varphi(p): \vb{v}\in V\}
+			\]
+			 to the atlas if it's not already there.
+		\end{ex}
+	\end{itemize}
+
+	Some people avoid this by working with the \emph{maximal atlas}, meaning the union of all atlases representing the smooth structure. But this obscures the fact that it's only the equivalence class that matters.
+
+	\begin{ex}
+		The \emph{$n$-sphere}, $S^n$, is the $n$-manifold whose underlying topological space is
+		\[
+			\{\vb{y} = (y_0, \dots, y_n) \in \mathbb{R}^{n+1}: \norm{\vb{y}}^2 = 1\}
+		\]
+		with the subspace topology, and whose smooth structure is defined by the following atlas. There are two charts $\varphi_{\pm}: U_{\pm} \hme \mathbb{R}^n$, where $U_\pm = S^n \backslash \{(\pm 1, 0, \dots, 0)\}$ and $\varphi_{\pm}$ is stereographic projection
+		\[
+			\varphi_{\pm}(y_0, \dots, y_n) = \frac{1}{1 \mp y_0}(y_1, \dots, y_n).
+		\]
+		The local coordinates $\vb{x}^\pm$ associated to $\varphi_\pm$ satisfy $x^\pm_i = y_i / (1 \mp y_0)$.
+
+		The \emph{height function} $y_0 : S^n \to \mathbb{R}$ is smooth, since it is given by
+		\[
+			y_0 = \pm \frac{\norm{\vb{x}^\pm}^2 - 1}{\norm{\vb{x}^\pm}^2 + 1}\quad\text{ on }\quad U_\pm
+		\]
+	\end{ex}
+
+	\begin{rmk}
+		This may seem asymmetric because we singled out two points to project from, but charts obtained by stereographic projection from any other point are compatible. We'll see later that $S^n$ is a \emph{submanifold} of $\mathbb{R}^{n+1}$ and its smooth structure is inherited from $\mathbb{R}^{n+1}$. 
+	\end{rmk}
+
+	\subsection{Manifolds from Sets}
 \end{document}
