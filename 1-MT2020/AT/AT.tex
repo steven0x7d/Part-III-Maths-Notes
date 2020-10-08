@@ -35,6 +35,8 @@
 		A space $X$ is \emph{path-connected} if for $p,q\in X$, $\exists \gamma: [0,1] \to X$ continuous with $\gamma(0) = p, \gamma(1) = q$. 
 	\end{defi}
 
+	\needfig{1}
+
 	\begin{ex}
 		$\mathbb{R}$ is path-connected; $\mathbb{R} \backslash \{0\}$ is not.
 	\end{ex}
@@ -53,9 +55,9 @@
 			F|_{Y \times \{0\}} = f_0, \qquad F|_{Y \times \{1\}} = f_1
 		\]
 		
-		We write $f_0 \simeq f_1$ (or $f_0 \simeq_F f_1)$.
+		We write $f_0 \simeq f_1$ (or $f_0 \underset{F}{\simeq} f_1)$.
 	\end{defi}
-	\needfig{square}
+	\needfig{2}
 
 	\begin{exer}
 		(On example sheet 1) $\simeq$ is an equivalence relation on the set of maps from $Y$ to $X$.
@@ -78,5 +80,149 @@
 
 	\begin{ex}
 		$\mathbb{R}^2$ is simply connected; $\mathbb{R}^2 \backslash \{0\}$ is not.
-	\end{ex}	
+
+		From complex analysis we know $\gamma: S^1 \to \mathbb{R}^2 \backslash \{0\}$ has a \emph{winding number} or \emph{degree} $\deg (\gamma) \in \mathbb{Z}$, for which
+		\begin{enumerate}
+			\item If $\gamma_n (t) = e^{2\pi \mathrm{i} n t}$ then $\deg (\gamma_n) = n$;
+			\item $\deg(\gamma_1) = \deg(\gamma_2)$ if $\gamma_1 \simeq \gamma_2$.  
+		\end{enumerate} 
+		\needfig{3}
+
+		For \emph{differentiable} $\gamma$, 
+		$$\deg(\gamma) = \int_\gamma \frac{\dd{z}}{z}.$$
+	\end{ex}
+	
+	\begin{cor}[Fundamental theorem of algebra]
+		Every non-constant complex polynomial has a root.
+	\end{cor}
+
+	\begin{proof}
+		Let $f(z) = z^n + a_1 z^{n-1} + \cdots + a_n$ be non-constant and WLOG monic. Suppose $f(z) \neq 0, \forall z \in \mathbb{C}$, let $\gamma_R (t):= f\left( R e^{2\pi \mathrm{i} t} \right)$ so that $\gamma_R : S^1 \to \mathbb{R}^2 \backslash \{0\}$. We know that
+		\[
+			\gamma_0 \text{ is constant} \quad \Rightarrow\quad \deg(\gamma_0) = 0 \quad \Rightarrow\quad \deg(\gamma_R) = 0, \quad \forall R
+		\]
+		However, if we take $R \gg \sum_i \abs{a_i}$, let $f_s(z) = z^n + s \left( a_1 z^{n-1} + \cdots + a_n \right)$ with $0 \leq s \leq 1$. On the circle $\abs{z} = R$, $f_s(z) \neq 0, \forall s$.
+
+		Therefore, if $\gamma_{R,s}(t) := f_s\left( R e^{2\pi \mathrm{i} t} \right)$ then we have $\gamma_{R,1} = \gamma_R$ and $\gamma_{R,0} : t \mapsto R^n e^{2\pi \mathrm{i} n t}$.
+		
+		Clearly, we have
+		\[
+			\deg(\gamma_{R,1}) = 0 \neq n = \deg(\gamma_{R,0}) 
+		\]
+		as non-constant property suggests $n \neq 0$. This is a \#.
+	\end{proof}
+
+	\begin{defi}
+		$X$ is \emph{$k$-connected} if every two maps $S^i \to X$ are homotopic whenever $i \leq k$.
+	\end{defi}
+
+	\begin{ex}
+		$\mathbb{R}^n$ is $(n-1)$-connected; $\mathbb{R}^n \backslash \{0\}$ is not. Maps $S^{n-1} \to \mathbb{R}^n \backslash \{0\}$ have a homotopy-invariant degree $\in \mathbb{Z}$ and deg(inclusion) = 1, deg(constant) = 0. (We'll prove it later.)
+	\end{ex}
+
+	\begin{cor}[Brouwer's theorem]
+		For closed unit ball $\bar{B}^n = \{x\in \mathbb{R}^n : \norm{x}\leq 1\}$, any map $f : \bar{B}^n \to \bar{B}^n$ has a fixed point.
+	\end{cor}
+
+	\begin{proof}
+		Suppose $f$ has no fixed point. Let $\gamma_R (v) := Rv - f(Rv)$ where $0 \leq R \leq 1$ and $v \in S^{n-1} = \partial \bar{B}^n$. Our assumption suggests $\gamma_R$ takes values in $\mathbb{R}^n \backslash \{0\}$.
+
+		According to homotopy invariance, as $\gamma_0$ is constant, we have $\deg(\gamma_0) = 0$ hence $\deg(\gamma_1) = 0$.
+		
+		Let $\gamma_{1,s}(v) := v - s f(v)$ for $0 \leq s \leq 1$. Then $\gamma_{1,1} = \gamma_1$ and $\text{image}(\gamma_{1,s}) \subseteq \mathbb{R} \backslash \{0\}$ as $\norm{v} = 1, \norm{s f(v)} = \abs{s}\norm{f(v)} < 1$ if $s < 1$.
+		
+		Therefore, we have $\deg(\gamma_{1,0}) = \deg(\gamma_{1,1}) = 0$ by homotopy invariance. However, the inclusion $\gamma_{1,0}$ should have degree 1, thus \#.
+	\end{proof}
+
+	\begin{defi}
+		$f: X \to Y$ is a \emph{homotopy-equivalence} if $\exists g : Y \to X$ such that $f \cpf g \simeq \id_Y, g \cpf f \simeq \id_X$. (We call $g$ a ``homotopy inverse'' for $f$.)
+	\end{defi}
+
+	\begin{nt}
+		The homotopy equivalence can be shown as an equivalence relation on spaces.
+	\end{nt}
+
+	\begin{ex}
+		If $X,Y$ are homeomorphic they are trivially homotopy equivalent: simply by taking $g = f^{-1}$.
+	\end{ex}
+
+	\begin{ex}
+		$\mathbb{R}^n \backslash \{0\} \simeq S^{n-1}$. 
+		
+		Let
+		\[
+			f: \mathbb{R}^n \backslash \{0\} \to S^{n-1}, \quad v \xmapsto{f} \frac{v}{\norm{v}}
+		\]
+		\[
+			g: S^{n-1} \hookrightarrow \mathbb{R}^n \backslash \{0\} \text{ by inclusion}
+		\]
+		Then
+		\[
+			f \cpf g = \id_{S^{n-1}}, \qquad g \cpf f \underset{F}{\simeq} \id_{\mathbb{R}^n \backslash \{0\}}
+		\]
+		via the homotopy
+		\[
+			F(t,v) = tv + (1-t) \frac{v}{\norm{v}}
+		\]
+		\needfig{4}
+	\end{ex}
+
+	\begin{ex}
+		$\{0\} \xhookrightarrow{\sim} \mathbb{R}^n$ is a homotopy equivalence. (Check!)
+	\end{ex}
+
+	\begin{defi}
+		If a space $X \simeq \{\text{point}\}$ we say $X$ is \emph{contractible}. 
+	\end{defi}
+
+	Talking about all these, we emphasise that
+	\[
+		\boxed{\text{Algebraic topology is the study of topological spaces up to homotopy equivalence.}}
+	\]
+	
+	The main idea is that: homeomorphism is too delicate as a relation, but homotopy equivalence keeps track of ``essential'' topological information. More precisely, we assign
+	\begin{align*}
+		\{\text{Spaces}\} & \to \{\text{Groups}\}\\
+		\{\text{Maps of spaces}\} & \to \{\text{Homomorphisms of groups}\}
+	\end{align*}
+	so we get algebraic invariants. (They are defined for \emph{all} spaces, but have more structure and use/interest for ``nicer'' spaces.)
+
+	The classical first attempt of algebraic topology would be \emph{homotopy theory}. One can \emph{concatenate} loops:
+	\needfig{5}
+	for
+	\[
+		\gamma * \tau (t) = \begin{cases}
+			\gamma(2t),& t \leq \frac{1}{2}\\
+			\tau(1 - 2t),& t \geq \frac{1}{2}
+		\end{cases}
+	\]
+	which leads to
+	\[
+		\{\text{Maps }S^1 \xrightarrow{\gamma} X\} / \simeq \quad  \longrightarrow \quad \pi_1(X,x_0)
+	\]
+	where $\gamma$ fixes $\gamma(0) = x_0 \in X$ and the homotopies preserve $x_0$; 
+	\needfig{6}
+	$\pi_1$ is called the \emph{fundamental group} on which the group operation is the concatenation $(\gamma, \tau) \mapsto \gamma * \tau$. 
+	
+	Similarly, for higher dimensions \needfig{7}
+
+	giving
+	\[
+		\pi_n (X, x_0) = \{\text{??? maps}\} / \simeq
+	\]
+	called the \emph{$n$-th homotopy group} of $X$.
+
+	The issue is that these homotopy groups are very hard to compute. E.g.\ $\pi_n (S^2, x_0)$ is not known $\forall n$.
+	
+	There is even \emph{no} simply connected manifold (a space $X$ locally homeomorphic to $\mathbb{R}^n$) of dimension $> 0$ with $\pi_n (X)$ known $\forall n$!
+	
+	Therefore, we will do something else: \emph{(co)homology}.
+
+	It is algebraically harder to set up, yet the computational gain is worth it. Please note that computing cohomology of ``harder'' spaces (e.g.\ $\text{Diff}(X), \text{Emb}(X,Y), \dots$) is still very hard.
+
+	Some general remarks:
+	\begin{itemize}
+		\item Algebraic topology is all about being able to \emph{compute}. It is important to do lots of examples;
+		\item Our ``nice spaces'' are \emph{manifolds} and indeed \emph{smooth manifolds} --- some of these will overlap with the course \emph{Differential Geometry} which will be useful. 
+	\end{itemize}
 \end{document}
