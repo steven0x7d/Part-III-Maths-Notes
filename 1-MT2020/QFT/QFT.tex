@@ -47,11 +47,30 @@
 	The reconcile of special relativity and quantum mechanics leads to \emph{Quantum Field Theory}, where new phenomena emerge:
 	\begin{itemize}
 		\item Particle creation;
+		\begin{center}
+			\begin{tikzpicture}[baseline=-5pt]
+				\begin{feynhand}
+					\vertex (i) at (0,0) {$\gamma$};
+					\vertex (f1) at (2.5,1) {$e^+$};
+					\vertex (f2) at (2.5,-1) {$e^-$};
+					\vertex [particle] (a) at (1.5,0);
+
+					\propag [pho] (i) to [] (a);
+					\propag [antfer] (a) to [] (f1);
+					\propag [fer] (a) to [] (f2);
+				\end{feynhand}
+			\end{tikzpicture}
+			$\quad$ with $\quad E_{\gamma} \geq 2 m_e c^2$
+		\end{center}
 		\item Bose/Fermi statistics;
 		\item And more...
 	\end{itemize}
 
-	It is typical to consider experiments where some initial state $\ket{i}$ transitions to $\ket{f}$. The challenge we are facing is to calculate the probability 
+	It is typical to consider experiments where some initial state $\ket{i}$ transitions to $\ket{f}$.
+	
+	\needfig{1}
+
+	The challenge we are facing is to calculate the probability 
 	\[
 		P_{i \to f} = \abs{\mathcal{A}_{i \to f}}^2
 	\]
