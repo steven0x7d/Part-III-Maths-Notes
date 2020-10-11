@@ -118,7 +118,7 @@
 
 	A natural solution is to require all transition maps to be smooth. Then smoothness in one chart implies smoothness in other charts on overlaps, by the chain rule.
 
-	\begin{defi}
+	\begin{defi} \ 
 		\begin{itemize}
 			\item An \emph{atlas} for a topological $n$-manifold $X$ is a collection of charts \[
 				\{\varphi_\alpha: U_\alpha \xrightarrow{\sim} V_\alpha\}_{\alpha\in \mathcal{A}}
@@ -139,7 +139,7 @@
 
 	We'll think of two smooth atlases as being the same if they have the same smooth functions.
 
-	\begin{defi}
+	\begin{defi} \ 
 		\begin{itemize}
 			\item Two smooth atlases are \emph{smoothly equivalent} if and only if their union is smooth (this is an equivalence relation).
 			\item A \emph{smooth structure} of $X$ is an equivalence class of smooth atlases under this relation.
@@ -169,7 +169,7 @@
 		If $X$ is an $n$-manifold and $Y$ and $m$-manifold then $X \times Y$ is naturally an $(m+n)$-manifold, by equipping it with the product topology and the smooth structure induced by products of charts on $X$ and $Y$.
 	\end{ex}
 
-	\begin{rmk}
+	\begin{rmk} \ 
 		\begin{enumerate}
 			\item Being a topological $n$-manifold is a \emph{property}.
 			\item Being a smooth $n$-manifold is a property (being a topological $n$-manifold and admitting a smooth structure) \emph{plus} a choice of smooth structure.
@@ -182,9 +182,9 @@
 		The integer $n$ is the \emph{dimension} of $X$, denoted $\dim X$.
 	\end{defi}
 
-	\begin{rmk}
+	\begin{rmk} \ 
 		\begin{enumerate}
-			\item We'll show that a (non=empty!) smooth manifold has a unique dimension.
+			\item We'll show that a (non-empty!) smooth manifold has a unique dimension.
 			\item A topological manifold also has a unique dimension but this requires algebraic topology to prove. It's at least as hard as showing $\mathbb{R}^m$ and $\mathbb{R}^n$ are not homeomorphic for $m \neq n$.
 			\item A manifold of negative dimension is empty.
 		\end{enumerate}
@@ -656,4 +656,115 @@
 		
 		Then $G: = \psi \cpf F \cpf \varphi^{-1}$ and $H := \varphi \cpf F^{-1} \cpf \psi^{-1}$ are mutually inverse smooth maps between open subsets $V \subset \mathbb{R}^n$ and $T \subset \mathbb{R}^m$. From multivariable calculus we then have that the derivatives $\mathrm{D}_{\varphi(p)}G$ and $\mathrm{D}_{\psi(F(p))} H$ are mutually inverse linear maps between $\mathbb{R}^{\dim X}$ and $\mathbb{R}^{\dim Y}$, so $\dim X$ and $\dim Y$ must be equal.
 	\end{proof}
+
+	\subsection{Tangent Spaces} \recnr{5}
+	
+	The tangent space parametrises infinitesimal directions in a manifold.
+
+	Fix an $n$-manifold $X$ and a point $p$ in $X$.
+
+	\begin{defi}
+		A \emph{curve based at $p$} is a smooth map $\gamma : I \to X$ from an open neighbourhood $I$ of $0$ in $\mathbb{R}$, satisfying $\gamma(0) = p$. We say that curves $\gamma_1 : I_1 \to X$ and $\gamma_2 : I_2 \to X$ \emph{agree to first order} if there exists a chart $\varphi : U \hme V$ about $p$ such that 
+		\[
+			\dv{t}\Bigg|_{t=0} \varphi \cpf \gamma_1(t) = \dv{t}\Bigg|_{t=0} \varphi \cpf \gamma_2 (t)
+		\]
+		as vectors in $\mathbb{R}^n$.
+	\end{defi}
+	\needfig{12}
+
+	From now on, given a smooth real- or vector-valued function $h$ on a neighbourhood of some $t_0$ in $\mathbb{R}$, we'll write $h'(t_0)$ for
+	\[
+		\dv{t}\Bigg|_{t = t_0} h(t).
+	\]
+	
+	\begin{prop}
+		Agreement to first order is an equivalence relation on curves based at $p$.
+	\end{prop}
+
+	\begin{proof}
+		It's manifestly reflexive and symmetric. Transitivity is a consequence of the following lemma.
+	\end{proof}
+
+	\begin{lem} \label{lem:1.49}
+		If $(\varphi \cpf \gamma_1)' (0) = (\varphi \cpf \gamma_2)' (0)$ holds for some chart $\varphi$ about $p$ then it holds for all such charts. 
+	\end{lem}
+	\begin{proof}
+		Given a chart $\varphi$ about $p$, let
+		\[
+			\pi^\varphi_p : \{\text{curves based at } p\} \to \mathbb{R}^n
+		\]
+		denote the map
+		\[
+			\gamma \mapsto (\varphi \cpf \gamma)' (0).
+		\]
+		
+		Now suppose $\varphi_1$ and $\varphi_2$ are two charts about $p$. We want to show that if two curves have the same image under $\pi_p^{\varphi_1}$ then they also have the same image under $\pi_p^{\varphi_2}$. To prove that this holds, note that by the chain rule we have $\pi_p^{\varphi_2} = A \cpf \pi_p^{\varphi_1}$, where $A$ is the linear map $\mathbb{R}^n \to \mathbb{R}^n$ given by the derivative of $\varphi_2 \cpf \varphi_1^{-1}$ at $\varphi_1(p)$. 
+	\end{proof}
+
+	\begin{defi}
+		The \emph{tangent space to $X$ at $p$}, denoted $T_p X$, is the set of curves based at $p$ modulo agreement to first order. Elements are called \emph{tangent vectors at $p$}. We write $[\gamma]$ for the tangent vector represented by a curve $\gamma$. Intuitively this is the infinitesimal direction in which $\gamma$ passes through $p$.
+	\end{defi}
+	\needfig{13}
+
+	By construction, for each chart $\varphi$ about $p$ the map $\pi_p^\varphi$ embeds $T_p X$ into $\mathbb{R}^n$. We claim that each $\pi_p^\varphi$ is in fact surjective, so induces a bijection $T_p X \to \mathbb{R}^n$. For different choices of chart these bijections differ by a linear automorphism of $\mathbb{R}^n$, namely the derivative of the transition map (called $A$ in the proof of Lemma \ref{lem:1.49}). We get the following.
+
+	\begin{prop}
+		$T_p X$ naturally carries the structure of an $n$-dimensional real vector space, in such a way that each $\pi_p^\varphi$ is a linear isomorphism.
+	\end{prop}
+	\begin{proof}
+		The only thing left to show is that for each $\varphi$ the map $\pi_p^\varphi$ is surjective. Given a vector $\vb v \in \mathbb{R}^n$, define a curve $\gamma$ based at $p$ by $\gamma(t) = \varphi^{-1}(\varphi(p) + t \vb v)$, for all $t$ in a small open neighbourhood of $0$ in $\mathbb{R}$. By construction this satisfies $\pi_p^\varphi (\gamma) = \vb v$. 
+	\end{proof}
+	\needfig{14}
+
+	\begin{defi}
+		If $x_1 , \cdots, x_n$ are the local coordinates associated to the $\varphi$ then we denote by $\pdv*{x_i}$ the tangent vector $(\pi_p^\varphi)^{-1} (\vb e_i)$, where $\vb e_i$ is the $i$-th standard basis vector. We may abbreviate this to $\partial_{x_i}$ or even $\partial_i$ if the chart is clear. Intuitively it is the infinitesimal direction obtained by running at unit speed along the $x_i$-axis, i.e.\ the curve along which all other $x_j$ are constant.
+	\end{defi}
+	\needfig{15}
+
+	Note that $\partial_{x_i}$ may denote a tangent vector at any point in the domain of the chart $\varphi$, and we will either be thinking of it as this whole family of vectors (a simple example of a \emph{vector field}) or we will specify at which specific point $p$ we are looking.
+	
+	\needfig{16}
+
+	\begin{rmk}
+		The notation $\pdv*{x_i}$ is just that: a piece of notation. We shall see shortly that it is justified by the fact that these tangent vectors can be interpreted as the obvious differential operators, and that they transform in the way the notation suggests.
+	\end{rmk}
+
+	Each vector $\partial_{x_i}$ depends on \emph{all} of the local coordinates $x_1, \cdots, x_n$, not just on $x_i$ itself. Said another way, if $y_1, \cdots, y_n$ are local coordinates associated to another chart about $p$, and if $y_i = x_i$ for some $i$, then it does not automatically follow that $\partial_{x_i} = \partial_{y_i}$. In fact, the correct expression in general (without assuming $y_i = x_i$) is the following.
+
+	\begin{lem}
+		For each $i$ we have
+		\[
+			\pdv{y_i} = \sum_{j = 1}^n \pdv{x_j}{y_i} \pdv{x_j}.
+		\]
+	\end{lem}
+	\begin{proof}
+		Let the $\vb x$ and $\vb y$ charts be $\varphi_1$ and $\varphi_2$. Following our earlier notation we have $\pi_p^{\varphi_2} = A \cpf \pi_p^{\varphi_1}$, so for each $i$ we get
+		\begin{equation}
+			\partial_{y_i} = (\pi_p^{\varphi_2})^{-1}(\vb e_i) = (\pi_p^{\varphi_1})^{-1} (A^{-1} \vb e_i).
+			\label{eq:1.5.1}
+		\end{equation} 
+
+		The map $A^{-1}$ is the derivative of $\varphi_1 \cpf \varphi_2^{-1}$, which expresses the $x_j$ in terms of the $y_i$, so
+		\[
+			A^{-1} \vb e_i = \sum_{j=1}^n \pdv{x_j}{y_i} \vb e_j.
+		\]
+		
+		Plugging into (\ref{eq:1.5.1}) and using linearity of $(\pi_p^{\varphi_1})^{-1}$ then gives
+		\[
+			\pdv{y_i} = (\pi_p^{\varphi_1})^{-1} (A^{-1} \vb e_i) = \sum_{j=1}^n \pdv{x_j}{y_i}\/(\pi_p^{\varphi_1})^{-1} (\vb e_j) = \sum_{j=1}^n \pdv{x_j}{y_i}\pdv{x_j}.
+		\]
+	\end{proof}
+
+	\begin{rmk}
+		If a vector $[\gamma]$ is given by $\sum_i a_i \partial_{x_i}$ then we have
+		\[
+			(\varphi \cpf \gamma)'(0) = \pi_p^{\varphi}(\gamma) = \sum_{i = 1}^n a_i \vb e_i.
+		\]
+		
+		Equating components of $\vb e_i$ we obtain
+		\begin{equation}
+			(x_i \cpf \gamma)'(0) = a_i
+		\end{equation}
+		so the coefficients of the $\partial_{x_i}$ are the derivatives of the $x_i$ along $\gamma$.
+	\end{rmk}
 \end{document}
