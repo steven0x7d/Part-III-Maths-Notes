@@ -39,7 +39,9 @@
 	\maintext
 	\section{Manifolds and Smooth Maps}
 	\recnr{1}
-	\subsection{Manifolds} A manifold is a space which locally looks like $\mathbb{R}^n$.
+	\subsection{Manifolds} \label{sec:1.1}
+	
+	A manifold is a space which locally looks like $\mathbb{R}^n$.
 
 	\begin{defi}
 		A \emph{topological $n$-manifold} is a topological space $X$ such that for every point $p$ in $X$ there exists an open neighbourhood $U$ of $p$ in $X$, an open set $V$ in $\mathbb{R}^n$, and a homeomorphism $\varphi: U \xrightarrow{\sim} V$.
@@ -517,4 +519,141 @@
 	\end{rmk}
 
 	Here transition maps are between open subsets of $\mathbb{C}^n$ or $\mathbb{C}^{k(n-k)}$, and are \emph{holomorphic}. Thus $\mathbb{CP}^n$ and $\mathrm{Gr}_{\mathbb{C}}(k,n)$ are examples of \emph{complex manifolds}, defined in the same way as smooth manifolds but with $\mathbb{R}$ and `smooth' replaced by $\mathbb{C}$ and `holomorphic'.
+
+	\subsection{Smooth Maps} \recnr{4}
+
+	Smoothness of maps is expressed in the local coordinates of a smooth atlas.
+
+	Fix manifolds $X$ and $Y$ of dimensions $n$ and $m$, and smooth atlases $\{\varphi_\alpha : U_\alpha \hme V_\alpha\}_{\alpha \in \mathcal{A}}$ and $\{\psi_\beta : S_\beta \hme T_\beta\}_{\beta \in \mathcal{B}}$ on $X$ and $Y$.
+	
+	\begin{defi}
+		A map $F : X \to Y$ between manifolds is \emph{smooth with respect to these atlases} if it's continuous and if for all $\alpha$ and $\beta$ the map
+		\[
+			\psi_\beta \cpf F \cpf \varphi_\alpha^{-1} : \varphi_\alpha (F^{-1} (S_\beta)) \to T_\beta
+		\]
+		is smooth as a map between open subsets of $\mathbb{R}^n$ and $\mathbb{R}^m$.
+	\end{defi}
+	\needfig{9}
+
+	If $x_1, \cdots, x_n$ and $y_1, \cdots, y_m$ are the corresponding local coordinates, then $F$ makes the $y_i$ into functions of the $x_j$ and we are just asking that each $y_i$ has all partial derivatives with respect to the $x_j$.
+
+	\begin{rmk}
+		Continuity of $F$ means $F^{-1}(S_\beta)$ is open, so the domain of 
+		\begin{equation}
+			\psi_\beta \cpf F \cpf \varphi_\alpha^{-1} : \varphi_\alpha (F^{-1}(S_\beta)) \to T_\beta
+			\label{eq:1.4.1}
+		\end{equation}
+		is open, so its smoothness makes sense.
+	\end{rmk}
+
+	\begin{lem}
+		$F: X\to Y$ is smooth with respect to these atlases if and only if it's continuous and for all $p$ in $X$ there exists $U_\alpha$ containing $p$ and $S_\beta$ containing $F(p)$ such that (\ref{eq:1.4.1}) is smooth.
+	\end{lem}
+	\begin{proof}
+		Use smoothness of the atlases plus the chain rule.
+	\end{proof}
+
+	\begin{cor}
+		Smoothness of $F: X \to Y$ is independent of the choice of smooth atlases representing the smooth structures on $X$ and $Y$.
+	\end{cor}
+	\begin{proof}
+		Reduce to the case where one atlas contains the other.
+	\end{proof}
+
+	\begin{defi}
+		A map $F \to Y$ is \emph{smooth} if it's smooth with respect to some (or equivalently all) smooth atlas(es) representing the smooth structure on $X$ and $Y$.
+	\end{defi}
+
+	\begin{ex}
+		\ 
+		\begin{enumerate}
+			\item The identity map on any manifold is smooth;
+			\item Any constant map $X \to Y$ is smooth;
+			\item The projections $X \times Y \to X$ and $X \times Y \to Y$ are smooth;
+			\item The inclusion $S^n \hookrightarrow \mathbb{R}^{n+1}$ is smooth.
+		\end{enumerate}
+	\end{ex}
+
+	We have the following basic properties.
+
+	\begin{lem}
+		\
+		\begin{enumerate}
+			\item A map $f: X \to \mathbb{R}$ is smooth if and only if it's a smooth function in the sense of Section \ref{sec:1.1};
+			\item A map from an open subset of $\mathbb{R}^n$ to an open subset of $\mathbb{R}^m$ is smooth if and only if it's smooth in the usual multi-variable calculus sense;
+			\item Smoothness is \emph{local in the source}, meaning that a map $F: X \to Y$ is smooth if and only if there exists an open cover $\{W_\gamma\}_{\gamma\in \mathcal{C}}$ of $X$ such that $F|_{W_\gamma}$ is smooth for all $\gamma$;
+			\item A composition of smooth maps is smooth.
+		\end{enumerate}
+	\end{lem}
+	
+	It's helpful to have a criterion that doesn't explicitly mention the topology, for examples defined using pseudo-atlases.
+
+	\begin{prop} \label{prop:1.41}
+		A map $F: X\to Y$ is smooth if and only if there exists a cover $\{W_\gamma\}_{\gamma \in \mathcal{C}}$ of $X$, and for each $\gamma \in \mathcal{C}$ there exists elements $\alpha(\gamma) \in \mathcal{A}$ and $\beta(\gamma) \in \mathcal{B}$, such that for all $\gamma$ we have:
+		\begin{enumerate}
+			\item $W_\gamma$ is contained in $U_{\alpha(\gamma)}$ and $F(W_\gamma)$ is contained in $S_{\beta(\gamma)}$;
+			\item $\varphi_{\alpha(\gamma)}(W_\gamma)$ is open in $V_{\alpha(\gamma)}$. [Equivalent to $W_\gamma$ being open in $X$];
+			\item The map \[
+				\psi_{\beta(\gamma)} \cpf F \cpf \varphi_{\alpha(\gamma)}|_{W_\gamma}^{-1} : \varphi_{\alpha(\gamma)}(W_\gamma) \to T_{\beta(\gamma)}
+			\]
+			is smooth.
+		\end{enumerate}  
+	\end{prop}
+	\begin{proof}
+		For the `only if' direction take $\mathcal{C} = \mathcal{A}\times \mathcal{B}$, then for $\gamma = (a,b) \in \mathcal{C}$ set $W_\gamma = U_a \cap F^{-1}(S_b), \alpha(\gamma) = a, \beta(\gamma) = b$.
+		
+		For the converse, the non-trivial thing to check is continuity of $F$, so tkae an open $S \subset Y$. We need to show $F^{-1}(S)$ is open in $X$, or equivalently that $F^{-1}(S) \cap W_\gamma$ is open in $X$ for all $\gamma$. This holds iff $\varphi_{\alpha(\gamma)} (F^{-1}(S)\cap W_\gamma)$ is open in $V_{\alpha(\gamma)}$ for all $\gamma$.
+		
+		For each $\gamma$, abbreviating $\alpha(\gamma)$ and $\beta(\gamma)$ to $\alpha$ and $\beta$ we have
+		\begin{align*}
+			\varphi_\alpha (F^{-1}(S) \cap W_\gamma) & = \varphi_\alpha (F^{-1}(S \cap S_\beta) \cap W_\gamma) \\
+			& = \varphi_\alpha (F^{-1} (S \cap S_\beta)) \cap \varphi_\alpha(W_\gamma) \\
+			& = (\psi_\beta \cpf F \cpf \varphi_\alpha^{-1})^{-1} (\psi_\beta (S)) \cap \varphi_\alpha(W_\gamma).
+		\end{align*}
+
+		This is open since $\psi_\beta(S)$ is open, $\psi_\beta \cpf F \cpf \varphi_\alpha^{-1}$ is smooth (hence continuous), and $\varphi_\alpha (W_\gamma)$ is open.
+	\end{proof}
+
+	\begin{ex}
+		Viewing $\mathbb{C}^{n+1}$ as $\mathbb{R}^{2(n+1)}$, we can think of $S^{2n+1}$ as the unit sphere in $\mathbb{C}^{n+1}$. Sending a point on this sphere to the complex line through that point gives a map
+		\[
+			H : S^{2n+1} \to \mathbb{CP}^{n}
+		\]
+		called the \emph{Hopf map}. On Example Sheet 1 you will check that this is smooth using Proposition \ref{prop:1.41}.
+
+		\needfig{11}
+	\end{ex}
+
+	\begin{defi}
+		A \emph{diffeomorphism} from one manifold to another is a smooth map with a smooth two-sided inverse. Two manifolds are \emph{diffeomorphic}, written $\cong$, if there exists a diffeomorphism between them. This is obviously an equivalence relation.
+	\end{defi}
+
+	Recall from Section \ref{sec:1.1} that:
+	\begin{itemize}
+		\item When $n = 1,2$, or 3, every topological $n$-manifolds admits an essentially unique smooth structure.
+		\item For $n \geq 4$ a topological $n$-manifold may admit many essentially different smooth structures.
+	\end{itemize}
+
+	Here `essentially unique' means `unique up to diffeomorphism', and `essentially different' means `non-diffeomorphic'.
+
+	\begin{ex}
+		$\CP{1}$ is diffeomorphic to $S^2$ via
+		\[
+			[z_0 : z_1] \mapsto \frac{1}{\norm{\vb z}^2} \left( 2 \bar{z}_0 z_1, \abs{z_1}^2 - \abs{z_0}^2 \right) \in S^2 \subset \mathbb{C} \oplus \mathbb{R} = \mathbb{R}^3, 
+		\]
+		so it makes sense to call $\CP{1}$ the \emph{Riemann sphere} and to talk about the Hopf map $S^3 \to S^2$. The conventions here are that $\CP{1}$ is viewed as $\mathbb{C} \cup \{\infty\}$ via $z \in \mathbb{C} \mapsto [1 : z]$ and $\infty \mapsto [0:1]$. Meanwhile, we put $\mathbb{C}$ inside $\mathbb{R}^3$ via $x + \mathrm{i}y \mapsto (x,y,0)$, and stereographically project it through the north pole $N = (0,0,1)$ onto $S^2 \backslash N$.  
+	\end{ex}
+
+	\begin{rmk}
+		A diffeomorphism is a smooth homeomorphism but the converse is false (see Example Sheet 1).
+	\end{rmk}
+
+	\begin{lem}[Uniqueness of dimension]
+		If $X$ and $Y$ are diffeomorphic non-empty manifolds then $\dim X = \dim Y$.
+	\end{lem}
+	\begin{proof}
+		Fix a diffeomorphism $F : X \to Y$ and a point $p$ in $X$. Take charts $\varphi : U \hme V$ on $X$ about $p$ and $\psi : S \hme T$ on $Y$ about $F(p)$. By shrinking $U,V,S$ and $T$ if necessary, we may assume that $F(U)=S$.
+		
+		Then $G: = \psi \cpf F \cpf \varphi^{-1}$ and $H := \varphi \cpf F^{-1} \cpf \psi^{-1}$ are mutually inverse smooth maps between open subsets $V \subset \mathbb{R}^n$ and $T \subset \mathbb{R}^m$. From multivariable calculus we then have that the derivatives $\mathrm{D}_{\varphi(p)}G$ and $\mathrm{D}_{\psi(F(p))} H$ are mutually inverse linear maps between $\mathbb{R}^{\dim X}$ and $\mathbb{R}^{\dim Y}$, so $\dim X$ and $\dim Y$ must be equal.
+	\end{proof}
 \end{document}
