@@ -666,7 +666,7 @@
 	\begin{defi}
 		A \emph{curve based at $p$} is a smooth map $\gamma : I \to X$ from an open neighbourhood $I$ of $0$ in $\mathbb{R}$, satisfying $\gamma(0) = p$. We say that curves $\gamma_1 : I_1 \to X$ and $\gamma_2 : I_2 \to X$ \emph{agree to first order} if there exists a chart $\varphi : U \hme V$ about $p$ such that 
 		\[
-			\dv{t}\Bigg|_{t=0} \varphi \cpf \gamma_1(t) = \dv{t}\Bigg|_{t=0} \varphi \cpf \gamma_2 (t)
+			\dv{t}\bigg|_{t=0} \varphi \cpf \gamma_1(t) = \dv{t}\bigg|_{t=0} \varphi \cpf \gamma_2 (t)
 		\]
 		as vectors in $\mathbb{R}^n$.
 	\end{defi}
@@ -674,7 +674,7 @@
 
 	From now on, given a smooth real- or vector-valued function $h$ on a neighbourhood of some $t_0$ in $\mathbb{R}$, we'll write $h'(t_0)$ for
 	\[
-		\dv{t}\Bigg|_{t = t_0} h(t).
+		\dv{t}\bigg|_{t = t_0} h(t).
 	\]
 	
 	\begin{prop}
@@ -764,7 +764,169 @@
 		Equating components of $\vb e_i$ we obtain
 		\begin{equation}
 			(x_i \cpf \gamma)'(0) = a_i
+			\label{eq:1.5.2}
 		\end{equation}
 		so the coefficients of the $\partial_{x_i}$ are the derivatives of the $x_i$ along $\gamma$.
 	\end{rmk}
+
+	\subsection{Vectors as Differential Operators} \recnr{6}
+
+	One can differentiate functions in the direction of a given tangent vector and this gives an alternative way to construct the tangent space.
+
+	Again fix an $n$-manifold $X$ and a point $p$ in it. Given a smooth function $f$ on a neighbourhood of $p$, and a curve $\gamma$ based at $p$, one can differentiate $f$ along $\gamma$ at $p$ to obtain a number $(f \cpf \gamma)'(0)$.
+	
+	\needfig{17}
+
+	\begin{lem}
+		This number depends only on the tangent vector $[\gamma]$ represented by $\gamma$. In particular, if $[\gamma] = \sum_i a_i \partial_{x_i}$ with respect to local coordinates $x_1, \cdots, x_n$ about $p$, then we have
+		\[
+			(f \cpf \gamma)'(0) = \sum_{i = 1}^n a_i \pdv{f}{x_i}\bigg|_{p}.
+		\]
+	\end{lem}
+
+	\begin{proof}
+		We'll prove
+		\[
+			(f \cpf \gamma)'(0) = \sum_{i=1}^n a_i \pdv{f}{x_i}\bigg|_{p}.
+		\]
+		
+		Let $\varphi$ be the chart corresponding to the coordinates $x_i$. We then have
+		\[
+			(f \cpf \gamma)'(0) = \dv{t}\bigg|_{t=0} \left( (f \cpf \varphi^{-1}) \cpf (\varphi \cpf \gamma) \right) (t).
+		\]
+		
+		The function $f \cpf \varphi^{-1}$ is simply $f$ written in terms of the $x_i$, so by the chain rule we have
+		\[
+			(f \cpf \gamma)'(0) = \sum_{i=i}^n \pdv{f}{x_i}\bigg|_{p} (x_i \cpf \gamma)' (0).
+		\]
+		
+		Pugging in (\ref{eq:1.5.2}) completes the proof.
+	\end{proof}
+
+	The specific open neighbourhood of $p$ on which $f$ is defined plays no role here so it is more convenient to work with germs of function.
+
+	\begin{defi}
+		A \emph{germ of a smooth function at $p$} is the equivalence class $[(U,f)]$ of a pair $(U,f)$ comprising an open neighbourhood $U$ of $p$ and a smooth function $f: U \to \mathbb{R}$, under the equivalence relation that says $(U_1,f_1)\sim (U_2, f_2)$ if and only if there exists an open neighbourhood $V$ of $p$, contained in $U_1 \cap U_2$, such that $f_1 |_V = f_2|_V$. The \emph{space of germs at $p$}, denotes $\mathcal{O}_{X,p}$, is the set of such germs of functions. 
+	\end{defi}
+
+	\needfig{18}
+
+	\begin{lem}
+		Addition and multiplication of functions makes $\mathcal{O}_{X,p}$ into a ring (all rings are associative, commutative and unital for us). Then inclusion $\mathbb{R} \hookrightarrow \mathcal{O}_{X,p}$ of germs of constant functions further makes $\mathcal{O}_{X,p}$ into an $\mathbb{R}$-algebra (a ring equipped with a ring homomorphism from $\mathbb{R}$). It has a unique maximal ideal, $\mathfrak{m}$, given by germs of functions which vanish at $p$.
+	\end{lem}
+
+	\begin{proof}
+		The first two sentences are straightforward. And $\mathfrak{m}$ is a maximal ideal since it's the kernel of a ring homomorphism to a field, namely
+		\[
+			\mathcal{O}_{X,p} \to \mathbb{R} \quad \text{given by} \quad [(U,f)] \mapsto f(p).
+		\]
+		
+		To see that $\mathfrak{m}$ is unique note that any element $[(U,f)]$ of $\mathcal{O}_{X,p} \backslash \mathfrak{m}$ is invertible: since $f(p) \neq 0$ the open set $V := f^{-1}(\mathbb{R}^*)$ contains $p$, and then $[(U,f)] = [(V,f|_V)] = [(V, 1/f|_V)]^{-1}$.
+	\end{proof}
+
+	A ring with a unique maximal ideal is called a \emph{local ring}, so $\mathcal{O}_{X,p}$ is local $\mathbb{R}$-algebra. The `local' terminology is motivated by this example: you can think of a local ring as looking something like `functions defined near a point', with the maximal ideal given by `functions vanishing at the point'.
+
+	We saw earlier that the map
+	\[
+		\{\text{curves based at $p$}\} \times \{\text{smooth functions on a neighbourhood of $p$}\} \to \mathbb{R}
+	\]
+	given by $(\gamma,f) \mapsto (f \cpf \gamma)' (0)$ depends on $\gamma$ only via $[\gamma]$. Clearly it depends only on $f$ via its germ, so defines a map
+	\[
+		T_p X \times \mathcal{O}_{X,p} \to \mathbb{R}.
+	\]
+	
+	Our explicit expression for it shows that this map is bilinear, so we can view it as a linear map
+	\[
+		D : T_p X \to \mathcal{O}_{X,p}^{\vee}
+	\]
+	where $^{\vee}$ denotes the ($\mathbb{R}$-)linear dual of a vector space.
+
+	Geometrically, $D$ sends a tangent vector to the linear operator which takes the directional derivative along the vector. In particular, $D(\partial_{x_i}) = \pdv*{x_i}$, so $D$ is injective.
+	
+	Clearly $D$ is far from surjective for $\dim X = n > 0$, since $\mathcal{O}_{X,p}$ is infinite-dimensional. However, for all $\vb v$ in $T_p X$ the element $D(\vb v)$ in $\mathcal{O}_{X,p}^{\vee}$ has the following property.
+
+	\begin{lem}
+		For all $f$ and $g$ in $\mathcal{O}_{X,p}$ (we are dropping the $[(U,f)]$ notation) we have
+		\[
+			D(\vb v) (fg) = D(\vb v)(f)\ g(p) + f(p)\ D(\vb v)(g).
+		\]
+		\label{lem:1.59}
+	\end{lem}
+	\begin{proof}
+		Write $\vb v$ as $[\gamma]$ for some curve $\gamma$, and apply the product rule to the function $(fg)\cpf \gamma$.
+	\end{proof}
+
+	\begin{defi}
+		Given a ring $R$, an $R$-algebra $S$, and an $S$-module $M$, an \emph{$R$-linear derivation from $S$ to $M$} is an $R$-linear map $\dd : S \to M$ such that for all $f$ and $g$ in $S$ the Leibniz rule
+		\[
+			\dd{(fg)} = \dd{(f)} g + f \dd{(g)}
+		\]
+		holds. This equality is in $M$, and $\dd{(f)}g$ denotes the module action of $g \in S$ on $\dd{(f)} \in M$ (similarly for $f \dd{(g)}$). The set of all such derivations is denoted by $\Der_R (S,M)$, and is an $R$-submodule of $\Hom_R (S,M)$.
+	\end{defi}
+
+	\begin{rmk}
+		\ 
+		\begin{itemize}
+			\item It's the algebraic version of differential operators;
+			\item Automatically $\dd{(r)} = 0$ for all $r\in R$. (Think: the derivative of a constant is zero.) This is because $\dd{(r)} = r \dd{(1)}$ and \[
+				\dd{(1)} = \dd{(1 \times 1)} = \dd{(1)} \times 1 + 1 \times \dd{(1)} = 2 \dd{(1)}.
+			\]
+		\end{itemize}
+	\end{rmk}
+
+	Lemma \ref{lem:1.59}, i.e.\ the equality
+	\[
+		D(\vb v) (fg) = D(\vb v)(f)\ g(p) + f(p)\ D(\vb v)(g)
+	\]
+	tells us that for all $\vb v$ the element $D(\vb v)\in \mathcal{O}_{X,p}^{\vee} = \Hom_{\mathbb{R}}(\mathcal{O}_{X,p},\mathbb{R})$ is actually contained in the $\mathbb{R}$-linear subspace $\Der_{\mathbb{R}}(\mathcal{O}_{X,p},\mathbb{R})$.
+	
+	\begin{itemize}
+		\item $R = \mathbb{R}$ and $S = \mathcal{O}_{X,p}$ is an $R$-algebra by inclusion of constants;
+		\item $M = \mathbb{R}$ and is made into an $\mathcal{O}_{X,p}$-module by defining $f$ to act as $f(p)$, or more abstractly by viewing $\mathbb{R}$ as $\mathcal{O}_{X,p}/\mathfrak{m}$.
+	\end{itemize}
+
+	So the linear map $D : T_p X \to \mathcal{O}_{X,p}^{\vee}$ lands in $\Der_{\mathbb{R}}(\mathcal{O}_{X,p},\mathbb{R})$.
+
+	\begin{prop}
+		The map $D : T_p X \to \Der_{\mathbb{R}}(\mathcal{O}_{X,p}, \mathbb{R})$ is an isomorphism. So $\Der_{\mathbb{R}}(\mathcal{O}_{X,p},\mathbb{R})$ gives an alternative definition of $T_p X$ as a vector space. 
+	\end{prop}
+
+	\begin{proof}
+		We saw $D$ is linear and injective, so it suffices to prove surjectivity. Suppose $\delta : \mathcal{O}_{X,p} \to \mathbb{R}$ is a derivation, and fix local coordinates $\vb x$ with $\vb x(p) = 0$. We view elements of $\mathcal{O}_{X,p}$ as functions of the $x_i$.
+
+		Given $[(U,f)]$ in $\mathcal{O}_{X,p}$, the intuitive idea is to Taylor expand $f$ in the $x_i$. We know $\delta$ kills the constant term, and by Leibniz it also kills quadratic terms and higher. So we get
+		\[
+			\delta(f) = \delta \left( \sum_{i = 1}^n x_i \pdv{f}{x_i}\bigg|_{p} \right) = \sum_{i=1}^n \delta(x_i) \pdv{f}{x_i}\bigg|_{p} = \sum_{i=1}^n \delta(x_i) D(\partial_{x_i})(f).
+		\]
+		Hence $\delta = D(\sum_i \delta(x_i) \partial_{x_i})$ is in the image of $D$.
+
+		To make this rigorous, fix $[(U,f)]$ and define $g : U \to \mathbb{R}$ by
+		\[
+			g = \begin{dcases}
+				\frac{f(x_1,\cdots,x_n) - f(x_1,\cdots,x_{n-1},0)}{x_n} & \text{if }x_n \neq 0,\\
+				\pdv{f}{x_n}\/(x_1, \cdots, x_n) & \text{if }x_n = 0.
+			\end{dcases}
+		\]
+		By l'H\^opital's rule this is continuous and, inductively, smooth, so defines an element of $\mathcal{O}_{X,p}$. Letting $f_n \in \mathcal{O}_{X,p}$ be given by
+		\[
+			f_n (x_1, \cdots, x_n) = f(x_1, \cdots, x_{n-1}, 0),
+		\]
+		we have $f = f_n + x_n g$ in $\mathcal{O}_{X,p}$, and so
+		\[
+			\delta(f) = \delta (f_n) + \delta (x_n) g(p) + x_n (p) \delta (g) = \delta(f_n) + \delta(x_n) \pdv{f}{x_n}\bigg|_{p}.
+		\]
+
+		Iterating, we can pull out each variable in turn, and arrive at
+		\[
+			\delta(f) = \delta(f(p)) + \sum_{i = 1}^n \delta(x_i) \pdv{f}{x_i}\bigg|_{p}.
+		\]
+		
+		The first term on the right-hand side vanishes since derivations kill constants, and we conclude that
+		\[
+			\delta = D \left( \sum_{i = 1}^n \delta(x_i) \partial_{x_i} \right)
+		\]
+		as claimed. So $D$ is indeed an isomorphism onto $\Der_{\mathbb{R}}(\mathcal{O}_{X,p},\mathbb{R})$.
+	\end{proof}
+
+	This result says that tangent vectors at $p$ are the same thing as derivations on $\mathcal{O}_{X,p}$, with vectors acting as the corresponding directional derivatives. Whilst our definition was more geometric, and really justifies the name `tangent vector', this derivation perspective has the advantage of marking no reference to charts.
 \end{document}
