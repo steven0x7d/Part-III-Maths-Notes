@@ -929,4 +929,101 @@
 	\end{proof}
 
 	This result says that tangent vectors at $p$ are the same thing as derivations on $\mathcal{O}_{X,p}$, with vectors acting as the corresponding directional derivatives. Whilst our definition was more geometric, and really justifies the name `tangent vector', this derivation perspective has the advantage of marking no reference to charts.
+
+	\subsection{Derivatives} \recnr{7}
+
+	The derivative of a smooth map is the map it induces on curves-modulo-agreement-to-first-order.
+
+	Fix manifolds $X$ and $Y$ and a smooth map $F: X \to Y$.
+
+	\begin{itemize}
+		\item Tangent spaces $T_p X$ and $T_q Y$ linearise $X$ and $Y$ at $p$ and $q$;
+		\item The derivative of $F$ should linearise it, so should map from $T_p X$ to $T_{F(p)}Y$;
+		\item Elements of $T_p X$ and $T_{F(p)}Y$ are equivalence classes of curves in $X$ and $Y$ based at $p$ and $F(p)$;
+		\item There's an obvious way to use $F$ to turn curves in $X$ based at $p$ to curves in $Y$ based at $F(p)$.
+	\end{itemize}
+
+	\begin{defi}
+		The \emph{derivative of $F$ at $p$}, denoted $D_p F$, is the map $T_p X \to T_{F(p)}Y$ given by $[\gamma]\mapsto [F\cpf \gamma]$. We sometimes denote $D_p F$ by $F_*$, the \emph{pushforward} by $F$ on tangent vectors. 
+	\end{defi}
+
+	\needfig{19}
+
+	\begin{lem}
+		This is well-defined and linear. If $\vb x$ and $\vb y$ are local coordinates on $X$ about $p$ and on $Y$ about $F(p)$ respectively, then viewing $F$ as a map from the $x_i$ to the $y_i$ we have
+		\[
+			D_p F(\partial_{x_i}) = \sum_{j=1}^m \pdv{y_j}{x_i}\bigg|_{p} \partial_{y_j}.
+		\]
+	\end{lem}
+	\begin{proof}
+		Let the $\vb x$ chart be $\varphi$. The coefficients of $\partial_{y_j}$ in $D_p F(\partial_{x_i})$ is
+		\[
+			\dv{t}\bigg|_{t=0} (y_j \cpf F \cpf \varphi^{-1}) (\varphi(p) + t \vb e_i) = \pdv{y_j}{x_i}.
+		\]
+	\end{proof}
+
+	\begin{rmk}
+		\
+		\begin{itemize}
+			\item This shows that the new notion of derivative coincides with the familiar multi-variable calculus version when $X$ and $Y$ are open subsets of $\mathbb{R}^m$ and $\mathbb{R}^n$ and we take the standard coordinates;
+			\item For a curve $\gamma$ based at $p$ we can write $[\gamma]$ as $D_0 \gamma (\partial_t)$, where $t$ is the standard coordinate on the domain of $\gamma$.
+		\end{itemize}
+	\end{rmk}
+
+	\needfig{20}
+
+	With our new notion of derivative the chain rule is tautological.
+
+	\begin{prop}[Chain rule]
+		If $F: X \to Y$ and $G : Y \to Z$ are smooth maps between manifolds then $G \cpf F$ is also smooth and for all $p$ in $X$ we have $D_p(G \cpf F) = D_{F(p)}G\cpf D_p F$.
+	\end{prop}
+	\begin{proof}
+		For all $[\gamma]$ in $T_p X$ we have
+		\[
+			D_p(G\cpf F) ([\gamma]) = [(G\cpf F)\cpf \gamma] = [G\cpf(F\cpf \gamma)] = D_{F(p)}G \cpf D_p F([\gamma]).
+		\]
+	\end{proof}
+
+	The definition can be reformulated in terms of derivations:
+	\begin{itemize}
+		\item Given a germ $[(U,f)] \in \mathcal{O}_{Y,F(p)}$ there is an induced germ $[(F^{-1}(U), f\cpf F)] \in \mathcal{O}_{X,p}$ (this is well-defined);
+		\item We get a map $F^* : \mathcal{O}_{Y,F(p)} \to \mathcal{O}_{X,p}$, called \emph{pullback by $F$};
+		\item This is obviously $\mathbb{R}$-linear so has a dual map \[
+			(F^*)^{\vee} : \mathcal{O}_{X,p}^{\vee} \to \mathcal{O}_{Y,F(p)}^{\vee}
+		\]
+		\item Since $F^*$ is moreover a homomorphism of $\mathbb{R}$-algebras (an $\mathbb{R}$-linear ring homomorphism), the map $(F^*)^{\vee}$ sends the subspace \[
+			\Der_{\mathbb{R}}(\mathcal{O}_{X,p},\mathbb{R}) \subset \mathcal{O}_{X,p}^{\vee} \quad \text{to} \quad \Der_{\mathbb{R}}(\mathcal{O}_{Y,F(p)},\mathbb{R}) \subset \mathcal{O}_{Y,F(p)}^{\vee}
+		\]
+		\item These subspaces are identified with $T_p X$ and $T_{F(p)}Y$ by the map $D$ which sends tangent vectors to directional derivatives. 
+		
+		\begin{center}
+			\begin{tikzcd}
+				T_p X \arrow[r, "D_p F"] \arrow[d, "D"', "\sim"] & T_{F(p)} Y \arrow[d, "\sim"', "D"]\\
+				\Der_{\mathbb{R}}(\mathcal{O}_{X,p},\mathbb{R}) \arrow[r, "(F^*)^{\vee}"] & \Der_{\mathbb{R}}(\mathcal{O}_{Y,F(p)},\mathbb{R})
+			\end{tikzcd}
+		\end{center}
+	\end{itemize}
+
+	\begin{lem}
+		The diagrams commutes, i.e.\ $D \cpf D_p F = (F^*)^{\vee} \cpf D$.
+	\end{lem}
+	\begin{proof}
+		For all $[\gamma]$ in $T_p X$, and all $f$ in $\mathcal{O}_{Y,F(p)}$, we have
+		\[
+			D(D_p F([\gamma])) (f) = D([F \cpf \gamma]) (f) = \left( f \cpf (F \cpf \gamma) \right)' (0).
+		\]
+		
+		Using the obvious associativity, this becomes
+		\[
+			\left( (f \cpf F) \cpf \gamma \right)' (0) = D([\gamma]) (F^* f) = (F^*)^{\vee} \left( D([\gamma]) \right) (f).
+		\]
+		
+		This means that
+		\[
+			D(D_p F([\gamma])) = (F^*)^{\vee} (D([\gamma]))
+		\]
+		for all $[\gamma]$, which is exactly what we want.
+	\end{proof}
+
+	Geometrically this just says that if you have a tangent vector $\vb v$ in $T_p X$ and a function germ $f$ in $\mathcal{O}_{Y,F(p)}$ then you can either pushforward $\vb v$ to $T_{F(p)}Y$ and differentiate $f$ along $F_* \vb v$, or pullback $f$ to $\mathcal{O}_{X,p}$ and differentiate $F^* f$ along $\vb v$, and these give the same answer. 
 \end{document}
