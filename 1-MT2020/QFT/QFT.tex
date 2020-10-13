@@ -294,7 +294,7 @@
 		\begin{equation}
 			L(t) = L [\phi, \partial_\mu \phi] = \int \dd[3]{x} \mathcal{L}(\phi(x),\partial_\mu \phi(x))
 		\end{equation}
-		where $\mathcal{L}$ is called the \emph{lagrangian density}, which itself is a function of $\phi$ and its derivatives.
+		where $\mathcal{L}$ is called the \emph{Lagrangian density}, which itself is a function of $\phi$ and its derivatives.
 	\end{defi}
 
 	\begin{nt}
@@ -334,7 +334,7 @@
 
 	Recall our requirements for any physical scalar field, the most general Lagrangian of some scalar field $\phi$ is of the form
 	\begin{equation}
-		\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - V(\phi)
+		\mathcal{L} = \frac{1}{2} F(\phi) \partial_\mu \phi \partial^\mu \phi - V(\phi)
 	\end{equation}
 	for some scalar function $V(\phi)$.
 
@@ -359,7 +359,7 @@
 		\pdv{\mathcal{L}}{\phi} - \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} \right) = 0.
 	\end{equation}
 
-	For our `ansatz'
+	For our `ansatz' with $F \equiv 1$, 
 	\begin{equation}
 		\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - V(\phi)
 	\end{equation}
@@ -370,7 +370,10 @@
 	so that the Euler-Lagrange equation is
 	\begin{equation}
 		\partial_\mu \partial^\mu \phi + V'(\phi) = 0.
+		\label{eq:ELgen}
 	\end{equation}
+	
+	In general it is a non-linear partial differential equation.
 
 	Let's see a special case of particular importance.
 	\begin{ex}
@@ -397,5 +400,130 @@
 		\]
 		
 		These solutions can be superposed, giving certain wave packets. (Think about Fourier transform.)
+	\end{ex}
+
+	\lecnr{3}
+	
+	Recall our general Euler-Lagrange equation (\ref{eq:ELgen}), it is a non-linear PDE. There won't be a general superposition principle. An exotic example is \emph{soliton}.
+	
+	\subsection{Maxwell's Theory: An Example of CFT}
+	In Maxwell's theory, the central idea we use is a 4-vector potential
+	\begin{equation*}
+		A^\mu (x) = A^\mu(t, \vb x) = (\phi , \vb A)
+	\end{equation*}
+	which transforms under Lorentz transformation as 
+	\begin{equation}
+		A^\mu(x) \to \LT{\mu}{\nu} A^\nu (\Lambda^{-1} \cdot x).
+	\end{equation}
+
+	The electromagnetic fields live in the field strength tensor
+	\begin{equation}
+		F^{\mu\nu}(x) := \partial^\mu A^\nu(x) - \partial^\nu A^\mu(x)
+	\end{equation}
+
+	Under the Lorentz transformation, $F^{\mu\nu}$ transforms as 
+	\begin{equation}
+		F^{\mu\nu}(x) \to \LT{\mu}{\alpha}\LT{\nu}{\beta}F^{\alpha\beta}(\Lambda^{-1} \cdot x).
+	\end{equation}
+
+	$F^{\mu\nu}$ has some properties:
+	\begin{itemize}
+		\item We will see that $F^{\mu\nu}$ is invariant under \emph{gauge transformations} in the form 
+		\begin{equation}
+			A^\mu(x) \to A^\mu(x) + \partial^\mu \lambda(x)
+		\end{equation} 
+		where $\lambda(x)$ is an arbitrary function $\lambda : \mathbb{R}^{3,1} \to \mathbb{R}$.
+		\item $F_{\mu,\nu}$ satisfies \emph{Bianchi identity}  \begin{equation}
+			\partial_\lambda F_{\mu\nu} + \partial_\mu F_{\nu\lambda} + \partial_\nu F_{\lambda\mu} = 0.
+		\end{equation}
+	\end{itemize}
+
+	The \emph{Maxwell Lagrangian} is 
+	\begin{equation}
+		\mathcal{L} = - \frac{1}{4} F_{\mu\nu} F^{\mu\nu} = - \frac{1}{2} (\partial_\mu A_\nu)(\partial^\mu A^\nu) + \frac{1}{2} (\partial_\mu A^\mu)^2 + \text{total derivatives}.
+	\end{equation}
+
+	Then the Euler-Lagrange equations are
+	\[
+		\pdv{\mathcal{L}}{A_\nu} - \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu A_\nu)} \right) = 0
+	\]
+	and by noting
+	\[
+		\pdv{\mathcal{L}}{A_\nu} = 0 \quad \text{and} \quad \pdv{\mathcal{L}}{(\partial_\mu A_\nu)} = - \partial^\nu A^\nu + (\partial_\rho A^\rho)\eta^{\mu\nu}
+	\]
+	we get the actual form of the equations of motion:
+	\begin{equation}
+		\partial_\mu F^{\mu\nu} = 0.
+	\end{equation}
+
+	\subsection{Symmetries}
+	(For more, see the course \emph{Symmetries, Fields and Particles}.)
+	\begin{defi}
+		A \emph{symmetry} of some theory is a variation of fields which leaves the action invariant.
+	\end{defi}
+
+	Why are symmetries important? According to \emph{Noether's theorem}, symmetries result in certain conservation laws in a theory. The possible form of Lagrangian is restricted by the symmetries the theory has.
+
+	We now discuss certain types of symmetries.
+
+	\subsubsection{Spacetime Symmetry}
+	Typical spacetime symmetries include
+	\begin{itemize}
+		\item Translation: $x^\mu \to x^\mu + c^\mu$ where $c^\mu \in \mathbb{R}^{3,1}$. Under translation, a scalar field transforms as $\phi(x) \to \phi(x-c)$; 
+		\item Lorentz transformation: $x^\mu \to \LT{\mu}{\nu}x^\nu$ and $\phi(x) \to \phi(\Lambda^{-1} \cdot x)$;
+		\item Scale transformation: $x^\mu \to \lambda x^\mu$ where $\lambda \in \mathbb{R}^+$ and the field goes as $\phi(x) \to \lambda^{-\Delta}\phi(\lambda^{-1} x)$ where $\Delta = [\phi]$ (this is for massless theories). 
+	\end{itemize}
+
+	\subsubsection{Internal Symmetry}
+
+	For example, electric charge, flavour and colour arise from certain internal symmetries.
+
+	\begin{ex}
+		For a complex scalar field $\psi : \mathbb{R}^{3,1}\to \mathbb{C}$, the Lagrangian is
+		\[
+			\partial_\mu \psi^* \partial^\mu \psi - V(\abs{\psi}^2).
+		\]
+		 
+		This theory has a symmetry 
+		\[
+			\psi(x) \to \psi'(x) = e^{\mathrm{i}\alpha}\psi(x) \quad \text{and} \quad \psi^*(x) \to \psi^*\/'(x) = e^{-\mathrm{i}\alpha}\psi^*(x)
+		\]
+		where $\alpha \in [0,2\pi)$. This leaves both $\mathcal{L}$ and $S$ invariant.
+	\end{ex}
+
+	Continuous symmetries form matrix Lie groups.
+	\begin{ex}
+		Lorentz transformation $x^\mu \to \LT{\mu}{\nu} x^\nu$. Note $\Lambda$ is a $4 \times 4$ matrix. Then the Lorentz group is
+		\[
+			G_L = \{\Lambda \in \Mat_4(\mathbb{R}): \Lambda \eta \Lambda^T = \eta, \det \Lambda = 1\} = \mathrm{SO}(3,1).
+		\]
+		
+		The general picture is
+		\[
+			\underbrace{\mathrm{SO}(3,1)}_{\text{Lorentz}} \subset \underbrace{\text{Poincar\'e}}_{\text{Lorentz + translations}} \subset \underbrace{\mathrm{SO}(4,2)}_{\text{Conformal}}.
+		\]
+	\end{ex}
+
+	\subsection{Finite vs Infinitesimal Transformations}
+
+	\begin{defi}
+		A (matrix) group element $g \in G$ are said to be \emph{near identity} if it can be written as 
+		\[
+			g = \exp (\alpha X):= \sum_{n=0}^\infty \frac{1}{n!} (\alpha X)^n\ \stackrel{\alpha \ll 1}{\simeq}\ \1 + \alpha X + \mathcal{O}(\alpha^2), \quad \alpha \in \mathbb{R}
+		\]
+		where the matrix $X \in \mathbb{L}(G)$, the Lie algebra of $G$.  
+	\end{defi}
+
+	It is often convenient to work to first order, e.g.
+	\begin{ex}
+		For a theory with
+		\[
+			\mathcal{L} = \partial_\mu \psi^* \partial^\mu \psi - V(\abs{\psi}^2)
+		\]
+
+		A finite transformation is $\psi(x) \to g \cdot \psi(x)$ with $g = \exp(\mathrm{i} \alpha) \in G \simeq \mathrm{U}(1)$.
+		
+		An infinitesimal transformation is $ \psi(x) \to \psi(x) + \delta\psi (x)$ with $\delta \psi(x) = \mathrm{i} \alpha \psi(x)$.
+		
 	\end{ex}
 \end{document}
