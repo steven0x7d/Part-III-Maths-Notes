@@ -171,6 +171,8 @@
 	\newpage
 	\section{Classical Field Theory}
 
+	\subsection{Lorentz Covariant Fields}
+
 	Firstly, let's recall that the Minkowski metric is invariant under Lorentz transformations. And we consider the Lorentz transformation of coordinates:
 	\begin{equation}
 		x^\mu \mapsto (x')^\mu = \LT{\mu}{\nu}x^\nu
@@ -247,5 +249,153 @@
 		\partial_\mu \phi \partial^\mu \phi(x) \to \partial_\mu \phi\partial^\mu \phi(\Lambda^{-1} \cdot x)
 	\]
 	
+	\subsection{Lagrangian Formulation} \lecnr{2}
+
+	\subsubsection{Review of Lagrangian Formulation}
+
+	Here we consider a non-relativistic particle with mass $m$ and moving in a potential $V(q)$. Here we use $q = q(t)$ to denote its position at time $t$. Then its Lagrangian is
+	\begin{equation}
+		L(t) = L\left( q(t), \dot{q}(t) \right) = \frac{1}{2} \dot{q}^2 - V(q)
+	\end{equation}
+
+	The \emph{action} in time interval $[t_i, t_f]$ of this Lagrangian $L$ is defined to be 
+	\begin{equation}
+		S[q] := \int_{t_i}^{t_f} \dd{t} L \left( q(t),\dot{q}(t) \right)
+	\end{equation}
 	
+	The equation(s) of motion can be obtained by the \emph{principle of least action}. The plan is
+	\begin{itemize}
+		\item We vary the path of the particle as $q(t) \to q(t) + \delta q(t)$ and fix the end points by $\delta q(t_i) = \delta(q_f) = 0$.
+		\item The equations of motion, known as \emph{Euler-Lagrange equations} are obtained by imposing the condition that the action is stationary, i.e. \[
+			\delta S = 0.
+		\]
+	\end{itemize}
+
+	The above principle can be easily and clearly generalised in later contexts.
+
+	For this specific example, we get the Euler-Lagrange equation
+	\begin{equation}
+		\ddot{q} = - \pdv{V}{q}.
+	\end{equation}
+	
+	\subsubsection{Scalar Field Theories}
+	
+	To construct such a scalar field theory of physical significance, we require
+	\begin{itemize}
+		\item It should have \emph{Lorentz invariant} action;
+		\item It has \emph{locality}, i.e.\ no coupling between fields (and their spacetime derivatives) at different points;
+		\item It has \emph{at most two time derivatives}.
+	\end{itemize}
+
+	From now on, for convenience, we use $x$ to denote some point $(\vb x,t)$ in spacetime.
+
+	\begin{defi}
+		The \emph{Lagrangian} of a scalar field $\phi(x)$ is some time-dependent functional of $\phi$ and its derivatives, in the form of
+		\begin{equation}
+			L(t) = L [\phi, \partial_\mu \phi] = \int \dd[3]{x} \mathcal{L}(\phi(x),\partial_\mu \phi(x))
+		\end{equation}
+		where $\mathcal{L}$ is called the \emph{lagrangian density}, which itself is a function of $\phi$ and its derivatives.
+	\end{defi}
+
+	\begin{nt}
+		The proper `Lagrangian' is in fact barely used in the context. Instead, the `Lagrangian density' appears far more often. Thus, we usually abuse the terminology and refer to `Lagrangian density' just as `Lagrangian'.
+	\end{nt}
+
+	\begin{defi}
+		The \emph{action} of a scalar field $\phi(x)$ for some time interval $[t_i,t_f]$ is a functional of the field and its derivatives in the form of
+		\begin{equation}
+			S_{t_i,t_f}[\phi, \partial_\mu \phi] = \int_{t_i}^{t_f} \dd{t} L[\phi, \partial_\mu \phi] = \int_{t_i}^{t_f} \dd{t} \int \dd[3]{x} \mathcal{L}.
+		\end{equation}
+
+		Practically, we often choose infinite time interval $t_i \to - \infty, t_f \to +\infty$, thus
+		\begin{equation}
+			S[\phi, \partial_\mu \phi] = \int_{\mathbb{R}^{3,1}} \dd[4]{x} \mathcal{L}(\phi(x),\partial_\mu \phi(x)).
+		\end{equation}
+	\end{defi}
+
+	Under Lorentz transformation 
+	\[
+		x^\mu \to x'^\mu = \LT{\mu}{\nu} x^\nu
+	\]
+	we require that
+	\[
+		\mathcal{L}(x) = \mathcal{L}(\phi(x), \partial_\mu \phi(x))
+	\]
+	transforms as a scalar field, i.e.\ 
+	\[
+		\mathcal{L}(x) \to \mathcal{L}(\Lambda^{-1} \cdot x)
+	\]
+	
+	Thus, changing variables by $y^\mu = \iLT{\nu}{\mu}x^\nu$ and noting $\det \Lambda = +1$ we have
+	\[
+		S \to S' = \int \dd[4]{x} \mathcal{L}(\Lambda^{-1} \cdot x) = \int \dd[4]{y} \mathcal{L}(y) = S,
+	\]
+	i.e.\ the action is invariant under Lorentz transformation.
+
+	Recall our requirements for any physical scalar field, the most general Lagrangian of some scalar field $\phi$ is of the form
+	\begin{equation}
+		\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - V(\phi)
+	\end{equation}
+	for some scalar function $V(\phi)$.
+
+	\begin{nt}
+		We don't need to consider terms like $\phi \partial_\mu \partial^\mu \phi$, as they are the same as $\partial_\mu \phi \partial^\mu \phi$ up to some surface term (which has no contribution to the action).
+	\end{nt}
+
+	Now we generalise the principle of least action to classical (scalar) field theories.
+
+	\begin{pos}[Principle of least action]
+		The equations of motion (i.e.\ Euler-Lagrange equations) of a scalar field $\phi(x)$ should make the action $S[\phi,\partial_\mu \phi]$ \emph{stationary}, i.e.\ $\delta S = 0$, under variations $\phi(x) \to \phi(x) + \delta \phi(x)$ subject to the boundary condition $\delta \phi(x) = \delta \phi(t,\vb x) \to 0$ as $\abs{\vb x} \to \infty$ or $t \to \pm \infty$.
+	\end{pos}
+
+	To get the equation(s) of motion of $\phi$, we vary the action and set it to zero, by
+	\begin{align*}
+		\delta S & = \int \dd[4]{x} \left[ \pdv{\mathcal{L}}{\phi} \delta \phi + \pdv{\mathcal{L}}{(\partial_\mu \phi)}\delta (\partial_\mu \phi) \right]\\
+		& = \int \dd[4]{x} \left[ \pdv{\mathcal{L}}{\phi} - \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} \right) \right] \delta \phi + \underbrace{\int \dd[4]{x} \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} \delta \phi \right)}_{ = \int_{\partial \mathbb{R}^{3,1}} \dd{S_\mu} \pdv{\mathcal{L}}{(\partial_\mu \phi)} \delta \phi = 0}.
+	\end{align*}
+
+	Thus, by setting $\delta S = 0$, we have, for any variation $\delta \phi$, the Euler-Lagrange equation
+	\begin{equation}
+		\pdv{\mathcal{L}}{\phi} - \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} \right) = 0.
+	\end{equation}
+
+	For our `ansatz'
+	\begin{equation}
+		\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - V(\phi)
+	\end{equation}
+	we have
+	\[
+		\pdv{\mathcal{L}}{\phi} = - V'(\phi) := \dv{V}{\phi} \quad \text{and} \quad \pdv{\mathcal{L}}{(\partial_\mu \phi)} = \partial^\mu \phi.
+	\]
+	so that the Euler-Lagrange equation is
+	\begin{equation}
+		\partial_\mu \partial^\mu \phi + V'(\phi) = 0.
+	\end{equation}
+
+	Let's see a special case of particular importance.
+	\begin{ex}
+		Klein-Gordon field theory has potential term
+		\[
+			V(\phi) = \frac{1}{2} m^2 \phi^2
+		\]
+		and the equation of motion is called \emph{Klein-Gordon equation}
+		\begin{equation}
+			\boxed{\partial_\mu \partial^\mu \phi + m^2 \phi = 0}.
+		\end{equation}
+
+		If we write the derivatives in terms of space and time explicitly, we have
+		\[
+			\partial_\mu \partial^\mu = \pdv[2]{t} - \sum_i \pdv[2]{x_i} = \pdv[2]{t} - \laplacian
+		\]
+		and the Klein-Gordon equation is actually a wave equation. It is a linear partial differential equation and has wavelike solutions such as 
+		\[
+			\phi \sim e^{\mathrm{i} p \cdot x} = e^{\mathrm{i} \omega t - \mathrm{i} \vb k \vdot \vb x}
+		\]
+		with dispersion relation
+		\[
+			\omega_{\vb k} = \sqrt{\abs{\vb k}^2 + m^2}.
+		\]
+		
+		These solutions can be superposed, giving certain wave packets. (Think about Fourier transform.)
+	\end{ex}
 \end{document}
