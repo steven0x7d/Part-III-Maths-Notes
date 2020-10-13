@@ -8,10 +8,10 @@ Cambridge Part III Mathematics Notes taken by *Zihan Yan*
 - Michaelmas 2020:
   - **Algebraic Topology** by *I. Smith*
   - **Differential Geometry** by *J. Smith*
-  - ~~**General Relativity** by *H. Reall*~~ (I've learned GR for too many times...)
-  - **Quantum Field Theory** by *N. Dorey*
-  - **Symmetries, Fields and Particles** by *B. Allanach*
-  - **Statistical Field Theory** by *C. Thomas*
+  - ~~**General Relativity** by *H. Reall*~~ (I've learned these for too many times...)
+  - ~~**Quantum Field Theory** by *N. Dorey *~~ (I plan to write a revision notes instead during the vacation)
+  - ~~**Symmetries, Fields and Particles** by *B. Allanach*~~ (The same as above)
+  - ~~**Statistical Field Theory** by *C. Thomas*~~ (Ditto)
 - Lent 2021:
   - **Applications of Differential Geometry in Physics** by *M. Dunajski*
   - **Advanced Quantum Field Theory** by *M. Wingate*
