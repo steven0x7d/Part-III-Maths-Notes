@@ -182,4 +182,203 @@
 	\]
 	as the background magnetic field seen from some site can be seen as modified by the magnetisation of neighbouring sites.
 	
-\end{document}
+	\subsection{Landau Theory of Phase Transitions} \recnr{1-2-1}
+
+	A phase transition occurs when some quantity changes discontinuously. For us this \emph{order parameter} is $m$.
+
+	Landau theory is a simple yet effective way to understand phase transitions qualitatively. Based on free energy and symmetry.
+
+	Recall the free energy for the Ising model in the mean field approximation
+	\[
+		f(m) \approx - B m - \frac{1}{2} J q m^2 - \frac{1}{\beta} \left[ \ln 2 - \frac{1}{2}(1+m)\ln(1+m) - \frac{1}{2} (1-m)\ln(1-m) \right]
+	\]
+	
+	Taylor expand for small $m$ and discarding the constant term (as it is not important), we get
+	\[
+		f(m)\approx -Bm + \frac{1}{2} \left( \frac{1}{\beta} - J q \right) m^2 + \frac{1}{12} \frac{1}{\beta}m^4 + \cdots
+	\]
+	
+	The equilibrium value of $m$ is $m_{\text{min}}$. Landau theory investigates how $m_{\text{min}}$ changes as we vary the parameters.
+
+	\subsubsection{$B=0$}
+	\[
+		f(m) \approx \frac{1}{2} (T - T_c) m^2 + \frac{1}{12} T m^4 + \cdots
+	\]
+	where we denoted the \emph{critical temperature} $T_c = Jq$.
+
+	\needfig{2}
+
+	At high $T$, we have $m=0$ as the minimum. For low $T$, specifically $T < T_c$, we have the minima
+	\[
+		m = \pm m_0 = \pm \sqrt{\frac{3(T_c - T)}{T}}
+	\]
+	and note that this holds only when close to $T_c$ where $m$ is small. 
+
+	If we plot the phase diagram \needfig{3}, we find $m$ turns on abruptly as we lower $T$. Here, $m$ is continuous, so this is called a \emph{continuous phase transition} (also known as a $2^{\text{nd}}$ order phase transition).
+
+	There are two phases:
+	\begin{itemize}
+		\item $m=0$ is the \emph{disordered phase};
+		\item $m \neq 0$ is the \emph{ordered phase}.
+	\end{itemize}
+
+	$f(m)$ is invariant under a $\mathbb{Z}_2$ symmetry $m \to -m$, which is inherited from the $S_i \to -S_i$ symmetry of the Ising model when $B = 0$.
+
+	For $T < T_c$, the system chooses one of the two states $m = \pm m_0$, i.e.\ the $\mathbb{Z}_2$ symmetry is \emph{spontaneously broken}.
+
+	Consider the heat capacity at constant $B = 0$ (this is a response function):
+	\[
+		C = \pdv{\expval{E}}{T} = \beta^2 \pdv[2]{\beta} \ln Z
+	\]
+	
+	Some algebra gives
+	\[
+		f(m_{\text{min}}) = \begin{dcases}
+			0 & T > T_c \\
+			- \frac{3}{4} \frac{(T_c - T)^2}{T} & T<T_c
+		\end{dcases}
+	\]
+	
+	Using $\ln Z \approx - \beta N f(m_{\text{min}})$ gives
+	\[
+		c = \frac{C}{N} \to \begin{dcases}
+			0 & T \to T_c^+ \\
+			3/2 & T \to T_c^-
+		\end{dcases}
+	\]
+	
+	This means $c$ jumps discontinuously.
+	
+	\needfig{4}
+
+	\subsubsection{$B\neq 0$}
+	\[
+		f(m) \approx - B m + \frac{1}{2}(T - T_c)m^2 + \frac{1}{12} T m^4 + \cdots
+	\]
+	
+	For high $T$, we have a unique minimum. For low $T$, we have two minima: one meta-stable, one true minimum.
+
+	\needfig{5}
+
+	As we vary $T$, the magnetisation varies smoothly
+	\[
+		m \to \frac{B}{T} \quad \text{as} \quad T \to \infty
+	\]
+	and
+	\[
+		m \to \pm 1 \quad \text{as} \quad T \to 0
+	\]
+	
+	But now the sign of the magnetic field determines the sign of $m$. Thus no phase transition as we vary $T$.
+
+	\needfig{6}
+
+	If instead we fix $T$ (low $T$) and vary $B$, as $B$ passes through $0$, $m$ jumps discontinuously from $m = - m_0$ to $m = + m_0$ --- this is a \emph{first-order phase transition}.
+
+	\needfig{7}
+
+	The phase diagram is shown below.
+
+	\needfig{8}
+
+	What happens close to the critical point? If we are right at the critical point, 
+	\[
+		f(m) \approx - B m + \frac{1}{12}T_c m^4 + \cdots
+	\]
+	which gives
+	\[
+		m \sim B^{1/3} \quad (B > 0)
+	\]
+	
+	Consider magnetic susceptibility $\chi = \pdv{m}{B}\big|_T$, which is another response function. 
+	
+	Then for $T>T_c$, 
+	\[
+		f(m) \approx -B m + \frac{1}{2} (T- T_c)m^2 + \cdots \quad \text{and} \quad m \approx \frac{B}{T - T_c}
+	\]
+	so
+	\[
+		\chi \sim \frac{1}{T - T_c} \quad \text{as} \quad T \to T_c^+
+	\]
+	
+	For $T<T_c$, similarly,
+	\[
+		\chi \sim \frac{1}{\abs{T - T_c}} \quad \text{as} \quad T \to T_c^-
+	\]
+
+	\subsubsection{Validity of Mean Field Theory} \recnr{1-2-2}
+
+	Are these results correct?
+	\begin{itemize}
+		\item $d = 1$: No. MFT is completely wrong! No phase transitions;
+		\item $d = 2,3$: Basic structure of phase diagram is right, details near $T_c$ are wrong;
+		\item $d \geq 4$: MFT gives right answers.
+	\end{itemize}
+
+	Similar story for other systems:
+	\begin{itemize}
+		\item MFT fails completely for $d \leq d_l$, the \emph{lower critical dimension};
+		\item MFT always works for $d \geq d_u$, the \emph{upper critical dimension};
+		\item What about $d_l < d < d_u$? Often these $d$ are interesting.
+	\end{itemize}
+	
+	In Ising model, $d_l = 1$ and $d_u = 4$.
+
+	\subsubsection{Critical Exponents}
+
+	We've seen that various quantities scale as power laws as we approach the critical point.
+	\begin{align*}
+		m \sim (T_c - T)^\beta \qquad & \beta = 1/2 \quad (T < T_c)\\
+		c \sim c_{\pm} \abs{T - T_c}^{-\alpha} \qquad & \alpha = 0 \text{ (discontinuity)}\\
+		\chi \sim \abs{T - T_c}^{-\gamma} \qquad & \gamma = 1\\
+		m \sim B^{1/\delta} \qquad & \delta = 3
+	\end{align*}
+
+	Compare MFT results with true values for Ising model in $d = 2,3$, we have
+	
+	\begin{center}
+		\begin{tabular}{c|ccc}
+			& MFT & $d=2$ & $d=3$ \\
+			\hline
+			$\alpha$ & 0 (disc.) & 0 (log div.) & 0.1101...\\
+			$\beta$ & 1/2 & 1/8 & 0.3264...\\
+			$\gamma$ & 1 & 7/4 & 1.2371...\\
+			$\delta$ & 3 & 15 & 4.7898...
+		\end{tabular}
+	\end{center}
+
+	\subsubsection{Universality}
+
+	Liquid-gas transition shows many similarities to the Ising model.
+	\needfig{9}
+
+	Again, a line of first-order phase transitions ending at a critical point.
+
+	At fixed $p$, $v = V/N$ jumps discontinuously at liquid-gas first-order phase transition. Suggests $v$ is order parameter analogous to $m$ in Ising model.
+
+	Using an equation of state (e.g.\ van der Waals equation), at the critical point:
+	\begin{align*}
+		v_{\text{gas}} - v_{\text{liquid}} \sim (T_c - T)^{\beta} \qquad & \beta = 1/2 \quad (T < T_c)\\
+		v_{\text{gas}} - v_{\text{liquid}} \sim (p - p_c)^{1/\delta} \qquad & \delta = 3 \quad(p \to p_c^+)\\
+		\text{Compressibility, } \kappa = - \frac{1}{v}\pdv{v}{p}\bigg|_{T}\sim \abs{T - T_c}^{-\gamma} \qquad & \gamma = 1\\
+		\text{Heat capacity, } C_V \sim C_{\pm}\abs{T - T_c}^{-\alpha} \qquad & \alpha = 0
+	\end{align*}
+	
+	None of these agree with experiment.
+
+	All liquid-gas transition show the same critical exponents, and these agree with $d = 3$ Ising.
+
+	\emph{Universality}: critical point governs behaviour of many different physical systems. Why?!
+
+	\subsubsection{Ising Model as Lattice Gas}
+
+	Consider the same $d$-dimensional lattice, but now with particles hopping between sites.
+
+	The number of particles on site is $n_i$, and we allow no more than one particle on each site, i.e.\ either $n_i = 0$ (empty) or $n_i = 1$ (filled). Then we have
+	\[
+		E = - 4 J \sum_{\expval{ij}}n_i n_j - \mu \sum_i n_i
+	\]
+	where $J > 0$ is acting as an attractive force and $\mu$ is the chemical potential.
+
+	This is equivalent to the Ising model if we identify $S_i = 2n_i - 1$. 
+\end{document} 
