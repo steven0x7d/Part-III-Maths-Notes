@@ -2,6 +2,8 @@
 
 \usepackage{../../zyancamlec}
 
+\usepackage{tikz-feynhand}
+
 \def\ntripos{Mathematical Tripos}
 \def\npart{III}
 \def\ncourse{Algebraic Topology}
@@ -229,4 +231,643 @@
 	\newpage
 	\section{Homology}
 	\subsection{Chain \& Cochain Complexes} \lecnr{2}
+
+	We will define invariants of spaces in two stages:
+	\begin{enumerate}
+		\item Associate to $X$ a (co)chain complex;
+		\item Take the (co)homology of that complex. 
+	\end{enumerate}
+
+	\begin{defi}
+		A \emph{chain complex} $(C_* , \partial)$ is a sequence of abelian groupd and homomorphisms
+		\[
+			\cdots \to C_{n+1} \xrightarrow{\partial_{n+1}} C_n \xrightarrow{\partial_n}C_{n-1} \xrightarrow{\partial_{n-1}} C_{n-2} \to \cdots
+		\]
+		such that $\partial_{n-1} \cpf \partial_n = 0, \forall n$. We write this as ``$\partial^2 = 0$''.
+
+		The \emph{homology group} $H (C_*, \partial)$ is the graded group 
+		\[
+			H_n (C_*) := {\ker (\partial_n)}/{\im (\partial_{n+1})}.
+		\]
+	\end{defi}
+	\begin{nt}
+		We may call $\partial$ the ``differential'' or ``boundary map''.
+	\end{nt}
+
+	\begin{defi}
+		A \emph{cochain complex} is a sequence of abelian groups and homomorphisms $(C^*, \partial)$
+		\[
+			\cdots \to C^{n-1} \xrightarrow{\partial^{n-1}} C^n \xrightarrow{\partial^n} C^{n+1} \xrightarrow{\partial^{n+1}} C^{n+2} \to \cdots
+		\]
+		such that $\partial^n \cpf \partial^{n-1} = 0, \forall n$ (``$\partial^2 = 0$'' again).
+
+		The \emph{cohomology groups} $H(C^*, \partial)$ are
+		\[
+			H^n (C^*) := {\ker(\partial^n)}/{\im(\partial^{n-1})}.
+		\]
+	\end{defi}
+
+	\begin{nt}
+		Here we introduce some terminologies.
+		\begin{itemize}
+			\item Elements of $\ker \partial : C_n \to C_{n-1}$ are called \emph{cycles};
+			\item Elements of $\im \partial : C_{n+1} \to C_n$ are called \emph{boundaries};
+			\item Elements of $\ker \partial : C^n \to C^{n+1}$ are called \emph{cocycles}. 
+		\end{itemize}
+	\end{nt}
+	\begin{exer}
+		Try to define \emph{coboundary}.
+	\end{exer}
+
+	\begin{nt}
+		For convenience (we are lazy!), we write all $\partial_i$ and $\partial^i$ as $\partial$ (or occasionally $\partial,\partial^*$).
+	\end{nt}
+
+	\begin{defi}
+		The elements of $H_*(C_*)$ are \emph{homology classes} and those of $H^*(C^*)$ are \emph{cohomology classes}.
+	\end{defi}
+
+	\begin{defi}
+		A \emph{chain map} between chain complexes $(C_*,\partial)$ and $(D_*,\partial)$ is a sequence of homomorphisms $f_n : C_n \to D_n$ such that $\forall n$ the following commutes:
+		\begin{center}
+			\begin{tikzcd}
+				\cdots \arrow[r] & C_n \arrow[r, "\partial"] \arrow[d, "f_n"] & C_{n-1} \arrow[r] \arrow[d,"f_{n-1}"] & \cdots \\
+				\cdots \arrow[r] & D_n \arrow[r, "\partial"] & D_{n-1} \arrow[r] & \cdots 
+			\end{tikzcd}
+		\end{center}
+		i.e.\ $f_{n-1} \cpf \partial_n^{C_*} = \partial_n^{D_*} \cpf f_n$. 
+	\end{defi}
+
+	\begin{exer}
+		Define a \emph{cochain map} of cochain complexes.
+	\end{exer}
+
+	\begin{lem}
+		A chain map $f_* : C_* \to D_*$ induces homomorphisms
+		\[
+			(f_n)_\star : H_n (C_*) \to H_n(D_*)
+		\]
+		for each $n$.
+	\end{lem}
+
+	\begin{proof}
+		Let $[a] \in H_n (C_*)$, so $a$ is represented by a cycle $\alpha \in C_n$. Use the commutativity of the diagram in the above definition, we have
+		\[
+			\partial(f_n (\alpha)) = f_{n-1}(\underbrace{\partial \alpha}_{0}) = 0
+		\]
+		so $f_n (\alpha)$ is a cycle.
+
+		Define
+		\[
+			f_\star [a] := [f_n(\alpha)] \in H_n(D_*).
+		\]
+		
+		We made a choice of representing cycle $\alpha$. But if $[a]$ is represented by $\alpha$ and $\alpha'$, then
+		\[
+			\alpha - \alpha' \in \im(\partial_{n+1}: C_{n+1} \to C_n).
+		\]
+		
+		Say $\alpha - \alpha' = \partial \tau$, then
+		\[
+			f_n (\alpha) - f_n(\alpha') = f_n (\alpha - \alpha') = f_n (\partial\tau) = \partial(f_{n+1}(\tau)).
+		\]
+		
+		Thus
+		\[
+			[f_n (\alpha)] = [f_n (\alpha') + \partial f_{n+1}(\tau)] = [f_n (\alpha')]
+		\]
+		as $[\im(\partial)] = 0$ in $H_*$.
+		
+		So $f_{\star}$ is well-defined, and easy to see it's a homomorphism.
+	\end{proof}
+
+	\begin{exer}
+		If $C_*, D_*, E_*$ are chain complexes and $f : C_* \to D_*$, $g: D_* \to E_*$ are chain maps then $\{g_n \cpf f_n : C_n \to E_n\}_n$ defines a chain map and
+		\[
+			(\dagger)\begin{cases}
+				(g \cpf f)_\star = g_\star \cpf f_\star,\\
+				(\id)_\star = \id \text{ on $H(C_*)$ themselves}.
+			\end{cases}
+		\]
+	\end{exer}
+
+	Discussing all these, our goal is associating to space $X$ (co)chain complexes $C_*(X), C_*(X)$ such that a map $f : X \to Y$ yields (co)chain maps
+	\[
+		C_* (X) \xrightarrow{f_*} C_* (Y)
+	\]
+	and
+	\[
+		C^* (Y) \xrightarrow{f^*} C^*(X).
+	\]
+	
+	\begin{nt}
+		$(\dagger)$ means that we can say we have a \emph{functor} $\mathbf{Top} \to \mathbf{Groups}$, $X \mapsto H_\star(X)$ where the categories are 
+		\[
+			\mathbf{Top} = (\text{spaces, continuous maps})\text{ and }\mathbf{Groups} = (\text{abelian groups, homomorphisms}). 
+		\]
+		
+	\end{nt}
+
+	Our complexes $C_*, C^*$ will have the benefit that they are ``intrinsic'' but will be huge and unwieldy. We will 
+	\begin{enumerate}
+		\item Prove structure theorems to help compute these;
+		\item Find ``smaller'' complexes later for nice spaces (e.g.\ CW-complexes).
+	\end{enumerate}
+
+	\begin{defi}
+		The \emph{standard simplex} is defined as 
+		\[
+			\Delta^n := \left\{(t_0, \cdots, t_n)\in \mathbb{R}^{n+1} : t_i \geq 0, \sum_i t_i = 1\right\}.
+		\]
+		
+		The $i$-th \emph{face} of $\Delta^n$ is
+		\[
+			\Delta^n_i := \{\vb t \in \Delta^n : t_i = 0\}.
+		\]
+	\end{defi}
+
+	\begin{nt}
+		There exists canonical homeomorphism $\Delta^{n-1} \xrightarrow{\delta_i} \Delta^n_i$ such that
+		\[
+			(t_0, \cdots, t_{n-1}) \mapsto (t_0, \cdots, t_{i-1}, 0, t_{i+1}, t_{n-1}).
+		\]
+	\end{nt}
+
+	\begin{defi}
+		If $X$ is a space, a \emph{singular $n$-simplex in $X$} is a map $\sigma: \Delta^n \to X$. The \emph{singular chain complex} $(C_*(X),\partial)$ has
+		\[
+			C_n (X) := \left\{ \sum_{i=1}^N n_i \sigma_i : N<\infty, n_i \in \mathbb{Z}, \sigma_i: \Delta^n \to X\right\},
+		\]
+		the free abelian groups on the singular $n$-simplices in $X$, and
+		\[
+			\partial: C_n (X) \to C_{n-1}(X), \quad \sigma \mapsto \sum_{i=0}^n (-1)^i (\sigma \cpf \delta_i)
+		\]
+		which extends linearly.
+	\end{defi}
+
+	\begin{nt}
+		The $n+1$ ordered points $\{v_i\}_{0 \leq i \leq n} \subseteq \mathbb{R}^{n+1}$ determine an $n$-simplex if $\{v_i - v_0 : 1 \leq i \leq n\}$ are linearly independent. Take their convex hull and set 
+		\[
+			\sigma: \Delta^n \to \mathbb{R}^{n+1}, \quad \vb t \mapsto \sum_{i=0}^n t_i v_i.
+		\]
+		
+		We orient the edges as $v_i \to v_j$ if $i < j$. Write $\underbrace{[v_0 \cdots v_n]}_{\sigma}$ for this $n$-simplex, then
+		\[
+			\partial \sigma := \sum_{i=0}^n (-1)^i \sigma\bigg|_{[v_0 \cdots \hat{v}_i \cdots v_n]}
+		\]
+		where the hat means omission.
+	\end{nt}
+
+	\needfig{8}
+
+	\begin{lem}
+		$\partial^2=0$.
+	\end{lem}
+
+	\begin{proof}
+		\[
+			\partial (\partial \sigma) = \sum_{j<i} (-1)^i (-1)^j \sigma\bigg|_{[v_0 \cdots \hat{v}_j \cdots \hat{v}_i \cdots v_n]} + \sum_{j>i} (-1)^i (-1)^{j-1} \sigma\bigg|_{[v_0 \cdots \hat{v}_i \cdots \hat{v}_j \cdots v_n]}
+		\]
+		
+		Exchange the $i$ and $j$ in the second term, the two terms cancel.
+	\end{proof}
+
+	\begin{defi}
+		The \emph{singular homology} is defined as $H_*(X) = H_*(x; \mathbb{Z}):= H(C_*(X),\partial)$.
+	\end{defi}
+	\begin{nt}
+		This is \emph{trivially} a homeomorphism invariant of $X$ since we only used the notion of continuous map to $X$ to define it.
+	\end{nt}
+
+	\begin{ex}
+		\needfig{9}
+
+		We take four 1-simplices to form a closed path as shown.
+
+		The annulus to the left has 
+		\[
+			\partial(\sigma_1 + \sigma_2 + \sigma_3 + \sigma_4) = 0
+		\]
+		and to the right, the connected space also has
+		\[
+			\partial(\gamma_1 + \gamma_2 + \gamma_3 + \gamma_4) = 0.
+		\]
+		
+		But what we can confirm is that 
+		\[
+			\gamma_1 + \gamma_2 + \gamma_3 + \gamma_4 \in \im(\partial)
+		\]
+		e.g.\ $\partial(\tau) = [v_0 v_1]-[v_0 v_2] + \underbrace{[v_1 v_2]}_{\gamma_3}$. This means that the homology class defined by such $\sum_i \gamma_i$ is 0. However, for $\sigma$ it should be non-zero --- the singular homology probes `holes' in a space.
+	\end{ex}
+
+	\begin{defi}
+		The \emph{sigular cochain complex} $C^*(X)$ has
+		\[
+			C^n(X) := \Hom(C_n(X), \mathbb{Z})
+		\]
+		\[
+			\partial^*: C^n (X) \to C^{n+1}(X), \qquad (\partial^* \psi)(\sigma) := \psi(\partial\sigma),\quad \sigma\in C_{n+1}(X)
+		\]
+		
+		Then 
+		\[
+			\partial^* (\partial^* \psi)(\sigma) = \partial^*(\psi(\partial \sigma)) = \psi (\partial(\partial\sigma)) = 0.
+		\]
+		i.e. $(\partial^*)^2 = 0$: this is indeed a cochain complex. 
+	\end{defi}
+
+	\begin{nt}
+		$H^*(X;\mathbb{Z}) := H^*(C^*(X),\partial^*)$ is \emph{singular cohomology} of $X$. 
+		
+		$H^*(X;\mathbb{Z})\ \cancel{\cong}\ \Hom(H_*(X),\mathbb{Z})$ in general.
+		
+		We bothered to define such cochain complex and cohomology because later we will show cohomology is a ring (which has better algebraic properties) while homology is not.
+	\end{nt}
+	
+	\begin{nt}[Rough idea]
+		We have several \emph{heuristic} ideas (don't take too seriously!):
+		\begin{itemize}
+			\item $\partial^2 = 0$ means ``the boundary of the boundary vanishes'';
+			\item $H_i(X)$ will probe ``$i$-dimensional holes/regions'' in $X$;
+			\item $H^i (X)$ will be a rule associating an integer to an $i$-dimensional region of $X$.
+		\end{itemize}
+	\end{nt}
+
+	\lecnr{3}
+
+	\begin{rmk}
+		Let $f : X \to Y$ be continuous. If $\sigma: \Delta^n \to X$ then $f \cpf \sigma : \Delta^n \to Y$, meaning that $f$ induces homomorphisms
+		\[
+			f_n : C_n (X) \to C_n(Y)
+		\]
+		and by $f\cpf (\sigma \cpf \delta_i) = (f \cpf \sigma) \cpf \delta_i$, we have
+		\[
+			f \cpf \left( \sigma\big|_{\text{$i$-th face}} \right) = (f \cpf \sigma)\big|_{\text{$i$-th face}}
+		\]
+		Thus $f_* : C_* (X) \to C_*(Y)$ is a chain map
+		\begin{center}
+			\begin{tikzcd}
+				C_n(X) \arrow[r, "\partial"] \arrow[d, "f_n"] & C_{n-1}(X) \arrow[d, "f_{n-1}"]\\
+				C_n(Y) \arrow[r, "\partial"] & C_{n-1}(Y)
+			\end{tikzcd}
+		\end{center}
+		also giving homomorphisms
+		\[
+			f_\star : H_{\star} (X) \to H_{\star}(Y).
+		\]
+	\end{rmk}
+
+	\begin{exer}
+		Show that
+		\[
+			(f\cpf g)_* = f_* \cpf g_*, \qquad (\id)_* = \id.
+		\]
+	\end{exer}
+
+	\begin{nt}
+		$f: X \to Y$ also induces 
+		\[
+			f^* : C^* (Y) \to C^*(X), \quad (f^* \psi) (\sigma) := \psi(f \cpf \sigma)
+		\]
+		and
+		\[
+			f^\star : H^\star(Y) \to H^\star(X)
+		\]
+		where $\sigma : \Delta^n \to X$ and $\psi: C_n(Y) \to \mathbb{Z}$.
+		
+		Note that in the language of category theory, we say ``cohomology is a contravariant functor''.
+	\end{nt}
+
+	\subsection{Homology of the Circle}
+
+	So far, what can we compute?
+
+	\begin{lem}
+		Let $X$ be a point. Then the singular homology is
+		\[
+			H_i (\{\text{pt}\}) = \begin{cases}
+				\mathbb{Z} & i=0\\
+				0 & \text{otherwise}
+			\end{cases}
+		\]
+	\end{lem}
+
+	\begin{proof}
+		For each $n\geq 0$, there exists a unique $n$-simplex in $X$, $\sigma_n : \Delta^n \to \{\text{pt}\}$, the constant map. So $C_*(\{\text{pt}\})$ is
+		\begin{center}
+			\begin{tikzcd}
+				\cdots \arrow[r, ""] & C_3 \arrow[r, ""] \arrow[d, equal, ""] & C_2 \arrow[r, ""] \arrow[d, equal, ""] & C_1 \arrow[r, ""] \arrow[d, equal, ""] & C_0 \arrow[d, equal, ""]\\
+				\cdots \arrow[r, "+1"] & \mathbb{Z} \arrow[r, "0"] & \mathbb{Z} \arrow[r, "+1"] & \mathbb{Z} \arrow[r, "0"] & \mathbb{Z}  
+			\end{tikzcd}
+		\end{center}
+		
+		We find
+		\[
+			\partial \sigma_1 = \partial (\begin{tikzpicture}
+				\begin{feynhand}
+					\vertex [dot] (a) at (0,0) {};
+					\vertex [dot] (b) at (1,0) {};
+					\propag [fer] (a) to [] (b);
+				\end{feynhand}
+			\end{tikzpicture}) = \bullet - \bullet = 0
+		\]
+		and 
+		\[
+			\partial \sigma_2 = \sigma_2 \cpf \delta_0 - \sigma_2 \cpf \delta_1 + \sigma_2 \cpf \delta_2 = \sigma_1
+		\]
+		
+		Thus by induction,
+		\[
+			\partial \sigma_n = \begin{cases}
+				\sigma_{n-1} & n \text{ even}\\
+				0 & n \text{ odd}
+			\end{cases}
+		\]
+
+		Then if we see how these relate kernels and images at different $n$, our result is clear.
+	\end{proof}
+	
+	
+
+	\begin{exer}
+		Check the cohomology 
+		\[
+			H^i(\{\text{pt}\}) \cong \begin{cases}
+				\mathbb{Z} & i = 0\\
+				0 & \text{otherwise}
+			\end{cases}
+		\]
+	\end{exer}
+
+	There is basically only one other computation we can do from the definitions.
+
+	\begin{lem}
+		If $X = \bigsqcup_{\alpha \in I} X_\alpha$ is a disjoint union of path-components, then
+		\[
+			H_i(X) \cong \bigoplus_{\alpha \in I} H_i (X_\alpha), \quad \forall i.
+		\]
+	\end{lem}
+
+	\begin{proof}
+		Any continuous map $\sigma : \Delta^i \to X$ has image in one $X_\alpha$ and then all the faces of $\sigma$ lie in the \emph{same} $X_\alpha$. So
+		\[
+			C_*(X) = \bigoplus_\alpha C_*(X_\alpha)
+		\]
+		compatibly with the differential.
+	\end{proof}
+
+	\begin{lem}
+		If $X$ is path-connected (and non-empty), $H_0 (X) \cong \mathbb{Z}$.
+	\end{lem}
+
+	(An aside note: We sometimes write $\pi_0(X)$ for the \emph{set} of path-components of $X$.)
+
+	\begin{proof}
+		Define 
+		\[
+			\varepsilon: C_0 (X) \to \mathbb{Z}, \quad \sum_{\text{finite}} n_i \sigma_i \mapsto \sum_i n_i
+		\]
+		called the \emph{augmentation}, where $\sigma_i : \{\text{pt}\} \to X$ are 0-simplices in $X$. As $X \neq \0$, $\varepsilon$ is surjective.
+		
+		If $\tau : \Delta^1 \to X$, 
+		
+		\needfig{10-1}
+
+		we have
+		\[
+			\varepsilon(\partial \tau) = \varepsilon(v_1 - v_0) = 0
+		\]
+		so
+		\[
+			\im(\partial: C_1 \to C_0) \subseteq \ker(\varepsilon)
+		\]
+		i.e.\ $\varepsilon$ defines $H_0(X) \to \mathbb{Z}$.
+
+		So far we didn't use path-connectivity. But suppose $\sum_i n_i \sigma_i \in \ker(\varepsilon)$. Fix a base point $p \in X$ and for every $i$ we pick
+		\[
+			\tau_i : \Delta^1 \cong [0,1] \to X, \quad \begin{cases}
+				\tau_i (1) = \sigma_i (\Delta^0)\\
+				\tau_i (0) = p
+			\end{cases}
+		\]
+
+		\needfig{10-2}
+
+		and we have
+		\[
+			\partial \left( \sum_i n_i \tau_i \right) = \sum_i n_i \sigma_i - \cancelto{\text{\tiny 0}}{\left( \sum_i n_i \right)} p 
+		\]
+		as $\sum_i n_i \sigma_i \in \ker(\varepsilon)$, so
+		\[
+			\ker(\varepsilon) \subseteq \im(\partial)
+		\]
+		and we identify
+		\[
+			\varepsilon : C_0(X) / \im(\partial) =: H_0 (X) \xrightarrow{\cong} \mathbb{Z}.
+		\]
+		
+	\end{proof}
+
+	\paragraph{\underline{Informal Picture}} 
+	Recall $\sigma : \Delta^1 \cong [0,1] \to X = \text{Annulus}$ has $\partial \sigma = \sigma(1) - \sigma(0) = 0$, so $\sigma$ defines $[\sigma]\in H_1(X)$.
+	
+	\needfig{11-1}
+
+	We would hope this is non-zero, as we can't ``see'' a way to fill in $\sigma$ with 2-simplices. (Contrast with the case where $\tau \in \im(\partial)$.)
+
+	\needfig{11-2}
+
+	However, $C_i(X)$ is uncountably generated for all $i$, and is very hard to control.
+
+	The question is: how do we rule out \emph{all} configurations of 2-simplices? Or, are there any other representations for $[\sigma]\in H_1(X)$? 
+
+	\paragraph{\underline{Informal Conjecture}} In the realm of ``nice'' spaces, there is \emph{nothing else} you can compute from the definition!
+
+	(Co)homology is rendered useful by a collection of structural theorems: we will state these and see how to use them and then return to prove them later.
+
+	\begin{thm}[Homotopy invariance]
+		If $f : X \to Y$ and $g: X \to Y$ are homotopic, then 
+		\[
+			f_\star = g_\star : H_\star(X) \to H_\star(Y) \quad \text{and} \quad f^\star = g^\star : H^\star(Y) \to H^\star(X).
+		\]
+	\end{thm}
+
+	\begin{cor}
+		If $X \simeq Y$ (homotopy-equivalent), then 
+		\[
+			H_\star (X) \cong H_\star (Y) \quad \text{and} \quad H^\star(X) \cong H^\star(Y).
+		\]
+	\end{cor}
+
+	\begin{proof}
+		There exists $f: X \to Y$ and $g : Y\to X$ such that $g \cpf f \simeq \id_X$ and $f \cpf g \simeq \id_Y$ thus $(f_\star)^{-1} = g_\star$ are isomorphisms.
+	\end{proof}
+
+	Thus (co)homology is insensitive to ``inessential'' deformations of a space.
+
+	\begin{cor}
+		\[
+			H_* (\mathbb{R}^n) \cong \begin{cases}
+				\mathbb{Z} & * = 0\\
+				0 & \text{otherwise}
+			\end{cases}
+		\]
+		for every $n$. And similar for $H^*$.
+	\end{cor}
+
+	But we still cannot compute very much... 
+
+	\begin{defi}
+		An \emph{exact sequence} is a (co)chain complex with vanishing\\(co)homology:
+		\[
+			\cdots \to C_{n+1} \xrightarrow{\partial_{n+1}} C_n \xrightarrow{\partial_n} C_{n-1} \to \cdots
+		\]
+		such that $\ker(\partial_n) = \im(\partial_{n+1}), \forall n$. 
+	\end{defi}
+
+	\begin{nt}
+		There are some additional terminologies/facts:
+		\begin{itemize}
+			\item Given homomorphisms \[
+				A \xrightarrow{f} B \xrightarrow{g} C
+			\]
+			say this is \emph{exact at $B$} if $\ker g = \im f$;
+			\item If \[
+				0 \to A \xrightarrow{f} B \to 0
+			\]
+			is exact, we have $A \cong B$;
+			\item A \emph{short exact sequence} is one of shape \[
+				0 \to A \xrightarrow{f} B \xrightarrow{g} C \to 0
+			\]
+			which says $f$ is injective and $g$ is surjective.
+		\end{itemize}
+	\end{nt}
+
+	\begin{thm}[Mayer-Vietoris]
+		If $X = A \cup B$ with $A,B$ open, there are ``Mayer-Vietoris boundary homomorphisms''
+		\[
+			\partial_{\text{MV}} : H_{i+1}(X) \to H_i (A \cap B)
+		\]
+		yielding a ``long'' exact sequence (LES):
+		\[
+			\cdots \to H_{i+1}(X) \xrightarrow{\partial_{\text{MV}}} H_i (A\cap B) \xrightarrow{(i_{A\star},i_{B\star})} H_i(A) \oplus H_i(B) \xrightarrow{j_{A\star}-j_{B\star}} H_i(X) \to \cdots
+		\]
+		where $i_{A\star}, j_{A\star}$, etc.\ are induced from certain inclusion maps in the commutative diagram below
+		\begin{center}
+			\begin{tikzcd}
+				A \cap B \arrow[r,hookrightarrow, "i_A"] \arrow[d, hookrightarrow, "i_B"] & A \arrow[d, hookrightarrow, "j_A"]\\
+				B \arrow[r, hookrightarrow, "j_B"] & X
+			\end{tikzcd}
+		\end{center}
+		and $\partial_{\text{MV}}$ is defined algebraically, not associated to a map of spaces.
+	\end{thm}
+
+	\begin{rmk}
+		Suppose $\sigma \in C_{i+1}(X)$ is a \emph{cycle} and $\sigma = \alpha + \beta$, $\alpha \in C_{i+1}(A), \beta \in C_{i+1}(B)$ for \emph{chains} $\alpha,\beta$ (i.e.\ $\partial \alpha, \partial\beta$ need not vanish). Then $\partial \alpha = - \partial \beta$ and $$\partial_{\text{MV}} [\sigma] = [\partial \alpha]$$ as $\partial \alpha = - \partial \beta$ gives $\partial \alpha \in C_{i}(A \cap B)$. 
+
+		\needfig{12}
+	\end{rmk}
+
+	\begin{addendum}
+		The MV sequence is \emph{natural}. If $X = A \cup B$ and $Y = C \cup D$ and $f: X \to Y$ has $f(A) \subseteq C$ and $f(B) \subseteq D$ (under maps of pairs), then there are homomorphisms of exact exact sequences
+		\begin{center}
+			\begin{tikzcd}
+				\cdots \arrow[r, ""] & H_{i+1}(X) \arrow[r, "\partial^X_{\text{MV}}"] \arrow[d, "f_\star"] & H_i (A\cap B) \arrow[r, ""] \arrow[d, "f_\star"] & H_i(A) \oplus H_i(B) \arrow[r, ""] \arrow[d, "f_\star"] & H_i(X) \arrow[r, ""] \arrow[d, "f_\star"] & \cdots\\
+				\cdots \arrow[r, ""] & H_{i+1}(Y) \arrow[r, "\partial^Y_{\text{MV}}"] & H_i(C\cap D) \arrow[r, ""] & H_i(C) \oplus H_i(D) \arrow[r, ""] & H_i(Y) \arrow[r, ""] & \cdots
+			\end{tikzcd}
+		\end{center} 
+		such that all squares commute.
+	\end{addendum}
+
+	\begin{rmk}
+		There is a MV sequence in cohomology, also natural:
+		\[
+			\partial^*_{\text{MV}}: H^i (A \cap B) \to H^{i+1}(X)
+		\]
+		such that
+		\[
+			\cdots \to H^i(X) \xrightarrow{(j_A^\star,j_B^\star)} H^i(A) \oplus H^i(B) \xrightarrow{i_A^\star - i_B^\star} H^i(A \cap B) \xrightarrow{\partial^*_{\text{MV}}} H^{i+1}(X) \to \cdots
+		\]
+		is \emph{exact}.
+	\end{rmk}
+
+	Finally, we get something to compute: the homology of the circle.
+
+	\begin{prop}
+		\[
+			H_i (S^1) \cong \begin{cases}
+				\mathbb{Z} & i = 0,1\\
+				0 & \text{otherwise}
+			\end{cases}	
+		\]
+		and 
+		\[
+			H^i (S^1) \cong \begin{cases}
+				\mathbb{Z} & i = 0,1\\
+				0 & \text{otherwise}
+			\end{cases}	
+		\]
+	\end{prop}
+	\begin{proof}
+		Choose $A$ and $B$ such that $S^1 = X = A \cup B$ and $A,B$ are open intervals, $A \cap B$ is the union of 2 disjoint open intervals, shown as in the figure below
+		
+		\needfig{13}
+
+		So, we have $A \simeq \{\text{pt}\} \simeq B$ and $A \cap B \simeq \underbrace{\{p\} \sqcup \{q\}}_{S^0, \text{0-sphere}}$. 
+
+		Recall that 
+		\[
+			H_* (\mathbb{R}) \cong \begin{cases}
+				\mathbb{Z} & * = 0\\
+				0 & \text{otherwise}
+			\end{cases}
+		\]
+		and $\mathbb{R} \simeq \{\text{pt}\}$. By homotopy invariance, we know $H_*(A), H_*(B), H_*(A \cap B)$.
+
+		If we take the MV sequence for $i \geq 2$, we have
+		\[
+			\cancelto{\text{\tiny 0}}{H_i (A) \oplus H_i(B)} \to H_i(S^1) \to \cancelto{\text{\tiny 0}}{H_{i-1}(A\cap B)} \quad \Rightarrow \quad H_i(S^1) = 0.
+		\]
+		
+		For $i = 1$, we have
+		\begin{center}
+			\begin{tikzcd}
+				\cancelto{\text{\tiny 0}}{H_1 (A\cap B)} \arrow[r, ""] & \cancelto{\text{\tiny 0}}{H_1(A)\oplus H_1(B)} \arrow[r, ""] & H_1(S^1) \arrow[dll,out=215, in=35, ""]\\
+				H_0(A \cap B) \arrow[r, "{(i_A, i_B)}"] \arrow[d, equal, "\cong"] & H_0(A)\oplus H_0(B) \arrow[r, "(j_A - j_B)"] \arrow[d, equal, "\cong"] & H_0(S^1) \arrow[d, equal, "\cong"]\\
+				\mathbb{Z} \oplus \mathbb{Z} \arrow[r, dashrightarrow, "\alpha"] & \mathbb{Z}\oplus \mathbb{Z} \arrow[r, dashrightarrow, "\beta"] & \mathbb{Z}
+			\end{tikzcd}
+		\end{center}
+
+		Recall that for some path-connected space $Z$, $H_0(Z)$ is a free abelian group on $\pi_0 (Z)$ (the set of path-components), and indeed this is generated by
+		\[
+			\sigma : \{\text{pt}\} \to Z
+		\]
+		for any choice of point in each component.
+
+		So from
+		\[
+			H_0 (A \cap B) = \mathbb{Z}\expval{p} \oplus \mathbb{Z} \expval{q} \xrightarrow{(i_A,i_B)} \mathbb{Z} \oplus \mathbb{Z}
+		\]
+		we identify the map
+		\[
+			\alpha : (a,b) \mapsto (a+b , a+b)
+		\]
+		and from
+		\[
+			\mathbb{Z} \oplus \mathbb{Z} \xrightarrow{j_A - j_B} H_0 (S^1)
+		\]
+		we have
+		\[
+			\beta : (u,v) \mapsto u-v.
+		\]
+		
+		The exactness of the sequence gives
+		\[
+			H_1(S^1) \cong \ker(\alpha) \cong \mathbb{Z}
+		\]
+		which is generated by 
+		\[
+			(1,-1) \equiv (p, -q) \in H_0(A) \oplus H_0(B).
+		\]
+	\end{proof}
 \end{document}
