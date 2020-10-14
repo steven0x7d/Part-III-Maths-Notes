@@ -14,14 +14,9 @@ Cambridge Part III Mathematics Notes taken by *Zihan Yan*
   - ~~**Statistical Field Theory** by *C. Thomas*~~ (Ditto)
 - Lent 2021:
   - **Applications of Differential Geometry in Physics** by *M. Dunajski*
-  - **Advanced Quantum Field Theory** by *M. Wingate*
-  - **Black Holes** by *J. Santos*
-  - **Standard Model** by *F. Quevedo*
-  - **String Theory** by *R. Reid-Edwards*
-  - **Supersymmetry** by *D. Skinner*
+  - **Homotopy Theory** by *O. Randal-Williams*
   - **Symplectic Topology** by *A. Keating*
 - Easter 2021:
-  - **Physics Beyond the Standard Model** (Non-Examinable) by *M. Ubiali*
   - **Gauge-Gravity Duality** by *A. Wall*
 
 ## Disclaimer
