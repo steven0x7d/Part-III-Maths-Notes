@@ -174,9 +174,9 @@
 	The Standard Model explains many of these features with a QFT possessing a particular group structure of symmetries. Each particle has its own field which fills the spacetime. Quantum excitations of the fields are observed in experiments.
 	\newpage
 
-	\section{Groups} \lecnr{2}
+	\section{Groups: Basics} \lecnr{2}
 
-	\subsection{Basics}
+	\subsection{Basic Concepts}
 
 	Recall the definition of a group from last section. Here, we introduce some more definitions and facts about groups.
 
@@ -360,4 +360,263 @@
 		$G_{x'} \simeq G_x$ since $hx = x$ and $x' = gx$, giving $h'x' = x'$ for $h' = ghg^{-1}$. 
 	\end{hint}
 	
+	\subsection{Automorphisms and Semi-Direct Product} \lecnr{3}
+
+	\begin{defi}
+		An \emph{automorphism} of a group $G = \{g_i\}$ is defined as a mapping between elements $g_i \to \phi(g_i)$ such that the product rule is preserved, i.e. 
+		\[
+			\phi(g_i) \phi(g_j) = \phi(g_i g_j), \quad g_i, g_j \in G
+		\]
+		and $G_\phi = \{\phi(g_i)\} \simeq G$. It must have $\phi(e) = e$ and $\phi(g^{-1}) = \phi(g)^{-1}$. 
+
+		For any fixed $g \in G$ we may define an \emph{inner automorphism} by
+		\[
+			\phi_g (g_i) = g g_i g^{-1}.
+		\]
+		
+		Automorphisms not of this form are called \emph{outer automorphisms}.
+	\end{defi}
+
+	\begin{prop}
+		The set of all automorphisms forms a group $\Aut G$, which should include $G / \mathcal{Z}(G)$ as a normal subgroup.
+	\end{prop}
+	
+	\begin{prop}
+		For any abelian group, there are no non-trivial inner automorphisms, but there can be outer ones.
+	\end{prop}
+
+	\begin{ex}
+		For $\mathbb{Z}_3$, take $\{e, a, a^2\} \to \{e, a^2, a\}$. In this case, $\Aut \mathbb{Z}_3 = \mathbb{Z}_2$ and $\mathbb{Z}_3 / \mathcal{Z}(\mathbb{Z}_3) = \{e\}$, the trivial one-element group. 
+	\end{ex}
+
+	\begin{lem}
+		If $H \subset \Aut G$ such that for any $h\in H$ and any $g \in G$, we have
+		\[
+			g \xrightarrow{h} \phi_h (g)
+		\]
+		with 
+		\[
+			\phi_h (g_1) \phi_h (g_2) = \phi_h (g_1 g_2)
+		\]
+		and
+		\[
+			\phi_{h_1}(\phi _{h_2} (g)) = \phi _{h_1 h_2} (g)
+		\]
+		also $\phi_h (e) = e, \phi_e (g) = g, \phi_{h^{-1}} (g) = \phi_h ^{-1} (g)$. 
+	\end{lem}
+
+	\begin{defi}
+		The above proposition allows us to define a new group called the \emph{semi-direct product} of $H$ with $G$, denoted as $H \ltimes G$. As with the direct product, this is defined in terms of pairs of elements $(h,g)$ belonging to $(H,G)$ but with a less trivial product rule
+		\begin{align*}
+			(h,g) (h',g') &= (hh', g \phi_h (g')),\\
+			(h,g)^{-1} & = (h^{-1}, \phi _{h^{-1}} (g)).
+		\end{align*}
+	\end{defi}
+
+	\begin{cor}
+		The above product rule of $H \ltimes G$ implies
+		\[
+			(h,e)(e,g)(h,e)^{-1} = (e, \phi_h(g)).
+		\]
+		
+	\end{cor}
+
+	It's often convenient to write the elements of $H \ltimes G$ as $(h,g) \to hg : = \phi_h(g)h$ as an abbreviation.
+
+	\begin{prop}
+		$G$ is a normal subgroup of $H \ltimes G$.
+	\end{prop}
+	\begin{proof}[Proof sketch]
+		\[
+			(h,g)(e,g')(h,g)^{-1} = (e, g \phi_h(g') g^{-1})
+		\]
+		for any $g,g' \in G$ and $h\in H$ so that
+		\[
+			H \simeq (H \ltimes G / G).
+		\]
+	\end{proof}
+
+	\begin{ex}
+		$D_n \simeq \mathbb{Z}_2 \ltimes \mathbb{Z}_n$, where
+		\[
+			\mathbb{Z}_2 = \{e, b : b^2 = e\}
+		\]
+		and
+		\[
+			\mathbb{Z}_n = \{a^r: r= 0, \cdots, n-1, a^n = e\}
+		\]
+		and we define for any $g = a^r \in \mathbb{Z}_n$,
+		\[
+			\phi_b (g) = g^{-1} = b g b^{-1}.
+		\]
+	\end{ex}
+
+	\subsection{Conjugacy Classes}
+
+	\begin{defi}
+		If $g_j = g g_j g^{-1}$ for some $g \in G$, then $g_i$ is \emph{conjugate} to $g_j$, written as $g_i \sim g_j$. The equivalence relation $\sim$ divides $G$ into \emph{conjugacy classes}
+		\[
+			\mathcal{C}_r = \{g_i: g_i \sim g_i' = g g_i g^{-1}, g \in G\}.
+		\]
+	\end{defi}
+
+	The identity $e$ is in a conjugacy class by itself. For an abelian group, all elements have their own conjugacy class.
+
+	Elements of a conjugacy class have similar properties, e.g.\ $g_i^n = e$ for the same $n$ for all $g_i \in \mathcal{C}_r$.
+
+	\begin{ex}
+		For $S_3 = \{e, a, a^2, b, ab, a^2 b\}$ with $b = (1\ 2), a = (1\ 2\ 3)$, there exist 3 conjugacy classes
+		\[
+			\{e\}, \quad \{a, a^2\}, \quad \{b, ab, a^2 b\}.
+		\]
+		
+	\end{ex}
+
+	\begin{nt}
+		If we have $a ^{n} = e$, then $g a^n g^{-1} = e$ so that $(g a g^{-1})^n = e$, too. 
+	\end{nt}
+
+	\subsection{Normaliser, Centraliser, Commutator}
+
+	\begin{defi}
+		For a subgroup $H \subset G$, the elements $g \in G$ such that $g h g^{-1} \in H, \forall h \in H$ (we write this as $gHg^{-1} = H$) form a subgroup of $G$ which contains $H$ itself, called the \emph{normaliser} of $H$ in $G$, denoted as $N_G(H)$.
+	\end{defi}
+	\begin{cor}
+		Clearly, $H \triangleleft N_G(H)$.
+	\end{cor}
+
+	\begin{defi}
+		The subgroup of $G$ formed by elements such that $g h g^{-1} = h, \forall h \in H$ forms the \emph{centraliser} $C_G(H)$.
+	\end{defi}
+
+	\begin{cor}
+		Necessarily, $C_G(H) \subset N_G(H)$.
+	\end{cor}
+
+	\begin{defi}
+		For any $g \in G, h \in G$, 
+		\[
+			[g,h] : = g^{-1} h^{-1} g h
+		\]
+		is the \emph{commutator} of $g$ and $h$. 
+		
+		We say $g$ is \emph{abelian}, if
+		\[
+			[g,h] = e, \quad \forall h\in G.
+		\]
+
+		More generally, if $[g,h] = e$, we say that $g$ and $h$ \emph{commute}.
+	\end{defi}
+
+	\begin{cor}
+		In general
+		\[
+			[g,h]^{-1} = [h,g]
+		\]
+		and for any $g' \in G$,
+		\[
+			g' [g,h] g'^{-1} = [g' g g'^{-1}, g' h g'^{-1}].
+		\]
+	\end{cor}
+
+	\begin{defi}
+		The \emph{commutator subgroup} or \emph{derived subgroup} of $G$, denoted $G' = [G,G]$, is formed by arbitrary products of commutators.
+	\end{defi}
+
+	\begin{cor}
+		From above,
+		\[
+			g[G,G]g^{-1} = [G,G] \quad \forall g \in G
+		\]
+		so $[G,G]$ is a normal subgroup.
+	\end{cor}
+
+	\begin{cor}
+		For any $g_1, g_2 \in G$, we have
+		\[
+			g_1 g_2 = g_2 g_1 [g_1, g_2]
+		\]
+		so $G/ [G,G]$ is abelian.
+	\end{cor}
+
+	\begin{defi}
+		A group is \emph{perfect} if $G = [G,G]$.
+	\end{defi}
+
+	\newpage
+
+	\section{Matrix Groups}
+
+	Any set of non-singular matrices which is closed under matrix multiplication forms a \emph{matrix group}. We choose $e$ to be identity matrix, inverse to be the matrix inverse. Many groups are defined in terms of matrices.
+
+	\begin{defi}
+		The \emph{real general linear group} $\GL(n,\mathbb{R})$ is the set of all real $n \times n$ non-singular matrices (i.e.\ $\det M \neq 0, \forall M \in \GL(n,\mathbb{R})$). Its real dimension is $n^2$.
+
+		Similarly, we can define the \emph{complex} general linear group $\GL (n,\mathbb{C})$, which has real dimension $2 n^2$.
+	\end{defi}
+
+	\begin{defi}
+		The real \emph{special linear group} $\SL(n,\mathbb{R})$ is the set of all real non-singular $n \times n$ matrices with $\det M = 1, \forall M \in \SL(n,\mathbb{R})$. It has real dimension $n^2 - 1$.
+	\end{defi}
+
+	\subsection{Continuous Matrix Groups of Interest}
+
+	\begin{enumerate}
+		\item $\Og(n)$, real orthogonal $n\times n$ matrices such that \begin{equation}
+			M^T M = I, \quad \forall M \in \Og(n).
+			\label{eq:2.1.1}
+		\end{equation}
+		
+		For $\SO(n)$, we have the condition $\det = 1$ as well.
+
+		To find the (real) dimension of such groups, note that a general $n \times n$ real matrix has $n^2$ parameters. A symmetric one has $\frac{n}{2} (n+1)$ free entries. $M^T M$ is a symmetric matrix, so (\ref{eq:2.1.1}) imposes $\frac{n}{2}(n+1)$ constraints. So, $\Og(n)$ has $\frac{1}{2} n (n-1)$ parameters. So does $\SO(n)$ as the defining relation already gives $\abs{\det M}=1$.
+		
+		If $v,v'$ belong to the $n$-dimensional representation space (to be defined) of $\Og(n)$ or $\SO(n)$, then the scalar product $v'^T v$ is invariant under
+		\[
+			v \to Mv, \quad v' \to Mv'.
+		\]
+		\item $\U(n)$, the complex unitary $n\times n$ matrices with \begin{equation}
+			M^\dagger M = I, \quad \forall M \in \U(n).
+			\label{eq:2.1.2}
+		\end{equation} 
+
+		A Hermitian complex matrix has $n^2$ real parameters. $M^\dagger M$ is Hermitian, then (\ref{eq:2.1.2}) contains $n^2$ constraints. Thus in $\U(n)$, we have $2n^2 - n^2 = n^2$ real parameters. 
+		
+		(\ref{eq:2.1.2}) implies $\abs{\det M} = 1$, so imposing $\det M = 1$ provides one additional constraint, giving the special unitary group, $\SU(n)$, with $n^2 - 1$ real parameters.
+
+		The $\U(n)$ invariant product for $n$-dimensional complex vectors $v,v'$ is $v'^\dagger v$.
+	\end{enumerate}
+
+	\begin{ex}
+		$\SO(2) \simeq \U(1)$ since a general $\SO(2)$ matrix
+		\[
+			\begin{pmatrix}
+				\cos \theta & \sin \theta\\
+				-\sin \theta & \cos \theta
+			\end{pmatrix}
+		\]
+		with $0 \leq \theta \leq 2 \pi$ is in one-to-one correspondence with a general element of $\U(1)$: $e ^{\mathrm{i} \theta}$, $0 \leq \theta \leq 2 \pi$.
+
+		Topologically, $\U(1) \simeq S^1$.
+
+		For $\SU(2)$,
+		\[
+			g = \begin{pmatrix}
+				\alpha & \beta\\
+				-\beta^* & \alpha^*
+			\end{pmatrix}
+		\]
+		where $\abs{\alpha}^2 + \abs{\beta}^2 = 1$.
+
+		Write 
+		\[
+			\alpha = a + \mathrm{i} b, \quad \beta = c + \mathrm{i} d
+		\]
+		we get
+		\[
+			a^2 + b^2 + c^2 + d^2 = 1
+		\]
+		i.e.\ the 3-sphere $S^3$.
+	\end{ex}
+
 \end{document}
