@@ -16,6 +16,7 @@ Cambridge Part III Mathematics Notes taken by *Zihan Yan*
   - **Applications of Differential Geometry in Physics** by *M. Dunajski*
   - **Homotopy Theory** by *O. Randal-Williams*
   - **Symplectic Topology** by *A. Keating*
+  - And more TBC...
 - Easter 2021:
   - **Gauge-Gravity Duality** by *A. Wall*
 
