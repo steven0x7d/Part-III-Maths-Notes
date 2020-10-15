@@ -64,7 +64,7 @@
 		\end{itemize}
 	\end{ex}
 
-	\begin{rmk}
+	\begin{rmk} \ 
 		\begin{enumerate}
 			\item Hausdorff and second-countable are important but are not restrictive in practice.
 			\item They're automatic for embedded submanifolds of $\mathbb{R}^n$.
@@ -272,7 +272,7 @@
 		For second-countability: take $\varphi_0^{-1}(\text{rational balls})$ and $\varphi_\infty^{-1}(\text{rational balls})$.
 	\end{ex}
 
-	ALternative perspective:
+	Alternative perspective:
 	\begin{itemize}
 		\item There's no need to talk about the underlying set;
 		\item Instead we could start with open sets $V_\alpha \subset \mathbb{R}^n$ and specify how to glue them together smoothly on open subsets;
@@ -1026,4 +1026,253 @@
 	\end{proof}
 
 	Geometrically this just says that if you have a tangent vector $\vb v$ in $T_p X$ and a function germ $f$ in $\mathcal{O}_{Y,F(p)}$ then you can either pushforward $\vb v$ to $T_{F(p)}Y$ and differentiate $f$ along $F_* \vb v$, or pullback $f$ to $\mathcal{O}_{X,p}$ and differentiate $F^* f$ along $\vb v$, and these give the same answer. 
+
+	\subsection{Immersions, Submersions and Local Diffeomorphisms} \recnr{8}
+
+	If the derivative of a smooth map is injective, surjective, or an isomorphism, then the map has a simple local description.
+
+	First recall the following result from multi-variable calculus.
+
+	\begin{thm}[Inverse function theorem]
+		If $G : V \to T$ is a continuously differentiable function between open subsets of $\mathbb{R}^n$, whose derivative at a point $p \in V$ is a linear isomorphism $\mathbb{R}^n \to \mathbb{R}^n$, then there exists open neighbourhoods $V'$ and $T'$ of $p$ and $G(p)$ respectively such that $G\big|_{V'}$ is a bijection $V' \to T'$ and the inverse is also continuously differentiable. 
+	\end{thm}
+
+	\needfig{21}
+
+	\begin{proof}
+		See Rudin's \emph{Principles of Mathematical Analysis}:\ Theorem 9.24 in the third edition.
+	\end{proof}
+
+	\begin{cor}
+		If, under the same hypotheses, $G$ is actually smooth then so is the inverse.
+	\end{cor}
+
+	\begin{proof}
+		The derivative $D(G^{-1})$ of the inverse is given by $(DG)^{-1}$, and the entries of the latter have explicit expressions in terms of the partial derivatives of $G$, which can be further differentiated arbitrarily many times.
+	\end{proof}
+
+	From now on fix manifolds $X$ and $Y$ of dimensions $n$ and $m$ respectively, and a smooth map $F: X\to Y$.
+
+	\begin{defi}
+		Given a point $p$ in $X$, say $F$ is
+		\begin{itemize}
+			\item An \emph{immersion at $p$} if $D_p F$ is injective;
+			\item A \emph{submersion at $p$} if $D_p F$ is surjective;
+			\item A \emph{local diffeomorphism at $p$} if $D_p F$ is an isomorphism. 
+		\end{itemize}
+
+		These require $n \leq m, n \geq m,$ and $n = m$ respectively. The points $p$ at which $F$ is a submersion are called \emph{regular points of $F$}. The non-regular points are called \emph{critical points of $F$}.
+	\end{defi}
+
+	The name `local diffeomorphism' is justified by the following.
+
+	\begin{prop}
+		If $D_p F$ is an isomorphism then there exists an open neighbourhood $U$ of $p$ in $X$ and an open neighbourhood $S$ of $F(p)$ in $Y$ such that $F\big|_{U}$ is a diffeomorphism $U \to S$.
+		\label{prop:1.71}
+	\end{prop}
+	\begin{proof}
+		Pick charts $\varphi : U \hme V$ and $\psi : S \hme T$ about $p$ and $F(p)$ respectively. By shrinking the first chart if necessary we may assume that $F(U)\subset S$. Now apply the inverse function theorem (actually the `smooth' corollary) to
+		\[
+			G : = \psi \cpf F \cpf \varphi^{-1} : V \to T.
+		\]
+		
+		We obtain open subsets $V' \subset V$ and $T' \subset T$ such that $G\big|_{V'}$ is a diffeomorphism $V' \to T'$. Replace $U$ with $\varphi^{-1}(V')$ and $S$ with $\psi^{-1}(T')$ to get the result.
+	\end{proof}
+
+	\begin{ex}
+		The map $\mathbb{R}_{>0} \times \mathbb{R} \to \mathbb{R}^2$ given by $(r,\theta)\mapsto (r \cos \theta, r \sin \theta)$ is a local diffeomorphism at every point. So if we restrict its domain to $\mathbb{R}_{>0} \times (\theta_0 ,\theta_0 + 2 \pi)$ for some $\theta_0$, to make it injective, then it gives a diffeomorphism
+		\[
+			\mathbb{R}_{>0} \times (\theta_0 ,\theta_0 + 2 \pi) \hme \mathbb{R}^2 \backslash \{(r \cos \theta_0 , r \sin \theta_0): r \in \mathbb{R}_{\geq 0}\}.
+		\]
+		The inverse gives a polar coordinate chart, without explicitly inverting any trig functions.
+	\end{ex}
+
+	\begin{ex}
+		The map $S^n \to \RP{n}$ that sends a point $p$ in $S^n$ to the line $\mathbb{R} p $ through $p$ is a local diffeomorphism. Globally it is $2 : 1$ since both $p$ and $-p$ represent the same line.
+	\end{ex}
+
+	We just proved Proposition \ref{prop:1.71}. This lets us construct charts on $X$ from charts on $Y$ and vice versa:
+	\begin{itemize}
+		\item By shrinking $U$ and $S$ if necessary we may assume that $S$ is the domain of some chart $\psi : S \hme T$. In fact, the $S$ we constructed in the proof already has this property. Then $\psi \cpf F : U \hme T$ defines a chart about $p$ on $X$;
+		\item By shrinking so that $U$ is the domain of a chart $\varphi: U \hme V$ then $\varphi \cpf \left( F\big|_U \right)^{-1} : S \hme V$ gives a chart about $F(p)$ on $Y$. 
+	\end{itemize}
+
+	The upshot is the following:
+
+	\begin{lem}
+		If $F$ is a local diffeomorphism at $p$, and $x_1, \cdots, x_n$ are local coordinates on $X$ about $p$, then there exists local coordinates $y_1, \cdots, y_n$ on $Y$ about $F(p)$ such that in terms of $\vb x$ and $\vb y$ the map $F$ is given by the identity map on $\mathbb{R}^n$. In other words $\vb \cpf F = \vb x$. Similarly, given coordinates $\vb y$ about $F(p)$ there exists coordinates $\vb x$ about $p$ such that $\vb y \cpf F = \vb x$.
+	\end{lem}
+	\begin{proof}
+		If $\varphi$ is the chart defining the coordinates $\vb x$ then take $\vb y$ to be the coordinates associated to the chart $\varphi \cpf \left( F \big|_U \right)^{-1}$ constructed just above. Similarly, if the $\vb y$ coordinates are associated to $\psi$ then take $\vb x$ to be the coordinates associated to $\psi \cpf F$. 
+	\end{proof}
+
+	There are also nice local forms for immersions and submersions.
+
+	\begin{lem}
+		Suppose $F$ is an immersion at $p$ and $x_1, \cdots, x_n$ are local coordinates about $p$. Then there exists local coordinates $y_1, \cdots, y_m$ about $F(p)$ such that, in terms of $\vb x$ and $\vb y$, $F$ is given on a neighbourhood of $p$ by the inclusion
+		\[
+			\mathbb{R}^n = \mathbb{R}^n \oplus 0 \hookrightarrow \mathbb{R}^n \mathbb{R}^{m-n} = \mathbb{R}^m.
+		\]
+		In other words $\vb y \cpf F = (x_1, \cdots, x_n, 0, \cdots, 0)$.
+
+		Similarly, if $F$ is a submersion at $p$ then given local coordinates $\vb y$ about $F(p)$ there exists local coordinates $\vb x$ about $p$ in which $F$ is given by the projection
+		\[
+			\mathbb{R}^n = \mathbb{R}^m \oplus \mathbb{R}^{n-m} \twoheadrightarrow \mathbb{R}^m,
+		\]
+		i.e.\ $\vb y \cpf F = (x_1, \cdots, x_m)$.
+	\end{lem}
+	\begin{proof}
+		The idea is to bulk up the domain or the codomain in order to make $F$ a local diffeomorphism. We'll do the submersion case but the immersion case is similar.
+
+		We're given coordinates $\vb y$ on $Y$ about $F(p)$, and these correspond to some chart $\psi : S \hme T$. Take an arbitrary chart $\varphi : U \hme V$ on $X$ about $p$. Replacing $F$ with $\psi \cpf F \cpf \varphi^{-1}$ we may assume that $X$ and $Y$ are open subsets of $\mathbb{R}^n$ and $\mathbb{R}^m$. Their tangent spaces are then also identified with $\mathbb{R}^n$ and $\mathbb{R}^m$.
+
+		We want a change of coordinates $\chi$ on $\mathbb{R}^n$ about $p$ so that
+		\[
+			F \cpf \chi^{-1} \quad \text{is projection} \quad \mathbb{R}^n = \mathbb{R}^m \oplus \mathbb{R}^{n-m} \twoheadrightarrow \mathbb{R}^m.
+		\]
+		The local coordinates associated to $\chi \cpf \varphi$ then give the desired $\vb x$.
+
+		Now we
+		\begin{itemize}
+			\item Have $F : X \subset \mathbb{R}^n \to Y \subset \mathbb{R}^m$ smooth, $D_p F$ surjective;
+			\item Want $\chi$ such that $F \cpf \chi^{-1}$ is projection $\mathbb{R}^n \twoheadrightarrow \mathbb{R}^m$.
+		\end{itemize}
+
+		Let $K$ denote the kernel of $D_p F : T_p X = \mathbb{R}^n \to T _{F(p)} Y = \mathbb{R}^m$. Pick an arbitrary linear projection $\pi : \mathbb{R}^n \to \mathbb{R}^{n-m}$ which induces an isomorphism $K \to \mathbb{R}^{n-m}$. Now consider the map
+		\[
+			\chi : X \to Y \times \mathbb{R}^{n-m} \quad \text{given by} \quad (F,\pi).
+		\]
+		This is smooth, and its derivative at $p$ is  
+		\[
+			(D_p F, \pi) : T_p X = \mathbb{R}^n \to T _{F(p)}Y \oplus \mathbb{R}^{n-m} = \mathbb{R}^m \oplus \mathbb{R}^{n-m} = \mathbb{R}^n,
+		\]
+		which is an isomorphism. So $\chi$ gives a change of coordinates about $p$, and by construction $F \cpf \chi^{-1}$ is projection onto the first $m$ components.
+	\end{proof}
+
+	\subsection{Submanifolds} \recnr{9}
+
+	A subset of an $n$-manifold naturally inherits the structure of an $(n-k)$-manifold if it is defined locally by the vanishing of $k$ local coordinates.
+
+	Fix an $n$-manifold $X$.
+
+	\begin{defi}
+		A subset $Z \subset X$ is a \emph{submanifold (of codimension $k$)} if for all $p$ in $Z$ there exists an open neighbourhood $U$ of $p$ in $X$, and local coordinates $x_1, \cdots, x_n$ defined on $U$, such that $Z \cap U$ is given by $x_1 = \cdots = x_k = 0$.
+	\end{defi}
+
+	\needfig{22}
+
+	\begin{ex}
+		The unit circle in $\mathbb{R}^2$ is a submanifold of codimension 1: about each point there are polar coordinates $(r,\theta)$, and if we take $(x_1,x_2) = (r-1,\theta)$ then the circle is given by $x_1 = 0$.
+	\end{ex}
+
+	\begin{rmk}
+		Note we require the existence of nice coordinates about each $p$ in $Z$, \emph{not} each $p$ in $X$. For instance, the set
+		\[
+			Z : = \{(x,0): x\neq 0\} \subset \mathbb{R}^2
+		\]
+		is a submanifold of $\mathbb{R}^2$, even though near the origin $Z$ is not described by the vanishing of a local coordinate function.
+	\end{rmk}
+	\needfig{23}
+
+	Fix a submanifold $Z \subset X$ of codimension $k$.
+
+	\begin{itemize}
+		\item $Z$ carries a subspace topology, which is Hausdorff and second-countable because $X$ is;
+		\item For each point $p$ in $Z$ there exists local coordinates $\vb x$ about $p$ such that $Z = \{x_1 = \cdots = x_k = 0\}$. Then $x _{k+1}, \cdots, x_n$ form local coordinates on a neighbourhood of $p$ in $Z$, i.e.\ they define a chart of $Z$ about $p$;
+		\item The transition functions between different charts constructed in this way are smooth, because the original transition functions on $X$ were smooth. So doing this for all $p,U$ and $\vb x$, we obtain a smooth atlas on $Z$.
+	\end{itemize}
+
+	Equivalent atlases on $X$ induce equivalent atlases on $Z$ so we get the following.
+
+	\begin{prop}
+		A codimension-$k$ submanifold $Z \subset X$ is naturally an $(n-k)$-manifold.
+	\end{prop}
+
+	\begin{ex}
+		An open subset $W \subset X$ is a codimension-0 submanifold and thus inherits an $n$-manifold structure. This agrees with the manifold structure we defined earlier on open subsets.
+	\end{ex}
+
+	Finding nice local coordinates about each point of $Z \subset X$ is fiddly. But there is a much easier way to check that $Z$ is a submanifold.
+
+	Fix an $m$-manifold $Y$ and a smooth map $F: X \to Y$.
+
+	\begin{defi}
+		A point $q$ in $Y$ is called a \emph{regular value} if every point $p$ in $F^{-1}(q)$ is a regular point, i.e.\ $D_p F$ is surjective for all such $p$. All points in $Y$ that are not regular values are \emph{critical values}.
+	\end{defi}
+	\needfig{24}
+
+	\begin{prop}
+		If $q \in Y$ is a regular value, then $F^{-1}(q)$ is a codimension-$m$ submanifold of $X$.
+	\end{prop}
+	\begin{proof}
+		For each $p \in F^{-1}(q)$ we know that $F$ is a submersion at $p$, so there exists local coordinates $\vb x$ about $p$ and $\vb y$ about $q$ such that
+		\[
+			\vb y \cpf F = (x_1, \cdots, x_m).
+		\]
+		If we translate the local coordinates so that $\vb y(q) = 0$, then on the domain of $\vb x$ we have $F^{-1}(q)$ is given by $x_1 = \cdots = x_m = 0$.
+	\end{proof}
+
+	Intuitively, the point $q$ is defined by the vanishing of $m$ local coordinate functions on $Y$, and then $Z$ is defined by the vanishing of their pullbacks under $F$.
+
+	\begin{ex}
+		Define $F : \mathbb{R}^2 \to \mathbb{R}$ by $F(x,y) = xy$. The point $0\in \mathbb{R}$ is a critical value, but all non-zero real numbers are regular values. So for $c\neq 0$ the set $F^{-1}(c) = \{xy = c\}$ is a smooth 1-manifold. The set $F^{-1}(0)$ meanwhile fails to be a manifold at the origin.
+		
+		\needfig{25}
+	\end{ex}
+
+	\begin{rmk}
+		The pre-image of a critical value does not necessarily fail to be a submanifold of the expected dimension. For example, 0 is a critical value of $F : \mathbb{R}^2 \to \mathbb{R}$ given by $F(x,y) = x^2$. But $F^{-1}(0)$ is still a codimension-1 submanifold. 
+	\end{rmk}
+
+	\begin{ex}
+		Let $F : \mathbb{R}^{n+1} \to \mathbb{R}$ be the smooth map given by $F(\vb x) = \norm{\vb x}^2$. The point $1 \in \mathbb{R}$ is a regular value, so $S^n$ is a codimension-1 submanifold of $\mathbb{R}^{n+1}$. We'll see shortly that the induced smooth structure on $S^n$ coincides with that constructed by stereographic projection.
+	\end{ex}
+
+	\begin{ex}
+		The space $\mathcal{L}(\mathbb{R}^n , \mathbb{R}^n)$ is a manifold of dimension $n^2$. The map $\det$ defines a smooth function on it, so $\GL(n, \mathbb{R}) = \det^{-1}(\mathbb{R}^*)$ is an open subset and hence inherits a manifold structure. 
+	\end{ex}
+
+	\begin{clm*}
+		1 is a regular value of $\det : \GL(n, \mathbb{R}) \to \mathbb{R}$, so its pre-image $\SL(n, \mathbb{R})$ is a smooth manifold of dimension $n^2 - 1$. 
+	\end{clm*}
+
+	\begin{proof}
+		Take an arbitrary $A \in \SL(n,\mathbb{R})$ and consider the curve
+		\[
+			\gamma : t \mapsto e^t A
+		\]
+		in $\GL(n,\mathbb{R})$ based at $A$. We have
+		\[
+			D_A \det([\gamma]) = [\det \cpf \gamma] = [t \mapsto e ^{nt}] = n \partial_x \in T_1 \mathbb{R}
+		\]
+		where $x$ is the standard coordinate on $\mathbb{R}$. This vector is non-zero so $D_A \det$ is surjective, and we're done.
+	\end{proof}
+
+	\begin{ex}
+		Let $S \subset \mathcal{L}(\mathbb{R}^n, \mathbb{R}^n)$ denote the linear subspace of symmetric matrices, of dimension $n(n+1)/2$, and consider the smooth map $F: \mathcal{L}(\mathbb{R}^n, \mathbb{R}^n) \to S$ given by $F(A) = A^T A$. The identity matrix $I \in S$ is a regular value so the orthogonal group $\Og(n) = F^{-1}(I)$ is naturally a submanifold of $\mathcal{L}(\mathbb{R}^n,\mathbb{R}^n)$ of dimension $n(n-1)/2$.  
+	\end{ex}
+
+	In order to use this criterion to produce submanifolds, we need regular values to be plentiful. Fortunately, this is the case.
+
+	\begin{thm}[Sard's theorem]
+		The set of critical values has measure 0 in $Y$. More precisely, given any chart $\psi: S \hme T$ on $Y$, the set
+		\[
+			\psi(S \cap \{\text{critical values of }F\}) \subset T \subset \mathbb{R}^m
+		\]
+		has measure 0 with respect to the Lebesgue measure on $\mathbb{R}^m$.
+	\end{thm}
+	\begin{proof}
+		See Lee's \emph{Introduction to Smooth Manifolds}:\ Theorem 6.10 in the second edition, or Nicolaescu's \emph{Lectures on the Geometry of Manifolds}:\ Theorem 2.1.18 in the September 9, 2018 version.
+	\end{proof}
+
+	The measure zero formulation is not important for most purposes. Usually the following corollary is enough, and this will be what we mean if we say `by Sard's theorem'.
+
+	\begin{cor}
+		The regular values of $F$ are dense in $Y$. In particular, $F$ has at least one regular value.
+	\end{cor}
+
+	\begin{rmk}
+		Sard's theorem guarantees the existence of regular values, but \emph{not} regular points. For example, if $X$ and $Y$ are non-empty and of positive dimension, and the map $F: X \to Y$ is constant, then every $p$ in $X$ is a critical point. But every $q$ in $Y \backslash F(X)$ is vacuously a regular value. Geometrically, although the set $C$ of critical points in $X$ may be very large, its image in $Y$ is small because $DF$ fails to be surjective at these points.
+	\end{rmk}
+	\needfig{26}
 \end{document}
