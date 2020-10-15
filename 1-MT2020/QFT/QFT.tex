@@ -187,7 +187,7 @@
 		\det \Lambda = + 1
 	\]
 	
-	The conditions above fix \emph{proper orthochronous} Lorentz transformations. These have 6 degrees of freedom: 3 rotations + 3 boosts. 
+	The conditions above fix \emph{proper} Lorentz transformations. These have 6 degrees of freedom: 3 rotations + 3 boosts. 
 
 	Lorentz transformations form a group under composition. It is actually a Lie group, called \emph{Lorentz group}, denoted as $\mathrm{SO}(3,1)$.
 	
@@ -526,4 +526,231 @@
 		An infinitesimal transformation is $ \psi(x) \to \psi(x) + \delta\psi (x)$ with $\delta \psi(x) = \mathrm{i} \alpha \psi(x)$.
 		
 	\end{ex}
+
+	\lecnr{4}
+	\begin{ex}
+		Consider proper Lorentz transformations
+		\[
+			x^\mu \to x'^\mu = \LT{\mu}{\nu} x ^{\nu}
+		\]
+		with
+		\[
+			\LT{\mu}{\alpha} \eta ^{\alpha \beta} \LT{\nu}{\beta} = \eta ^{\mu \nu} \quad \text{and} \quad \det (\Lambda) = +1.
+		\]
+		
+		Such infinitesimal transformations are of the form \[
+			\Lambda \approx \exp(s \Omega)
+		\]
+		where $\Omega \in \mathbb{L}(\SO(3,1))$. If we expand $\Lambda$ near identity, we have
+		\[
+			\LT{\mu}{\nu} = \delta^\mu _\nu + s \Omega\indices{^{\mu}_{\nu}} + \mathcal{O}(s^2)
+		\]
+		and the condition that $\Lambda$ satisfies gives to first order
+		\[
+			(\delta^\mu_\alpha + s \Omega\indices{^\mu_\alpha})\eta ^{\alpha \beta} (\delta^\nu_\beta + s \Omega\indices{^\nu _\beta}) = \eta ^{\mu \nu}.
+		\]
+		
+		The term linear in $s$ gives
+		\[
+			\Omega ^{\mu \nu} + \Omega ^{\nu \mu} = 0 \quad \Rightarrow \quad \Omega _{\mu \nu} = - \Omega _{\nu \mu}.
+		\]
+		and the number of free entries in $\Omega$ is $\frac{1}{2} \times 3 \times 4 = 6 =$ 3 rotations + 3 boosts.
+
+		Scalar field transforms as
+		\[
+			\phi(x) \to \phi(\Lambda^{-1}\cdot x)
+		\]
+		and from
+		\[
+			(\Lambda^{-1})\indices{^\mu_\nu} = \delta^\mu_\nu - s \Omega\indices{^\mu_\nu} + \mathcal{O}(s^2)
+		\]
+		we have
+		\[
+			\phi(\Lambda^{-1} \cdot x) \approx \phi(x - s \Omega \cdot x) \approx \phi(x) - s \Omega\indices{^\mu_\nu} x^\nu \partial_\mu \phi(x) + \mathcal{O}(s^2).
+		\]
+		
+		Thus we conclude that the infinitesimal Lorentz transformation is of the form
+		\[
+			\phi(x) \to \phi(x) + \delta \phi(x)
+		\]
+		and 
+		\begin{equation}
+			\delta \phi(x) = -s \Omega\indices{^\mu_\nu} x^\nu \partial_\mu \phi(x).
+		\end{equation}
+	\end{ex}
+
+	\subsection{More General Story}
+
+	We can consider the more general case of complex fields taking value in $\mathbb{C}$
+	\[
+		\bm{\psi}: \mathbb{R}^{3,1} \to \mathbb{C}^n
+	\]
+	with inner product
+	\[
+		(\bm{\psi}_1, \bm \psi_2) = \bm \psi_1^\dagger \cdot \bm \psi_2.
+	\]
+	
+	To work with such ``vector-like'' fields, we need the following definition.
+
+	\begin{defi}
+		An \emph{$n$-dimensional representation} of symmetry group $G$ is a map
+		\[
+			D : G \to \Mat_n(\mathbb{C})
+		\]
+		that preserves the group multiplication,
+		\[
+			D(g_1 \cdot g_2) = D(g_1)\cdot D(g_2), \quad \forall g_1, g_2 \in G.
+		\]
+
+		A representation $D$ of $G$ is \emph{unitary} if
+		\begin{equation}
+			D(g)^{-1} = D(g)^\dagger, \quad \forall g \in G.
+			\label{eq:1.6.1}
+		\end{equation}
+	\end{defi}
+
+	Given such a unitary $n$-dimensional representation of a symmetry group $G$, we can write down a Lagrangian that has a symmetry corresponding to this.
+
+	\begin{equation*}
+		\mathcal{L} = (\partial_\mu \bm \psi, \partial^\mu \bm \psi) - V((\bm \psi, \bm \psi))
+	\end{equation*}
+	is invariant under the symmetry
+	\begin{equation*}
+		\bm \psi (x) \to \bm \psi'(x) = D(g) \cdot \bm \psi(x), \quad \forall g \in G.
+	\end{equation*}
+
+	We can check that
+	\[
+		(\bm \psi, \bm \psi) \to (D(g) \cdot \bm \psi, D(g) \cdot \bm \psi) = (D(g)^\dagger \cdot D(g) \cdot \bm \psi, \bm \psi) \overset{(\ref{eq:1.6.1})}{=} (\bm \psi,\bm \psi).
+	\]
+	
+	For such representations, the simplest possibility is that $G = \U(n)$, the group of $n \times n$ unitary matrices. For this, we have the \emph{fundamental representation}
+	\[
+		D_F(g) = g, \quad \forall g \in G.
+	\]
+	
+	\subsection{Noether's Theorem}
+
+	The general idea of Noether's theorem is that
+	\[
+		\text{continuous symmetry} \quad \Rightarrow \quad \text{conserved current}.
+	\]
+
+	\subsubsection{Continuous Symmetry}
+
+	Consider a continuous symmetry of a scalar field
+	\[
+		\phi(x) \to \phi(x) + \delta \phi(x) \quad \text{with} \quad \delta \phi(x) = X(\phi(x), \partial \phi(x), \cdots).
+	\]
+	
+	\begin{ex}
+		\
+		\begin{itemize}
+			\item Lorentz transformation $\Lambda = \exp(s \Omega)$ has \[
+				X = - s \Omega\indices{^\mu _\nu} x^\nu \partial_\mu \phi(x);
+			\]
+			\item Translation $\phi(x) \to \phi(x - \varepsilon)$ has \[
+				X = - \varepsilon^\mu \partial_\mu \phi(x).
+			\]
+		\end{itemize}
+	\end{ex}
+
+	Now investigate the variation of $\mathcal{L}(x)$. 
+	\begin{itemize}
+		\item For Lorentz transformation, since $\mathcal{L}(x)$ is a scalar field, we have \[
+			\delta \mathcal{L}(x) = -s \Omega\indices{^\mu _\nu} x^\nu \partial_\mu \mathcal{L}(x) = s \Omega\indices{^\mu _\nu} \partial_\mu (x^\nu \mathcal{L}(x)) = \text{total derivative}
+		\]
+		using 
+		\[
+			\Omega\indices{^\mu_\mu} = \eta ^{\mu \nu} \Omega _{\mu \nu} = 0.
+		\]
+		\item And for translation $\mathcal{L}(x) \to \mathcal{L}(x - \varepsilon)$ \[
+			\delta \mathcal{L}(x) = - \varepsilon^\mu \partial_\mu \mathcal{L}(x) = \text{total derivative}.
+		\]
+	\end{itemize}
+
+	For a general symmetry, we can assume
+	\begin{equation}
+		\delta \mathcal{L}(x) = \partial_\mu F^\mu
+		\label{eq:1.7.1}
+	\end{equation}
+	for some $F^\mu = F^\mu(\phi(x), \partial \phi(x), \cdots)$.
+	
+	The variation of action is
+	\[
+		\delta S = \int _{\mathbb{R}^{3,1}} \dd[4]{x} \delta \mathcal{L} = \int _{\mathbb{R}^{3,1}} \dd[4]{x} \partial_\mu F^\mu \overset{\text{Stokes}}{=} \int _{\partial(\mathbb{R}^{3,1})} \dd{S_\mu} F^\mu = \text{surface term}
+	\]
+	but we always assume the action is not affected by any surface-term-like variations.
+
+	\subsubsection{Conserved Current}
+
+	\begin{defi}
+		\emph{Conserved current} is a 4-vector field
+		\[
+			j^\mu (x) = j^\mu(\phi(x), \partial \phi(x),\cdots)
+		\]
+		such that
+		\begin{equation}
+			\partial_\mu j^\mu = 0
+			\label{eq:1.7.2}
+		\end{equation}
+		when $\phi$ obeys its Euler-Lagrange equation(s).
+
+		We can further define
+		\[
+			j^\mu (x) = j^\mu (t, \vb x) = (j^0 (t,\vb x), \vb J(t, \vb x))
+		\]
+		where we call $j^0$ the \emph{charge density} and $\vb J$ the \emph{current density}. The \emph{total charge} in any region of space $V \subset \mathbb{R}^3$ is defined as
+		\[
+			Q_V (t) = \int_V \dd[3]{\vb x} j^0(t, \vb x).
+		\]
+	\end{defi}
+	
+	Recall the condition (\ref{eq:1.7.2}) can be re-written as
+	\begin{equation}
+		\pdv{j^0}{t}(t,\vb x) + \div \vb J (t, \vb x) = 0
+		\label{eq:1.7.3}
+	\end{equation}
+	and we have
+	\[
+		\dv{Q_V(t)}{t} = \int_V \dd[3]{\vb x} \pdv{t} j^0(t, \vb x) \overset{(\ref{eq:1.7.3})}{=} - \int_V \dd[3]{\vb x} \div \vb J(t, \vb x) \overset{\text{Stokes}}{=} - \int _{\partial V} \dd{\vb S} \vdot \vb J (t, \vb x)
+	\]
+	which is the flux through $\partial V$. When $V = \mathbb{R}^3$ and $\phi(x)\to 0$ as $\abs{\vb x}\to \infty$, we have the total charge of whole $\mathbb{R}^3$
+	\[
+		Q(t) = \int _{\mathbb{R}^3} \dd[3]{\vb x} j^0(t, \vb x)
+	\]
+	and 
+	\[
+		\dv{Q(t)}{t} = - \int _{\partial \mathbb{R}^3} \dd{\vb S} \vdot \vb J(t, \vb x) \overset{\text{b.c.}}{=} 0.
+	\]
+
+	\subsubsection{Proof of the Theorem}
+
+	\begin{thm}[Noether's theorem]
+		A (continuous) symmetry gives rise to conserved current(s).
+	\end{thm}
+	\begin{proof}
+		Consider the variation of the Lagrangian
+		\begin{align*}
+			\delta \mathcal{L}(x) = &\ \pdv{\mathcal{L}}{\phi} \delta \phi + \pdv{\mathcal{L}}{(\partial_\mu \phi)} \delta(\partial_\mu \phi) \\
+			\overset{\text{Leibniz}}{=} &\ \pdv{\mathcal{L}}{\phi} \delta \phi - \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} \right) \delta \phi + \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} \delta \phi \right)\\
+			= &\ \underbrace{\left[ \pdv{\mathcal{L}}{\phi} - \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} \right) \right]}_{0 \text{ by E-L}} \delta \phi + \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} \delta \phi \right).
+		\end{align*}
+		thus
+		\begin{equation}
+			\delta \mathcal{L} = \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} X(\phi) \right)
+			\label{eq:1.7.4}
+		\end{equation}
+
+		Define
+		\[
+			j^\mu (x) := \pdv{\mathcal{L}}{(\partial_\mu \phi)} X(\phi(x)) - F^\mu(\phi(x)).
+		\]
+		
+		Compare (\ref{eq:1.7.1}) and (\ref{eq:1.7.4}) we get
+		\begin{equation}
+			\partial_\mu j^\mu = \partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu \phi)} X(\phi(x)) \right) - \partial_\mu F^\mu (\phi(x)) = 0.
+		\end{equation}
+	\end{proof}
+	
 \end{document}
