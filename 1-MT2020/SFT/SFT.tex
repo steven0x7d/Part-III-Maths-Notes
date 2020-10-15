@@ -381,4 +381,181 @@
 	where $J > 0$ is acting as an attractive force and $\mu$ is the chemical potential.
 
 	This is equivalent to the Ising model if we identify $S_i = 2n_i - 1$. 
+
+	\subsection{Landau-Ginzburg Theory} \recnr{1-3}
+
+	The Landau-Ginzberg (LG) approach is an extension of Landau's idea that, treated correctly, gives the correct physics.
+
+	We now allow $m$ to vary in space: $m \to m(\vb x)$. It is now a field.
+
+	Start with a lattice with $N$ sites, and divide into boxes each with $N'$ sites such that $1 \ll N' \ll N$.
+	
+	\needfig{10}
+
+	For each box
+	\[
+		m(\vb x) = \frac{1}{N'} \sum_i S_i
+	\]
+	where $\vb x$ is the centre of the box and the sum is only over the sites in box.
+
+	This is a \emph{coarse graining}. We require
+	\begin{itemize}
+		\item $N'$ is large enough so $m \in [-1,+1]$ is essentially continuous;
+		\item Box side length $a \ll$ other relevant scales so $\vb x$ can be treated as continuous. But we must remember that $m$ cannot vary on scales $<a$.
+	\end{itemize}
+
+	Write the partition function as 
+	\[
+		Z = \sum _{m(\vb x)} \sum _{\{S_i\}|m(\vb x)} e ^{- \beta E[S_i]} := \sum _{m(\vb x)} e ^{-\beta F[m(\vb x)]}
+	\]
+	where the summation is over all $\{S_i\}$ such that coarse graining gives $m(\vb x)$ and we defined the free energy $F[m(\vb x)]$ to be a functional (that takes a function $m(\vb x)$ and gives a number).
+
+	Now sum is over all possible fields $m(\vb x)$.
+
+	We write $Z$ as a \emph{functional integral}, also known as a \emph{path integral}.
+	\[
+		Z = \int \ddp m(\vb x) e ^{-\beta F[m(\vb x)]}
+	\]
+	
+	The probability of field configuration $m(\vb x)$ is
+	\[
+		P[m(\vb x)] = \frac{e ^{- \beta F[m(\vb x)]}}{Z}.
+	\]
+	
+	\subsubsection{Free Energy Functional}
+
+	What is the free energy functional $F[m(\vb x)]$?
+
+	It must have the following properties:
+	\begin{itemize}
+		\item \textbf{Locality}: in the Ising model spins only affect their neighbours \[
+			F[m(\vb x)] = \int \dd[d]{\vb x} f[m(\vb x)]
+		\]
+		where $f[m(\vb x)]$ depends only on $m(\vb x), \grad m(\vb x), \laplacian m(\vb x), \cdots$;
+		\item \textbf{Translation and rotation symmetry}: inherited from discrete versions of these symmetries on the lattice;
+		\item A $\mathbb{Z}_2$ \textbf{symmetry} when $B = 0$: $m(\vb x) \to - m(\vb x)$ and when $B \neq 0$ there's a symmetry $B \to - B, m(\vb x) \to - m(\vb x)$;
+		\item \textbf{Analyticity}: we are interested in the critical point when $m$ is small. Assume $f[m(\vb x)]$ has a Taylor series expansion;
+		\item We are interested in $m(\vb x)$ that are slowly varying in space, e.g.\ $\nabla m$ terms are more important than $a \laplacian m$ terms, etc.
+	\end{itemize}
+
+	Most general free energy when $B = 0$ writes
+	\[
+		F[m(\vb x)] = \int \dd[d]{\vb x} \left[ \frac{1}{2} \alpha_2(T) m^2 + \frac{1}{4} \alpha_4(T) m^4 + \frac{1}{2} \gamma(T) (\nabla m)^2 + \cdots \right].
+	\]
+	
+	Note that we only have even powers in $m$ as odd powers break the $\mathbb{Z}_2$ symmetry. Similar for $\nabla m$ terms as odd ones kills the rotational symmetry off.
+
+	When $B \neq 0$ we can have $Bm, Bm^3$, etc.\ terms.
+
+	It's hard to compute coefficients $\alpha_2(T), \alpha_4(T), \gamma(T)$ from first principles. From MFT we expect
+	\begin{align*}
+		\alpha_2(T) & \sim (T - T_c),\\
+		\alpha_4(T) & \sim \frac{1}{3}T.
+	\end{align*}
+	But we only need
+	\[
+		\alpha_4(T), \gamma(T) > 0 \quad \text{and} \quad \alpha_2(T) \text{ changes sign at } T = T_c.
+	\]
+	
+	\subsubsection{Saddle Point}
+	For the path integral 
+	\[
+		Z = \int \ddp m(\vb x) e^{-\beta F[m(\vb x)]},
+	\]
+	our first guess is to assume integral is dominated by the saddle point.
+
+	Consider $m(\vb x) + \delta m(\vb x)$, we get
+	\begin{align*}
+		\delta F & = \int \dd[d]{\vb x} [\alpha_2 m\ \delta m + \alpha_4 m^3\ \delta m + \gamma (\grad m) \vdot (\grad \delta m) + \mathcal{O}((\delta m)^2)]\\
+		& = \int \dd[d]{\vb x} [\alpha_2 m + \alpha_4 m^3 - \gamma \nabla^2 m] (\delta m) + \cdots \quad \text{[integrated by parts]}
+	\end{align*} 
+
+	This has minimum when
+	\[
+		\gamma \laplacian m = \alpha_2 m + \alpha_4 m^3.
+	\]
+	
+	The simplest solution is $m(\vb x) = m = \text{constant}$ which reproduces results of Landau theory
+	\begin{align*}
+		& T > T_c \Rightarrow \alpha_2 > 0 \Rightarrow m = 0\\
+		& T < T_v \Rightarrow \alpha_2 < 0 \Rightarrow m = \pm m_0 = \pm \sqrt{\frac{-\alpha_2}{\alpha_4}} = \pm \sqrt{\frac{3(T_c - T)}{T}}.
+	\end{align*}
+
+	\subsubsection{Domain Walls}
+
+	For $T < T_c$, there are two ground states $m \pm m_0$.
+
+	Consider state where part of space has $m = + m_0$ and the other part has $m = - m_0$.
+
+	Two different `\emph{domains}' separated by a `\emph{domain wall}'.
+
+	\needfig{11}
+
+	Write $m(\vb x) = m(x)$ since we here only vary the $x$-coordinate. We get
+	\[
+		\gamma \dv[2]{m}{x} = \alpha_2 m + \alpha_4 m^3
+	\]
+	with boundary conditions $m(x)\to \pm m_0$ as $x \to \pm \infty$.
+	
+	This has solution
+	\[
+		m = m_0 \tanh(\frac{x - x_0}{W})
+	\]
+	where $x_0$ is the position of the domain wall and $W = \sqrt{-\gamma/\alpha_2}$ is the width of the wall.
+	
+	\needfig{12}
+
+	If linear size of system is $L$, the excess cost in free energy is
+	\[
+		F_{\text{wall}} \sim L ^{d-1} \int \dd{x} \gamma \left( \dv{m}{x} \right)^2 \sim L ^{d-1} W \gamma \left( \frac{m_0}{W} \right)^2.
+	\]
+	where we regard $L ^{d-1}$ as the `area' of the domain wall. Plug $W$ in, we have
+	\[
+		F _{\text{wall}} \sim L ^{d-1} \sqrt{\frac{- \gamma \alpha_2^3}{\alpha_4^2}}.
+	\]
+	
+	\subsubsection{Lower Critical Dimension}
+
+	It turns out that domain walls are responsible for the lack of phase transition for $d = 1$.
+
+	Suppose the system is in the ordered phase, $\alpha_2(T)<0$, and consider an interval of length $L$.
+
+	Suppose at $x = -L/2$ we fix $m = + m_0$, we want to calculate the probability of $m = + m_0$ at the other end $x = + L/2$.
+
+	\needfig{13}
+
+	A domain wall flips the state, and
+	\[
+		P[\text{wall at } x = x_0] = \frac{e ^{-\beta F _{\text{wall}}}}{Z}
+	\]
+	and
+	\[
+		P[\text{wall anywhere}] \sim \frac{L}{W} \frac{e ^{-\beta F _{\text{wall}}}}{Z}
+	\]
+
+	Suppose we have $n$ domain walls, if $n$ is even, it eventually gets back to $+m_0$; for $n$ is odd, it ends up at $- m_0$.
+	
+	\[
+		P[n \text{ walls}] = \frac{e ^{-n \beta F _{\text{wall}}}}{Z} \frac{1}{W^n} \int_{-L/2}^{L/2} \dd{x_1} \int_{x_1}^{L/2} \dd{x_2} \cdots \int_{x _{n-1}}^{L/2} \dd{x_n} = \frac{1}{Z n!} \left( \frac{L e ^{- \beta F _{\text{wall}}}}{W} \right)^n
+	\]
+	
+	Now we can answer the question
+	\[
+		P[m \to + m_0] = \frac{1}{Z} \sum _{n \text{ even}} \frac{1}{n!} \left( \frac{L e ^{- \beta F _{\text{wall}}}}{W} \right)^n = \frac{1}{Z} \cosh(\frac{L e ^{- \beta F _{\text{wall}}}}{W})
+	\]
+	and
+	\[
+		P[m \to - m_0] = \frac{1}{Z} \sum _{n \text{ odd}} \frac{1}{n!} \left( \frac{L e ^{- \beta F _{\text{wall}}}}{W} \right)^n = \frac{1}{Z} \sinh(\frac{L e ^{- \beta F _{\text{wall}}}}{W})
+	\]
+
+	As $L \to \infty$, $P[m \to + m_0] = P[m \to - m_0]$, i.e.\ all memory of the starting point gets washed away.
+
+	Fluctuations of domain walls are unsuppressed because of entropy --- they proliferate.
+
+	Thus there is no ordered phase and no spontaneous symmetry breaking in $d = 1$.
+	
+	This suggests (although we haven't proved yet) the lower critical dimension for Ising model is $d_l = 1$.
+
+	
+
 \end{document} 
