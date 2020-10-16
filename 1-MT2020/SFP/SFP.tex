@@ -545,14 +545,14 @@
 
 	\newpage
 
-	\section{Matrix Groups}
+	\section{Matrix Groups and Representations}
 
 	Any set of non-singular matrices which is closed under matrix multiplication forms a \emph{matrix group}. We choose $e$ to be identity matrix, inverse to be the matrix inverse. Many groups are defined in terms of matrices.
 
 	\begin{defi}
-		The \emph{real general linear group} $\GL(n,\mathbb{R})$ is the set of all real $n \times n$ non-singular matrices (i.e.\ $\det M \neq 0, \forall M \in \GL(n,\mathbb{R})$). Its real dimension is $n^2$.
+		The real \emph{general linear group} $\GL(n,\mathbb{R})$ is the set of all real $n \times n$ non-singular matrices (i.e.\ $\det M \neq 0, \forall M \in \GL(n,\mathbb{R})$). Its real dimension is $n^2$.
 
-		Similarly, we can define the \emph{complex} general linear group $\GL (n,\mathbb{C})$, which has real dimension $2 n^2$.
+		Similarly, we can define the complex general linear group $\GL (n,\mathbb{C})$, which has real dimension $2 n^2$.
 	\end{defi}
 
 	\begin{defi}
@@ -561,31 +561,37 @@
 
 	\subsection{Continuous Matrix Groups of Interest}
 
-	\begin{enumerate}
-		\item $\Og(n)$, real orthogonal $n\times n$ matrices such that \begin{equation}
+	
+	\begin{defi}
+		The \emph{orthogonal group} $\Og(n)$ is the group of real orthogonal $n\times n$ matrices such that \begin{equation}
 			M^T M = I, \quad \forall M \in \Og(n).
 			\label{eq:2.1.1}
 		\end{equation}
 		
-		For $\SO(n)$, we have the condition $\det = 1$ as well.
+		For \emph{special orthogonal group} $\SO(n)$, we have the condition $\det = 1$ as well.
+	\end{defi}
 
-		To find the (real) dimension of such groups, note that a general $n \times n$ real matrix has $n^2$ parameters. A symmetric one has $\frac{n}{2} (n+1)$ free entries. $M^T M$ is a symmetric matrix, so (\ref{eq:2.1.1}) imposes $\frac{n}{2}(n+1)$ constraints. So, $\Og(n)$ has $\frac{1}{2} n (n-1)$ parameters. So does $\SO(n)$ as the defining relation already gives $\abs{\det M}=1$.
-		
-		If $v,v'$ belong to the $n$-dimensional representation space (to be defined) of $\Og(n)$ or $\SO(n)$, then the scalar product $v'^T v$ is invariant under
-		\[
-			v \to Mv, \quad v' \to Mv'.
-		\]
-		\item $\U(n)$, the complex unitary $n\times n$ matrices with \begin{equation}
+	To find the (real) dimension of such groups, note that a general $n \times n$ real matrix has $n^2$ parameters. A symmetric one has $\frac{n}{2} (n+1)$ free entries. $M^T M$ is a symmetric matrix, so (\ref{eq:2.1.1}) imposes $\frac{n}{2}(n+1)$ constraints. So, $\Og(n)$ has $\frac{1}{2} n (n-1)$ parameters. So does $\SO(n)$ as the defining relation already gives $\abs{\det M}=1$.
+	
+	If $v,v'$ belong to the $n$-dimensional representation space (to be defined) of $\Og(n)$ or $\SO(n)$, then the scalar product $v'^T v$ is invariant under
+	\[
+		v \to Mv, \quad v' \to Mv'.
+	\]
+
+	\begin{defi}
+		The \emph{unitary group} $\U(n)$ is the group of complex unitary $n\times n$ matrices with 
+		\begin{equation}
 			M^\dagger M = I, \quad \forall M \in \U(n).
 			\label{eq:2.1.2}
 		\end{equation} 
+	\end{defi}
 
-		A Hermitian complex matrix has $n^2$ real parameters. $M^\dagger M$ is Hermitian, then (\ref{eq:2.1.2}) contains $n^2$ constraints. Thus in $\U(n)$, we have $2n^2 - n^2 = n^2$ real parameters. 
-		
-		(\ref{eq:2.1.2}) implies $\abs{\det M} = 1$, so imposing $\det M = 1$ provides one additional constraint, giving the special unitary group, $\SU(n)$, with $n^2 - 1$ real parameters.
+	A Hermitian complex matrix has $n^2$ real parameters. $M^\dagger M$ is Hermitian, then (\ref{eq:2.1.2}) contains $n^2$ constraints. Thus in $\U(n)$, we have $2n^2 - n^2 = n^2$ real parameters. 
+	
+	(\ref{eq:2.1.2}) implies $\abs{\det M} = 1$, so imposing $\det M = 1$ provides one additional constraint, giving the \emph{special unitary group}, $\SU(n)$, with $n^2 - 1$ real parameters.
 
-		The $\U(n)$ invariant product for $n$-dimensional complex vectors $v,v'$ is $v'^\dagger v$.
-	\end{enumerate}
+	The $\U(n)$ invariant product for $n$-dimensional complex vectors $v,v'$ is $v'^\dagger v$.
+	
 
 	\begin{ex}
 		$\SO(2) \simeq \U(1)$ since a general $\SO(2)$ matrix
@@ -619,4 +625,206 @@
 		i.e.\ the 3-sphere $S^3$.
 	\end{ex}
 
+	\lecnr{4}
+
+	\begin{defi}
+		The real (complex) \emph{symplectic groups} $\Sp(2n,\mathbb{R})$ ($\Sp(2n, \mathbb{C})$) consists of $2n \times 2n$ matrices $M$, satisfying
+		\begin{equation}
+			M^T J M = J
+			\label{eq:2.1.3}
+		\end{equation}
+		where
+		\[
+			J = \mqty(\dmat{0 & -1\\1 & 0,0 & -1\\1 & 0, \ddots, 0 & -1\\1 & 0})
+		\]
+		is a $2n \times 2n$ matrix.
+	\end{defi}
+
+	$M^T J M$ is antisymmetric, so (\ref{eq:2.1.3}) comprises $n(2n-1)$ conditions. Therefore, $\Sp(2n,\mathbb{R})$ has $n(2n+1)$ real parameters. (\ref{eq:2.1.3}) already imposes $\det M = 1$ so there exists no further restrictions on parameters. (To understand this, see Hugh Osborne's notes and the definition of the Pfaffian etc.)
+
+	\begin{defi}
+		The \emph{antisymmetric invariant form} is defined as
+		\[
+			\expval{v',v} = -\expval{v,v'} = v'^T J v.
+		\]
+	\end{defi}
+	
+	\begin{prop}
+		$\SO(n), \SU(n)$ are \emph{compact}, i.e.\ the natural parameters vary over a finite range. $\Sp(2n,\mathbb{R})$ isn't.
+	\end{prop}
+
+	\begin{ex}
+		Consider $\Sp(2,\mathbb{R})$, it has elements
+		\[
+			M = \mqty(\cosh \theta & \sinh \theta\\ \sinh \theta & \cosh \theta),
+		\]
+		and $-\infty < \theta < \infty$. The parameters can tend to infinity, thus not compact.
+	\end{ex}
+
+	\begin{defi}
+		The \emph{pseudo-orthogonal group} $\Og(n,m)$ of $(n + m)\times (n+m)$ matrices is such that its elements $M$ satisfy
+		\[
+			M^T g M = g
+		\]
+		where
+		\[
+			g = \mqty(\dmat{I_n, - I_m})
+		\]
+		is an $(n+m)\times (n+m)$ matrix, with $I_n$ the $n\times n$ identity matrix and $I_m$ the $m\times m$ one.
+
+		This definition naturally tends to $\SO(n,m)$.
+	\end{defi}
+
+	Similarly we can define $\U(n,m)$ and $\SU(n,m)$. Parameter counts are the same as for $\Og(n+m)$ or $\U(n+m)$.
+
+	\begin{nt}
+		$\SO(1,1)$ is the same as $\Sp(2,\mathbb{R})$.
+	\end{nt}
+
+	\subsection{Representations}
+
+	Representations play a crucial role in physics.
+
+	\begin{defi}
+		For any group $G$, a \emph{representation} is a set of non-singular square matrices $\{D(g)\}, \forall g\in G$ such that
+		\begin{itemize}
+			\item $D(g_1) D(g_2) = D(g_1 g_2)$;
+			\item $D(e) = I$, the identity matrix;
+			\item $D(g^{-1}) = D(g)^{-1}$. 
+		\end{itemize}
+		
+		If $D(g)$ are $n\times n$, the representation has \emph{dimension} $n$.
+
+		For each matrix group, its definition provides a representation called the \emph{fundamental representation}.
+	\end{defi}
+
+	For complex matrices, the \emph{conjugate representation} is defined to be $D(g)^*$.
+
+	\begin{nt}
+		$(D(g)^{-1})^T$ also forms a representation. 
+	\end{nt}
+
+	\begin{defi}
+		Two representations of the same dimension $D(g)$ and $D'(g)$ are said to be \emph{equivalent} if 
+		\begin{equation}
+			D'(g) = S D(g) S^{-1}, \quad \forall g \in G
+			\label{eq:2.2.1}
+		\end{equation}
+		where $S$ is an $n\times n$ invertible matrix.
+	\end{defi}
+
+	\begin{defi}
+		The $n$-dimensional vector space $V$ that some representation of dimension $n$ acts on, is called the \emph{representation space}. For $v \in V$, we define a \emph{group transformation} acting on it by
+		\[
+			v \xrightarrow{g} v^g = D(g) v.
+		\]
+		
+	\end{defi}
+
+	\begin{nt}
+		Thus (\ref{eq:2.2.1}) corresponds to a change of basis of $V$.
+	\end{nt}
+
+	\begin{defi}
+		A representation is \emph{reducible} if there exists a subspace $U \subset V, U \neq V$ such that
+		\[
+			D(g) u \in U, \quad \forall u \in U.
+		\]
+		
+		Otherwise it is an \emph{irreducible representation}, often called `\emph{irrep}'.
+	\end{defi}
+
+	For a reducible representation, we may define a representation of lower dimension by restricting to a invariant subspace. For example, with a suitable choice of basis 
+	\[
+		D(g) = \mqty(\hat{D}(g) & B(g)\\ 0 & C(g)), \quad \text{for } u = \mqty(\hat{u}\\0)
+	\]
+	where $\hat{D}(g)$ form a representation of $G$.
+
+	\begin{defi}
+		For the decomposition above, if $B(g) = 0, \forall g$, the representation is \emph{completely reducible}.
+	\end{defi}
+
+	\begin{cor}
+		For a completely reducible representation, the representation space $V$ decomposes into a direct sum of invariant spaces $U_r$ which are not further reducible.
+
+		Hence, there exists a matrix $S$ such that
+		\[
+			S D(g) S^{-1} = \mqty(\dmat{D_1(g), D_2(g), \ddots, D_k(g)})
+		\]
+		where $D_r(g)$ are irreps, and 
+		\[
+			V = \bigoplus_{r=1}^k U_r.
+		\]
+	\end{cor}
+
+	Writing $R$ for representation given by matrices $D(g)$ and $R_s$ for irrep matrices $D_s(g)$, this is written as 
+	\[
+		R = R_1 \oplus \cdots \oplus R_k
+	\]
+	
+	A particular $R_s$ may appear more than once. A 1-dimensional trivial irrep is given by $D_0(g) = 1, \forall g \in G$.
+	
+	\begin{lem}[Schur's lemmas]
+		If $D_1(g)$ and $D_2(g)$ are two irreps, then
+		\begin{enumerate}
+			\item $S D_1 (g) = D_2(g) S, \forall g \quad \Rightarrow\quad D_1 (g)$ is equivalent to $D_2(g)$ or $S=0$;
+			\item $S D_1(g) = D_1(g) S, \forall g \quad \Rightarrow \quad S \propto I$. 
+		\end{enumerate}
+	\end{lem}
+
+	For quantum applications, we are usually interested in \emph{unitary representations}, where
+	\[
+		D(g)^\dagger = D(g^{-1}) = D(g)^{-1}.
+	\]
+	
+	For such a representation, the usual scalar product on $V$ is invariant, since
+	\[
+		v_1^\dagger v_2 = (v_1^g)^\dagger v_2^g, \quad v_1, v_2 \in V.
+	\]
+	 
+	\begin{defi}
+		For any representation $R$, the \emph{character} is defined by
+		\[
+			\chi_R (g) = \tr_R (D ^{(R)}(g)).
+		\]
+	\end{defi}
+
+	\begin{cor}
+		Matrix traces are unchanged by cyclic permutations, so
+		\[
+			\chi_R (g' g g'^{-1}) = \chi_R(g).
+		\]
+
+		Therefore, the character depends on the conjugacy class of each element. Thus
+		\[
+			\chi(g_i) = \chi(\mathcal{C}_r)
+		\]
+		for any $g_i \in \mathcal{C}_r$. For $n _{\text{char}}$ different conjugacy classes in $G$, $r = 1, \cdots, n _{\text{char}}$.
+
+		The character is also unchanged for equivalent representations as 
+		\[
+			D'(g) = S D(g) S^{-1}, \quad \forall g \in G.
+		\]
+	\end{cor}
+	
+	\begin{defi}
+		If $V_1, V_2$ are representation spaces for representations $R_1, R_2$ given by matrices $D_1(g), D_2(g)$ for a group $G$, we define a \emph{tensor product representation} $R_1 \otimes R_2$ in terms of $D_1(g) \otimes D_2(g)$ acting on the tensor product space $V_1 \otimes V_2$ where
+		\[
+			D(g) v = \sum _{r,s} a _{rs} D_1(g) v _{1,r} D_2(g) v _{2,s}
+		\]
+		with $D(g)\in R_1 \otimes R_2$, $v \in V_1 \otimes V_2$ and $v _{1,r}$ the $r$-th component of the vector $v_1$, etc.
+	\end{defi}
+
+	The dimension of tensor product space is $\dim V_1 \times \dim V_2$.
+
+	\begin{prop}
+		In general, the tensor product of two representations $R_1 \otimes R_2$ is reducible and can be decomposed into irreps
+		\begin{equation}
+			R_r \otimes R_s \simeq R_s \otimes R_r \simeq \bigoplus_t n _{rs,t} R_t
+			\label{eq:2.2.2}
+		\end{equation}
+		where $n _{rs,t} = 0,1,2,\cdots$.
+
+		Even though for non-finite groups there exists infinitely many irreps, the direct sum is still finite dimensional.
+	\end{prop}
 \end{document}
