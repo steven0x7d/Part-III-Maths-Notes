@@ -406,7 +406,7 @@
 	
 	Recall our general Euler-Lagrange equation (\ref{eq:ELgen}), it is a non-linear PDE. There won't be a general superposition principle. An exotic example is \emph{soliton}.
 	
-	\subsection{Maxwell's Theory: An Example of CFT}
+	\subsection{Maxwell's Theory: An Example of Classical FT}
 	In Maxwell's theory, the central idea we use is a 4-vector potential
 	\begin{equation*}
 		A^\mu (x) = A^\mu(t, \vb x) = (\phi , \vb A)
@@ -753,4 +753,229 @@
 		\end{equation}
 	\end{proof}
 	
+	\subsubsection{Application of NT: Translational Symmetry} \lecnr{5}
+
+	For a translation $x^\mu \to x^\mu + \varepsilon^\mu$ with small $\varepsilon$, we expand the field 
+	\[
+		\phi(x) \to \phi(x - \varepsilon) \approx \phi(x) - \varepsilon^\mu \partial_\mu \phi(x) + \mathcal{O}(\varepsilon^2).
+	\]
+	
+	Infinitesimally, we identify 
+	\[
+		\delta \phi(x) = - \varepsilon^\mu \partial_\mu \phi(x).
+	\]
+	
+	The Lagrangian itself is a scalar field, thus 
+	\[
+		\delta \mathcal{L}(x) = - \varepsilon^\mu \partial_\mu \mathcal{L}(x)
+	\]
+	as we mentioned before. Following the proof of Noether's theorem, we can construct 
+	\[
+		\delta \phi(x) = \varepsilon^\nu X_\nu (\phi) \quad \text{and} \quad \delta \mathcal{L} (x) = \varepsilon^\nu \partial_\mu F\indices{^\mu_\nu}(\phi)
+	\]
+	and identify
+	\[
+		X_\nu = \partial_\nu \phi \quad \text{and} \quad F\indices{^\mu_\nu} = \delta^\mu_\nu \mathcal{L}.
+	\]
+	
+	Noether's theorem implies we have a 4-parameter family of conserved currents, which can be expressed in terms of the \emph{energy-momentum tensor}
+	\begin{equation}
+		T\indices{^\mu_\nu} = (j^\mu)_\nu := \pdv{\mathcal{L}}{(\partial_\mu \phi)} \partial_\nu \phi - \delta^\mu_\nu \mathcal{L}
+		\label{eq:1.7.6}
+	\end{equation}
+	with conservation law
+	\[
+		\partial_\mu T\indices{^\mu_\nu} = 0
+	\]
+	for free index $\nu = 0,1,2,3$.
+
+	The corresponding conserved charges are the \emph{energy}
+	\[
+		E = \int _{\mathbb{R}^3} \dd[3]{\vb x} T ^{00}
+	\]
+	for $\nu = 0$, and \emph{3-momentum}
+	\[
+		(\vb P)^i = \int _{\mathbb{R}^3} \dd[3]{\vb x} T ^{0i}
+	\]
+	for $i = \nu = 1,2,3$.
+
+	We can combine these into a \emph{4-momentum} $P^\nu = (E, \vb P)$ and
+	\[
+		P^\nu = \int _{\mathbb{R}^3} \dd[3]{\vb x} T ^{0 \nu}.
+	\]
+	
+	\begin{ex}[Klein-Gordon theory]
+		K-G theory has Lagrangian
+		\[
+			\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{1}{2} m^2 \phi^2.
+		\]
+		
+		Using $\pdv{\mathcal{L}}{(\partial_\mu \phi)} = \partial^\mu \phi$, we have the energy-momentum tensor
+		\[
+			T ^{\mu \nu} = \partial^\mu \phi \partial^\nu \phi - \eta ^{\mu \nu} \mathcal{L} = \partial^\mu \phi \partial^\nu \phi - \frac{1}{2}\eta ^{\mu \nu} \left( \partial_\rho \phi \partial^\rho \phi -  m^2 \phi^2 \right)
+		\]
+		
+		Taking $\mu = \nu = 0$ we have the energy
+		\[
+			E = \int _{\mathbb{R}^3} \dd[3]{\vb x} \frac{1}{2} \left(\dot{\phi}^2 + \abs{\grad \phi}^2 +  m^2 \phi^2 \right)  \geq 0.
+		\]
+	\end{ex}
+
+	\begin{nt}
+		The above example gives a symmetric energy-momentum tensor (when two indices are all upstairs or downstairs). However, in general it may not be the case. One can add well-tuned total derivatives to make it symmetric.
+	\end{nt}
+
+	\subsection{Coupling to Gravity}
+
+	For a flat space, the metric is $g _{\mu \nu} = \eta _{\mu \nu}$. The action is
+	\[
+		S = \int _{\mathbb{R}^{3,1}} \dd[4]{x} \mathcal{L}(x)
+	\]
+	with Lagrangian
+	\[
+		\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - V(\phi).
+	\]
+	
+	In curved spacetime, we have a general metric $g _{\mu \nu} = g _{\mu \nu}(x)$. To describe the physics correctly, we need to change all partial derivatives into \emph{covariant derivatives}
+	\[
+		\partial_\mu \phi \to \nabla_\mu \phi.
+	\]
+	
+	The volume integral is generalised as $\dd[4]{x} \to \dd[4]{x} \sqrt{-g}$ with $g = \det g _{\mu \nu}$ so the action now becomes
+	\[
+		\tilde{S} = \int _{\mathcal{M}} \dd[4]{x} \sqrt{-g} \tilde{\mathcal{L}} (x)
+	\]
+	where the Lagrangian itself becomes
+	\[
+		\tilde{\mathcal{L}} = \frac{1}{2} g ^{\mu \nu}(x) \nabla_\mu \phi \nabla_\nu \phi - V(\phi).
+	\]
+
+	From \emph{General Relativity}, the energy-momentum tensor $T _{\mu \nu}$ appears on the right-hand side of Einstein equation
+	\[
+		R _{\mu \nu} - \frac{1}{2} g _{\mu \nu} R = 8 \pi G T _{\mu \nu},
+	\]
+	which is the equation of motion from the sum of Einstein-Hilbert action $S _{\text{EH}}$ and the matter action $\tilde{S}$
+	\[
+		S _{\text{EH}} + \tilde{S}= \frac{1}{16 \pi G} \int \dd[4]{x} \sqrt{-g} R + \int \dd[4]{x} \sqrt{-g} \tilde{\mathcal{L}} (x).
+	\]
+
+	In particular, for Minkowski space
+	\[
+		T _{\mu \nu}(x) = - \frac{2}{\sqrt{-g}} \pdv{(\sqrt{-g} \tilde{\mathcal{L}})}{g ^{\mu\nu}}\bigg|_{g_{\mu \nu} = \eta_{\mu \nu}},
+	\]
+	i.e.\ we can use the general matter-coupling theory and evaluate at Minkowski metric.
+
+	\newpage
+
+	\section{Canonical Quantisation}
+
+	\subsection{Hamiltonian Formulation}
+	
+	Recall in \emph{Quantum Mechanics}, we canonically quantised classical mechanics in its Hamiltonian formulation. To use such canonical quantisation, we need to reformulate our (classical) field theory in terms of \emph{Hamiltonian} first.
+
+	\subsubsection{Review of Hamiltonian Formulation}
+
+	Consider a non-relativistic particle (with unit mass, WLOG), moving in one dimension. It has position coordinate
+	\[
+		q = q(t)
+	\]
+	
+	If it is put in a potential $V = V(q)$, then easily its Lagrangian is
+	\[
+		L (q(t), \dot{q}(t)) = \frac{1}{2} \dot{q}^2 - V(q).
+	\]
+	
+	\begin{defi}
+		The \emph{momentum} $p$ \emph{conjugate to} $q$ is defined to be 
+		\begin{equation}
+			p := \pdv{L}{\dot{q}}.
+			\label{eq:2.1.1}
+		\end{equation}
+	\end{defi}
+
+	In this simple case, $p = \dot q$.
+	
+	\begin{defi}
+		We can define the \emph{Hamiltonian} $H$ by performing \emph{Legendre transform}
+		\begin{equation}
+			H := p \dot q - L(q,\dot q).
+			\label{eq:2.1.2}
+		\end{equation}
+	\end{defi}
+
+	In this case, we can eliminate $\dot q$ to give the Hamiltonian
+	\[
+		H = H(p,q) = \frac{1}{2} p^2 + V(q) = \text{total energy}.
+	\]
+	
+	Now consider the Hamiltonian mechanics for $N$ degrees of freedom. The Lagrangian now depends on $N$ coordinates and their time derivatives
+	\[
+		L = L \left( \{q_i(t)\}, \{\dot{q}_i(t)\} \right)
+	\]
+	for $i = 1,\cdots, N$.
+
+	Each coordinate $q_i$ has a conjugate momentum associated
+	\begin{equation}
+		p_i := \pdv{L}{\dot{q}_i}.
+		\label{eq:2.1.3}
+	\end{equation}
+	
+	\begin{defi}
+		The \emph{Poisson bracket} on functions $F = F(p,q)$ and $G = G(p,q)$ is defined as
+		\begin{equation}
+			\{F,G\} := \sum _{i = 1}^{N} \pdv{F}{q_i} \pdv{G}{p_i} - \pdv{F}{p_i} \pdv{G}{q_i}.
+			\label{eq:2.1.4}
+		\end{equation}
+	\end{defi}
+
+	\begin{nt}
+		The Poisson bracket acts like a commutator.
+	\end{nt}
+
+	(\ref{eq:2.1.4}) gives 
+	\begin{equation}
+		\{q_i, q_j\} = \{p_i, p_j\} = 0 \quad \text{and} \quad \{q_i, p_j\} = \delta _{ij}.
+		\label{eq:2.1.5}
+	\end{equation}
+
+	Now we generalise the Hamiltonian for $N$ degrees of freedom
+	\begin{equation*}
+		H = H(\{q_i\}, \{p_i\}) := \sum _{i=1} ^{N} p_i \dot{q}_i - L (\{q_i\}, \{\dot{q}_i\})
+	\end{equation*} 
+	
+	Eliminate the time derivatives $\dot{q}_i$ via equation (\ref{eq:2.1.3}) so that we have
+	\[
+		H = H(\{p_i\},\{q_i\}).
+	\]
+	
+	The initial state of the system (at $t=0$) is given by specifying the points
+	\[
+		q_i(0), \quad p_i(0), \quad i = 1, \cdots, N.
+	\]
+	in \emph{phase space} $\{(q_i,p_i)\}$.
+	
+	The time evolution of the system is generated by Hamiltonian. For any function $F(p,q)$ we have its time derivative satisfying
+
+	\begin{prop}
+		\[
+			\dot{F} = \{F,H\},
+		\]
+		known as the \emph{Hamilton's equation}.
+	\end{prop}
+	
+	In particular, if $F= p_i$ or $F = q_i$, we get the \emph{Hamilton's equations of motion}
+	\begin{align*}
+		\dot{q}_i & = \{q_i, H\} = \pdv{H}{p_i}\\
+		\dot{p}_i & = \{p_i, H\} = - \pdv{H}{q_i}.
+	\end{align*}
+
+	Suppose we have $F = Q(p,q)$ a conserved quantity, then we have 
+	\[
+		\dot{Q} = 0 \quad \Rightarrow \quad \{Q,H\} = 0.
+	\]
+	
+	
+	
+
+
 \end{document}
