@@ -1100,7 +1100,7 @@
 	The upshot is the following:
 
 	\begin{lem}
-		If $F$ is a local diffeomorphism at $p$, and $x_1, \cdots, x_n$ are local coordinates on $X$ about $p$, then there exists local coordinates $y_1, \cdots, y_n$ on $Y$ about $F(p)$ such that in terms of $\vb x$ and $\vb y$ the map $F$ is given by the identity map on $\mathbb{R}^n$. In other words $\vb \cpf F = \vb x$. Similarly, given coordinates $\vb y$ about $F(p)$ there exists coordinates $\vb x$ about $p$ such that $\vb y \cpf F = \vb x$.
+		If $F$ is a local diffeomorphism at $p$, and $x_1, \cdots, x_n$ are local coordinates on $X$ about $p$, then there exists local coordinates $y_1, \cdots, y_n$ on $Y$ about $F(p)$ such that in terms of $\vb x$ and $\vb y$ the map $F$ is given by the identity map on $\mathbb{R}^n$. In other words $\vb y \cpf F = \vb x$. Similarly, given coordinates $\vb y$ about $F(p)$ there exists coordinates $\vb x$ about $p$ such that $\vb y \cpf F = \vb x$.
 	\end{lem}
 	\begin{proof}
 		If $\varphi$ is the chart defining the coordinates $\vb x$ then take $\vb y$ to be the coordinates associated to the chart $\varphi \cpf \left( F \big|_U \right)^{-1}$ constructed just above. Similarly, if the $\vb y$ coordinates are associated to $\psi$ then take $\vb x$ to be the coordinates associated to $\psi \cpf F$. 
@@ -1111,7 +1111,7 @@
 	\begin{lem}
 		Suppose $F$ is an immersion at $p$ and $x_1, \cdots, x_n$ are local coordinates about $p$. Then there exists local coordinates $y_1, \cdots, y_m$ about $F(p)$ such that, in terms of $\vb x$ and $\vb y$, $F$ is given on a neighbourhood of $p$ by the inclusion
 		\[
-			\mathbb{R}^n = \mathbb{R}^n \oplus 0 \hookrightarrow \mathbb{R}^n \mathbb{R}^{m-n} = \mathbb{R}^m.
+			\mathbb{R}^n = \mathbb{R}^n \oplus 0 \hookrightarrow \mathbb{R}^n \oplus \mathbb{R}^{m-n} = \mathbb{R}^m.
 		\]
 		In other words $\vb y \cpf F = (x_1, \cdots, x_n, 0, \cdots, 0)$.
 
@@ -1275,4 +1275,300 @@
 		Sard's theorem guarantees the existence of regular values, but \emph{not} regular points. For example, if $X$ and $Y$ are non-empty and of positive dimension, and the map $F: X \to Y$ is constant, then every $p$ in $X$ is a critical point. But every $q$ in $Y \backslash F(X)$ is vacuously a regular value. Geometrically, although the set $C$ of critical points in $X$ may be very large, its image in $Y$ is small because $DF$ fails to be surjective at these points.
 	\end{rmk}
 	\needfig{26}
+
+	\subsection{Embeddings} \recnr{10}
+
+	Inclusions of submanifolds are smooth immersions that are homeomorphisms onto their images.
+
+	Fix an $n$-manifold $X$ and a codimension-$k$ submanifold $Z \subset X$. Let $\iota : Z \to X$ be the inclusion. First we prove its basic properties.
+
+	\begin{lem}
+		The map $\iota$ is a smooth immersion which is a homeomorphism onto its image (equipped with the subspace topology).
+		\label{lem:1.91}
+	\end{lem}
+
+	\begin{proof}
+		About each $p \in Z$ we have local coordinates $\vb x$ on $X$ such that $Z$ is $x_1 = \cdots = x_k = 0$ and $x _{k+1}, \cdots, x_n$ are coordinates on $Z$. In these coordinates $\iota$ is $(x _{k+1}, \cdots, x_n) \mapsto (0,\cdots,0,x _{k+1},\cdots,x_n)$, so it's a smooth immersion. It's automatically a homeomorphism onto its image because $Z$ was given the subspace topology.
+	\end{proof}
+
+	\begin{lem}
+		Post-composition with $\iota$ gives a bijection
+		\[
+			\{\text{smooth maps to }Z\} \underset{\iota \cpf -}{\hme} \{\text{smooth maps to $X$ with image contained in $Z$}\}.
+		\]
+		\label{lem:1.92}
+	\end{lem}
+	\begin{proof}
+		Ignoring smoothness, the map $\iota \cpf -$ induces a bijection.
+		\[
+			\{\text{all maps to }Z\} \hme \{\text{all maps to $X$ with image contained in $Z$}\}
+		\]
+		since $\iota$ is injective. It preserves smoothness since $\iota$ is smooth.
+
+		Now suppose $Y$ is a manifold and $F : Y \to Z$ is a map such that $\iota \cpf F$ is smooth. We need to show $F$ is smooth. So take coordinates $\vb x$ about an arbitrary point $p$ in the image of $F$ such that locally $Z$ is $\{x_1 = \cdots = x_k = 0\}$. Letting $\vb x' = (x _{k+1}, \cdots, x_n)$, we are given that $\vb x \cpf F$ is smooth and need to show that $\vb x' \cpf F$ is smooth. This follows immediately from the fact that the map $\vb x \mapsto \vb x'$ is smooth.
+	\end{proof}
+
+	We'll use this to formulate the converse to Lemma \ref{lem:1.91}.
+
+	\begin{prop}
+		Suppose $Y$ is an $m$-manifold and $F : Y \to X$ is a smooth immersion which is a homeomorphism onto its image. Then the image of $F$ is a submanifold $Z$ of $X$ of codimension $k := n - m$ and the smooth map $\bar{F} : Y \to Z$ induced by $F$ via Lemma \ref{lem:1.92} is a diffeomorphism.
+	\end{prop}
+	\begin{proof}
+		First assume that the image of $F$ is a codimension-$(n-m)$ submanifold $Z$, and let $\iota : Z \hookrightarrow X$ be the inclusion. We have $\iota \cpf \bar{F} = F$, which we are assuming is an immersion. By the chain rule $\bar F$ is then also an immersion, and so by dimension it is a local diffeomorphism. Hence $\bar F$ locally has a smooth inverse, and since it's bijective $Y \to Z$ these local inverses glue together to give a global smooth inverse. Hence $\bar F$ is a diffeomorphism.
+
+		It remains to show that $F(Y) \subset X$ is a codimension-$(n-m)$ submanifold, so take $q \in Y$ and let $p = F(q)$. Since $F$ is an immersion at $q$ there exist local coordinates $\vb y$ on a neighbourhood $S$ of $q$ in $Y$ and $\vb x$ on a neighbourhood $U$ of $p$ in $X$ such that $\vb x \cpf F = (\vb y, 0, \cdots, 0)$. Suppose we can find an open neighbourhood $U'$ of $p$ in $U$ such that $F(Y)\cap U' = F(S)\cap U'$. Then $\vb x$ defines coordinates on $U'$ and we have
+		\[
+			F(Y)\cap U' = \{x _{m+1} = \cdots = x_n = 0\}\cap U',
+		\]
+		which is what we want (i.e.\ $F(Y)$ is locally given by the vanishing of $n-m$ local coordinate functions). So it suffices to find such a $U'$.
+		
+		Since $F$ is a homeomorphism onto its image, the set $F(S)$ is open in $F(Y)$. Hence there exists an open neighbourhood $W$ of $p$ in $X$ such that $F(S)= F(Y)\cap W$. Taking $U' = W \cap U$ gives the result: we have
+		\[
+			F(Y)\cap U' = (F(Y)\cap W)\cap U = (F(S)\cap W)\cap U = F(S)\cap U'.
+		\]
+	\end{proof}
+
+	\begin{prop}
+		The stereographic projection definition of $S^n$ is diffeomorphic to the definition as a submanifold of $\mathbb{R}^{n+1}$.
+	\end{prop}
+
+	\begin{proof}
+		Take the stereographic projection definition of $S^n$, and let $F: S^n \to \mathbb{R}^{n+1}$ be the inclusion map. This is a homeomorphism onto the unit sphere (since $S^n$ was given the subspace topology), so we are left to show it's a smooth immersion. To do this we just need to show that $F \cpf \varphi _{\pm}^{-1}$ is a smooth immersion $\mathbb{R}^n \to \mathbb{R}^{n+1}$, where
+		\[
+			\varphi_\pm : (x_0, \cdots, x_n) \in S^n \backslash \{(\pm 1, 0, \cdots, 0)\} \mapsto \frac{1}{1 \mp x_0} (x_1, \cdots, x_n)\in \mathbb{R}^n
+		\]
+		are the two charts. This can be checked using the explicit expression
+		\[
+			F \cpf \varphi_\pm^{-1} (\vb y) = \frac{1}{\norm{\vb y}^2 + 1} \left( \pm (\norm{\vb y}^2 - 1),2 \vb y \right).
+		\]
+	\end{proof}
+
+	\begin{defi}
+		An \emph{embedding} is a smooth immersion which is a homeomorphism onto its image. We've shown that submanifolds are precisely the images of embeddings. An \emph{immersed submanifold} is the image of an immersion, we won't use this notion.
+	\end{defi}
+
+	Our definition of manifold seems to allow more general objects than submanifolds of $\mathbb{R}^N$, but the following remarkable result holds.
+
+	\begin{thm}[Whitney embedding theorem]
+		Any $n$-manifold $X$ can be realised as a submanifold of $\mathbb{R}^{2n}$.
+	\end{thm}
+
+	\begin{proof}
+		The weaker statement in which $2n$ is replaced by $2n + 1$ is proved in Lee's book:\ Theorem 6.15 in the second edition. The full statement appears in Whitney's paper \emph{The self-intersections of a smooth $n$-manifold in $2n$-space}, published in \emph{Ann.\ of Math.}, 1944.
+	\end{proof}
+
+
+	\subsection{Transversality} \recnr{11}
+
+	The intersection of two submanifolds is a submanifold if they are transverse.
+
+	Fix an $n$-manifold $X$, and submanifolds $Z_1$ and $Z_2$ of codimensions $k_1$ and $k_2$.
+
+	\begin{itemize}
+		\item Locally each $Z_i$ is cut out by $k_i$ equations;
+		\item So roughly one expects that $Z_1 \cap Z_2$ is cut out by $k_1 + k_2$ equations and hence is a submanifold of $X$ of codimension $k_1 + k_2$;
+		\item For this to work the equations must be suitably independent.
+	\end{itemize}
+
+	\begin{ex}
+		If the equations are the same, so $Z_1 = Z_2$, then $Z_1 \cap Z_2$ is a submanifold but of codimension $k_1 = k_2$.
+	\end{ex}
+
+	\begin{ex}
+		In general $Z_1 \cap Z_2$ isn't even a submanifold, e.g.\ if
+		\[
+			Z_1 = \{z=0\} \subset \mathbb{R}^3 \quad \text{and} \quad Z_2 = \{z = y^2 - x^2\}.
+		\]
+		\needfig{27}
+	\end{ex}
+
+	The easiest way to ensure that the equations are independent is to ask that their linearisations are linearly independent, and this is precisely what transversality does.
+
+	\begin{itemize}
+		\item Near a point $p \in Z_1 \cap Z_2$ the linearisation of $X$ is $T_p X$;
+		\item The linearisation of $Z_i$ is the subspace $T_p Z_i \subset T_p X$;
+		\item The linearisation of the $k_i$ equations cutting out $Z_i$ form a basis for the space of linear equations that cut out $T_p Z_i$ in $T_p X$;
+		\item In other words, they form a basis for the annihilator $(T_p Z_i)^\circ$ of $T_p Z_i$, inside the dual space $(T_p X)^{\vee}$;
+		\item The condition that the linear equations for $Z_1$ and $Z_2$ are independent then says that $(T_p Z_1)^\circ \cap (T_p Z_2)^\circ = 0$, which is equivalent to $T_p Z_1 + T_p Z_2 = T_p X$.  
+	\end{itemize}
+	\begin{defi}
+		The submanifold $Z_1$ and $Z_2$ in $X$ are \emph{transverse}, denoted $Z_1 \pitchfork Z_2$, if for all $p \in Z_1 \cap Z_2$ we have $T_p Z_1 + T_p Z_2 = T_p X$.
+	\end{defi}
+
+	\begin{ex}
+		If $Z_1$ and $Z_2$ are disjoint then they're vacuously transverse. If $k_1 + k_2 > n$ then $Z_1 \pitchfork Z_2$ if and only if they're disjoint.
+	\end{ex}
+
+	\begin{ex}
+		Affine subspaces of $\mathbb{R}^n$ are transverse iff their intersection is an affine subspace of the expected dimension. E.g.\ in $\mathbb{R}^3$
+		\begin{itemize}
+			\item Two affine lines are transverse iff they are disjoint;
+			\item An affine line is transverse to a plane iff it's not contained in it;
+			\item A point is transverse to $\mathbb{R}^3$ but is only transverse to a proper subspace if they're disjoint.
+		\end{itemize}
+	\end{ex}
+	\begin{rmk}
+		Transversality should be viewed as the `generic' way in which submanifolds meet, meaning that any two submanifolds can be made transverse by a small perturbation. (C.f. Sard.)
+	\end{rmk}
+
+	The point of the definition was so that the following result holds.
+
+	\begin{prop}
+		If $Z_1$ and $Z_2$ are transverse then $Z_1 \cap Z_2$ is a submanifold of $X$ of codimension $k_1 + k_2$. It is also a codimension-$k_2$ submanifold of $Z_1$ and a codimension-$k_1$ submanifold of $Z_2$.
+		\label{prop:1.103}
+	\end{prop}
+
+	\begin{ex}
+		The line $y = c$ in $\mathbb{R}^2$ is transverse to the unit circle $S^1$ iff $c \neq \pm 1$. Even in these non-transverse cases the intersection is a 0-manifold. Note that as $c$ varies the number of points in $\{y=c\}\cap S^1$ is locally constant but jumps at $c = \pm 1$.
+	\end{ex}
+
+	We'll prove Proposition \ref{prop:1.103} by showing that if $Z_1$ and $Z_2$ meet transversely at $p$ (meaning $p$ lies in $Z_1 \cap Z_2$ and $T_p Z_1 + T_p Z_2 = T_p X$) then there exist nice local coordinates about $p$.
+
+	\begin{lem}
+		If $Z_1$ and $Z_2$ meet transversely at $p$ then there exist local coordinates $x_1, \cdots, x_n$ about $p$ in which $Z_1$ is given by $x_1 = \cdots = x _{k_1} = 0$ and $Z_2$ is given by $x _{k_1 + 1} = \cdots = x _{k_1 + k_2} = 0$.
+	\end{lem}
+
+	\begin{proof}
+		Let $\vb a$ and $\vb b$ be local coordinates on a neighbourhood $U$ of $p$ in which $Z_1$ is $a_1 = \cdots = a _{k_1} = 0$ and $Z_2$ is $b_1 = \cdots = b _{k_2} = 0$. Consider
+		\[
+			F: U \to \mathbb{R} ^{k_1 + k_2} \quad \text{given by} \quad (a_1, \cdots, a _{k_1}, b_1, \cdots, b _{k_2}).
+		\]
+		
+		Transversality says precisely that $F$ is a submersion at $p$. We can therefore find local coordinates $\vb x$, defined on some open neighbourhood $U'$ of $p$ in $U$, such that on this neighbourhood
+		\[
+			F(x_1, \cdots, x_n) = (x_1, \cdots, x _{k_1 + k_2}).
+		\]
+		
+		Summary:
+		\[
+			F = (a_1,\cdots, a _{k_1}, b_1 \cdots, b _{k_2}) \quad \text{on} \quad U
+		\]
+		\[
+			F = (x_1, \cdots, x _{k_1 + k_2}) \quad \text{on} \quad U' \subset U.
+		\]
+		
+		We conclude that on $U'$
+		\[
+			x_1 = a_1, \cdots, x _{k_1} = a _{k_1} \quad \text{and} \quad x _{k_1 + 1} = b_1, \cdots, x _{k_1 + k_2} = b _{k_2}.
+		\]
+		So $Z_1 = \{x_1 = \cdots = x _{k_1} = 0\}$ and $Z_2 = \{x _{k_1 + 1} = \cdots x _{k_1 + k_2} = 0\}$ on $U'$, as we wanted.
+	\end{proof}
+
+	\begin{ex}
+		Given smooth functions $f$ and $g : \mathbb{R} \to \mathbb{R}$, consider the hypersurfaces (codimension-1 submanifolds) in $\mathbb{R}^3$ defined by
+		\[
+			Z_1 := \{x = f(z)\} \quad \text{and} \quad Z_2 := \{y = g(z)\}. 
+		\]
+		
+		These are transverse since for all $p \in Z_1 \cap Z_2$ we have
+		\[
+			T_p Z_1 = \expval{\partial_z + f'(z)\partial_x, \partial_y} \quad \text{and} \quad T_p Z_2 = \expval{\partial_z + g'(z)\partial_y, \partial_x}.
+		\]
+		
+		So $Z_1 \cap Z_2$ is a codimension-2 submanifold, and the preceding lemma says that we can choose local coordinates $x_1, x_2, x_3$ about $p$ such that $Z_1$ is given by $x_1 = 0$ and $Z_2$ by $x_2 = 0$. In this example we can actually write down such coordinates globally, on the whole of $\mathbb{R}^3$: take $x_1 = x - f(z), x_2 = y - g(z)$ and $x_3 = z$.
+	\end{ex}
+
+	If $\iota_1$ is the inclusion of $Z_1$ then $Z_1 \pitchfork Z_2$ iff for all $p$ in $\iota_1^{-1}(Z_2)$ we have $\im(D_p \iota_1) + T _{\iota_1(p)}Z_2 = T _{\iota_1(p)}X$. In this case we know that $\iota_1^{-1}(Z_2)$ is a codimension-$k_2$ submanifold of $Z_1$. This generalises as follows.
+	
+	\begin{defi}
+		For a codimension-$k$ submanifold $Z$ of $X$, a smooth map $F: W \to X$ is \emph{transverse} to $Z$ if for all $p$ in $F^{-1}(Z)$ we have $\im(D_p F) + T _{F(p)}Z = T _{F(p)} X$. We write $F \pitchfork Z$. 
+	\end{defi}
+
+	\begin{prop}
+		If $F : W \to X$ is transverse to $Z$ then $F^{-1}(Z)$ is a codimension-$k$ submanifold of $W$.
+		\label{prop:1.108}
+	\end{prop}
+
+	\begin{rmk}
+		A smooth map is transverse to a point if and only if that point is a regular value. So Proposition \ref{prop:1.108} generalises the fact that the pre-image of a regular value is a submanifold.
+	\end{rmk}
+
+	\begin{proof}[Proof of Proposition \ref{prop:1.108}]
+		Let $\Gamma_F$ be the graph $\{(w,F(w)) \in W \times X\}$ of $F$, which is a submanifold of $W \times X$. The map $F$ is transverse to $Z$ if and only if $\Gamma_F$ is transverse to $W \times Z$. Assuming this holds, we know that
+		\[
+			\Gamma_F \cap (W \times Z)
+		\]
+		is a codimension-$k$ submanifold of $\Gamma_F$. But $\Gamma_F$ is diffeomorphic to $W$ via $\text{pr}_1 : (w, F(w))\mapsto w$, so $\text{pr}_1(\Gamma_F \cap (W\times Z))$ is a codimension-$k$ submanifold of $W$, and this set is exactly $F^{-1}(Z)$. 
+	\end{proof}
+
+	\begin{ex}
+		Let $V_1$ and $V_2$ be the submanifolds of $\CP{2}$ defined by
+		\[
+			V_1 = \{x_0 + x_1 + x_2 = 0\} \quad \text{and} \quad V_2 = \{x_0^2 + x_1^2 + x_2^2 = 0\}.
+		\]
+		(Note that the condition s $x_0 + x_1 + x_2 = 0$ and $x_0^2 + x_1^2 + x_2^2 = 0$ are unchanged by rescaling the $x_i$, since they are homogeneous, i.e.\ all terms have the same degree in the $x_i$. This means they do not depend on the specific homogeneous coordinates chosen to represent the point $[x_0 : \cdots : x_n]$.)
+
+		The Hopf map $H : S^5 \to \CP{2}$ is a submersion so is transverse to any submanifold. Thus $H^{-1}(V_1)$ and $H^{-1}(V_2)$ are submanifolds of $S^5$. On Example Sheet 1 you'll show that $V_1 \cong V_2$ but that $H^{-1}(V_1) \cong S^3$ and $H^{-1}(V_2)\cong \RP{3}$.
+	\end{ex}
+
+	\subsection{Fibre Products} \recnr{12}
+
+	The notion of transversality can be extended to pairs of maps, and allows us to define the fibre product.
+
+	Fix manifolds $X_1, X_2$ and $Y$, and smooth maps $F_i : X_i \to Y$.
+
+	\begin{defi}
+		The maps $F_1$ and $F_2$ are \emph{transverse}, denoted $F_1 \pitchfork F_2$, if for all $(p_1,p_2)\in X_1 \times X_2$ with $F_1(p_1)=F_2(p_2)$ we have
+		\[
+			\im(D _{p_1} F_1) + \im(D _{p_2} F_2) = T _{F_i(p_i)} Y.
+		\]
+	\end{defi}
+
+	\begin{prop}
+		If $F_1$ and $F_2$ are transverse then
+		\[
+			X_1 \times_Y X_2 := \{(p_1,p_2)\in X_1 \times X_2 : F_1(p_1) = F_2(p_2)\}
+		\]
+		is a submanifold of $X_1 \times X_2$ of dimension $\dim X_1 + \dim X_2 - \dim Y$.
+	\end{prop}
+
+	\begin{proof}
+		The maps are transverse if and only if $(F_1,F_2): X_1 \times X_2 \to Y \times Y$ is transverse to the diagonal $\Delta = \{(y,y)\} \subset Y \times Y$. If this holds then $X_1 \times_Y X_2 = (F_1,F_2)^{-1}(\Delta)$ is a submanifold of $X_1 \times X_2$. 
+	\end{proof}
+
+	Alternatively, consider the graphs $\Gamma _{F_1 \cpf \text{pr}_1}$ and $\Gamma _{F_2 \cpf \text{pr}_2}$ of
+	\[
+		F_i \cpf \text{pr}_i : X_1 \times X_2 \to Y.
+	\]
+	We have $F_1 \pitchfork F_2$ iff the graphs are transverse, and then $X_1 \times_Y X_2$ can be equated with their intersection.
+
+	\begin{defi}
+		The manifold $X_1 \times_Y X_2$ is called the \emph{fibre product of $X_1$ and $X_2$ over $Y$}. Of course, it depends on the maps $F_1$ and $F_2$ even though they are not explicitly notated.
+	\end{defi}
+
+	\begin{ex}
+		If $Y$ is a point, so $F_i$ is the unique map $X_i \to Y$, then transversality is automatic and $X_1 \times_Y X_2$ is the usual product $X_1 \times X_2$.
+	\end{ex}
+
+	\begin{ex}
+		More generally, if $F_2$ is a submersion then it is transverse to any smooth map $F_1$. In this case $X_1 \times_Y X_2$ is called the \emph{pullback of $F_2$ along $F_1$}.
+	\end{ex}
+
+	\begin{ex}
+		If $F_1$ and $F_2$ are inclusions of submanifolds $X_i \subset Y$ then $F_1 \pitchfork F_2$ iff $X_1 \pitchfork X_2$, and in this case $X_1 \times_Y X_2$ is naturally identified with $X_1 \cap X_2$.
+	\end{ex}
+
+	This construction satisfies the following universal property.
+
+	\begin{prop}
+		Assume $F_1$ and $F_2$ are transverse. Then:
+		\begin{enumerate}
+			\item The $\mathrm{pr}_i : X_1 \times X_2 \to X_i$ induce smooth maps $\mathrm{\overline{pr}}_i : X_1 \times_Y X_2 \to X_i$ satisfying $F_1 \cpf \mathrm{\overline{pr}}_1 = F_2 \cpf \mathrm{\overline{pr}}_2$. 
+			\item Given a manifold $W$ and smooth maps $G_i: W \to X_i$ satisfying $F_1 \cpf G_1 = F_2 \cpf G_2$ there is a unique smooth map $G : W \to X_1 \times_Y X_2$ satisfying $\mathrm{\overline{pr}}_i \cpf G = G_i$.
+			\begin{center}
+				\begin{tikzcd}
+					 & & X_1 \arrow[dr, "F_1"] &\\
+					W \arrow[urr,out=30,in=180, "G_1"] \arrow[r,dashed, "G"] \arrow[drr,out=330,in=180 , "G_2"'] & X_1 \times_Y X_2 \arrow[ur, "\mathrm{\overline{pr}}_1"'] \arrow[dr, "\mathrm{\overline{pr}}_2"] & & Y\\
+					& & X_2 \arrow[ur, "F_2"'] & 
+				\end{tikzcd}
+			\end{center} 
+		\end{enumerate}
+	\end{prop}
+	\begin{proof}
+		\ 
+		\begin{enumerate}
+			\item Let $\iota : X_1 \times_Y X_2 \hookrightarrow X_1 \times X_2$ be the inclusion. Then $\mathrm{\overline{pr}}_i = \mathrm{pr}_i \cpf \iota$, so is smooth. The fibre product is defined so that $F_1 \cpf \mathrm{\overline{pr}}_1 = F_2 \cpf \mathrm{\overline{pr}}_2$.
+			\item Use the fact that post-composition with $\iota$ gives a bijection from the set of smooth maps $W \to X_1 \times_Y X_2$ to the set of smooth maps $W \to X_1 \times X_2$ with image contained in $X_1 \times_Y X_2$.
+		\end{enumerate}
+	\end{proof}
 \end{document}
