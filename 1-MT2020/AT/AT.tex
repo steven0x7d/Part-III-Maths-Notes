@@ -1317,7 +1317,7 @@
 			P _{n-1} \cdot \partial_n ^{C_*} \pm \partial _{n+1}^{D_*} \cdot P_n = f_n - g_n.
 		\]
 
-		This can be shown by a commutative diagram:
+		This can be shown by a diagram:
 		\begin{center}
 			\begin{tikzcd}
 				\cdots \rar &[-1em] C _{n+1} \arrow[d, "f_{n+1} - g_{n+1}"'] \arrow[r, "\partial"] & C _{n} \arrow[d, "f_{n} - g_{n}"] \arrow[r, "\partial"] \arrow[dl,blue, "P_{n}"] & C _{n-1} \arrow[d, "f_{n-1} - g_{n-1}"] \arrow[r, ""] \arrow[dl,blue, "P_{n-1}"] &[-1em] \cdots\\[2em]
@@ -1335,7 +1335,7 @@
 	\end{lem}
 
 	\begin{proof}
-		Since $f_*$ and $g_*$ are chain homotopic, i.e.\ the following diagram commute
+		Since $f_*$ and $g_*$ are chain homotopic
 		\begin{center}
 			\begin{tikzcd}
 				C _{n+1} \arrow[d,dashed] \arrow[r,dashed] & C _{n} \arrow[d, "f_{n} - g_{n}"] \arrow[r, "\partial"] \arrow[dl,blue, "P_{n}"] & C _{n-1} \arrow[d,dashed] \arrow[dl,blue, "P_{n-1}"]\\
@@ -1439,14 +1439,13 @@
 	\end{proof}
 
 	\begin{rmk}
-		If $C^*, D^*$ are cochain complexes, $f^* \simeq g^*: C^* \to D^*$ are cochain homotopic if there exists $P^i : C^i \to D ^{i-1}$ such that the following diagram commute
+		If $C^*, D^*$ are cochain complexes, $f^* \simeq g^*: C^* \to D^*$ are cochain homotopic if there exists $P^i : C^i \to D ^{i-1}$ such that $\partial^* P^i \pm P^i \partial^* = f^i - g^i$:
 		\begin{center}
 			\begin{tikzcd}
 				\cdots \rar &[-1em] C ^{i-1} \arrow[d, "f^{i-1} - g^{i-1}"'] \arrow[r, "\partial^*"] & C^i \arrow[d, "f^{i} - g^{i}"] \arrow[r, "\partial^*"] \arrow[dl,blue, "P^{i}"] & C^{i+1} \arrow[d, "f^{i+1} - g^{i+1}"] \arrow[r, ""] \arrow[dl,blue, "P^{i+1}"] &[-1em] \cdots\\[2em]
 				\cdots \rar & D^{i-1} \arrow[r, "\partial^*"'] & D^i \arrow[r, "\partial^*"'] & D^{i+1} \rar & \cdots
 			\end{tikzcd}
 		\end{center}
-		i.e.\ $\partial^* P \pm P \partial^* = f^* - g^*$.
 		
 		And this should induce 
 		\[
