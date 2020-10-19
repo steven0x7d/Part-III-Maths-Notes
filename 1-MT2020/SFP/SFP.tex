@@ -827,4 +827,196 @@
 
 		Even though for non-finite groups there exists infinitely many irreps, the direct sum is still finite dimensional.
 	\end{prop}
+
+	\lecnr{5}
+
+	\begin{defi}
+		The \emph{trace for product representation} is defined as
+		\[
+			\tr _{V_r \otimes V_s} \left( D ^{(R_r)}(g) \otimes D ^{(R_s)}(g) \right):= \tr _{V_r} \left( D ^{(R_r)}(g) \right) \tr _{V_s} \left( D ^{(R_s)}(g) \right).
+		\]
+	\end{defi}
+	\begin{cor}
+		(\ref{eq:2.2.2}) suggests
+		\[
+			\chi _{R_r} (g) \chi _{R_s} (g) = \sum_t n _{rs,t} \chi _{R_t} (g).
+		\]
+	\end{cor}
+
+	(\ref{eq:2.2.2}) is equivalent to the decomposition of the associated representation spaces, with the same expansion for $V_r \otimes V_s$ into a direct sum of irreducible spaces $V_t$.
+
+	\begin{prop}
+		If $R_r \otimes R_s$ contains the singlet representations, it's possible to construct a scalar product $\expval{v,v'}$ between vector $v \in V_r, v' \in V_s$, which is invariant under the group transformation rule, i.e.\
+	\[
+		\expval{D ^{(R_r)}(g)v, D ^{(R_s)}(g)v'} = \expval{v,v'}.
+	\]
+	\end{prop}
+
+	\subsection{Symmetries and Quantum Mechanics}
+
+	In Quantum Mechanics, the state vector $\ket{\psi}$ lives in Hilbert space $\mathcal{H}$. Observables are probability $\abs{\braket{\phi}{\psi}}^2$: finding $\ket{\phi}$ after measurement of a state prepared in $\ket{\psi}$.
+
+	\begin{defi}
+		A \emph{symmetry transformation} $\ket \psi \to \ket{\psi'}$ is such that, 
+		\[
+			\abs{\braket{\phi}{\psi}}^2 = \abs{\braket{\phi'}{\psi'}}^2 \quad \forall \ket{\phi}, \ket{\psi} \in \mathcal{H}.
+		\]
+		
+		The phase of each state is arbitrary. 
+	\end{defi}
+	
+	Wigner used this to prove that there exists an operator $U$ such that
+	\[
+		U \ket{\psi} = \ket{\psi'}
+	\]
+	and $U$ is either \emph{linear} or \emph{anti-linear}, i.e.\ 
+	\begin{align*}
+		\text{linear} \quad & \Rightarrow \quad \braket{\phi'}{\psi'} = \braket{\phi}{\psi} \quad \text{and} \quad U(a \ket{\psi_1} + b \ket{\psi_2}) = a U \ket{\psi_1} + b U \ket{\psi_2};\\
+		\text{anti-linear} \quad & \Rightarrow \quad \braket{\phi'}{\psi'} = \braket{\psi}{\phi} \quad \text{and} \quad U(a \ket{\psi_1} + b \ket{\psi_2}) = a^* U \ket{\psi_1} + b^* U \ket{\psi_2}.
+	\end{align*}
+	
+	In physics, the second cae is only relevant for $T$-reversal symmetries, so for now, we'll assume $U$ linear.
+
+	For a symmetry group $G = \{g\}$, we must have unitary operators $U(g)$ where $U(e)=1$, $U(g^{-1})=U(g)^{-1}$. The product rule is 
+	\[
+		U(g_i)U(g_j)=e ^{\mathrm{i} \gamma(g_i,g_j)}U(g_i g_j)
+	\]
+	where a phase $\gamma$ is allowed because of phase freedom of states. But it's mostly irrelevant for us. Take $\gamma = 0$ for now.
+
+	If $G$ is a symmetry for a physical system with Hamiltonian $H$, we require
+	\[
+		U(g_i)H U(g_i)^{-1} = H, \quad \forall g_i \in G.
+	\]
+	
+	$H \ket{\psi_r} = E \ket{\psi_r}$ for $r = 1, \cdots, n$, then 
+	\[
+		H \left( U(g)\ket{\psi_r} \right) = E \left( U(g)\ket{\psi_r} \right).
+	\]
+	
+	Hence,
+	\[
+		U(g)\ket{\psi_r} = \sum _{s=1}^n \ket{\psi_s}D _{sr}(g)
+	\]
+	where $D _{sr}(g)$ matrices form an $n$-dimensional representation of $G$. For physical cases, these are irreps.
+
+	\newpage
+
+	\section{Rotations, $\SO(3)$ and $\SU(2)$}
+
+	Many physical systems have a symmetry with respect to 3-dimensional rotations. The fundamental property is that scalar products of vectors, and therefore their lengths, are invariant under a rotation.
+
+	Rotations correspond to orthogonal matrices acting on $v$, so they leave $v^T v$ invariant. For real-valued vectors $v$, the length $\abs{v}$ is given by
+	\[
+		\abs{v}^2 = v^T v.
+	\]
+	
+	For a real orthogonal matrix, if $v$ is an eigenvector (which in general is complex-valued), then
+	\[
+		M v = \lambda v \quad \text{and} \quad M v^* = \lambda^* v^*
+	\]
+	i.e.\ if $\lambda \in \mathbb{C}$ is an eigenvalue, so is $\lambda^*$.
+
+	Thus
+	\[
+		(Mv^*)^T Mv = \abs{\lambda}^2 v^\dagger v = v^\dagger v
+	\]
+	so $\abs{\lambda}^2 = 1$.
+
+	\subsection{3-Dimensional Rotations}
+	\begin{lem}
+		For $R \in \Og(3)$ (i.e.\ $R^T R = I$), the eigenvalues can only be $e ^{\mathrm{i} \theta}, e ^{-\mathrm{i} \theta}$, so a general $R$ can be reduced via a real transformation $S$, to
+		\[
+			S R S^{-1} = \mqty(\cos \theta & \sin \theta & 0\\ -\sin \theta & \cos \theta & 0\\ 0 & 0 & \pm 1).
+		\]
+	\end{lem}
+
+	For $\det R = 1$, i.e.\ $R \in \SO(3)$, we have the $+1$ case, i.e.
+	\[
+		\tr R = 2 \cos \theta + 1.
+	\]
+	
+	Acting on a spatial vector $x$, the matrix induces a linear transformation
+	\[
+		x \xrightarrow{R} x' = x^R
+	\]
+	where $x' = R x$.
+
+	For $\det R = -1$, the transformation involves a reflection.
+
+	\begin{lem}
+		A general $R \in \SO(3)$ has three parameters which may be taken to be a rotation angle $\theta$ and a unit vector $n$ (specified by other two angles) and is determined by 
+		\[
+			R n = n.
+		\]
+		$n$ is the axis of rotation.
+	\end{lem}
+
+	\begin{prop}
+		In general,
+		\begin{equation}
+			R _{ij} = \cos \theta \delta _{ij} + (1- \cos \theta)n_i n_j - \sin \theta \epsilon _{ijk} n_k.
+			\label{eq:3.1.1}
+		\end{equation}
+		for $i,j,k \in \{1,2,3\}$, $\delta _{ij}$ the Kronecker delta and $\epsilon _{ijk}$ the 3-d Levi-Civita tensor.
+	\end{prop}
+
+	\begin{nt}
+		Throughout we use the Einstein summation convention.
+	\end{nt}
+	
+	The parameters cover all rotations if $n \in S^2$, i.e.\ $n$ is anywhere on the unit sphere. Here, $0 \leq \theta \leq \pi$ and $(\pi, n) \simeq (\pi, -n)$.
+	
+	For an infinitesimal rotation $R(\delta \theta, n)$,
+	\[
+		\vb x \to \vb x' = \vb x + \delta \theta \vb n \cross \vb x + \mathcal{O}(\delta \theta^2)
+	\]
+	so that
+	\[
+		\abs{\vb x '}^2 = \abs{\vb x}^2 + \mathcal{O}(\delta \theta^2).
+	\]
+
+	\subsection{Isomorphism of $\SO(3)$ and $\SU(2)/\mathbb{Z}_2$}
+
+	\begin{thm}
+		\[
+			\SO(3) \cong \SU(2)/ \mathbb{Z}_2
+		\]
+		where $\mathbb{Z}_2 = \{I , - I\}$ is the centre of $\SU(2)$.
+	\end{thm}
+
+	We will prove this later.
+	
+	\begin{defi}
+		The \emph{Pauli matrices} are $2\times 2$ matrices
+		\[
+			\sigma_1 = \mqty(\pmat{1}), \quad \sigma_2 = \mqty(\pmat{2}), \quad \sigma_3 = \mqty(\pmat{3}).
+		\]
+	\end{defi}
+
+	\begin{cor}
+		Pauli matrices satisfy
+		\begin{equation}
+			\sigma_i \sigma_j = \delta _{ij} I + \mathrm{i} \epsilon _{ijk} \sigma_k.
+			\label{eq:3.2.1}
+		\end{equation}
+		which is equivalent to
+		\[
+			(\vb a \vdot \bm \sigma) (\vb b \vdot \bm \sigma) = (\vb a \vdot \vb b) I + \mathrm{i} (\vb a \cross \vb b) \vdot \bm \sigma.
+		\]
+	\end{cor}
+
+	Notice that the Pauli matrices are traceless Hermitian.
+
+	\begin{prop}
+		(\ref{eq:3.2.1}) implies
+		\[
+			\tr(\sigma_i \sigma_j) = 2 \delta _{ij}
+		\]
+		which means that any $2 \times 2$ matrix $A$ can be expressed in the form
+		\[
+			A = \frac{1}{2} \tr (A) I + \frac{1}{2} \tr(\bm \sigma A) \vdot \bm \sigma.
+		\]
+		i.e.\ the Pauli matrices form a complete set of traceless Hermitian $2\times 2$ matrices.
+	\end{prop}
+
 \end{document}
