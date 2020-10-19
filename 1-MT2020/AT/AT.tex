@@ -1172,4 +1172,299 @@
 		\]
 		which requires odd $n$, contradiction.
 	\end{proof}
+
+	\subsection{The Klein Bottle} \lecnr{5}
+
+	We should do one computation which involves \emph{knowing} the maps (not just on $H_0$) in an exact sequence, and not just that the sequence is exact. For this we want to compute the (co)homology for a Klein bottle.
+
+	The \emph{Klein bottle} $K$ is obtained from gluing two M\"obius bands together.
+
+	\needfig{17}
+
+	\begin{lem}
+		$$H_j(K; \mathbb{Z})\cong \begin{cases}
+			\mathbb{Z} & j=0\\
+			\mathbb{Z} \oplus \mathbb{Z}/2 & j=1\\
+			0 & \text{otherwise}
+		\end{cases}$$
+	\end{lem}
+
+	\begin{proof}
+		We make decomposition shown in the following figure.
+
+		\needfig{18}
+
+		Apply MV to $K = A \cup B$, $A,B$ and $A\cap B$. Note that one can show $A, B \simeq S^1$ and $A \cap B \simeq S^1$.
+
+		The essential part of the LES is 
+		\begin{center}
+			\begin{tikzcd}
+				& & \mathbb{Z} \rar & \mathbb{Z} \oplus \mathbb{Z}\\
+				0 \rar & H_2(K) \rar & H_1(A\cap B) \arrow[u,equal, "\cong"'] \arrow[r, "\psi"] & H_1(A)\oplus H_1(B) \arrow[u,equal, "\cong"'] \arrow[dll, out=0,in=180,overlay, ""]\\
+				& H_1(K) \arrow[r, "0"] & H_0(A \cap B) \arrow[d,equal, "\cong"] \arrow[r,hookrightarrow, ""] & H_0(A) \oplus H_0(B) \arrow[d,equal, "\cong"]\\
+				& & \mathbb{Z} \rar & \mathbb{Z} \oplus \mathbb{Z}
+			\end{tikzcd}
+		\end{center}
+
+		The exactness of the sequence gives 
+		\[
+			H_1 (K) = (\mathbb{Z}\oplus \mathbb{Z}) / \im \psi \quad \text{and} \quad H_2(K) \cong \ker \psi.
+		\]
+		The key claim here is 
+		\[
+			\psi(1) = (2,2).
+		\]
+		(Note that $(\mathbb{Z}\oplus \mathbb{Z})/(2,2)\cong \mathbb{Z} \oplus \mathbb{Z}/2$.)
+
+		To prove the claim, we use the fact that
+		\begin{enumerate}
+			\item $A\cap B \simeq$ the boundary circle of central M\"obius band;
+			\item $A \simeq$ the core circle of central M\"obius band.
+		\end{enumerate}
+		to pick the generators as following
+		
+		\needfig{19}
+
+		We have
+		\[
+			H_1(A\cap B) = \mathbb{Z} \expval{v+w} \quad \text{and} \quad H_1(A) = \mathbb{Z}\expval{\sigma_1 + \sigma_2}.
+		\]
+		
+		From the figure it is easy to see
+		\[
+			v \mapsto \sigma_1 + \sigma_2 \quad \text{and} \quad w \mapsto \sigma_1 + \sigma_2.
+		\]
+		and we're done.
+	\end{proof}
+
+	\begin{rmk}
+		We could define $C_k(X; G) := \{\sum _{\text{finite}} a_i \sigma_i : a_i \in G, \sigma_i : \Delta^k \to X\}$ for \emph{any} abelian group $G$, with the same differential $\partial$. These lead to the \emph{singular homology with coefficients in $G$} $H_*(X;G)$.
+	\end{rmk}
+
+	\begin{exer}
+		Show that
+		\[
+			H_j(S^1; \mathbb{Z}/2) \cong \begin{cases}
+				\mathbb{Z}/2 & j \in \{0,1\}\\
+				0 & \text{otherwise}
+			\end{cases}
+		\]
+		and
+		\[
+			H_i(\{\text{pt}\};\mathbb{Z}/2)\cong\begin{cases}
+				\mathbb{Z}/2 & i=0\\
+				0 & \text{otherwise}
+			\end{cases}	
+		\]
+	\end{exer}
+
+	In the previous sequence, if we compute $H_*(K;\mathbb{Z}/2)$, we get
+	\begin{center}
+		\begin{tikzcd}
+			0 \rar & H_2(K;\mathbb{Z}/2) \rar & H_1(A \cap B; \mathbb{Z}/2) \arrow[r, "\psi"] \arrow[d,equal, "\cong"] & H_1(A; \mathbb{Z}/2) \oplus H_1(B; \mathbb{Z}/2) \arrow[d,equal, "\cong"]\\
+			& & \mathbb{Z}/2 \arrow[r, "{1 \mapsto (2,2)\equiv (0,0)}"] & \mathbb{Z}/2 \oplus \mathbb{Z}/2
+		\end{tikzcd}
+	\end{center}
+	so that $\psi$ vanishes for $H_*(-; \mathbb{Z}/2)$. Thus
+	\[
+		H_i (K; \mathbb{Z}/2) \cong \begin{cases}
+			\mathbb{Z}/2 & i=0\\
+			\mathbb{Z}/2 \oplus \mathbb{Z}/2 & i=1\\
+			\mathbb{Z}/2 & i = 2\\
+			0 & \text{otherwise}
+		\end{cases}
+	\]
+	
+	It's also instructive to think about cohomology (in $\mathbb{Z}$ coefficients, still) in this example: $K = A\cup B$, $A,B\simeq S^1$, $A \cap B \simeq S^1$ as before. The cohomology MV sequence look like
+	\begin{center}
+		\begin{tikzcd}
+			H^0 (A\cap B)\rar &[-1em] H^1(K) \arrow[r, "{(j_A^\star, j_B^\star)}"] & H^1 (A) \oplus H^1 (B) \arrow[d,equal, "\cong"] \arrow[r, "i_A^\star - i_B^\star"] & H^1(A\cap B) \arrow[d,equal, "\cong"] \rar &[-1em] H^2(K) \rar &[-1em] 0\\
+			& & \mathbb{Z}\oplus \mathbb{Z} \arrow[r, "\alpha"] & \mathbb{Z} & &
+		\end{tikzcd}
+	\end{center} 
+	where one can check
+	\[
+		\alpha: (a,b)\mapsto 2(a-b).
+	\]
+	
+	So we have
+	\[
+		H^2(K) \cong \mathbb{Z}/2.
+	\]
+	
+	(Contrast: $H_2(K) = 0$ if we use $\mathbb{Z}$ coefficients.)
+
+	\begin{nt}
+		The important point here to raise is that: there were \emph{many} ways we could have cut up $K$. For example, we can decompose $K$ into a disc and its complement.
+
+		\needfig{20}
+
+		We set $A = \text{disc}$ and $B = K \backslash \text{disc}$. Then it can be shown $B \simeq S^1 \vee S^1$,
+		where $S^1 \vee S^1$ is the wedge of two circles: that they join at one point. 
+
+		$H_*(A)$ is shown before, $H_*(B)$ is computable by using MV sequence. Then we can find $H_*(K)$ using MV under such decomposition.
+
+		In some cases, some decomposition will give easier algebra than others.
+	\end{nt}
+
+	\subsection{Homotopy Invariance}
+
+	Now we should pay some debts: proving homotopy invariance.
+
+	\begin{defi}
+		Chain maps $f_* : C_* \to D_*$ and $g_* : C_* \to D_*$ are said to be \emph{chain homotopic} if there exists $P_n : C_n \to D _{n+1}$ such that 
+		\[
+			P _{n-1} \cdot \partial_n ^{C_*} \pm \partial _{n+1}^{D_*} \cdot P_n = f_n - g_n.
+		\]
+
+		This can be shown by a commutative diagram:
+		\begin{center}
+			\begin{tikzcd}
+				\cdots \rar &[-1em] C _{n+1} \arrow[d, "f_{n+1} - g_{n+1}"'] \arrow[r, "\partial"] & C _{n} \arrow[d, "f_{n} - g_{n}"] \arrow[r, "\partial"] \arrow[dl,blue, "P_{n}"] & C _{n-1} \arrow[d, "f_{n-1} - g_{n-1}"] \arrow[r, ""] \arrow[dl,blue, "P_{n-1}"] &[-1em] \cdots\\[2em]
+				\cdots \rar & D_{n+1} \arrow[r, "\partial"'] & D_n \arrow[r, "\partial"'] & D_{n-1} \rar & \cdots
+			\end{tikzcd}
+		\end{center}
+	\end{defi}
+
+	\begin{lem}
+		If $f_* : C_* \to D_*$ and $g_* : C_* \to D_*$ are chain homotopic, then
+		\[
+			f_\star = g_\star : H_i(C_*, \partial) \to H_i(D_*, \partial), \quad \forall i
+		\]
+		i.e.\ chain homotopic maps induce the same map on homology.
+	\end{lem}
+
+	\begin{proof}
+		Since $f_*$ and $g_*$ are chain homotopic, i.e.\ the following diagram commute
+		\begin{center}
+			\begin{tikzcd}
+				C _{n+1} \arrow[d,dashed] \arrow[r,dashed] & C _{n} \arrow[d, "f_{n} - g_{n}"] \arrow[r, "\partial"] \arrow[dl,blue, "P_{n}"] & C _{n-1} \arrow[d,dashed] \arrow[dl,blue, "P_{n-1}"]\\
+				D_{n+1} \arrow[r, "\partial"'] & D_n \arrow[r,dashed] & D_{n-1}
+			\end{tikzcd}
+		\end{center}
+		so
+		\[
+			P _{n-1} \partial \pm \partial P_n = f_n - g_n.
+		\]
+		
+		Let $\alpha \in C_n$ be a cycle, i.e.\ $\partial \alpha = 0$. Then we have $\partial f_n(\alpha) = f _{n-1}(\partial \alpha) = 0$ and
+		\[
+			f_\star [\alpha] := [f_n (\alpha)].
+		\]
+
+		Consider
+		\[
+			f_n (\alpha) - g_n (\alpha) = (f_n - g_n) (\alpha) = P _{n-1} (\partial \alpha) \pm \partial P_n (\alpha) = \partial P_n (\alpha) \in \im(\partial),
+		\]
+		so
+		\[
+			[f_n(\alpha)] = [g_n(\alpha)] \in H(D_*).
+		\]
+	\end{proof}
+
+	\begin{exer}
+		Show that chain homotopy is an equivalence relation on chain complexes and chain maps.
+	\end{exer}
+	
+	\begin{thm}[Homotopy invariance, v2]
+		If $f \simeq g : X \to Y$ then $f_* \simeq g_* : (C_*(X),\partial) \to (C_*(Y),\partial)$. 
+	\end{thm}
+	
+	\begin{proof}
+		$f \simeq g$ suggests there exists
+		\[
+			F : X \times [0,1]\to Y \quad \text{s.t.} \quad F\big|_{X \times \{0\}} = f, \ F\big|_{X \times \{1\}} = g.
+		\]
+		
+		So, if
+		\[
+			\begin{rcases}
+				i_0 : X \hookrightarrow X \times [0,1] & x \mapsto (x,0)\\
+				i_1 : X \hookrightarrow X \times [0,1] & x \mapsto (x,1)
+			\end{rcases} \quad f = F \cpf i_0, \quad g = F \cpf i_1.
+		\]
+		then 
+		\[
+			f_* = g_* \quad \text{if} \quad (i_0)_* = (i_1)_*
+		\]
+		and it suffices to prove
+		\[
+			(i_0)_* \simeq (i_1)_* : C_*(X) \to C_*(X\times[0,1]).
+		\]
+		
+		We want $P : C_n(X) \to C _{n+1} (X \times [0,1])$. The idea is that $P$ is a \emph{prism operator}. It gives a ``universal way'' of cutting up $\Delta^n \times [0,1]$ into $(n+1)$-simplices
+		\begin{align*}
+			C_n(X) \qquad & \to \qquad C _{n+1}(X\times [0,1])\\
+			\sigma: \Delta^n \to X \quad& \mapsto \quad \text{lin. comb. of } \sigma \times \id : \Delta^n \times [0,1] \to X \times [0,1].
+		\end{align*}
+		
+		The equation $\partial P \pm P \partial = (i _{1*} - i _{0*})$ says
+		\[
+			\text{``boundary of prism $=$ prism on boundary $+$ top $-$ bottom''}
+		\]
+
+		\needfig{21}
+
+		The details of the proof are not very illuminating, so we will be quite terse... (See Hatcher's book for details.)
+
+		Label base of prism by $[v_0\cdots v_n]$ and top by $[w_0 \cdots w_n]$.
+
+		\paragraph{Claim 1.} $\sigma _{n+1}^i = [v_0 \cdots v_i w_i \cdots w_n]$ is an $(n+1)$-simplex and 
+		\[
+			\Delta^n \times [0,1] = \bigcup _{i=0}^n \sigma _{n+1}^i.
+		\]
+
+		It should be intuitive from the pictures. We won't prove this, see Hatcher's book.
+
+		Define
+		\[
+			P: \begin{dcases}
+				C_n (X)  & \to \qquad C _{n+1} (X \times [0,1])\\
+				\sigma  & \mapsto \qquad \sum _{i=0}^n (-1)^i (\sigma \times 1)\big|_{[v_0\cdots v_i w_i\cdots w_n]} = \sum _{i=0}^n (-1)^i (\sigma \times 1) \cpf \sigma _{n+1}^i.
+			\end{dcases}
+		\]
+		
+		\paragraph{Claim 2.} $\partial P + P \partial = (i_1)_* - (i_0)_*$.
+
+		For this, one can check
+		\begin{align*}
+			\partial P \sigma & = \sum _{j \leq i} (-1)^i (-1)^j (\sigma \times 1)\big|_{[v_0 \cdots \hat{v}_j \cdots v_i w_i \cdots w_n]}\\
+			& \quad + \sum _{j \geq i} (-1)^i (-1)^{j+1} (\sigma \times 1)\big|_{[v_0 \cdots v_i w_i \cdots \hat{w}_j \cdots w_n]}\\
+			& = \underbrace{(\sigma \times 1)\big|_{[\hat{v}_0 w_0 \cdots w_n]}}_{\text{top of prism}} - \underbrace{(\sigma \times 1)\big|_{[v_0 \cdots v_n \hat{w}_n]}}_{\text{base of prism}}\\
+			& \quad +\underbrace{\sum _{j<i}\cdots + \sum _{j>i}\cdots}_{\text{Check: these are $-P(\partial \sigma)$}}.
+		\end{align*}
+		The ``top $-$ bottom'' term is obtained because $i = j$ terms cancel in pairs \emph{except} for $i=j=0$ and $i=j=n$.
+
+		The details omitted are routine but not enlightening.
+	\end{proof}
+
+	\begin{rmk}
+		If $C^*, D^*$ are cochain complexes, $f^* \simeq g^*: C^* \to D^*$ are cochain homotopic if there exists $P^i : C^i \to D ^{i-1}$ such that the following diagram commute
+		\begin{center}
+			\begin{tikzcd}
+				\cdots \rar &[-1em] C ^{i-1} \arrow[d, "f^{i-1} - g^{i-1}"'] \arrow[r, "\partial^*"] & C^i \arrow[d, "f^{i} - g^{i}"] \arrow[r, "\partial^*"] \arrow[dl,blue, "P^{i}"] & C^{i+1} \arrow[d, "f^{i+1} - g^{i+1}"] \arrow[r, ""] \arrow[dl,blue, "P^{i+1}"] &[-1em] \cdots\\[2em]
+				\cdots \rar & D^{i-1} \arrow[r, "\partial^*"'] & D^i \arrow[r, "\partial^*"'] & D^{i+1} \rar & \cdots
+			\end{tikzcd}
+		\end{center}
+		i.e.\ $\partial^* P \pm P \partial^* = f^* - g^*$.
+		
+		And this should induce 
+		\[
+			f^\star = g^\star : H^\star(C^*) \to H^\star (D^*).
+		\]
+		(Check this as an exercise!)
+
+		We can construct such $P^*$ by considering the following.
+
+		$P: C_n(X) \to C _{n+1}(X\times [0,1])$ has dual
+		\[
+			P^* : \Hom(C _{n+1}(X\times [0,1]), \mathbb{Z}) \to \Hom(C_n(X),\mathbb{Z})
+		\]
+		which is exactly a map $C ^{n+1}(X\times [0,1])\to C^n(X)$ and 
+		\[
+			\partial P + P \partial = i _{1*} - i _{0*} \quad \Rightarrow \quad \partial^* P^* + P^* \partial^* = (i_1)^* - (i_0)^*.
+		\]
+		meaning that $H^*$ is also homotopy invariant.
+	\end{rmk}
+
 \end{document}
