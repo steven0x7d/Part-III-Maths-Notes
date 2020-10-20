@@ -1681,4 +1681,198 @@
 			\partial(F^{-1}(Z)) = F_0^{-1}(Z) \sqcup F_1^{-1}(Z).
 		\]
 	\end{ex}
+
+	\subsection{Intersection Theory} \recnr{14}
+
+	Counting intersections between submanifolds of complementary dimensions gives topological invariants.
+
+	Fix an $n$-manifold $X$, a codimension-$k$ submanifold $Z \subset X$, and an $k$-manifold $W$. We shall assume throughout that $Z$ is closed as a subset of $X$ and that $W$ is compact.
+
+	\begin{ex}
+		The submanifold $Z = \{(x,0):x \in \mathbb{R}\} \subset X = \mathbb{R}^2$ is allowed, but $Z = \{(x,0): x \in \mathbb{R}^*\}$ is not.
+	\end{ex}
+
+	\begin{defi}
+		The conditions on $Z$ are equivalent to: for all $p$ in $X$ (not just $Z$) there exists an open neighbourhood $U$ of $p$ in $X$, and local coordinates $x_1, \cdots, x_n$ defined on $U$, such that $Z \cap U$ is given by $x_1 = \cdots x_k = 0$.
+	\end{defi}
+
+	\begin{rmk}
+		\ 
+		\begin{itemize}
+			\item $Z$ is closed in $X$ iff the inclusion is \emph{proper} (preimages of compact sets are compact), so such submanifolds are sometimes called \emph{properly embedded};
+			\item Often a manifold is called `closed' to mean that it is compact and without boundary;
+			\item So `closed submanifold' is ambiguous: it may mean a submanifold that is properly embedded or one that is compact and without boundary;
+			\item The latter implies the former but not vice versa (consider the submanifold $\mathbb{R} \times \{0\} \subset \mathbb{R}^2$).
+		\end{itemize}
+	\end{rmk}
+
+	Suppose first that $\iota_0 : W \to X$ is an embedding of $W$ as a submanifold of $X$. Assuming it is transverse to $Z$, the intersection $Z \cap \iota_0(W)$ is a 0-manifold, and since $Y$ is closed in $X$ this intersection is a closed subspace of the compact space $\iota_0(W)$ so is compact. Thus $Z \cap \iota_0(W)$ is a finite set of points, which we can count.
+
+	\needfig{29}
+
+	Now suppose we vary the embedding $\iota_0$ in a family $\iota_t$. As $t$ varies, intersection points $Z \cap \iota_t(W)$ will move around, but if each $\iota_t$ is transverse to $Z$ then this is all that can happen.
+
+	In general, there will be times $t$ at which transversality fails, but generically what happens then is that two intersection points collide and die, or are born and separate.
+
+	\begin{ex}
+		Picture moving a circle across a line in $\mathbb{R}^2$.
+
+		\needfig{30}
+
+		\begin{itemize}
+			\item Before the circle meets the line they are vacuously transverse and the intersection is empty;
+			\item Transversality fails when they first meet, since the line is tangent to the circle, but as we pass through this configuration two intersection points are born and move apart around the circle;
+			\item The circle and line remain transverse until they become tangent again, and during this time the two intersection points persist and just move across the circle;
+			\item The intersections collide and die as we cross the second point of tangency.
+		\end{itemize}
+	\end{ex}
+
+	Geometrically, it seems that
+	\[
+		\text{final \#intersections} = \text{initial \#intersections} + 2(\text{\#births} - \text{\#deaths}).
+	\]
+	In particular, the number of intersections modulo 2 is unchanged as we vary the embedding, as long as it starts and ends transverse to $Z$.
+	
+	To make this rigorous we may as well generalise slightly and not just consider embeddings. So let $F_0$ and $F_1$ be smooth maps $W \to X$ transverse to $Z$, and assume they can be connected by a homotopy $F: [0,1]\times W \to X$.
+
+	\begin{thm}
+		The finite sets $F_0^{-1}(Z)$ and $F_1^{-1}(Z)$ have the same cardinality modulo 2.
+		\label{thm:1.134}
+	\end{thm}
+
+	\begin{proof}
+		We'll assume the following (intuitively plausible) technical result without proof.
+
+		\begin{lem}
+			Be making a small perturbation to $F$, which does not change $F_0$ or $F_1$, we may arrange that it's transverse to $Z$. \hfill $\blacksquare$ 
+		\end{lem}
+
+		After such a perturbation we know that $F^{-1}(Z)$ is a compact 1-manifold-with-boundary, so looks like the disjoint union of say $r$ copies of $[0,1]$ and $s$ copies of $S^1$. On the other hand, we also have
+		\[
+			\partial(F^{-1}(Z)) = F_0^{-1}(Z) \sqcup F_1^{-1}(Z).
+		\]
+
+		Counting points gives
+		\[
+			2r = \#(\partial F^{-1}(Z)) = \#F_0^{-1}(Z) + \#F_1^{-1}(Z),
+		\]
+		so the two terms on the right-hand side must be equal mod 2.
+	\end{proof}
+
+	\begin{rmk}
+		This result and its generalisations are of \emph{huge} importance in topology.
+	\end{rmk}
+
+	\begin{ex}
+		Take $X$ to be the 2-torus $T^2 = S^1 \times S^1$, and $Z$ to be the curve $S^1 \times \{\text{point}\}$. Let $W = S^1$. For $F$ the inclusion of $\{\text{point}\}\times S^1$ we have $\#F^{-1}(Z) = 1$ so $S^1 \times \{\text{point}\}$ and $\{\text{point}\}\times S^1$ cannot be separated from each other by homotopy.
+		
+		\needfig{31}
+
+		If $F$ is instead the inclusion of $Z$ itself, but perturbed to be transverse, then $\#F^{-1}(Z)$ may be any even number, depending on the choice of perturbation.
+
+		\needfig{32}
+	\end{ex}
+
+	\begin{ex}
+		The group $\SO(3)$ is a 3-manifold (it's the connected component of the identity in $\Og(3)$), and we claim that it isn't simply connected, i.e.\ there exists a loop $\gamma : S^1 \to \SO(3)$ which is not homotopic to a constant.
+
+		To prove this, let $Z \subset \SO(3)$ be the submanifold comprising rotations through angle $\pi$. This is diffeomorphic to $\RP{2}$ by sending such a rotation to its unoriented axis.
+
+		Now fix an oriented axis $\ell$ and let $\gamma : S^1 \to \SO(3)$ be the map which sends $e ^{\mathrm{i} \theta}\in S^1$ to the rotation about $\ell$ through angle $\theta$. We have $\gamma \pitchfork Z$ and $\gamma^{-1}(Z) = \{-1 \in S^1\}$.
+		
+		If $\gamma_0 := \gamma$ were homotopic to a constant map $\gamma_1$ then by perturbating $\gamma_1$ we could arrange that it does not hit $Z$. Then $\gamma_1$ would be transverse to $Z$ and satisfy $\gamma_1^{-1}(Z) = \0$. But then
+		\[
+			\# \gamma_1^{-1}(Z) \not\equiv \# \gamma_0^{-1}(Z) \mod 2,
+		\]
+		which contradicts Theorem \ref{thm:1.134}, so no such homotopy can exist.
+
+		If $\gamma$ instead represented the same loop traversed twice, i.e.\ it sent $e ^{\mathrm{i} \theta}$ to rotation through angle $2 \theta$, then $\# \gamma^{-1}(Z)$ would be 0 mod 2 and this argument would fail. In fact, this double loop \emph{can} be homotoped to a constant.  
+	\end{ex}
+
+	\begin{defi}
+		Suppose $k = n$ so $W$ and $X$ are both $n$-manifolds (with $W$ compact). For a regular value $p \in X$ of $F : W \to X$ we can compute $\# F^{-1}(p)$. If $X$ is connected then this number is independent of which regular value $p$ we chose, and is called the \emph{degree} of $F$.
+	\end{defi}
+
+	To set this up in our framework, we consider the map
+	\[
+		\tilde F_p : W \to X \times X \quad \text{given by} \quad w \mapsto (F(w),p)
+	\]
+	and count $\tilde F_p^{-1}(\Delta_X)$ (with $\Delta_X$ the diagonal of $X \times X$), which is equal to $\# F^{-1}(p)$. Given another regular value $q$, there exists a path $\gamma$ from $p$ to $q$, then
+	\[
+		\tilde F_t(w):= (F(w),\gamma(t))
+	\]
+	gives a homotopy from $\tilde F_p$ and $\tilde F_q$, proving $\# \tilde F_p^{-1}(\Delta_X)=\# \tilde F_q^{-1}(\Delta_X)$.
+	
+	Homotopy invariance of intersection numbers also proves:
+	\begin{thm}
+		The degree of $F$ is invariant under homotopies of $F$.
+	\end{thm}
+
+	\begin{ex}
+		The identity map on any compact manifold has degree 1. A constant map has degree 0. So the identity is not nullhomotopic. Compactness is crucial here: e.g.\ $\id _{\mathbb{R}^n}$ \emph{is} nullhomotopic.
+	\end{ex}
+
+	\begin{ex}
+		For each $n$ there is a map $S^n \to S^n$ which is not nullhomotopic so the homotopy group $\pi_n (S^n)$ is non-trivial. In fact
+		\[
+			\deg : \pi_n (S^n) \to \mathbb{Z}/2
+		\]
+		is a group homomorphism. Once we meet orientations, the degree can be upgraded to a $\mathbb{Z}$-valued invariant for orientable manifolds, and we obtain a homomorphism $\pi_n(S^n)\to \mathbb{Z}$. This can be shown to be an isomorphism.
+	\end{ex}
+
+	\begin{ex}
+		There exists a degree 1 map $F : T^2 \to S^2$: take a small open disc $U$ in $T^2$, view $S^2$ as $\mathbb{C}\cup \{\infty\}$, and define $F$ by sending $U$ to $\mathbb{C}$ by a diffeomorphism, and $T^2 \backslash U$ to $\infty$. (This map can be smoothed near the boundary of the disc $U$.)
+
+		But there is no degree 1 map $S^2 \to T^2$. Suppose $F$ is such a map and let $Z_1 = S^1 \times \{1\}$ and $Z_2 = \{1\}\times S^1$ in $T^2$. By homotoping $F$ we may assume it's transverse to $Z_1$ and $Z_2$, and to $Z_1 \cap Z_2$. Then $F^{-1}(Z_1)$ and $F^{-1}(Z_2)$ are compact codimension-1 submanifolds of $S^2$.
+
+		\needfig{33}
+
+		They meet transversely at
+		\[
+			\deg F \cdot \#(Z_1 \cap Z_2) = 1
+		\]
+		point mod 2. But any codimension-1 submanifolds in $S^2$ are nullhomotopic, and thus have intersection number $0$ mod $2$ --- contradiction.
+	\end{ex}
+
+	\begin{rmk}
+		We can weaken the hypothesis of Theorem \ref{thm:1.134}, i.e.\ 
+		\[
+			\#F_0^{-1}(Z) = \#F_1^{-1}(Z)
+		\]
+		so that $F_0$ and $F_1$ are required to be \emph{cobordant} instead of homotopic.
+
+		This means their domains may be different compact $k$-manifolds $W_0$ and $W_1$, but there exists a compact manifold-with-boundary $Y$, and a smooth map $F: Y \to X$, such that $\partial Y = W_0 \sqcup W_1$ and the restriction of $F$ to the $W_i$ component of the boundary is given by $F_i$.
+
+		\needfig{34}
+
+		The proof of Theorem \ref{thm:1.134} then goes through unchanged. A homotopy corresponds to the case where $Y$ is the \emph{trivial cobordism} $[0,1]\times W$ from $W$ to itself.
+	\end{rmk}
+
+	Once we introduce the notion of orientations and co-orientations the statements can be upgraded from $\mathbb{Z}/2$ to $\mathbb{Z}$. Precisely, if $W$ is oriented and $Z$ is co-oriented, and $F_0$ and $F_1: W\to X$ are transverse to $Z$, then each $F_i^{-1}(Z)$ is a compact \emph{oriented} 0-manifold, which is a finite collection of \emph{signed} points. We can count these points with signs, and will denote the resulting integers by $\#F_i^{-1}(Z)$ still. The general statement is then the following.
+
+	\begin{thm}
+		If $F_0$ and $F_1$ are homotopic then $\#F_0^{-1}(Z) = \#F_1^{-1}(Z)$.
+	\end{thm}
+
+	\begin{proof}[Sketch Proof]
+		Follow the proof of Theorem \ref{thm:1.134}, but now $F^{-1}(Z)$ is a compact \emph{oriented} 1-manifold with boundary, satisfying
+		\[
+			\partial(F^{-1}(Z)) = - (F_0^{-1}(Z))\sqcup F_1^{-1}(Z).
+		\]
+		
+		Here the minus sign indicates that when the left-hand side is given its natural orientation, the $F_0^{-1}(Z)$ points appear with the opposite of their natural orientations. Again we can write $F^{-1}(Z)$ as a union of $S^1$'s and $[0,1]$'s, but now they carry orientations and the oriented boundary comprises zero points when counted with signs (the two ends of $[0,1]$ count with opposite signs). We thus have
+		\[
+			0 = \#(\partial F^{-1}(Z)) = - \# F_0^{-1}(Z) + \# F_1^{-1}(Z).
+		\]
+	\end{proof}
+
+	\begin{rmk}
+		Again we can weaken the hypothesis to cobordant, but now we have to say \emph{oriented-cobordant}, meaning that $\partial Y$ is $-W_0 \sqcup W_1$ rather than $W_0 \sqcup W_1$. 
+	\end{rmk}
+
+	\begin{ex}
+		The \emph{pair of pants} gives an oriented cobordism from the two cuffs to the waistband.
+
+		\needfig{35}
+	\end{ex}
 \end{document}
