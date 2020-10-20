@@ -556,6 +556,165 @@
 	
 	This suggests (although we haven't proved yet) the lower critical dimension for Ising model is $d_l = 1$.
 
+	\newpage
+
+	\section{Path Integrals} \recnr{2-1}
+	
+	We want to compute
+	\[
+		Z = \int \ddp m(\vb x) e ^{- \beta F[m(\vb x)]}.
+	\]
+	
+	To be more general, we change notation $m(\vb x)\to \phi(\vb x)$ which can be used to denote a generic field.
+	
+	For L-G theory, at $B = 0$ we have
+	\[
+		F[\phi(\vb x)]= \int \dd[d]{\vb x} \left[ \frac{1}{2} \gamma(T) (\grad \phi)^2 + \frac{1}{2} \alpha_2(T) \phi^2 + \frac{1}{4} \alpha_4 (T) \phi^4 + \cdots \right].
+	\]
+
+	Path integrals are:
+	\begin{itemize}
+		\item Easy to do if $F[\phi(\vb x)]$ is quadratic in $\phi$;
+		\item Possible if higher order terms are small (try perturbation);
+		\item Very difficult to compute otherwise.
+	\end{itemize}
+
+	We start by neglecting higher order terms.
+
+	For $T > T_c$, by denoting $\mu^2 = \alpha_2(T) > 0$, we have
+	\begin{equation}
+		F[\phi(\vb x)] = \frac{1}{2} \int \dd[d]{\vb x} [\gamma(\grad \phi)^2 + \mu^2 \phi^2].
+		\label{eq:2.0.1}
+	\end{equation}
+
+	\begin{nt}
+		When close to the critical point, $\mu^2 \approx 0$ and so we cannot neglect higher order terms (see later).
+	\end{nt}
+
+	When $T < T_c$ the saddle point is at $\expval{\phi} = \pm m_0$ and we write
+	\[
+		\tilde{\phi}(\vb x) = \phi(\vb x)-\expval{\phi}
+	\]
+	giving
+	\[
+		F[\tilde{\phi}(\vb x)] = F[m_0] + \frac{1}{2} \int \dd[d]{\vb x} \left[ \gamma (\grad \tilde \phi)^2 + \alpha_2' \tilde \phi^2 \right]
+	\]
+	where $\alpha_2' = \alpha_2 + 3 m_0^2 \alpha_4 = - 2 \alpha_2 > 0$.
+
+	This is the same form as (\ref{eq:2.0.1}) ($T > T_c$) but with $\phi \to \tilde \phi$ and $\mu^2 \to \alpha_2'$.
+
+	\subsection{Thermodynamic Free Energy}
+
+	We have already seen some contributions to $F _{\text{thermo}}$:
+	\[
+		F_0(T) \text{ (e.g.\ $-T \ln 2$)} \quad \text{and} \quad \text{$F(m_0)$ when $T<T_c$}.
+	\]
+	
+	Now we compute further contributions from fluctuations of $\phi(\vb x)$. Work in Fourier space:
+	\[
+		\phi _{\vb k} = \int \dd[d]{\vb x} e ^{- \mathrm{i} \vb k \vdot \vb x} \phi(\vb x).
+	\]
+	
+	$\phi(\vb x)$ is real means
+	\[
+		\phi _{\vb k}^* = \phi _{- \vb k}
+	\]
+	and we refer to $\vb k$ as \emph{momenta}.
+
+	Because we started with a spatial lattice, we must have
+	\[
+		\phi _{\vb k}= 0 \quad \forall \abs{\vb k} > \Lambda
+	\]
+	where $\Lambda$ is the \emph{UV cutoff}. For us, $\Lambda = \pi / a$.
+
+	In a finite system with volume $V = L^d$, momenta are quantised
+	\[
+		\vb k = \frac{2 \pi}{L} \vb n \quad \vb n \in \mathbb{Z}^d.
+	\]
+	
+	Then
+	\[
+		\phi(\vb x) = \frac{1}{V} \sum _{\vb k} e ^{\mathrm{i} \vb k \vdot \vb x} \phi _{\vb k}.
+	\]
+	
+	As $V \to \infty$, this becomes
+	\[
+		\phi(\vb x) = \int \frac{\dd[d]{\vb k}}{(2 \pi)^d} e ^{\mathrm{i} \vb k \vdot \vb x} \phi _{\vb k}.
+	\]
+	
+	Substitute into $F$, we have
+	\begin{align*}
+		F[\phi _{\vb k}] & = \frac{1}{2} \int \frac{\dd[d]{\vb k_1}}{(2 \pi)^d} \int \frac{\dd[d]{\vb k_2}}{(2\pi)^d} \int \dd[d]{\vb x} (-\gamma \vb k_1 \vdot \vb k_2 + \mu^2) \phi _{\vb k_1} \phi _{\vb k_2} e ^{\mathrm{i} (\vb k_1 + \vb k_2)\vdot \vb x}\\
+		& = \frac{1}{2} \int \frac{\dd[d]{\vb k}}{(2 \pi)^d} (- \gamma(-\vb k)\vdot \vb k + \mu^2) \phi _{\vb k} \phi _{-\vb k}\\
+		& = \frac{1}{2} \int \frac{\dd[d]{\vb k}}{(2 \pi)^d} (\gamma k^2 + \mu^2) \abs{\phi _{\vb k}}^2\\
+		& = \frac{1}{2V} \sum _{\vb k} (\gamma k^2 + \mu^2) \abs{\phi _{\vb k}}^2.
+	\end{align*}
+	
+	The measure is 
+	\[
+		\int \ddp \phi(\vb x) = \prod _{\vb k} \left[ N \int \dd{\phi _{\vb k}} \dd{\phi _{\vb k}^*} \right].
+	\]
+
+	\begin{nt}
+		We'll drop $N$ because it doesn't play any role in the quantities we're interested in.
+	\end{nt}
+
+	Then the partition function is
+	\begin{align*}
+		Z & = \left( \prod _{\vb k}\int \dd{\phi _{\vb k}} \dd{\phi _{\vb k}^*} \right) \exp[- \frac{\beta}{2V}\sum _{\vb k}(\gamma k^2 + \mu^2)\abs{\phi _{\vb k}}^2]\\
+		& = \prod _{\vb k}\left[ \int \dd{\phi _{\vb k}} \dd{\phi _{\vb k}^*} \exp(- \frac{\beta}{2V}(\gamma k^2 + \mu^2)\abs{\phi _{\vb k}}^2) \right].
+	\end{align*}
+
+	This is a Gaussian integral for each $\vb k$ 
+	\[
+		\int_{-\infty}^{+\infty} e ^{- \frac{x^2}{2a}} = \sqrt{2 \pi a}.
+	\]
+	
+	So
+	\[
+		Z = \prod _{\vb k} \sqrt{\frac{2 \pi V}{\beta (\gamma k^2 + \mu^2)}} = \prod _{\vb k} \sqrt{\frac{2 \pi V T}{\gamma k^2 + \mu^2}} := e ^{- \beta F _{\text{thermo}}}.
+	\]
+	thus
+	\[
+		\frac{F _{\text{thermo}}}{V} = - \frac{T}{V} \ln Z = - \frac{T}{2V} \sum _{\vb k} \ln(\frac{2 \pi V T}{\gamma k^2 + \mu^2}) = - \frac{T}{2} \int \frac{\dd[d]{\vb k}}{(2\pi)^d} \ln(\frac{2 \pi V T}{\gamma k^2 + \mu^2}).
+	\]
+	
+	We now compute the heat capacity per unit volume $c = C/V$.
+
+	Take $\gamma$ constant and $\mu^2 \sim (T - T_c)$, for $T > T_c$
+	\begin{align*}
+		c & = \frac{\beta^2}{V} \pdv[2]{\beta} \ln Z\\
+		& = \frac{1}{2} \left( T^2 \pdv[2]{T} + 2 T \pdv{T} \right) \int \frac{\dd[d]{\vb k}}{(2 \pi)^d}\ln(\frac{2 \pi V T}{\gamma k^2 + \mu^2})\\
+		& = \frac{1}{2} \int \frac{\dd[d]{\vb k}}{(2 \pi)^d} \Bigg[ \underbrace{1}_{(1)} - \underbrace{\frac{2T}{(\gamma k^2 + \mu^2)}}_{(2)} + \underbrace{\frac{T^2}{(\gamma k^2 + \mu^2)^2}}_{(3)} \Bigg]
+	\end{align*}
+	where (1) is $\frac{1}{2} k$ per d.o.f.\ (from equipartition) from $\ln T$ bit; (2), (3) are from $T$ dependence of $\mu$. The behaviour of (2) and (3) terms depends on whether the integral converges as $\Lambda \to \infty$ --- which depends on $d$.
+
+	The measure $\dd[d]{\vb k}$ is proportional to $k ^{d-1} \dd{k}$ in spherical coordinates. Then we can consider
+	\[
+		\int_{0}^{\Lambda} \dd{k} \frac{k ^{d-1}}{(\gamma k^2 + \mu^2)} \sim \begin{cases}
+			\Lambda ^{d-2} + \cdots & d>2\\
+			\ln \Lambda + \cdots & d = 2\\
+			\mu^{-1} + \cdots & d = 1
+		\end{cases}
+	\]
+	and
+	\[
+		\int_{0}^{\Lambda} \dd{k} \frac{k ^{d-1}}{(\gamma k^2 + \mu^2)^2} \sim \begin{cases}
+			\Lambda ^{d-4} + \cdots & d>4\\
+			\ln \Lambda + \cdots & d = 4\\
+			\mu^{d-4} + \cdots & d < 4
+		\end{cases}
+	\]
+	
+	For $d \geq 4$, the leading contribution to $c$ is independent of $T$;
+	
+	For $d < 4$, $c \sim \mu ^{d-4} \sim \abs{T - T_c}^{-\alpha}$ with $\alpha = 2 - \frac{d}{2}$, i.e.\ change of critical exponent (recall MFT gives $\alpha = 0$).
+
+	But we shouldn't trust this near the critical point --- we neglected the $\phi^4$ term.
+
+
+	
+	
 	
 
 \end{document} 
