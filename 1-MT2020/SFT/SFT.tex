@@ -713,8 +713,149 @@
 	But we shouldn't trust this near the critical point --- we neglected the $\phi^4$ term.
 
 
+	\subsection{Correlation Functions} \recnr{2-2} 
 	
+	We know that 
+	\[
+		\expval{\phi(\vb x)} = \begin{cases}
+			0 & T> T_c\\
+			\pm m_0 & T < T_c
+		\end{cases}
+	\]
 	
+	Now look at the correlation function $\expval{\phi(\vb x)\phi(\vb y)}$ which characterises how the magnetisation at $\vb x$ is correlated with that at $\vb y$.
+	
+	The connected correlation function is defined by
+	\[
+		\expval{\phi(\vb x)\phi(\vb y)}_c = \expval{\phi(\vb x)\phi(\vb y)} - \expval{\phi}^2.
+	\]
+	
+	Now let's include spatially varying $B(\vb x)$. The free energy is now
+	\[
+		F = \int \dd[d]{\vb x} \left[ \frac{1}{2} \gamma (\grad \phi)^2 + \frac{1}{2} \mu^2 \phi^2 - B(\vb x)\phi(\vb x) \right]
+	\]
+	and the partition function
+	\[
+		Z[B(\vb x)]=\int \ddp \phi\ e ^{-\beta F}
+	\]
+	is a functional of $B(\vb x)$, which contains lots of information.
+
+	Consider
+	\[
+		\frac{1}{\beta} \frac{\delta \ln Z}{\delta B(\vb x)} = \frac{1}{\beta Z}\frac{\delta Z}{\delta B(\vb x)} = - \frac{1}{Z}\int \ddp \phi\ \phi(\vb x)e ^{-\beta F} = - \expval{\phi(\vb x)}_B
+	\]
+	which is the expectation in presence of $B$
+
+	Consider
+	\begin{align*}
+		\frac{1}{\beta^2} \frac{\delta^2 \ln Z}{\delta B(\vb x) \delta B(\vb y)} & = \frac{1}{\beta^2 Z}\frac{\delta Z}{\delta B(\vb x)\delta B(\vb y)} - \frac{1}{\beta^2 Z^2} \frac{\delta Z}{\delta B(\vb x)} \frac{\delta Z}{\delta B(\vb y)}\\
+		& = \expval{\phi(\vb x)\phi(\vb y)}_B - \expval{\phi(\vb x)}_B \expval{\phi(\vb y)}_B
+	\end{align*}
+	which, when evaluated at $B = 0$, is what we want: 
+	\begin{equation}
+		\frac{1}{\beta^2} \frac{\delta^2 \ln Z}{\delta B(\vb x) \delta B(\vb y)}\bigg|_{B=0} = \expval{\phi(\vb x)\phi(\vb y)} - \expval{\phi}^2 = \expval{\phi(\vb x)\phi(\vb y)}_c.
+		\label{eq:2.2.1}
+	\end{equation}
+
+	We just need to compute $Z[B(\vb x)]$. 
+
+	In Fourier space
+	\[
+		F[\phi _{\vb k}] = \int \frac{\dd[d]{\vb k}}{(2 \pi)^d} \left[ \frac{1}{2} (\gamma k^2 + \mu^2)\phi _{\vb k} \phi _{-\vb k} - B _{-\vb k} \phi _{\vb k} \right]
+	\]
+	where $B _{\pm \vb k}$ are Fourier modes of $B(\vb x)$.
+
+	Complete the square
+	\[
+		\hat \phi _{\vb k} = \phi _{\vb k} - \frac{B _{\vb k}}{\gamma k^2 + \mu^2}
+	\]
+	we have
+	\[
+		F[\hat \phi _{\vb k}] = \int \frac{\dd[d]{\vb k}}{(2\pi)^d} \left[ \frac{1}{2}(\gamma k^2 + \mu^2) \abs{\hat \phi _{\vb k}}^2 - \frac{1}{2} \frac{\abs{B _{\vb k}}^2}{\gamma k^2 + \mu^2}\right]
+	\]
+	and so
+	\begin{align*}
+		Z[B(\vb x)] &= \prod _{\vb k} \int \dd{\hat \phi _{\vb k}} \dd{\hat \phi _{\vb k}^*} e ^{-\beta F[\hat \phi]}\\
+		& = e ^{- \beta F _{\text{thermo}}} \exp[\frac{\beta}{2} \int \frac{\dd[d]{\vb k}}{(2 \pi)^d} \frac{\abs{B _{\vb k}}^2}{\gamma k^2 + \mu^2}]\\
+		& = e ^{-\beta F _{\text{thermo}}} \exp[\frac{\beta}{2} \int \dd[d]{\vb x} \dd[d]{\vb y} B(\vb x) G(\vb x - \vb y) B(\vb y)]
+	\end{align*}
+	where
+	\[
+		G(\vb x - \vb y) = \int \frac{\dd[d]{\vb k}}{(2\pi)^d} \frac{e ^{- \mathrm{i} \vb k \vdot (\vb x - \vb y)}}{\gamma k^2 + \mu^2}.
+	\]
+	
+	From (\ref{eq:2.2.1}) we have
+	\[
+		\expval{\phi(\vb x)\phi(\vb y)} - \expval{\phi}^2 = \frac{1}{\beta} G(\vb x - \vb y).
+	\]
+	
+	Now we just need to compute this.
+
+	Correlation function depends on $\xi^2 = \gamma / \mu^2$, where $\xi$ is called the \emph{correlation length}.
+
+	Actually, $G(\vb x) = G(r)$ where $r = \abs{\vb x}$, and we can write
+	\[
+		G(r) = \frac{1}{\gamma}\int \frac{\dd[d]{\vb k}}{(2\pi)^d} \frac{e ^{-\mathrm{i} \vb k \vdot \vb x}}{k^2 + 1 / \xi^2}.
+	\]
+	
+	We claim that (proof is exercise on example sheet 2):
+	\[
+		G(r) \sim \begin{dcases}
+			\frac{1}{r ^{d-2}} & r \ll \xi\\
+			\frac{e ^{- r/ \xi}}{r ^{(d-1)/2}} & r \gg \xi
+		\end{dcases}
+	\]
+	
+	\needfig{14, power law + exponential}
+
+	Roughly, fluctuations occur over sizes $\sim \xi$ or less.
+
+	$\mu^2 \sim (T - T_c)$ suggests that $\xi \to \infty$ at the critical point --- this means fluctuations on all length scales (c.f.\ critical opalescence). We want to understand this.
+
+	The correlator suggests two more critical exponents
+	\[
+		\xi \sim \abs{T - T_c}^{-\nu} \quad \text{with} \quad \nu = 1/2
+	\]
+	and, at the critical point, $\xi \to \infty$,
+	\[
+		\expval{\phi(\vb x)\phi(\vb y)} \sim \frac{1}{r ^{d-2+\eta}} \quad \text{with} \quad \eta = 0.
+	\]
+	
+	These are correct for $d \geq 4$, but not for lower $d$.
+
+	It turns out that, for both Ising and liquid/gas transition,
+	\begin{center}
+		\begin{tabular}{c|ccc}
+			& MFT & $d=2$ & $d=3$\\
+			\hline
+			$\eta$ & $0$  & $1/4$ & $0.0363...$ \\
+			$\nu$ & $1/2$ & $1$ & $0.6300...$ 
+		\end{tabular}
+	\end{center}
+	
+	Something else to understand!
+
+	\subsubsection{Aside: the Upper Critical Dimension}
+
+	Recall that, in the ordered phase ($T < T_c$), $\expval{\phi(\vb x)} = \pm m_0$.
+
+	Mean field results are not obviously wrong provided $\expval{\phi^2} \ll \expval{\phi}^2$.
+	
+	Consider
+	\[
+		R = \frac{\int_{0}^{\xi}\dd[d]{\vb x} \expval{\phi(\vb x)\phi(\vb 0)}}{\int_{0}^{\xi}\dd[d]{\vb x} m_0^2} \sim \frac{1}{m_0^2 \xi^d} \int_{0}^{\xi} \dd{r} \frac{r ^{d-1}}{r ^{d-2}} \sim \frac{\xi ^{2-d}}{m_0^2}.
+	\]
+
+	But $m_0 \sim \abs{T- T_c}^{1/2}$ and $\xi \sim \abs{T - T_c}^{-1/2}$, we have
+	\[
+		R \sim \abs{T - T_c}^{(d-4)/2}.
+	\]
+	
+	We see that $R \to \infty$ as $T \to T_c$ if $d < d_c = 4$ --- this means the MFT results are definitely wrong.
+
+	For $d > 4$, $R \to 0$ as $T \to T_c$, so the MFT results have at least a chance of being correct!
+
+	(For $d=4$ there is a log divergence --- need to work harder.)
 	
 
 \end{document} 
