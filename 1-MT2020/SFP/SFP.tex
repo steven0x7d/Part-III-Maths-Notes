@@ -982,6 +982,7 @@
 			\SO(3) \cong \SU(2)/ \mathbb{Z}_2
 		\]
 		where $\mathbb{Z}_2 = \{I , - I\}$ is the centre of $\SU(2)$.
+		\label{thm:3.4}
 	\end{thm}
 
 	We will prove this later.
@@ -1007,7 +1008,7 @@
 
 	Notice that the Pauli matrices are traceless Hermitian.
 
-	\begin{prop}
+	\begin{lem}
 		(\ref{eq:3.2.1}) implies
 		\[
 			\tr(\sigma_i \sigma_j) = 2 \delta _{ij}
@@ -1017,6 +1018,232 @@
 			A = \frac{1}{2} \tr (A) I + \frac{1}{2} \tr(\bm \sigma A) \vdot \bm \sigma.
 		\]
 		i.e.\ the Pauli matrices form a complete set of traceless Hermitian $2\times 2$ matrices.
-	\end{prop}
+	\end{lem}
 
+	\begin{proof}[Proof of Theorem \ref{thm:3.4}] \lecnr{6}
+		There exists a one-to-one correspondence between real 3-vectors and Hermitian traceless $2 \times 2$ matrices
+		\[
+			\vb x \to \vb x \vdot \bm \sigma = (\vb x \vdot \bm \sigma)^\dagger 
+		\]
+		and we have
+		\[
+			\vb x = \frac{1}{2} \tr (\bm \sigma \vb x \vdot \bm \sigma).
+		\]
+		
+		Also
+		\begin{equation}
+			(\vb x \vdot \bm \sigma)^2 = \vb x^2 I
+			\label{eq:3.2.2}
+		\end{equation}
+
+		(\ref{eq:3.2.1}) suggests the eigenvalues of $\vb x \vdot \bm \sigma$ are $\pm \sqrt{\vb x^2}$. Therefore,
+		\begin{equation}
+			\det (\vb x \vdot \bm \sigma) = - \vb x^2
+			\label{eq:3.2.3}
+		\end{equation}
+
+		For any $A \in \SU(2)$, we can define a linear transformation $\vb x \to \vb x'$ by
+		\begin{equation}
+			\vb x' \vdot \bm \sigma = A \vb x \vdot \bm \sigma A^\dagger
+			\label{eq:3.2.4}
+		\end{equation}
+		to show
+		\begin{equation*}
+			\vb x'^2 \overset{(\ref{eq:3.2.3})}{=} - \det (\vb x' \vdot \bm \sigma) \overset{(\ref{eq:3.2.4})}{=} - \det (A \vb x \vdot \bm \sigma A^\dagger) = - \det (\vb x \vdot \bm \sigma) \overset{(\ref{eq:3.2.3})}{=} \vb x^2.
+		\end{equation*}
+
+		Thus the length is invariant. Therefore
+		\[
+			x_i' = R _{ij}x_j
+		\]
+		with $R$ an orthogonal matrix.
+
+		Since as $A \to I$, $R \to \delta _{ij}$. Therefore, we have
+		\[
+			\det (R _{ij}) = +1.
+		\]
+
+		(\ref{eq:3.2.4}) implies
+		\[
+			\sigma_i R _{ij} x_j = A x _{j} \sigma _{j} A^\dagger \quad \text{or} \quad \sigma_i R _{ij} = A \sigma_j A^\dagger
+		\]
+		which implies
+		\[
+			R _{ij} = \frac{1}{2} \tr (\sigma_i A \sigma_j A^\dagger)
+		\]
+		
+		To find $A$ in terms of $R _{ij}$, note (\ref{eq:3.2.1}) suggests $\sigma_j \sigma_i \sigma_j = - \sigma_i$, 
+		\[
+			\sigma_j A^\dagger \sigma_j = 2 (\tr A)I - A^\dagger.
+		\]
+
+		We find
+		\begin{equation}
+			R_{jj} = \abs{\tr A}^2 - 1
+			\label{eq:3.2.5}
+		\end{equation}
+		and
+		\begin{equation}
+			\sigma_i R _{ij} \sigma_j = 2 (\tr A^\dagger) A - I
+			\label{eq:3.2.6}
+		\end{equation}
+
+		For $A \in \SU(2)$, $\tr A = \tr A^\dagger \in \mathbb{R}$ (eigenvalues are $e ^{\pm \mathrm{i} \alpha}$ suggesting $\tr A = 2 \cos \alpha$), so (\ref{eq:3.2.5}), (\ref{eq:3.2.6}) give
+		\[
+			A = \pm \frac{I + \sigma_i R _{ij} \sigma_j}{2 \sqrt{1 + R _{jj}}}.
+		\]
+		 
+		The arbitrary $\pm$ sign ensures $\pm A \to R _{ij}$.
+		
+		For an infinitesimal rotation $\delta \theta$, (\ref{eq:3.1.1}) gives
+		\[
+			R _{ij} = \delta _{ij} - \delta \theta \epsilon _{ijk} n_k.
+		\]
+		
+		Assuming $A \to + I$ as $\delta \theta \to 0$, 
+		\[
+			A = I - \frac{\mathrm{i}}{2} \delta \theta \vb n \vdot \bm \sigma.
+		\]
+		
+		Since $\det(1 + X) = 1 + \tr X$ to first order in $X$ for any matrix, the tracelessness of Pauli matrices is necessary to be compatible with $\det A = 1$.
+		
+		For a finite rotation, we have
+		\[
+			\tr R = 2 \cos \theta + 1 = \abs{\tr A}^2 - 1
+		\]
+		and we can find $A$ by exponentiation
+		\[
+			\exp M := I + \sum _{n=1}^\infty \frac{M^n}{n!}.
+		\]
+		(for square matrix $M$) as 
+		\[
+			A(\theta, \vb n) = \exp(- \frac{\mathrm{i}}{2} \vb n \vdot \bm \sigma \theta) = \cos \frac{\theta}{2} I - \mathrm{i} \vb n \vdot \bm \sigma \sin \frac{\theta}{2}.
+		\]
+		
+		The parameters $(\theta,\vb n)$ cover all $\SU(2)$ matrices for $n \in S^2$, $0 \leq \theta \leq 2 \pi$ (i.e.\ \emph{double} the range of $\SO(3)$).
+	\end{proof}
+
+	\subsection{Infinitesimal Generators and Rotations}
+
+	Consider 2 infinitesimal transformation
+	\[
+		R_1 = R (\delta \theta_1 , \vb n_1) \quad \text{and} \quad R_2 = R(\delta \theta_2, \vb n_2).
+	\]
+	The commutator is 
+	\[
+		R_c = R_2 ^{-1} R_1 ^{-1} R_2 R_1 = I + \mathcal{O}(\delta \theta_1, \delta \theta_2).
+	\]
+	and
+	\begin{align*}
+		\vb x & \to \vb x + \delta \theta_1 \delta \theta_2 (\vb n_2 \cross (\vb n_1 \cross \vb x) - \vb n_1 \cross (\vb n_2 \cross \vb x))\\
+		& = \vb x + \delta \theta_1 \delta \theta_2 (\vb n_2 \cross \vb n_1) \cross \vb x
+	\end{align*}
+
+	Acting on QM vector space, the corresponding unitary operators are assumed to be of the form
+	\[
+		U[R(\delta \theta, \vb n)] = 1 - \mathrm{i} \delta \theta \vb n \vdot \vb J
+	\]
+	where $\vb J$ are the generators of the rotation group.
+	
+	The inverse is
+	\[
+		U[R(\delta \theta, \vb n)]^{-1} = 1 + \mathrm{i} \delta \theta \vb n \vdot \vb J.
+	\]
+	
+	The condition for $U$ to be a unitary operator becomes $\vb J = \vb J^\dagger$.
+
+	\begin{align*}
+		U[R_c] & = 1 - \mathrm{i} \delta \theta_1 \delta \theta_2 (\vb n_2 \cross \vb n_1) \vdot \vb J\\
+		& = U[R_2]^{-1} U[R_1]^{-1} U[R_2] U[R_1]\\
+		& = 1 - \delta \theta_1 \delta \theta_2 [\vb n_2 \vdot \vb J , \vb n_1 \vdot \vb J]
+	\end{align*}
+	hence
+	\[
+		[\vb n_2 \vdot \vb J, \vb n_1 \vdot \vb J] = \mathrm{i}(\vb n_2 \cross \vb n_1) \vdot \vb J \quad \Leftrightarrow \quad [J_i, J_j] = \mathrm{i} \epsilon _{ijk}J_k.
+	\]
+	
+	Acting on functions of $\vb x$, 
+	\[
+		\vb J \to \vb L = - \mathrm{i} \vb x \cross \grad,
+	\]
+	so 
+	\[
+		(1 - \mathrm{i} \delta \theta \vb n \vdot \vb L)f(\vb x) = f(\vb x - \delta \theta \vb n \cross \vb x)
+	\]
+	corresponds to an infinitesimal rotation. 
+
+	One can check $L_i$ the same commutation relations as $J_i$.
+
+	For finite rotations,
+	\[
+		U[R(\theta,\vb n)] = \exp(- \mathrm{i} \theta \vb n \vdot \vb J) = \lim _{N \to \infty}\left(1 - \frac{\mathrm{i}\theta}{N} \vb n \vdot \vb J\right)^N.
+	\]
+	
+	$\vb J$ is a vector under rotations, since from before 
+	\[
+		U[R] U[R(\delta \theta, \vb n)]U[R]^{-1} = U[R(\delta \theta, R\vb n)]
+	\]
+	implying 
+	\[
+		U[R]J_i U[R]^{-1} = (R^{-1})_{ij} J_j.
+	\]
+	
+	For a physical system, the rotation group operator $\vb J$ is identified as the total angular momentum of the system and the commutation relations are the fundamental angular momentum commutation relations.
+	
+	Rotational invariance implies conservation of angular momentum since 
+	\[
+		U[R] H U[R]^{-1} = H \quad \Leftrightarrow \quad [\vb J, H] = 0.
+	\]
+	ensuring that degenerate energy states for each energy must belong to a representation space for a representation of the rotation group.
+
+	\subsection{Representations of the Angular Momentum Commutation Relations}
+
+	Here, we shall see how we can analyse $[J_i , J_j] = \mathrm{i} \epsilon _{ijk} J_k$ to determine possible representation spaces $V$ on which the action of $\vb J$ is determined.
+	
+	We can define operators
+	\[
+		J _{\pm} := J_1 \pm \mathrm{i} J_2
+	\]
+	so that
+	\[
+		[J_3,J_\pm] = \pm J_\pm \quad \text{and} \quad [J_+, J_-] = 2J_3.
+	\]
+	\begin{nt}
+		$J_3 = J_3^\dagger$ but $J_+^\dagger = J_-$, i.e.\ $J_\pm$ are not Hermitian.
+	\end{nt}
+	 
+	We define a basis for a representation of angular momentum in terms of eigenvalues of $J_3$. Let 
+	\[
+		J_3 \ket{m} = m \ket{m}
+	\]
+	so
+	\[
+		J_\pm \ket{m} \propto \ket{m\pm 1} \quad \text{or}\quad 0.
+	\]
+	
+	The possible sequence of $J_3$ eigenvalues is
+	\[
+		\cdots, m-1, m, m+1, \cdots.
+	\]
+	
+	If the states $\ket{m\pm 1}$ are non-zero, we define
+	\begin{align*}
+		J_- \ket{m} & = \ket{m-1}\\
+		J_+ \ket{m} & = \lambda_m \ket{m+1}.
+	\end{align*}
+	which gives
+	\[
+		J_+ J_- \ket{m} = \lambda _{m-1} \ket{m} \quad \text{and} \quad J_- J_+ \ket{m} = \lambda_m \ket{m}.
+	\]
+	
+	$\lambda _{m-1} - \lambda_m = 2m$ if $\ket{m \pm 1} \neq 0$.
+
+	This can be solved for any $m$ by 
+	\begin{equation}
+		\lambda_m = j(j+1) - m(m+1).
+		\label{eq:3.4.1}
+	\end{equation}
+	for some constant which we've written as $j(j+1)$.
+
+	For large enough $\abs{m}$, $\lambda_m < 0$.
 \end{document}
