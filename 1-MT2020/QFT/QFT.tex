@@ -1142,12 +1142,177 @@
 	
 	The Hamiltonian becomes a Hermitian operator
 	\[
-		\hat{\mathbb{H}}: \mathcal{H}\to \mathcal{H}.
+		\hat{{H}}: \mathcal{H}\to \mathcal{H}.
 	\]
 	
 	If we would like to find the energy eigenstate, we need to solve the functional Schr\"odinger equation
 	\[
-		\hat{\mathbb{H}} \cpf \Psi = E \Psi
+		\hat{{H}} \cpf \Psi = E \Psi
 	\]
 	which is damn hard (nearly impossible in general) to solve.
+
+	In general, it is intractable to understand quantum field theories in the same way we did for quantum mechanics, especially by proceeding from first principle on some Hilbert spaces.
+
+	\subsection{Free Field Theory} 	\lecnr{7}
+	Although it is hard to solve QFTs in general, we have some special cases where the spectrum of the Hamiltonian is soluble, such as \emph{free field theories} we are about to discuss.
+
+	Consider the Klein-Gordon Lagrangian
+	\[
+		\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{1}{2} m^2 \phi^2.
+	\]
+	It has equation of motion
+	\[
+		\partial_\mu \partial^\mu \phi + m^2 \phi = 0.
+	\]
+	which is linear, so can be solved by Fourier transform. We can expand $\phi$ in its momentum space modes
+	\[
+		\phi(t,\vb x) = \int \frac{\dd[3]{\vb p}}{(2 \pi)^2} e ^{\mathrm{i} \vb p \vdot \vb x} \tilde{\phi}(t,\vb p).
+	\]
+	and
+	\[
+		\phi(t,\vb x) \in \mathbb{R} \quad \Leftrightarrow \quad \tilde{\phi}^*(t,\vb p) = \tilde{\phi}(t, -\vb p).
+	\]
+	
+	The equation of motion becomes
+	\[
+		\left( \pdv[2]{t} + \abs{\vb p}^2 + m^2 \right) \tilde{\phi}(t, \vb p) = 0
+	\]
+	giving solutions
+	\[
+		\tilde{\phi}(t,\vb p) = A _{\vb p} e ^{\mathrm{i} \omega _{\vb p} t} + B _{\vb p}e ^{-\mathrm{i} \omega _{\vb p}t}
+	\]
+	where $\omega _{\vb p} = \sqrt{\abs{\vb p}^2 + m^2}$. Impose $A^* _{\vb p} = B _{-\vb p}$ to keep the original field $\phi (t, \vb x)$ real. Each mode can be interpreted as a complex \emph{simple harmonic oscillator}.
+
+	The action is
+	\begin{align*}
+		S & = \int \dd{t} \int \dd[3]{\vb x} \mathcal{L}(t,\vb x)\\
+		& = -\frac{1}{2} \int \dd{t} \int \frac{\dd[3]{\vb p}}{(2\pi)^3}\ \tilde{\phi}^*(t,\vb p) \left(\pdv[2]{t} + \abs{\vb p}^2 + m^2 \right)\tilde{\phi}(t,\vb p)\\
+		& \equiv \infty \text{ set of complex \emph{decoupled} S.H.O.\ labelled by }\vb p \in \mathbb{R}^3. 
+	\end{align*}
+
+	\subsubsection{Review of Quantum S.H.O.}
+
+	Consider a simple harmonic oscillator with angular frequency $\omega$. Its Lagrangian is
+	\[
+		L = \frac{1}{2} \dot q^2 - \frac{1}{2} \omega^2 q^2.
+	\]
+	
+	Legendre transform gives the Hamiltonian
+	\[
+		H = \frac{p^2}{2} + \frac{\omega^2}{2}q^2.
+	\]
+	
+	We quantise this using canonical quantisation conditions
+	\[
+		q \to \hat q, \quad p \to \hat p \quad \text{with} \quad [\hat q,\hat p]= \mathrm{i}.
+	\]
+	
+	To make life easier and unravel the physics even more, we can define the following.
+	
+	\begin{defi}
+		The \emph{annihilation operator} $\hat a$ and \emph{creation operator} $\hat a^\dagger$ are defined as
+		\begin{align*}
+			\hat a & := \sqrt{\frac{\omega}{2}} \hat q + \frac{\mathrm{i}}{\sqrt{2 \omega}} \hat p,\\
+			\hat a^\dagger & := \sqrt{\frac{\omega}{2}} \hat q - \frac{\mathrm{i}}{\sqrt{2 \omega}} \hat p.
+		\end{align*}
+	\end{defi}
+
+	\begin{prop}
+		\[
+			[\hat q, \hat p] = \mathrm{i} \quad \Leftrightarrow \quad [\hat a,\hat a^\dagger] = 1.
+		\]
+	\end{prop}
+
+	\begin{prop}
+		Using creation and annihilation operators, we can rewrite the Hamiltonian as
+		\[
+			\hat H = \frac{1}{2} \omega (\hat a \hat a^\dagger + \hat a^\dagger \hat a) = \omega \left(\hat a^\dagger \hat a + \frac{1}{2}\right)
+		\]
+		so
+		\begin{align*}
+			[\hat H, \hat a] & = - \omega \hat a\\
+			[\hat H, \hat a^\dagger] & = + \omega \hat a^\dagger.
+		\end{align*}
+	\end{prop}
+
+	\begin{defi}
+		The \emph{number operator} $\hat N$ is defined as $\hat N = \hat a^\dagger \hat a$.
+	\end{defi}
+
+	The creation and annihilation operators are also called \emph{ladder operators}. This is because, for some energy eigenstate $\ket{E}$ of $\hat H$, i.e. $\hat H \ket{E} = E \ket{E}$, we have
+	\begin{align*}
+		\hat H (\hat a^\dagger \ket{E}) & = (E + \omega)(\hat a^\dagger \ket{E})\\
+		\hat H (\hat a \ket{E}) & = (E - \omega)(\hat a \ket{E})\\
+	\end{align*}
+	i.e.\ the state $\hat a^\dagger \ket{E}$ is one $\omega$ higher in energy, where as the state $\hat a \ket{E}$ in one $\omega$ lower.
+	
+	Hence, either
+	\begin{enumerate}
+		\item Spectrum is unbounded below, or
+		\item There exists $\ket{0}\in \mathcal{H}$ such that $\hat a \ket{0}=0$.
+	\end{enumerate}
+
+	We take possibility b) as it makes more physical sense by admitting a vacuum state $\ket{0}$ with lowest energy.
+
+	Then the vacuum energy can be extracted from
+	\[
+		\hat H \ket{0} = \omega \left( \hat a^\dagger \hat a + \frac{1}{2}\right) \ket{0} = \frac{1}{2} \omega \ket{0}.
+	\]
+	which is $E_0 = \frac{1}{2} \omega$.
+
+	Building on the ground state $\ket{0}$, there is a infinite tower of excited states
+	\[
+		\ket{n} := (\hat a^\dagger)^n \ket{0} \quad n \in \mathbb{Z}_{\geq 0}
+	\]
+	(which is not normalised) with
+	\[
+		\hat H \ket{n} = \left( n + \frac{1}{2} \right) \omega \ket{n}
+	\]
+	(as a result of $\hat N \ket{n} = n \ket{n}$) and the energy eigenvalues are
+	\[
+		E_n = \left( n + \frac{1}{2} \right) \omega.
+	\]
+	
+	\subsubsection{Back to Field Theory}
+	
+	Analogous to the QM S.H.O., we expand the field operators in terms of some $\hat a, \hat a^\dagger$ operators by Fourier transform
+	\begin{equation}
+		\hat \phi (\vb x) = \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 \omega _{\vb p}}} \left[ \hat a _{\vb p} e ^{\mathrm{i} \vb p \vdot \vb x} + \hat a^\dagger _{\vb p} e ^{-\mathrm{i} \vb p \vdot \vb x} \right]
+	\end{equation}
+	and similar for its conjugate momentum
+	\begin{equation}
+		\hat \pi (\vb x) = \int \ddk{\vb p}{3} (-\mathrm{i}) \sqrt{\frac{\omega _{\vb p}}{2}} \left[ \hat a _{\vb p} e ^{\mathrm{i} \vb p \vdot \vb x} - \hat a^\dagger _{\vb p} e ^{-\mathrm{i} \vb p \vdot \vb x} \right].
+	\end{equation}
+
+	\begin{thm}
+		The following sets of commutation relations are equivalent
+		\begin{align}
+			\mathrm{a):} & \quad[\hat \phi(\vb x),\hat \phi(\vb y)] = [\hat \pi(\vb x), \hat \pi(\vb y)] = 0, \quad [\hat \phi(\vb x), \hat \pi(\vb y)] = \mathrm{i} \delta^{(3)}(\vb x - \vb y);\\
+			\mathrm{b):} & \quad[\hat a _{\vb p}, \hat a _{\vb q}] = [\hat a^\dagger _{\vb p}, \hat a^\dagger _{\vb q}] = 0, \quad [\hat a _{\vb p}, \hat a^\dagger _{\vb q}] = (2 \pi)^3 \delta ^{(3)}(\vb p - \vb q).
+		\end{align}
+	\end{thm}
+	\begin{proof}
+		We only check one way, the other is left as an exercise.
+
+		Suppose
+		\[
+			[\hat a _{\vb p}, \hat a _{\vb q}] = [\hat a^\dagger _{\vb p}, \hat a^\dagger _{\vb q}] = 0, \quad [\hat a _{\vb p}, \hat a^\dagger _{\vb q}] = (2 \pi)^3 \delta ^{(3)}(\vb p - \vb q)
+		\]
+		is true.
+
+		\begin{align*}
+			[\hat \phi(\vb x), \hat \pi(\vb y)] & = - \frac{\mathrm{i}}{2} \int \ddk{\vb p}{3} \ddk{\vb q}{3} \sqrt{\frac{\omega _{\vb q}}{\omega _{\vb p}}} \left[ \hat a _{\vb p}e ^{\mathrm{i} \vb p \vdot \vb x} + \hat a^\dagger _{\vb p} e ^{-\mathrm{i}\vb p \vdot \vb x}, \hat a _{\vb q} e ^{\mathrm{i} \vb q \vdot \vb y} - \hat a^\dagger _{\vb q} e ^{- \mathrm{i} \vb q \vdot \vb y} \right]\\
+			& = - \frac{\mathrm{i}}{2} \int \ddk{\vb p}{3} \ddk{\vb q}{3} \sqrt{\frac{\omega _{\vb q}}{\omega _{\vb p}}} \left( - e ^{\mathrm{i} \vb p \vdot \vb x - \mathrm{i} \vb q \vdot \vb y} [\hat a _{\vb p}, \hat a^\dagger _{\vb q}] + e ^{-\mathrm{i} \vb p \vdot \vb x + \mathrm{i} \vb q \vdot \vb y} [\hat a^\dagger _{\vb p}, \hat a _{\vb q}] \right)\\
+			& = \frac{\mathrm{i}}{2} \int \ddk{\vb p}{3} \ddk{\vb q}{3} \sqrt{\frac{\omega _{\vb q}}{\omega _{\vb p}}}(2 \pi)^3 \delta ^{(3)} (\vb p - \vb q) \left( e ^{\mathrm{i} \vb p \vdot \vb x - \mathrm{i} \vb q \vdot \vb y} + e ^{-\mathrm{i} \vb p \vdot \vb x + \mathrm{i} \vb q \vdot \vb y} \right)\\
+			& = \frac{\mathrm{i}}{2}\int \ddk{\vb p}{3} \left( e ^{\mathrm{i} \vb p \vdot (\vb x - \vb y)} + e ^{-\mathrm{i} \vb p \vdot (\vb x - \vb y)} \right)\\
+			& = \mathrm{i} \delta ^{(3)}(\vb x - \vb y).
+		\end{align*}
+	\end{proof}
+
+	To check the system indeed resembles a infinite set of decoupled S.H.O.s, we evaluate the Hamiltonian
+	\begin{align*}
+		\hat H = \frac{1}{2} \int _{\mathbb{R}^3} \dd[3]{\vb x} \left( \hat \pi^2 + \abs{\grad \hat \phi}^2 + m^2 \hat \phi^2 \right)
+	\end{align*}
+	
+	(TO BE CONTINUED)
 \end{document}
