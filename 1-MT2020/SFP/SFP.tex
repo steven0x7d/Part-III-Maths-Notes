@@ -1246,4 +1246,261 @@
 	for some constant which we've written as $j(j+1)$.
 
 	For large enough $\abs{m}$, $\lambda_m < 0$.
+
+	We note that \lecnr{7} $J _{\pm}J _{\mp}$ are of the form $O^\dagger O$, thus the eigenvalues are non-negative, with zero eigenvalues only if $J_+$ or $J_-$ annihilates the state (i.e. $\mel{\psi}{O^\dagger O}{\psi} \geq 0$ with $=0$ only if $O \ket{\psi}=0$). Hence there exists a $m _{\text{max}}$ and $m _{\text{min}}$ such that
+	\[
+		J_+ \ket{m _{\text{max}}} = 0 \quad \Rightarrow \quad \lambda _{m _{\text{max}}} = (j - m _{\text{max}})(j + m _{\text{max}} + 1) = 0
+	\]
+	and
+	\[
+		J_+ \ket{m _{\text{min}}} = 0 \quad \Rightarrow \quad \lambda _{m _{\text{min}}} = (j + m _{\text{min}})(j - m _{\text{min}} + 1) = 0
+	\]
+	where $m _{\text{max}} - m _{\text{min}} = 0, 1, 2, \cdots$ and 
+	\[
+		m _{\text{max}} = j, \quad m _{\text{min}} = - j.
+	\]
+	
+	So
+	\[
+		j \in \left\{0, \frac{1}{2}, 1, \cdots\right\} \quad \text{and} \quad m \in \{-j, -j+1, \cdots, j\}.
+	\]
+	
+	The corresponding states $\ket{m}$ form a basis of the $(2j+1)$-dimensional representation space $V_j$.
+
+	\subsubsection{The $\ket{jm}$ Basis}
+
+	It's more convenient to define an orthonormal basis for $V_j$ in terms of $\{\ket{jm}\}$, i.e.\ satisfying
+	\begin{equation}
+		\braket{jm}{jm'} = \delta _{mm'}.
+		\label{eq:3.4.2}
+	\end{equation}
+
+	\[
+		J_3 \ket{jm} = m \ket{jm}
+	\]
+	and $j$ is defined to be the max of $m$ such that
+	\[
+		J_+ \ket{jj}=0.
+	\]
+	
+	\begin{defi}
+		A state satisfying the condition
+		\[
+		J_+ \ket{jj}=0
+		\]
+		is called a \emph{highest weight state}.
+	\end{defi}
+
+	Consider
+	\[
+		J _{\pm} \ket{jm} = N _{jm}^\pm \ket{j\ m\pm 1}
+	\]
+	(\ref{eq:3.4.2}) implies
+	\[
+		\abs{N _{jm}^+}^2 = \lambda_m = (j-m)(j + m + 1)
+	\]
+	and
+	\[
+		\abs{N _{jm}^-}^2 = \lambda_m = (j+m)(j - m + 1)
+	\]
+
+	For phase convention, we choose $N _{jm}^\pm \in \mathbb{R} > 0$ such that
+	\[
+		N _{jm}^\pm = \sqrt{(j \mp m)(j \pm m + 1)}.
+	\]
+	
+	In general, we may define the states $\{\ket{jm}\}$ in terms of the highest weight state by
+	\[
+		(J_-)^n \ket{jj} = \sqrt{\frac{n! (2j)!}{(2j-n)!}} \ket{j\ j-n}
+	\]
+	where $n = 0,1,\cdots,2j$.
+
+	An alternative prescription is to consider $\vb J^2 = J_1^2 + J_2^2 + J_3^2$ so
+	\[
+		\vb J^2 = J_- J_+ + J_3^2 + J_3.
+	\]
+	
+	Therefore,
+	\[
+		\vb J^2 \ket{jj} = j(j+1)\ket{jj}
+	\]
+	since $J_+ \ket{jj}=0$.
+	
+	\begin{nt}
+		Alternatively
+		\[
+			\vb J^2 = J_+ J_- + J_3^2 - J_3.
+		\]
+	\end{nt}
+
+	Notice
+	\[
+		[\vb J^2 , J_i]=0
+	\]
+	so $\vb J^2$ is a rotational scalar. Also
+	\[
+		[\vb J^2, J_-]=0
+	\]
+	so it's eigenvalue is the same for all $m$ under fixed $j$:
+	\[
+		\vb J^2 \ket{jm} = j(j+1)\ket{jm}.
+	\]
+	
+	\subsubsection{Representation Matrices}
+	\begin{defi}
+		The \emph{representation matrices of angular momentum} are three $(2j+1)\times (2j+1)$ matrices defined as $[\vb J _{m'm}^{(j)}]$ with
+		\[
+			\vb J _{m'm}^{(j)} := \mel{jm'}{\vb J}{jm}
+		\]
+		or equivalently
+		\[
+			\vb J \ket{jm} = \sum _{m'} \ket{jm'}\vb J _{m'm}^{(j)}
+		\]
+		where $m'$ denotes the rows and $m$ denotes the columns.
+
+	\end{defi}
+
+	It is easy to check these satisfy the angular momentum commutation relations.
+
+	Notice
+	\[
+		(J_3)_{m'm}^{(j)} = m \delta _{m'm}
+	\]
+	and
+	\[
+		(J_\pm)_{m'm}^{(j)} = \sqrt{(j \mp m)(j \pm m + 1)}\delta _{m',m\pm 1}.
+	\]
+	
+	If $R$ is a rotation, we define $(2j+1)\times (2j+1)$ matrices
+	\[
+		D ^{(j)}_{m'm}(R):= \mel{jm'}{U[R]}{jm}
+	\]
+	forming a representation of the rotation group corresponding to the representation space $V_j$.
+
+	Easy to see
+	\[
+		U[R]\ket{jm} = \sum _{m'}\ket{jm'}D _{m'm}^{(j)}(R).
+	\]
+
+	For $j=0$, $D ^{(0)}(R)=1$ is the trivial representation. For an infinitesimal rotation by $\delta \theta$, then we have
+	\[
+		D ^{(j)}(R(\delta \theta, \vb n)) = \1 _{2j+1} - \mathrm{i} \delta \theta \vb n \vdot \vb J ^{(j)}.
+	\]
+	
+	To obtain explicit forms for rotation matrices, we parametrise in terms of Euler angles $(\phi,\theta,\psi)$ 
+	\[
+		R = R(\phi,\vb e_3)R(\theta,\vb e_2)R(\psi,\vb e_3)
+	\]
+	for $\vb e_2, \vb e_3$ unit vectors along $x_2,x_3$ directions, respectively.
+
+	Thus
+	\[
+		U[R] = e ^{-\mathrm{i} \phi J_3} e ^{-\mathrm{i} \theta J_2} e ^{- \mathrm{i} \psi J_3}
+	\]
+	so that
+	\[
+		D _{m'm}^{(j)}(R) = e ^{-\mathrm{i} m' \phi - \mathrm{i} m \psi} d_{m'm}^{(j)}(\theta)
+	\]
+	where
+	\[
+		d _{m'm}^{(j)} := \mel{jm'}{e ^{-\mathrm{i}\theta J_2}}{jm}.
+	\]
+	
+	For special cases where $\theta = \pi, 2 \pi$, we have
+	\[
+		d _{m'm}^{(j)}(\pi) = (-1)^{j-m} \delta _{m',-m}
+	\]
+	and
+	\[
+		d _{m'm}^{(j)}(2\pi) = (-1)^{2j} \delta _{m',m}.
+	\]
+	
+	In general
+	\[
+		D ^{(j)} (R(2 \pi,\vb n)) = (-1)^{2j} \1 _{2j+1}
+	\]
+	for any unit vector $\vb n$. This is not equal to identity if $j$ is half integral! For a representation of $\SO(3)$, it's necessary to take $j \in \mathbb{Z}$, but in QM, any half-integer $j$ is allowed since we only require the representations up to a phase factor.
+
+	From the $\theta = \pi$ result
+	\[
+		e ^{-\mathrm{i} \pi J_2}\ket{jm} = (-1)^{j-m} \ket{j,-m}
+	\]
+	and 
+	\[
+		e ^{-\mathrm{i} \pi J_3}J_2 e ^{\mathrm{i} \pi J_3} = - J_2
+	\]
+	we must have
+	\[
+		d _{m'm}^{(j)}(\theta)= (-1)^{m'-m} d _{-m',-m}^{(j)}(\theta) = (-1)^{m'-m} d _{m'm}^{(j)}(-\theta) = (-1)^{m'-m} d	_{mm'}^{(j)}(\theta).
+	\]
+	
+	For $j = \frac{1}{2}$, we have
+	\[
+		J_+ ^{(\frac{1}{2})} = \mqty(0 & 1\\0 & 0), \quad J_- ^{(\frac{1}{2})} = \mqty(0 & 0 \\ 1 & 0), \quad J_3 ^{(\frac{1}{2})} = \frac{1}{2} \mqty(1 & 0\\0 & -1)
+	\]
+	so
+	\[
+		\vb J ^{(\frac{1}{2})} = \frac{1}{2} \bm \sigma
+	\]
+	where $\bm \sigma$ are the Pauli matrices.
+
+	Thus, $\bm \sigma$ must satisfy the analogous commutation relations to $\vb J$ (can be seen from $\sigma_i \sigma_j = \delta _{ij} \1 + \mathrm{i} \epsilon _{ijk} \sigma_k$).
+
+	It can be shown
+	\[
+		d ^{(\frac{1}{2})}(\theta) = \mqty(\cos \theta/2 & - \sin \theta/2 \\ \sin \theta/2 & \cos \theta/2).
+	\]
+
+	Now consider a general $j$.
+
+	Rotation group characters
+	\[
+		\chi_j (\theta) = \tr(D^{(j)}(R(\theta,\vb n)))
+	\]
+	depend only on $\theta$. It's calculated using
+	\[
+		\chi_j (\theta) = \sum _{m = -j}^{j} \mel{jm}{e ^{-\mathrm{i} \theta J_3}}{jm} = \sum _{m = -j}^{j} e ^{- \mathrm{i} m \theta} = \frac{\sin[(j+\frac{1}{2})\theta]}{\sin \theta/2}.
+	\]
+	
+	\subsection{Tensor Products and Angular Momentum Addition}
+
+	Representation space $V_j$ with orthonormal basis $\{\ket{jm}\}$ together with commutation relations determines an irrep of $\SU(2)$. $V _{j_1}\otimes V _{j_2}$ of two representation spaces $V _{j_1}$ and $V _{j_2}$ has a basis
+	\[
+		\ket{j_1 m_1}_1\ket{j_2 m_2}_2.
+	\]
+	
+	Associated with $V _{j_1}, V _{j_2}$, there exist two independent angular momentum operators $\vb J_1, \vb J_2$ satisfying
+	\[
+		[J _{(1,2)i}, J _{(1,2)j}] = \mathrm{i} \epsilon _{ijk} J _{(1,2)k}.
+	\]
+
+	They can be extended to act on $V _{j_1}\otimes V _{j_2}$ since
+	\[
+		J_1 := \vb J_1 \otimes \1_2, \quad J_2 := \1_1 \otimes \vb J_2
+	\]
+	and 
+	\[
+		J_1 (\ket{j_1 m_1}_1 \ket{j_2 m_2}_2) = (\vb J_1 \ket{j_1 m_1}_1) \ket{j_2 m_2}_2
+	\]
+	\[
+		J_2 (\ket{j_1 m_1}_1 \ket{j_2 m_2}_2) = \ket{j_1 m_1}_1 (\vb J_2\ket{j_2 m_2}_2)
+	\]
+
+	With this definition, it's clear that
+	\[
+		[J _{1i}, J _{2j}] = 0
+	\]
+
+	The generator for the tensor product representation is
+	\[
+		\vb J = \vb J_1 + \vb J_2
+	\]
+	which is the total angular momentum operator. It has the standard angular momentum commutation relations and in $V _{j_1}\otimes V _{j_2}$ we construct standard basis states for the total angular momentum $\ket{JM}$: 
+
+	(TO BE CONTINUED)
+	
+	 
+	
+
+	
 \end{document}
