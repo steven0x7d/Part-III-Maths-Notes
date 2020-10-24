@@ -1309,10 +1309,142 @@
 		\end{align*}
 	\end{proof}
 
-	To check the system indeed resembles a infinite set of decoupled S.H.O.s, we evaluate the Hamiltonian
+	To check the system indeed resembles a infinite set of decoupled S.H.O.s, we evaluate the Hamiltonian \lecnr{8}
 	\begin{align*}
-		\hat H = \frac{1}{2} \int _{\mathbb{R}^3} \dd[3]{\vb x} \left( \hat \pi^2 + \abs{\grad \hat \phi}^2 + m^2 \hat \phi^2 \right)
+		\hat H & = \frac{1}{2} \int _{\mathbb{R}^3} \dd[3]{\vb x} \left( \hat \pi^2 + \abs{\grad \hat \phi}^2 + m^2 \hat \phi^2 \right)\\
+		& = \frac{1}{2} \int \dd[3]{\vb x} \int \frac{\dd[3]{\vb p} \dd[3]{\vb q}}{(2 \pi)^6} \bigg[ \alpha (\hat a _{\vb p} e ^{\mathrm{i} \vb p \vdot \vb x} - \hat a^\dagger _{\vb p} e ^{-\mathrm{i} \vb p \vdot \vb x}) (\hat a _{\vb q} e ^{\mathrm{i} \vb q \vdot \vb x} - \hat a^\dagger _{\vb q} e ^{-\mathrm{i} \vb q \vdot \vb x})\\
+		& \qquad \qquad + \beta (\mathrm{i} \vb p \hat a _{\vb p} e ^{\mathrm{i} \vb p \vdot \vb x} - \mathrm{i} \vb p \hat a^\dagger _{\vb p} e ^{-\mathrm{i} \vb p \vdot \vb x}) (\mathrm{i}\vb q \hat a _{\vb q} e ^{\mathrm{i} \vb q \vdot \vb x} - \mathrm{i}\vb q\hat a^\dagger _{\vb q} e ^{-\mathrm{i} \vb q \vdot \vb x})\\
+		&\qquad  \qquad + \delta (\hat a _{\vb p} e ^{\mathrm{i} \vb p \vdot \vb x} + \hat a^\dagger _{\vb p} e ^{-\mathrm{i} \vb p \vdot \vb x}) (\hat a _{\vb q} e ^{\mathrm{i} \vb q \vdot \vb x} + \hat a^\dagger _{\vb q} e ^{-\mathrm{i} \vb q \vdot \vb x})\bigg]
 	\end{align*}
+	where $\alpha = - \sqrt{\omega _{\vb p} \omega _{\vb q}} / 2$, $\beta = 1/(2 \sqrt{\omega _{\vb p} \omega _{\vb q}})$ and $\delta = m^2 \beta$, with $\omega _{\vb p} = \sqrt{\abs{\vb p}^2 + m^2}$ . 
+
+	To simplify this evaluation, we note
+	\begin{itemize}
+		\item All terms go like $e ^{\pm \mathrm{i} \vb p \vdot \vb x} e ^{\pm \mathrm{i} \vb q \vdot \vb x}$;
+		\item So if we do the $\dd[3]{\vb x}$ integral, we get $(2 \pi)^3 \delta ^{(3)}(\pm \vb p \pm \vb q)$;
+		\item Do the $\dd[3]{\vb q}$ integral we get $\vb q = \pm \vb p$;
+		\item Finally, we have operator dependence with four types of terms \[
+			\hat a _{\vb p}\hat a _{-\vb p}, \quad \hat a^\dagger _{\vb p} \hat a^\dagger _{-\vb p}, \quad \hat a _{\vb p}\hat a^\dagger _{\vb p}, \quad \hat a^\dagger _{\vb p}\hat a _{\vb p};
+		\]
+		\item Collect coefficients, we have \begin{align*}
+			\hat H & = \frac{1}{4} \int \ddk{\vb p}{3} \frac{1}{\omega _{\vb p}} \bigg[\left( - \omega^2 _{\vb p} + \abs{\vb p}^2 + m^2 \right) \left( \hat a _{\vb p} \hat a _{-\vb p} + \hat a^\dagger _{\vb p} \hat a^\dagger _{-\vb p} \right) \\
+			& \qquad \qquad \qquad \qquad + \left(\omega^2 _{\vb p} + \abs{\vb p}^2 + m^2 \right) \left( \hat a _{\vb p} \hat a^\dagger _{\vb p} + \hat a^\dagger _{\vb p} \hat a _{\vb p} \right) \bigg]
+		\end{align*}
+	\end{itemize}
+
+	Thus we have
+	\begin{equation}
+		\hat H = \frac{1}{2} \int \ddk{\vb p}{3} \omega _{\vb p} \left( \hat a _{\vb p}\hat a^\dagger _{\vb p} + \hat a^\dagger _{\vb p} \hat a _{\vb p} \right).
+		\label{eq:2.3.5}
+	\end{equation}
 	
-	(TO BE CONTINUED)
+	\subsubsection{The Vacuum}
+	
+	\begin{defi}
+		The \emph{vacuum state} $\ket{0}$ is the state of lowest energy, satisfying 
+		\[
+			\hat a _{\vb p} \ket{0} = 0 \quad \forall \vb p \in \mathbb{R}^3.
+		\]
+	\end{defi}
+
+	We can calculate the vacuum energy by
+	\[
+		\hat H \ket{0} = E_0 \ket{0}
+	\]
+	where $E_0$ is the energy. To simplify this calculation, we can reorder the $\hat a, \hat a^\dagger$ as 
+	\[
+		\hat a _{\vb p}\hat a^\dagger _{\vb p} + \hat a^\dagger _{\vb p} \hat a _{\vb p} = 2 \hat a^\dagger _{\vb p} \hat a _{\vb p} + (2 \pi)^3 \underbrace{\delta ^{(3)}(0)}_{= \infty}
+	\]
+	so
+	\[
+		\hat H = \int \ddk{\vb p}{3} \left( \omega _{\vb p} \hat a^\dagger _{\vb p} \hat a _{\vb p} \right) + \frac{1}{2} \int \dd[3]{\vb p} \omega _{\vb p} \delta ^{(3)}(0).
+	\]
+	
+	The vacuum energy is 
+	\[
+		E = \frac{1}{2} \int \dd[3]{\vb p} \omega _{\vb p} \delta ^{(3)}(0) = \infty.
+	\]
+	
+	Actually, there are two different types of infinity:
+	\paragraph{\underline{Infrared (IR) Divergence}} (Large distance, low energy scale): \[
+		(2 \pi)^3 \delta ^{(3)}(\vb p) = \int _{\mathbb{R}^3} \dd[3]{\vb x} e ^{\mathrm{i} \vb x \vdot \vb p}.
+	\]
+	divergence at $\vb p = 0$ comes from the infinity volume of space. 
+	
+	The cure is to put our theory in a large box of side $L$ ($L \ll M^{-1}$), so $x_i \in [-L/2,+L/2]$ with periodic boundary condition. So we can think this way:
+	\[
+		(2 \pi)^3 \delta ^{(3)}(\vb p) = \lim _{L \to \infty} \int_{-L/2}^{+L/2} \dd[3]{\vb x} e ^{\mathrm{i} \vb x \vdot \vb p}
+	\]
+	so at $\vb p = 0$ we have the interpretation
+	\[
+		(2 \pi)^3 \delta ^{(3)}(0) = \lim _{L \to \infty} V_L
+	\]
+	where $V_L = L^3$ is the volume of the box we're considering. Thus, to be more sensible and get rid of the IR infinity, we can consider the \emph{energy density}
+	\[
+		\mathcal{E}_0 := \lim _{L \to \infty} \left[ \frac{E_0 ^{(L)}}{V_L} \right]
+	\]
+	with
+	\[
+		E_0 ^{(L)} := \int_{-L/2}^{+L/2} \dd[3]{\vb x} \int \ddk{\vb p}{3} \frac{1}{2} \omega _{\vb p}
+	\]
+	so
+	\[
+		\mathcal{E}_0 = \int \ddk{\vb p}{3} \frac{1}{2} \omega _{\vb p} = \infty
+	\]
+	with $\omega _{\vb p} = \sqrt{\abs{\vb p}^2 + m^2}$. This is still infinite, but of a different type. It comes from large $\abs{\vb p}$. \[
+		\mathcal{E}_0 \sim \int \abs{\vb p}^3 \dd{\abs{\vb p}} = \infty.
+	\]
+	\paragraph{\underline{Ultraviolet (UV) Divergence}} (High energy, short distance) This is due to large momenta as shown above. The cure is to introduce a UV cut-off $\Lambda \ll M \ll L^{-1}$. Define
+	\[
+		\mathcal{E}_0 ^{(\Lambda)} := \int \ddk{\vb p}{3} \frac{1}{2} \omega _{\vb p} \quad \text{with limit} \quad \abs{\vb p} < \Lambda.
+	\]
+	
+	Then
+	\[
+		\mathcal{E}_0 ^{(\Lambda)} = \frac{4 \pi}{2 (2 \pi)^3} \int_{0}^{\Lambda} \abs{\vb p} \sqrt{\abs{\vb p}^2 + m^2} \dd{\abs{\vb p}} = \frac{1}{16 \pi^2} \Lambda^4 \left[ 1 + \mathcal{O} \left( \frac{M^2}{\Lambda^2} \right) \right].
+	\]
+
+	The alternative is also useful: putting the theory on \emph{spatial lattice}. We can change the domain of the field by
+	\[
+		\mathbb{R}^3 \to (\mathbb{Z})^3
+	\]
+	with lattice spacing $a \ll M^{-1}$ and we find
+	\[
+		\mathcal{E}_0 ^{(a)} \sim \frac{1}{a^4}.
+	\]
+
+	There are two view points towards this
+	\begin{itemize}
+		\item Continuum must be defined by an appropriate limit $\Lambda \to \infty$ (as $a \to 0$);
+		\item The theory should only be valid up to some maximum energy scale. ``Effective Field Theory''
+	\end{itemize}
+
+	Now we focus on our specific divergent $\mathcal{E}_0$. To fix this, there are some different attempts: 
+	\begin{enumerate}[i)]
+		\item We can choose a different quantisation scheme: \emph{normal order} all products of $\hat \phi$ and $\hat \pi$. \begin{defi}
+			The \emph{normal ordered} operator $\nord{\hat X}$ for $\hat X$ is defined by placing all annihilation operators to the right.
+		\end{defi}
+		For example, $\nord{\hat a (\hat a^\dagger)^2 \hat a \hat a^\dagger}\ = (\hat a^\dagger)^3 (\hat a)^2 $.
+		
+		We define our new Hamiltonian by
+		\[
+			\hat H _{\text{normal}} :=\ \nord{\hat H}\ = \frac{1}{2} \int \ddk{\vb p}{3} \omega _{\vb p} \nord{\left( \hat a _{\vb p}\hat a^\dagger _{\vb p} + \hat a^\dagger _{\vb p} \hat a _{\vb p} \right)}\ = \int \ddk{\vb p}{3} \omega _{\vb p} \hat a^\dagger _{\vb p} \hat a _{\vb p}.
+		\]
+		so
+		\[
+			(\mathcal{E}_0)_{\text{normal}} = 0.
+		\]
+		\item ``Who cares?'' Only energy differences are observable...
+	\end{enumerate}
+
+	However, when considering gravity, the energy-momentum tensor appears on the right-hand side of Einstein equation
+	\[
+		R _{\mu \nu} - \frac{1}{2} R g _{\mu \nu} = 8 \pi G T _{\mu \nu}.
+	\]
+	
+
+	
+	
+	
+	
 \end{document}
