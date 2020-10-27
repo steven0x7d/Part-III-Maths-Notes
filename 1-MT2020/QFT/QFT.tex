@@ -1366,7 +1366,7 @@
 	\]
 	
 	Actually, there are two different types of infinity:
-	\paragraph{\underline{Infrared (IR) Divergence}} (Large distance, low energy scale): \[
+	\paragraph{Infrared (IR) Divergence} (Large distance, low energy scale): \[
 		(2 \pi)^3 \delta ^{(3)}(\vb p) = \int _{\mathbb{R}^3} \dd[3]{\vb x} e ^{\mathrm{i} \vb x \vdot \vb p}.
 	\]
 	divergence at $\vb p = 0$ comes from the infinity volume of space. 
@@ -1394,7 +1394,7 @@
 	with $\omega _{\vb p} = \sqrt{\abs{\vb p}^2 + m^2}$. This is still infinite, but of a different type. It comes from large $\abs{\vb p}$. \[
 		\mathcal{E}_0 \sim \int \abs{\vb p}^3 \dd{\abs{\vb p}} = \infty.
 	\]
-	\paragraph{\underline{Ultraviolet (UV) Divergence}} (High energy, short distance) This is due to large momenta as shown above. The cure is to introduce a UV cut-off $\Lambda \ll M \ll L^{-1}$. Define
+	\paragraph{Ultraviolet (UV) Divergence} (High energy, short distance) This is due to large momenta as shown above. The cure is to introduce a UV cut-off $\Lambda \ll M \ll L^{-1}$. Define
 	\[
 		\mathcal{E}_0 ^{(\Lambda)} := \int \ddk{\vb p}{3} \frac{1}{2} \omega _{\vb p} \quad \text{with limit} \quad \abs{\vb p} < \Lambda.
 	\]
@@ -1438,9 +1438,205 @@
 	\end{enumerate}
 
 	However, when considering gravity, the energy-momentum tensor appears on the right-hand side of Einstein equation
-	\[
+	\begin{equation}
 		R _{\mu \nu} - \frac{1}{2} R g _{\mu \nu} = 8 \pi G T _{\mu \nu}.
+		\label{eq:2.3.6}
+	\end{equation}
+
+	\lecnr{9}
+	
+	If we were to have constant vacuum energy density, then
+	\[
+		\mel{0}{\hat T _{\mu \nu}}{0} = \mathcal{E}_0 g _{\mu \nu}
 	\]
+	contributes \emph{cosmological constant} term to (\ref{eq:2.3.6}), proportional to $\lambda g _{\mu \nu}$, where $\lambda$ is the cosmological constant. Naive calculation suggests
+	\[
+		\lambda \overset{?}{\sim} \mathcal{E}_0 G.
+	\]
+	note that $[G] = -2, [\mathcal{E}_0] = + 4, [\lambda] = +2$. 
+
+	We have a measurement
+	\[
+		\lambda \sim (10 ^{-3}\text{ eV})^2
+	\]
+	which is tiny compared with scales of high energy physics.
+
+	Recall
+	\[
+		\mathcal{E}_0 \sim \Lambda^4
+	\]
+	for UV cut-off $\Lambda$. It could be
+	\[
+		\Lambda \sim M _{\text{pl}} = \sqrt{\frac{\hbar c}{G}}
+	\]
+	so in natural units
+	\[
+		\lambda \sim (M _{\text{pl}})^2 \sim (10 ^{28} \text{ eV})
+	\]
+	which gives huge discrepancy between theory and observation. Need further investigation... 
+
+	We now show that vacuum energy \emph{is} real!
+
+	\paragraph{Casimir Effect} Consider a set of parallel metal plates in $\mathbb{R}^3$ both with area $A$ in a separation $d$.
+
+	\needfig{Casimir Effect}
+		
+	We study the effect due to photon field in real world. Model with massless scalar field $\phi(t,\vb x)$ subject to boundary condition
+	\[
+		\phi(t,0,y,z) = \phi(t,d,y,z) = 0.
+	\]
+	
+	The field modes are $\hat a _{\vb p}, \hat a^\dagger _{\vb p}$ in region between plate for quantised momenta \[
+		\vb p = \left( \frac{n \pi}{d}, p_y, p_z \right), \quad n \in \mathbb{Z}^{+}.
+	\]
+	The vacuum energy density is
+	\[
+		\int \ddk{\vb p}{3} \frac{1}{2} \omega _{\vb p} = \mathcal{E}_0
+	\]
+	and by changing the integral in $x$ to a sum
+	\[
+		\int \ddk{p_x}{} \quad \to \quad \frac{1}{d}\sum _{n \in \mathbb{Z}^+},
+	\]
+	the energy density between the plates can be calculated by
+	\[
+		\tilde{\mathcal{E}}_0 = \frac{1}{d} \sum _{n = 1}^{\infty} \int \frac{\dd{p_y} \dd{p_z}}{(2 \pi)^2} \frac{1}{2} \sqrt{\left( \frac{n \pi}{d} \right)^2 + p_y^2 + p_z^2}.
+	\]
+	
+	If just consider the energy shift
+	\[
+		\Delta E := (\tilde{\mathcal{E}}_0 - \mathcal{E}_0) A d
+	\]
+	we can get the pressure on plates
+	\[
+		p = - \frac{1}{A}\dv{d} \Delta E(d) = - \frac{\pi^2}{480 d^4} + \cdots
+	\]
+	in agreement with experiment.
+
+	\subsubsection{Excited States}
+
+	\begin{defi}
+		We define an \emph{excited state with 3-momentum $\vb p$} as
+		\[
+			\ket{\vb p} = \hat a^\dagger _{\vb p} \ket{0}, \quad \forall \vb p \in \mathbb{R}^3.
+		\]
+	\end{defi}
+
+	\paragraph{Energy}
+	Consider the energy difference
+	\[
+		\hat H - E_0 = \int \ddk{\vb q}{3} \omega _{\vb q} \hat a^\dagger _{\vb q} \hat a _{\vb q}
+	\]
+	and
+	\[
+		[\hat a^\dagger _{\vb q} \hat a _{\vb q}, \hat a^\dagger _{\vb p}] = \hat a^\dagger _{\vb q}[\hat a _{\vb q}, \hat a^\dagger _{\vb p}] = (2 \pi)^3 \delta ^{(3)}(\vb q - \vb p) \hat a^\dagger _{\vb q}.
+	\]
+
+	Then one can deduce
+	\[
+		[(\hat H - E_0), \hat a^\dagger _{\vb p}] = \omega _{\vb p} \hat a^\dagger _{\vb p}
+	\]
+	using which we calculate
+	\begin{align*}
+		(\hat H - E_0)\ket{\vb p} = (\hat H - E_0) \hat a^\dagger _{\vb p} \ket{0} = \hat a^\dagger _{\vb p} \cancelto{\text{\tiny 0}}{(\hat H - E_0)\ket{0}} + \omega _{\vb p} \underbrace{\hat a^\dagger _{\vb p} \ket{0}}_{\ket{\vb p}}
+	\end{align*}
+	so
+	\[
+		(\hat H - E_0)\ket{\vb p} = E _{\vb p}\ket{\vb p}
+	\]
+	where
+	\[
+		E _{\vb p} := \omega _{\vb p} = + \sqrt{\abs{\vb p}^2 + m^2}.
+	\]
+	
+	\paragraph{Momentum}
+	Classical momentum is defined as
+	\[
+		P^i = \int \dd[3]{\vb x} T ^{0i}, \quad i = 1,2,3
+	\]
+	with 
+	\[
+		T ^{\mu \nu} = \partial^\mu \phi \partial^\nu \phi - \eta ^{\mu \nu} \mathcal{L}.
+	\]
+	(See Question 1 on Example Sheet 2.)
+
+	Then the quantum momentum operator (normal ordered) is
+	\[
+		\hat{\vb P} = \int \ddk{\vb p}{3} \vb p \hat a^\dagger _{\vb p} \hat a _{\vb p},
+	\]
+	then
+	\[
+		\hat{\vb P}\ket{\vb p} = \vb p \ket{\vb p}.
+	\]
+	
+	For the above discussion, our conclusions are
+	\begin{itemize}
+		\item $\ket{\vb p}$ corresponds to relativistic particle of mass $m$, momentum $\vb p$ and energy \[
+			E _{\vb p} = + \sqrt{\abs{\vb p}^2 + m^2}.
+		\]
+		\item We can also check that the angular momentum vanishes in rest frame of the particle \[
+			\mel{\vb 0}{\hat{\vb J}}{\vb 0} = 0
+		\]
+		i.e.\ no intrinsic angular momentum, confirming it's a scalar particle with spin 0.
+	\end{itemize}
+
+	\subsubsection{Multiparticle States}
+	\begin{defi}
+		Upon the excited (single particle) states, we define the \emph{multiparticle state}
+		\[
+			\ket{\vb p_1, \vb p_2, \cdots, \vb p_n} := \hat a^\dagger _{\vb p_1} \hat a^\dagger _{\vb p_2} \cdots \hat a^\dagger _{\vb p_n} \ket{0}.
+		\]
+	\end{defi}
+
+	We can show the multiparticle state has energy
+	\[
+		(E - E_0) = \sum _{a = 1}^n E _{\vb p_a}
+	\]
+	and momentum
+	\[
+		\vb p = \sum _{a = 1}^n \vb p _{a}.
+	\]
+	
+	There are $n$ non-interacting particles, we can introduce the particle number operator.
+
+	\begin{defi}
+		The \emph{particle number operator $\hat N$} is defined as 
+		\begin{equation}
+			\hat N = \int \ddk{\vb p}{3} \hat a^\dagger _{\vb p} \hat a _{\vb p}.
+		\end{equation}
+	\end{defi}
+	
+	So
+	\[
+		\hat N \ket{\vb p_1, \cdots,\vb p_n} = n \ket{\vb p_1, \cdots, \vb p_n}.
+	\]
+	
+	It is true that in free field theory,
+	\[
+		[\hat N ,\hat H] = 0
+	\]
+	meaning that the particle number $n$ is conserved. Later when we discuss interacting theory, this is no longer true in general.
+
+	The state should be invariant under swapping any pair of particles, as a result of the commutation relations. For example, when $n = 2$ \[
+		\ket{\vb p_1, \vb p_2} = \hat a^\dagger _{\vb p_1} \hat a^\dagger _{\vb p_2} \ket{0} = \hat a^\dagger _{\vb p_2} \hat a^\dagger _{\vb p_1} \ket{0} = \ket{\vb p_2, \vb p_1}.
+	\]
+
+	The particles described by scalar fields act as bosons.
+
+	\subsubsection{Normalisation}
+	We choose $\braket{0}{0} = 1$. 
+
+	Look at
+	\[
+		\braket{\vb p}{\vb q} = \mel{0}{\hat a _{\vb p}\hat a^\dagger _{\vb q}}{0} = (2 \pi)^3 \delta ^{(3)}(\vb p - \vb q)
+	\]
+	and we see the 3-delta function is \emph{not} Lorentz invariant. We fix this with new \emph{relativistic normalisation}.
+
+	Consider completeness identity
+	\[
+		\1 = \int \ddk{\vb p}{3} \dyad{\vb p}{\vb p}
+	\]
+	(TO BE CONTINUED)
+	 
 	
 
 	
