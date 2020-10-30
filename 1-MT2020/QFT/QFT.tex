@@ -1633,9 +1633,246 @@
 
 	Consider completeness identity
 	\[
-		\1 = \int \ddk{\vb p}{3} \dyad{\vb p}{\vb p}
+		\hat \1 = \int \ddk{\vb p}{3} \dyad{\vb p}{\vb p}
 	\]
-	(TO BE CONTINUED)
+
+	\lecnr{10} The Lorentz invariant measure is
+	\[
+		\int \dd{\mu_p} = \int \dd[4]{p} \delta (p_\mu p^\mu - m^2) \Theta(p_0)
+	\]
+	where
+	\[
+		\Theta(x) = \begin{cases}
+			1 & x>0\\
+			0 & x<0
+		\end{cases}
+	\]
+	
+	$\delta$-function imposes constraint, 
+	\[
+		p_\mu p^\mu = m^2 \quad \text{with} \quad p_0 > 0 \qquad \Leftrightarrow \qquad p_0 = + \sqrt{\abs{\vb p}^2 + m^2} = E _{\vb p},
+	\]
+	thus
+	\[
+		\int \dd{\mu _p} = \int \dd[3]{\vb p} \int_{0}^{\infty} \frac{\dd{(p_0^2)}}{2p_0} \delta(p_0^2 - \abs{\vb p}^2 - m^2) = \int \frac{\dd[3]{\vb p}}{2 E _{\vb p}}.
+	\]
+	
+	To rewrite the completeness relation, we define new normalisation for states
+	\[
+		\ket{p} := \sqrt{2 E _{\vb p}} \ket{\vb p}, \quad \forall \vb p
+	\]
+	where $p = p^\mu = (p_0, \vb p)$, so
+	\[
+		\hat \1 = \int \ddk{\vb p}{3} \dyad{\vb p}{\vb p} = \int \ddk{\vb p}{3} \frac{1}{2 E _{\vb p}} \dyad{p}{p} = \int \frac{\dd{\mu_p}}{(2 \pi)^3} \dyad{p}{p}.
+	\]
+
+	Thus the multiparticle states can be written as 
+	\[
+		\ket{p_1, \cdots, p_n} := \prod _{a = 1}^n \left( \sqrt{2 E _{\vb p_a}} \right) \ket{\vb p_1, \cdots, \vb p_n}.
+	\]
+
+	\subsubsection{Complex Scalar Fields}
+
+	Consider a complex scalar field
+	\[
+		\psi : \mathbb{R}^{3,1} \to \mathbb{C}
+	\]
+	with mass $M$. Its Lagrangian is
+	\[
+		\mathcal{L} = \partial_\mu \psi^* \partial^\mu \psi - M^2 \psi^* \psi.
+	\]
+	
+	We can write is in terms of two real scalar fields $\phi_1(x), \phi_2(x)$ as 
+	\[
+		\psi = \frac{1}{\sqrt{2}} (\phi_1 + \mathrm{i} \phi_2).
+	\]
+	
+	This field has global symmetry
+	\[
+		\psi \to e ^{\mathrm{i} \alpha} \psi, \quad \psi^* \to e ^{- \mathrm{i} \alpha} \psi^*
+	\]
+	for $\alpha \in [0,2 \pi)$, which admits conserved current
+	\[
+		j^\mu = \mathrm{i}\left[ \psi \partial^\mu \psi^* - \psi^* \partial^\mu \psi \right]
+	\]
+	with conserved charge
+	\[
+		Q = \int _{\mathbb{R}^3} \dd[3]{\vb x} j^0.
+	\]
+	
+	In Hamiltonian formulation, the conjugate momentum is
+	\[
+		\pi = \pdv{\mathcal{L}}{\dot \psi} = \psi^*.
+	\]
+	
+	Under quantisation (for fixed time) we have
+	\[
+		\psi(t, \vb x) \to \hat \psi(\vb x), \quad \psi^* (t, \vb x) \to \hat \psi^\dagger (\vb x)
+	\]
+	and corresponding momentum operator $\hat \pi, \hat \pi^{\dagger}$. Quantisation condition is
+	\[
+		[\hat \psi(\vb x), \hat \pi(\vb y)] = \mathrm{i} \delta ^{(3)}(\vb x - \vb y), \quad [\hat \psi^{\dagger}(\vb x), \hat \pi^{\dagger}(\vb y)] = \mathrm{i} \delta^{(3)} (\vb x - \vb y).
+	\]
+
+	Similar to the real scalar field, the mode expansions of the complex fields are
+	\[
+		\hat \psi = \int \ddk{\vb p}{3} \frac{1}{\sqrt{2E _{\vb p}}} (\hat b _{\vb p} e ^{\mathrm{i} \vb p \vdot \vb x} + \hat c^{\dagger}_{\vb p} e ^{-\mathrm{i} \vb p \vdot \vb x}),
+	\]
+	where $\hat b _{\vb p}$ and $\hat c^{\dagger}_{\vb p}$ are \emph{oscillator variables}. Here, we have two types of particles
+	\[
+		\ket{\vb p, +} = \hat c^{\dagger}_{\vb p} \ket{0} \text{{\color{red}\ ``particle''}}\quad \text{and} \quad \ket{\vb p, -} = \hat b^{\dagger} _{\vb p} \ket{0}\text{{\color{red}\ ``anti-particle''}}.
+	\]
+	
+	The $\U(1)$ conserved charge is
+	\[
+		\hat Q = \mathrm{i} \int \dd[3]{\vb x} \left(\hat \pi \hat \psi - \hat \psi^{\dagger} \hat \pi^{\dagger}\right) = \int \ddk{\vb p}{3} \left( \hat c^{\dagger}_{\vb p}\hat c _{\vb p} - \hat b^{\dagger}_{\vb p} \hat b _{\vb p} \right)
+	\]
+	and its conservation is shown by
+	\[
+		[\hat Q, \hat H] = 0.
+	\]
+	
+	Also notice
+	\[
+		\hat Q \ket{\vb p, \pm} = \pm \ket{\vb p, \pm}.
+	\]
+
+	\subsection{Time Dependence}
+	
+	\subsubsection{Schr\"odinger Picture}	
+
+	So far we are working in Schr\"odinger picture, in which the field operator
+	\[
+		\hat \phi_S(\vb x) := \hat \phi(\vb x)
+	\]
+	is \emph{time independent}.
+
+	The time dependence lives in \emph{states}
+	\[
+		\ket{\psi}_S = \ket{\psi(t)}_S \in \mathcal{H}
+	\]
+	obeying time dependent \emph{Schr\"odinger equation}
+	\[
+		\mathrm{i} \dv{t} \ket{\psi(t)}_S = \hat H \ket{\psi(t)}_S.
+	\]
+	
+	For example, the particle state $\ket{\vb p}$ as $\ket{\vb p(t)}_S$ obeys
+	\[
+		\mathrm{i} \dv{t} \ket{\vb p(t)}_S = \hat H \ket{\vb p(t)}_S = E _{\vb p} \ket{\vb p(t)}_S
+	\]
+	giving
+	\[
+		\ket{\vb p(t)}_S = e ^{- \mathrm{i} E _{\vb p}t}\ket{\vb p(0)}_S.
+	\]
+
+	\subsubsection{Heisenberg Picture}
+
+	Often it is convenient to work in \emph{Heisenberg picture}, such that the states are
+	\[
+		\ket{\psi}_H = e ^{+ \mathrm{i} \hat H t} \ket{\psi (t)}_S
+	\]
+	so $\ket{\psi}_H$ is \emph{time independent}, and the operators are
+	\[
+		\hat O_H := e ^{+ \mathrm{i} \hat H t} \hat O_S e ^{- \mathrm{i} \hat H t}
+	\]
+	that $\hat O_H$ are \emph{time dependent}.
+
+	In particular, we define the Heisenberg picture field operator
+	\[
+		\hat \phi(x) = e ^{+ \mathrm{i} \hat H t}\hat \phi(\vb x)e ^{- \mathrm{i}\hat H t}.
+	\]
+	where $x = x^\mu = (t, \vb x)$. We define such time dependent operators since in relativity we tend to unify space and time. Under this scheme, the Lorentz invariance is clearer. Also, one can check that it obeys Klein-Gordon equation (see Example Sheet 2, Question 2).
+
+	The mode expansion of such (real scalar) field in Heisenberg picture is
+	\[
+		\hat \phi(x) = \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left( (\hat a _{\vb p})_H e ^{\mathrm{i} \vb p \vdot \vb x} + (\hat a^{\dagger}_{\vb p})_H e ^{- \mathrm{i} \vb p \vdot \vb x} \right),
+	\]
+	in particular
+	\[
+		(\hat a _{\vb p})_H = e ^{+ \mathrm{i} \hat H t}\hat a _{\vb p} e ^{-\mathrm{i} \hat H t}
+	\]
+	and 
+	\[
+		\dv{t}\/(\hat a _{\vb p})_H = \mathrm{i} [\hat H, (\hat a _{\vb p})_H] = - \mathrm{i} E _{\vb p} (\hat a _{\vb p})_H
+	\]
+	so
+	\[
+		(\hat a _{\vb p})_H (t) = e ^{- \mathrm{i} E _{\vb p}t} (\hat a _{\vb p})_H(0) = e ^{-\mathrm{i} E _{\vb p}t}\hat a _{\vb p}.
+	\]
+	
+	A similar calculation gives
+	\[
+		(\hat a^{\dagger}_{\vb p})_H = e ^{+\mathrm{i} E _{\vb p}t} \hat a^{\dagger} _{\vb p}.
+	\]
+	
+	Then the mode expansion can be simplified as 
+	\[
+		\hat \phi(x) = \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left( \hat a _{\vb p} e ^{- \mathrm{i} p \cdot x} + \hat a ^{\dagger}_{\vb p} e ^{+ \mathrm{i} p \cdot x} \right)
+	\]
+	where $p \cdot x = p_\mu x^\mu = E _{\vb p}t - \vb p \vdot \vb x$. 
+	\newpage
+	\section{Interacting QFT}
+
+	In general, an interacting field theory is very hard to quantise and solve by analytical methods. However, we solved free QFT completely. The main idea here is to study weakly interacting theories that are \emph{near to} free field theory so we can solve them by perturbation theory.
+
+	Consider a general Lagrangian for a (real) scalar field
+	\[
+		\mathcal{L} = \frac{1}{2} \partial_\mu \tilde{\phi} \partial^\mu \tilde \phi - V (\tilde \phi)
+	\]
+	and we calculate the Hamiltonian
+	\[
+		H = \int _{\mathbb{R}^3} \left( \frac{1}{2} \dot{\tilde{\phi}}^2 + \frac{1}{2} \abs{\grad \tilde{\phi}}^2 + V(\tilde \phi) \right).
+	\]
+	
+	We seek the state of lowest energy $\tilde \phi(t, \vb x) \equiv \tilde \phi_0$, that $\tilde \phi_0$ is at the minimum of $V$ so
+	\begin{equation}
+		\pdv{V}{\tilde \phi}\bigg|_{\tilde \phi = \tilde \phi_0} = 0 \quad \text{and} \quad \pdv[2]{V}{\tilde \phi}\bigg|_{\tilde \phi = \tilde \phi_0} \geq 0.
+		\label{eq:3.0.1}
+	\end{equation}
+	WLOG we set \begin{equation}
+		V(\tilde \phi_0) = 0.
+		\label{eq:3.0.2}
+	\end{equation}
+	
+	We can expand the field around the minimum value of $V$ by using
+	\[
+		\phi(x) : = \tilde \phi(x) - \tilde \phi_0
+	\]
+	so
+	\[
+		V(\tilde \phi) = \sum _{n = 0}^{\infty} \frac{1}{n!} \pdv[n]{V}{\tilde \phi}\bigg|_{\tilde \phi = \tilde \phi_0} \phi^n.
+	\]
+	
+	By (\ref{eq:3.0.1}), (\ref{eq:3.0.2}), we can rewrite the Lagrangian as
+	\[
+		\mathcal{L} = \mathcal{L}_0 + \mathcal{L}_I.
+	\]
+	We call $\mathcal{L}_0$ is the \emph{free Lagrangian} and $\mathcal{L}_I$ the \emph{interacting Lagrangian}, and we find
+	\[
+		\mathcal{L}_0 = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{1}{2} m^2 \phi^2
+	\]
+	where $m^2 = \pdv[2]{V}{\tilde \phi}\big|_{\tilde \phi = \tilde{\phi}_0} \geq 0$, and
+	\[
+		\mathcal{L}_I = - \sum _{n = 3}^{\infty} \frac{\lambda_n}{n!} \phi^n
+	\]
+	where
+	\[
+		\lambda_n = \pdv[n]{V}{\tilde \phi}\bigg|_{\tilde \phi = \tilde{\phi}_0}.
+	\]
+	
+	
+	
+
+
+	
+
+
+	
+
+	 
+	
+	
+
 	 
 	
 
