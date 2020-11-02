@@ -2,7 +2,6 @@
 
 \usepackage{../../zyancamlec}
 \usepackage[compat=1.1.0]{tikz-feynhand}
-
 \def\ntripos{Mathematical Tripos}
 \def\npart{III}
 \def\ncourse{Quantum Field Theory}
@@ -1821,7 +1820,7 @@
 	\]
 	and we calculate the Hamiltonian
 	\[
-		H = \int _{\mathbb{R}^3} \left( \frac{1}{2} \dot{\tilde{\phi}}^2 + \frac{1}{2} \abs{\grad \tilde{\phi}}^2 + V(\tilde \phi) \right).
+		H = \int _{\mathbb{R}^3} \dd[3]{\vb x} \left( \frac{1}{2} \dot{\tilde{\phi}}^2 + \frac{1}{2} \abs{\grad \tilde{\phi}}^2 + V(\tilde \phi) \right).
 	\]
 	
 	We seek the state of lowest energy $\tilde \phi(t, \vb x) \equiv \tilde \phi_0$, that $\tilde \phi_0$ is at the minimum of $V$ so
@@ -1845,7 +1844,7 @@
 	
 	By (\ref{eq:3.0.1}), (\ref{eq:3.0.2}), we can rewrite the Lagrangian as
 	\[
-		\mathcal{L} = \mathcal{L}_0 + \mathcal{L}_I.
+		\mathcal{L} = \mathcal{L}_0 + \mathcal{L}_{\text{int}}.
 	\]
 	We call $\mathcal{L}_0$ is the \emph{free Lagrangian} and $\mathcal{L}_I$ the \emph{interacting Lagrangian}, and we find
 	\[
@@ -1853,31 +1852,149 @@
 	\]
 	where $m^2 = \pdv[2]{V}{\tilde \phi}\big|_{\tilde \phi = \tilde{\phi}_0} \geq 0$, and
 	\[
-		\mathcal{L}_I = - \sum _{n = 3}^{\infty} \frac{\lambda_n}{n!} \phi^n
+		\mathcal{L}_{\text{int}} = - \sum _{n = 3}^{\infty} \frac{\lambda_n}{n!} \phi^n
 	\]
 	where
 	\[
 		\lambda_n = \pdv[n]{V}{\tilde \phi}\bigg|_{\tilde \phi = \tilde{\phi}_0}.
 	\]
-	
-	
-	
 
+	$\lambda_n$ are the \emph{coupling constants} and we hope to calculate when they are \emph{small}. We carry out a dimensional analysis. \lecnr{11} 
 
+	We know that
+	\[
+		[S] = 0 \quad [x] = -1 \quad [\partial_\mu] = +1
+	\]
+	thus 
+	\[
+		S = \int \dd[4]{x} \mathcal{L} \quad \Rightarrow \quad [\mathcal{L}] = 4
+	\]
+	so
+	\[
+		[\partial_\mu \phi \partial^\mu \phi] = 4 \quad \Rightarrow \quad [\phi] = 1.
+	\]
 	
+	To find the dimension of the coupling constants, we demand
+	\[
+		\left[ \frac{\lambda_n \phi^n}{n!} \right] = 4 \quad \text{so} \quad [\lambda_n] = 4-n.
+	\]
+	
+	For $n \neq 4$, $[\lambda_n]\neq 0$. To investigate further, consider a process with characteristic energy scale $E \geq m$. The effective dimensionless parameter is
+	\[
+		\tilde \lambda_n = \lambda_n E ^{n-4}.
+	\]
+	
+	There are three cases
+	\begin{itemize}
+		\item \underline{$n < 4$}: these are called \emph{relevant coupling}. They are weakly coupled at high energy. For $\lambda_n \ll M ^{4-n}$ the perturbation theory is good for all energies;
+		\item \underline{$n = 4$}: these are called \emph{marginal coupling}. The coupling constant is dimensionless, so in general the perturbation theory is good for $\lambda_4 \ll 1$;
+		\item \underline{$n > 4$}: these are called \emph{irrelevant coupling}. In this case, perturbation theory is weakly coupled only at low energies. Perturbation theory is good only for $\lambda_n \ll E ^{4-n}$ for some ``maximum'' energy scale $E$. 
+	\end{itemize}
 
+	For now, we restrict our attention to only relevant and marginal couplings.
 
-	
+	\begin{ex}[$\phi^4$-theory]
+		This theory has Lagrangian 
+		\[
+			\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{1}{2} m^2 \phi^2 - \frac{\lambda}{4!} \phi^4
+		\]
+		and the perturbation theory is good when $\lambda \ll 1$.
+	\end{ex}
 
-	 
-	
-	
+	\begin{ex}[Scalar Yukawa theory]
+		This theory involves two fields
+		\begin{align*}
+			\phi : \mathbb{R}^{3,1} \to \mathbb{R} \quad &\text{with mass } m\\
+			\psi : \mathbb{R}^{3,1} \to \mathbb{C} \quad &\text{with mass } M
+		\end{align*}
+		with Lagrangian
+		\[
+			\mathcal{L} = \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{1}{2} m^2 \phi^2 + \partial_\mu \psi^* \partial^\mu \psi - M^2 \psi^* \psi - g \psi^* \psi \phi
+		\]
+		weakly coupled for $\abs{g} \ll m, M$.
+	\end{ex}
 
-	 
-	
+	\subsection{Scattering}
 
+	For the classical consideration, the locality of the theory suggests that the particles move freely for $t \to \pm \infty$.
+
+	\needfig{classical scattering}
+
+	For quantum theory, just as in the classical case, we assume particles are effectively free in the far past and the far future. Later we will see the subtleties of this assumption.
+
+	\needfig{1}
+
+	The reaction amplitude can be written as
+	\[
+		\mathcal{A}_{i \to f} = \lim _{T \to \infty} \left[ \bra{f, t = +\frac{T}{2}}_S{e ^{\mathrm{i} \hat H T}}\ket{i, t = -\frac{T}{2}}_S \right].
+	\]
+
+	The Hamiltonian can be written as 
+	\[
+		\hat H = \hat H_0 + \hat H _{\text{int}}
+	\]
+	where $\hat H_0$ is the \emph{free Hamiltonian} and $\hat H _{\text{int}}$ is the \emph{interaction Hamiltonian}, just as we did for the Lagrangian.
+
+	For example, for the $\phi^4$-theory,
+	\[
+		\hat H_0 = \frac{1}{2} \int _{\mathbb{R}^3} \dd[3]{\vb x} \left( \hat \pi^2 + \abs{\grad \hat \phi}^2 + m^2 \hat \phi^2 \right)
+	\]
+	and
+	\[
+		\hat H _{\text{int}} = \frac{\lambda}{4!} \int _{\mathbb{R}^3} \dd[3]{\vb x} \hat \phi^4
+	\]
+	which contains terms such as 
+	\[
+		\hat a^{\dagger} _{\vb p_1}\hat a^{\dagger} _{\vb p_2} \hat a^{\dagger} _{\vb p_3} \hat a^{\dagger} _{\vb p_4}
+	\]
+	with certain momentum constraints.
+
+	In general
+	\[
+		[\hat H_0 ,\hat H _{\text{int}}] \neq 0 \quad \text{and} \quad [\hat H _{\text{int}}, \hat N] \neq 0,
+	\]
+	meaning that the particle number is no longer conversed.
+
+	The key assumption is (by locality) particles are free at $t \to \pm \infty$, so we can take $\ket{i}, \ket{f}$ to be eigenstates of free Hamiltonian $\hat H_0$. For example, in $\phi^4$-theory
+	\[
+		\ket{i} = \lim _{T \to \infty} \prod _{a = 1}^{n_i}\left(\sqrt{2 E _{\vb p_a}} \right)\hat a^{\dagger}_{\vb p_a} \ket{0, t = - \frac{T}{2}}_S.
+	\]
 	
+	It is much more convenient to work in the \emph{interaction picture}:
+	\begin{itemize}
+		\item Heisenberg with respect to $\hat H_0$, but
+		\item Schr\"odinger with respect to $\hat H _{\text{int}}$.
+	\end{itemize}
 	
+	Under interaction picture, the states becomes
+	\[
+		\ket{\psi(t)}_{\mathcal{I}} := e ^{+ \mathrm{i} \hat H_0 t} \ket{\psi(t)}_S
+	\]
+	and the operators now are
+	\[
+		\hat O _{\mathcal{I}} (t) := e ^{+\mathrm{i} \hat H_0 t} \hat O_S e ^{- \mathrm{i} \hat H_0 t}.
+	\]
+	
+	We define the interaction picture of the interaction Hamiltonian as 
+	\[
+		\hat H_I (t) := \left( \hat H _{\text{int}} \right)_{\mathcal{I}} (t) = e ^{+ \mathrm{i} \hat H_0 t}\hat H _{\text{int}} e ^{- \mathrm{i} \hat H_0 t}.
+	\]
+	
+	Note that, in general,
+	\[
+		[\hat H_I (t), \hat H_I(t')] \neq 0.
+	\]
+	
+	The time evolution in Schr\"odinger picture is given by
+	\[
+		\mathrm{i} \dv{t} \ket{\psi(t)}_S = \hat H \ket{\psi(t)}_S = \left( \hat H_0 + \hat H _{\text{int}} \right) \ket{\psi(t)}_S.
+	\]
+	
+	To get the corresponding equation in the interaction picture, we calculate
+	\[
+		\mathrm{i} \dv{t} \ket{\psi(t)}_{\mathcal{I}} = \mathrm{i} \dv{t} \left( e ^{+ \mathrm{i} \hat H_0 t} \ket{\psi(t)}_S \right)
+	\]
+	(TO BE CONTINUED)
 	
 	
 \end{document}
