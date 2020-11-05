@@ -2,6 +2,7 @@
 
 \usepackage{../../zyancamlec}
 \usepackage[compat=1.1.0]{tikz-feynhand}
+\usepackage[offset=1.25em]{simpler-wick}
 \def\ntripos{Mathematical Tripos}
 \def\npart{III}
 \def\ncourse{Quantum Field Theory}
@@ -1914,7 +1915,7 @@
 		weakly coupled for $\abs{g} \ll m, M$.
 	\end{ex}
 
-	\subsection{Scattering}
+	\subsection{Interaction Picture}
 
 	For the classical consideration, the locality of the theory suggests that the particles move freely for $t \to \pm \infty$.
 
@@ -1926,7 +1927,7 @@
 
 	The reaction amplitude can be written as
 	\[
-		\mathcal{A}_{i \to f} = \lim _{T \to \infty} \left[ \bra{f, t = +\frac{T}{2}}_S{e ^{\mathrm{i} \hat H T}}\ket{i, t = -\frac{T}{2}}_S \right].
+		\mathcal{A}_{i \to f} = \lim _{T \to \infty} \left[ \bra{f, t = +\frac{T}{2}}_S{e ^{-\mathrm{i} \hat H T}}\ket{i, t = -\frac{T}{2}}_S \right].
 	\]
 
 	The Hamiltonian can be written as 
@@ -1991,10 +1992,325 @@
 	\]
 	
 	To get the corresponding equation in the interaction picture, we calculate
-	\[
-		\mathrm{i} \dv{t} \ket{\psi(t)}_{\mathcal{I}} = \mathrm{i} \dv{t} \left( e ^{+ \mathrm{i} \hat H_0 t} \ket{\psi(t)}_S \right)
-	\]
-	(TO BE CONTINUED)
+	\begin{align*}
+		\mathrm{i} \dv{t} \ket{\psi(t)}_{\mathcal{I}} & = \mathrm{i} \dv{t} \left( e ^{+ \mathrm{i} \hat H_0 t} \ket{\psi(t)}_S \right)\lecnr{12}\\
+		& = - \hat H_0 e ^{+ \mathrm{i} \hat H_0 t} \ket{\psi(t)}_S + e ^{+ \mathrm{i} \hat H_0 t} \mathrm{i} \dv{t}\ket{\psi(t)}_S\\
+		& = \left( - \hat H_0 e ^{+\mathrm{i} \hat H_0 t} + e ^{+\mathrm{i} \hat H_0 t}(\hat H_0 + \hat H _{\text{int}}) \right) \ket{\psi(t)}_S \\
+		& = e ^{+ \mathrm{i} \hat H_0 t} \hat H _{\text{int}} e ^{-\mathrm{i}\hat H_0 t} e ^{+\mathrm{i}\hat H_0 t} \ket{\psi(t)}_S,
+	\end{align*}
+	thus
 	
+	\begin{equation}
+		\mathrm{i} \dv{t} \ket{\psi(t)}_{\mathcal{I}} = \hat H_I(t) \ket{\psi(t)}_{\mathcal{I}}.
+		\label{eq:3.1.1}
+	\end{equation}
+	
+	To solve this equation, compare with ODE
+	\[
+		\mathrm{i} \dv{t}F(t) = g(t) F(t)
+	\]
+	which can be integrated to get
+	\[
+		F(t) = \exp(\frac{1}{\mathrm{i}}\int_{0}^{t}\dd{t'}g(t')) F(0).
+	\]
+	
+	However, (\ref{eq:3.1.1}) is harder because, in general,
+	\[
+		[\hat H_I(t), \hat H_I (t')] \neq 0, \quad t \neq t'.
+	\]
+	
+	We now solve equation (\ref{eq:3.1.1}) perturbatively using a small coupling constant $\lambda$ by setting
+	\[
+		\hat H_I(t) = \lambda \hat{\mathbb{H}}(t) \quad \text{with} \quad \lambda \ll 1.
+	\]
+	
+	We first define the \emph{time evolution operator $\hat U(t)$} such that
+	\[
+		\ket{\psi(t)}_{\mathcal{I}} = \hat U(t) \ket{\psi(0)}_{\mathcal{I}}
+	\]
+	with
+	\[
+		\hat U(t) = \sum _{n=0}^{\infty} \lambda^n \hat{\mathbb{K}}^{(n)}(t).
+	\]
+	Substitute this into equation (\ref{eq:3.1.1}) and compare the orders in $\lambda$ we have
+	\[
+		\mathrm{i} \dv{t} \hat{\mathbb{K}}^{(n)} (t) = \hat{\mathbb{H}}(t) \hat{\mathbb{K}}^{(n-1)}(t).
+	\]
+	
+
+	For $n=0$, \[
+		\hat{\mathbb{K}}^{(0)} = \hat{\1};
+	\]
+	
+	For $n=1$, \[
+		\mathrm{i} \dv{t}\hat{\mathbb{K}}^{(1)}(t) = \hat{\mathbb{H}}(t) \quad \Rightarrow \quad \hat{\mathbb{K}}^{(1)}(t) = \frac{1}{\mathrm{i}} \int_{0}^{t} \dd{t'} \hat{\mathbb{H}}(t');
+	\]
+	
+	For $n = 2$, \[
+		\mathrm{i} \dv{t} \hat{\mathbb{K}}^{(2)}(t) = \hat{\mathbb{H}}(t) \times \frac{1}{\mathrm{i}} \int_{0}^{t}\dd{t'} \hat{\mathbb{H}}(t') 
+	\]
+	so \begin{align*}
+		\hat{\mathbb{K}}^{(2)} & = \left( \frac{1}{\mathrm{i}} \right)^2 \int_{0}^{t} \dd{t'} \hat{\mathbb{H}}(t') \int_{0}^{t'} \dd{t''} \hat{\mathbb{H}}(t'')\\
+		& = \frac{1}{2} \left( \frac{1}{\mathrm{i}} \right)^2 \int_{0}^{t} \dd{t'} \int_{0}^{t} \dd{t''} \mathcal{T} [\hat{\mathbb{H}}(t') \hat{\mathbb{H}}(t'')],
+	\end{align*}
+	where we define
+	\begin{defi}
+		For any operator valued functions $\hat O(t), \hat O'(t)$ of time $t$, we define the \emph{time ordering operator $\mathcal{T}$} such that
+		\[
+			\mathcal{T}[\hat O(t_1), \hat O'(t_2)] = \begin{cases}
+				\hat O(t_1)\hat O'(t_2) & t_1 > t_2,\\
+				\hat O'(t_2)\hat O(t_1) & t_1 < t_2.
+			\end{cases}
+		\]  
+	\end{defi}
+
+	\begin{clm}[Dyson's Formula]
+		For,
+	\[
+		\ket{\psi(t)}_{\mathcal{I}} = \left[ 1 + \frac{1}{\mathrm{i}} \int_{0}^{t} \dd{t'} \hat H_I (t') + \frac{1}{2} \left( \frac{1}{\mathrm{i}} \right)^2 \int_{0}^{t} \dd{t'} \int_{0}^{t} \dd{t''} \mathcal{T}[\hat H_I(t') \hat H_I(t'')] + \mathcal{O}(\lambda^3) \right] \ket{\psi(0)}_{\mathcal{I}}
+	\]
+	we claim that 
+	\begin{equation}
+		\ket{\psi(t)}_{\mathcal{I}} = \mathcal{T}\left[ \exp(\frac{1}{\mathrm{i}}\int_{0}^{t}\dd{t'}\hat H_I(t')) \right] \ket{\psi(0)}_{\mathcal{I}}.
+		\label{eq:3.1.2}
+	\end{equation}
+	\end{clm}
+	\begin{proof}
+		We prove by checking that (\ref{eq:3.1.2}) obeys equation (\ref{eq:3.1.1}).
+		\begin{align*}
+			\mathrm{i} \dv{t}\ket{\psi(t)}_{\mathcal{I}} & = \mathrm{i} \dv{t} \mathcal{T}\left[ \exp(\frac{1}{\mathrm{i}}\int_{0}^{t}\dd{t'}\hat H_I(t')) \right] \ket{\psi(0)}_{\mathcal{I}}\\
+			& = \hat H_I (t) \mathcal{T}\left[ \exp(\frac{1}{\mathrm{i}} \int_{0}^{t}\dd{t'} \hat H_I (t')) \right] \quad \text{as }t>t'\\
+			& = \hat H_I(t) \ket{\psi(t)}_{\mathcal{I}}. \qedhere
+		\end{align*}
+	\end{proof}
+	
+	\subsection{Dyson's Formula}
+
+	Consider the following particle scattering event.
+	
+	\needfig{quantum scattering for $n_i$ initial particles and $n_f$ final particles between time $t = -T/2$ to $t = + T/2$}
+	
+	We want to calculate the scattering amplitude
+	\begin{align*}
+		\mathcal{A}_{i \to f} & = \lim _{T \to \infty} \left[\bra{f, t = + \frac{T}{2}}_S e ^{-\mathrm{i}\hat H t} \ket{i, t = - \frac{T}{2}}_S \right]\\
+		& = \lim _{T \to \infty} \left[\tensor[_S]{\braket{f, t = + \frac{T}{2}}{i, t = + \frac{T}{2}}}{_S}\right]\\
+		& = \lim _{T \to \infty} \left[\tensor[_{\mathcal{I}}]{\braket{f, t = + \frac{T}{2}}{i, t = + \frac{T}{2}}}{_{\mathcal{I}}}\right]\\
+		& = \lim _{T \to \infty} \left\{ \bra{f, t = + \frac{T}{2}}_{\mathcal{I}} \mathcal{T}\left[ \exp(\frac{1}{\mathrm{i}}\int_{- T/2}^{+T/2} \dd{t}\hat H_I(t)) \right] \ket{i, t = - \frac{T}{2}}_{\mathcal{I}} \right\},
+	\end{align*}
+	finally we can write
+	\[
+		\mathcal{A}_{i \to f} = \mel{i}{\hat S}{f}
+	\]
+	with
+	\[
+		\ket{i} = \lim _{T \to \infty} \ket{i, t = - \frac{T}{2}}_{\mathcal{I}}, \quad \ket{f} = \lim _{T \to \infty} \ket{f, t = + \frac{T}{2}}_{\mathcal{I}}
+	\]
+	and the \emph{scattering matrix} or \emph{$S$-matrix}
+	\[
+		\hat S = \mathcal{T} \left[ \exp(\frac{1}{\mathrm{i}}\int_{-\infty}^{+\infty}\dd{t}\hat H_I(t)) \right].
+	\]
+	 
+	\subsubsection{Scattering in $\phi^4$-Theory}
+	
+	The Hamiltonian is $\hat H = \hat H_0 + \hat H _{\text{int}}$ with
+	\[
+		\hat H_0 = \frac{1}{2}\int _{\mathbb{R}^3} \dd[3]{\vb x} \left( \hat \pi^2 + \abs{\grad \hat \phi}^2 + m^2 \hat \phi^2 \right) \quad \text{and} \quad \hat H _{\text{int}} = \frac{\lambda}{4!} \int _{\mathbb{R}^3} \dd[3]{\vb x} \hat \phi^4(\vb x).
+	\]
+	
+	We find 
+	\begin{equation}
+		\hat H_I(t) = e ^{+ \mathrm{i}\hat H_0 t} \hat H _{\text{int}} e ^{- \mathrm{i} \hat H_0 t} = \frac{\lambda}{4!} \int _{\mathbb{R}^3} \dd[3]{\vb x} \hat \phi^4(x).
+		\label{eq:3.2.1}
+	\end{equation}
+	
+	Note here the $\hat \phi(x)$ is the Heisenberg picture field operator from the free field theory.
+	
+	Using the mode expansion, we can decomposing such $\hat\phi$ into two parts
+	\[
+		\hat \phi(x) = \hat \phi^+(x) + \hat \phi^-(x)
+	\]
+	with
+	\[
+		\hat \phi^+(x) := \int \ddk{\vb p}{3} \frac{1}{\sqrt{2E _{\vb p}}} \hat a _{\vb p} e ^{- \mathrm{i} p \cdot x} \quad \text{and} \quad \hat \phi^-(x) := \int \ddk{\vb p}{3} \frac{1}{\sqrt{2E _{\vb p}}} \hat a^{\dagger} _{\vb p} e ^{+ \mathrm{i} p \cdot x}
+	\]
+	where $p^\mu = (E _{\vb p}, \vb p)$ and $p \cdot x = p_\mu x^\mu = E _{\vb p}t - \vb p \vdot \vb x$.
+	
+	For the scattering, we set the initial and final states to be 
+	\[
+		\ket{i} := \ket{p_1, \cdots, p _{n_i}} = \prod _{a = 1}^{n_i} \left( \sqrt{2 E _{\vb p _{a}}} \hat a^{\dagger} _{\vb p_a} \right) \ket{0}
+	\]
+	and
+	\[
+		\ket{f} := \ket{p'_1, \cdots, p'_{n_f}} = \prod _{a = 1}^{n_f} \left( \sqrt{2 E _{\vb p' _{a}}} \hat a^{\dagger} _{\vb p'_a} \right) \ket{0},
+	\]
+	respectively.
+
+	Then the scattering amplitude is
+	\[
+		\mathcal{A}_{i \to f} = \mel{f}{\mathcal{T}\left[\exp(\frac{\mathrm{i} \lambda}{4!} \int _{\mathbb{R}^{3,1}} \dd[4]{x} \hat \phi^4(x))\right]}{i}.
+	\]
+
+	To calculate this, we use a perturbation theory. \lecnr{13}
+
+	\[
+		\mathcal{A}_{i \to f} = \sum _{l = 0}^{\infty} \lambda^l \mathcal{A} _{i \to f}^{(l)}
+	\]
+	where
+	\[
+		\mathcal{A}_{i\to f}^{(l)} = \frac{1}{l!} \left( \frac{1}{\mathrm{i} (4!)} \right)^l \int \dd[4]{x_1} \cdots \int \dd[4]{x_l} \mel{f}{\mathcal{T}[\hat \phi^4(x_1) \hat \phi^4(x_2) \cdots \hat \phi^4(x_l)]}{i}
+	\]
+	and note that the integration would go over all time ordering combinations, with $\mathcal{T}$ reorders the operators whenever necessary. 
+
+	To make it easier to evaluate the matrix element, we need to convert $\mathcal{T}$-ordering into normal ordering.
+
+	We abbreviate
+	\[
+		\mathcal{T}_2 := \mathcal{T}[\hat \phi(x) \hat \phi(y)].
+	\]
+	If $x^0 > y^0$, we have
+	\begin{align*}
+		\mathcal{T}_2 & = \hat \phi(x) \hat \phi(y) = \left( \hat \phi^+(x) + \hat \phi^-(x) \right) \left( \hat \phi^+(y) + \hat \phi^-(y) \right) \\
+		& = \hat \phi^+(x)\hat \phi^+(y) + \hat \phi^-(x) \hat \phi^+(y) + \hat \phi^-(y)\hat \phi^+(x) + [\hat \phi^+(x), \hat \phi^-(y)] + \hat \phi^-(x)\hat \phi^-(y).
+	\end{align*}
+	
+	To resolve this, we define
+	\[
+		D(x-y) := [\hat \phi^+(x), \hat \phi^-(y)] = \int \frac{\dd[3]{\vb p}\dd[3]{\vb q}}{(2 \pi)^6} \frac{1}{2 \sqrt{E _{\vb p}E _{\vb q}}} e^{+\mathrm{i}(q \cdot y - p \cdot x)} \underbrace{[\hat a _{\vb p}, \hat a^{\dagger} _{\vb q}]}_{(2 \pi)^3 \delta ^{(3)}(\vb p - \vb q)}
+	\]
+	so
+	\begin{equation}
+		D(x-y) = \int \ddk{\vb p}{3} \frac{1}{2 E _{\vb p}} e ^{- \mathrm{i}p \cdot(x - y)}.
+		\label{eq:3.2.2}
+	\end{equation}
+
+	For $x^0 > y^0$,
+	\[
+		\mathcal{T}[\hat \phi(x)\hat \phi(y)] =\ \nord{\hat \phi(x)\hat \phi(y)} + D(x-y),
+	\]
+	and for $x^0 < y^0$,
+	\[
+		\mathcal{T}[\hat \phi(x)\hat \phi(y)] =\ \nord{\hat \phi(x)\hat \phi(y)} + D(y-x).
+	\]
+
+	Including both cases, we define
+	\[
+		\mathcal{T}[\hat \phi(x)\hat \phi(y)] =\ \nord{\hat \phi(x)\hat \phi(y)} + \Delta_\text{F}(x-y)
+	\]
+	where we made the definition
+	\begin{defi}
+		The \emph{Feynman propagator} is defined as 
+		\[
+			\Delta _{\text{F}} = \begin{cases}
+				D(x-y) & x^0 > y^0\\
+				D(y-x) & x^0 < y^0
+			\end{cases}
+		\]
+		or more fundamentally, it can be defined as 
+		\begin{equation}
+			\Delta_\text{F}(x-y) := \mel{0}{\mathcal{T}[\hat \phi(x)\hat \phi(y)]}{0}.
+			\label{eq:3.2.3}
+		\end{equation}
+	\end{defi}
+
+	To express $\Delta_\text{F}$ in a closed form, we claim
+	\begin{clm}
+		\begin{equation}
+			\Delta_\text{F} (x-y) = \int _{C_\text{F}} \ddk{p}{4} \frac{\mathrm{i}}{p^2 - m^2} e ^{-\mathrm{i} p \cdot(x-y)}
+		\end{equation}
+		with a contour $C_\text{F}$ in the $p^0$-complex plane specified as below.
+		\needfig{Feynman contour}
+	\end{clm}
+	
+	\begin{proof}
+		We elaborate 
+		\[
+			\Delta_\text{F}(x-y) = \int \ddk{\vb p}{3} \mathrm{i} e ^{+ \mathrm{i} \vb p \vdot (\vb x - \vb y)} \int _{C_\text{F}} \dd{p^0} \mathcal{I}(p^0)
+		\]
+		where
+		\[
+			\mathcal{I}(p^0) = \frac{e ^{- \mathrm{i} p^0 (x^0 - y^0)}}{(p^0)^2 - E _{\vb p}^2}
+		\]
+		with $E _{\vb p} = + \sqrt{\abs{\vb p}^2 + m^2}$.
+	
+		\[
+			\frac{1}{(p^0)^2 - E _{\vb p}^2} = \frac{1}{2 E _{\vb p}}\left[ \frac{1}{p^0 - E _{\vb p}} - \frac{1}{p^0 + E _{\vb p}} \right]
+		\]
+		meaning $\mathcal{I}(p^0)$ has poles at $p^0 = \pm E _{\vb p}$. We can take the residue
+		\[
+			\dRes _{p^0 = \pm E _{\vb p}} [\mathcal{I}(p^0)] = \pm \frac{1}{2 E _{\vb p}} e ^{\mp \mathrm{i} E _{\vb p} (x^0 - y^0)}.
+		\]
+
+		To see which half plane we need to close for $C_\text{F}$, we set $p^0 = \Re(p^0) + \mathrm{i}\Im(p^0)$ so
+		\[
+			\mathcal{I}(p^0) \sim e ^{+ \Im (p^0) (x^0 - y^0)}.
+		\]
+		
+		This factor decay rapidly as $p^0 \to \infty$ in 
+		\[
+			\begin{cases}
+				\text{Lower Half Plane},\ \Im(p^0)<0 & \text{for } x^0 > y^0\\
+				\text{Upper Half Plane},\ \Im(p^0)>0 & \text{for } x^0 > y^0
+			\end{cases}
+		\]
+		known as \emph{Jordan's lemma}.
+		
+		Thus, for $x^0 > y^0$, we close the contour in L.H.P.\ and use Cauchy's residue theorem, 
+		\begin{align*}
+			\Delta_\text{F} (x-y) & = \int \frac{\dd[3]{\vb p}}{(2 \pi)^4} \mathrm{i} e ^{\mathrm{i} \vb p \vdot (\vb x - \vb y)} \times (- 2 \pi \mathrm{i}) \dRes _{p^0 = + E _{\vb p}} [\mathcal{I}(p^0)]\\
+			& = \int \ddk{\vb p}{3} \frac{1}{2 E _{\vb p}} e ^{- \mathrm{i} E _{\vb p}(x^0 - y^0) + \mathrm{i} \vb p \vdot (\vb x - \vb y)}\\
+			& = \int \ddk{\vb p}{3} \frac{1}{2 E _{\vb p}} e ^{- \mathrm{i} p \cdot (x-y)}\\
+			& = D(x-y).
+		\end{align*}
+		
+		For $x^0 < y^0$, similar calculation by close the contour in U.H.P.\ gives
+		\[
+			\Delta_\text{F}(x-y) = D(y - x)
+		\]
+		by picking up the residue at $p^0 = - E _{\vb p}$. 
+	\end{proof}
+
+	The alternative representation, called the \emph{$\mathrm{i} \epsilon$-prescription} with $\epsilon > 0$, is
+	\[
+		\Delta_\text{F}(x-y) = \lim _{\epsilon \to 0^+} \int \ddk{p}{4} \frac{\mathrm{i} e ^{- \mathrm{i} p \cdot (x-y)}}{p^2 - m^2 + \mathrm{i} \epsilon}.
+	\]
+	
+	To see this is true, we draw the poles again for the $\mathrm{i}\epsilon$-prescription in the $p^0$-complex plane
+	\needfig{$\mathrm{i}\epsilon$-prescription diagram}. We can safely take $C_\text{F}$ along the real axis.
+
+	To express the relationship between time ordering and normal ordering, we first introduce a set of new definitions.
+
+	We denote $\hat \phi_i : = \hat \phi(x_i)$ and 
+	\[
+		\mathcal{T}_n := \mathcal{T}[\hat \phi_1 \hat \phi_2 \cdots \hat \phi_n]
+	\]
+	for convenience.
+
+	\begin{defi}
+		The \emph{contraction} (e.g.\ for $\phi^4$-theory) is defined as 
+		\[
+			\wick{\c {\hat \phi_1} \hat \phi_2 \c {\hat \phi_3} \hat \phi_4} : = \Delta _{\text{F}}(x_1 - x_3) \hat \phi_2 \hat \phi_4
+		\]
+	\end{defi}
+
+	\begin{defi}
+		We define
+		\[
+			\mathcal{C}[\hat \phi_1 \cdots \hat \phi_n] = \sum \text{all possible contractions of }\hat \phi_i .
+		\]
+	\end{defi}
+
+	\begin{ex}
+		\begin{align*}
+			\mathcal{C}[\hat \phi_1 \hat \phi_2 \hat \phi_3 \hat \phi_4] =\ & \hat \phi_1 \hat \phi_2 \hat \phi_3 \hat \phi_4 \\
+			+ &\wick{\c {\hat{\phi}}_1 \c {\hat{\phi}}_2 \hat \phi_3 \hat \phi_4} + \wick{\c {\hat \phi}_1 \hat \phi_2 \c{\hat \phi}_3 \hat \phi_4} + \wick{\c{\hat \phi}_1 \hat \phi_2 \hat \phi_3 \c{\hat \phi}_4} +  \text{3 similar terms}\\
+			+ & \wick{\c1 {\hat{\phi}}_1 \c1 {\hat{\phi}}_2 \c2{\hat \phi}_3 \c2{\hat \phi}_4} + \wick{\c1 {\hat{\phi}}_1 \c2 {\hat{\phi}}_2 \c1{\hat \phi}_3 \c2{\hat \phi}_4} + \wick{\c1 {\hat{\phi}}_1 \c2 {\hat{\phi}}_2 \c2{\hat \phi}_3 \c1{\hat \phi}_4}.
+		\end{align*}
+	\end{ex}
+	Then compactly, we have
+	\begin{thm}[Wick's theorem]
+		\[
+			\mathcal{T}[\hat \phi_1 \hat \phi_2 \cdots \hat \phi_n] =\ \nord{\mathcal{C}[\hat \phi_1 \hat \phi_2 \cdots \hat \phi_n]}.
+		\]
+	\end{thm}
 	
 \end{document}
