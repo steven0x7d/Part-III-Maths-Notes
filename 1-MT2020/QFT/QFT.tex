@@ -2312,5 +2312,144 @@
 			\mathcal{T}[\hat \phi_1 \hat \phi_2 \cdots \hat \phi_n] =\ \nord{\mathcal{C}[\hat \phi_1 \hat \phi_2 \cdots \hat \phi_n]}.
 		\]
 	\end{thm}
+
+	\begin{proof} \lecnr{14}
+		We prove by induction in $n$. For $n = 2$ case, we've already showed
+		\[
+			\mathcal{T}[\hat \phi_1 \hat \phi_2] =\ \nord{\hat \phi_1 \hat \phi_2} + \Delta_\text{F}(x_1 - x_2) =\ \nord{\hat \phi_1 \hat \phi_2} + \nord{\wick{\c{\hat \phi}_1 \c{\hat \phi}_2}} =\ \nord{\mathcal{C}[\hat \phi_1 \hat \phi_2]}.
+		\]
+		So, Wick's theorem holds for $n=2$.
+
+		Now we do the induction. Assume the theorem is true for any products of length $l \leq n - 1$, then by setting $x_1^0 \geq x^0_i$ for $i = 2, \cdots, n$ WLOG, we have
+		\begin{align*}
+			\mathcal{T}[\hat \phi_1 \hat \phi_2 \cdots \hat \phi_n] & = \hat \phi_1 \mathcal{T}[\hat \phi_2 \cdots \hat \phi_n]\\
+			& = \left( \hat \phi_1^+ + \hat \phi_1^- \right) \nord{\mathcal{C}[\hat \phi_2 \cdots \hat \phi_2]}\\
+			& =\ \nord{\hat \phi_1^- \mathcal{C}[\hat \phi_2 \cdots \hat \phi_n]} + \nord{\hat \phi_1^+ \mathcal{C}[\hat \phi_2\cdots \hat \phi_n]} + \nord{\sum _{i = 2}^n [\hat \phi_1^+ , \hat \phi_i] \mathcal{C}[\hat \phi_2 \cdots \hat \phi _{i-1}\hat \phi _{i+1}\cdots \hat \phi_n]}\\
+			& =\ \nord{\hat \phi_1 \mathcal{C}[\hat \phi_2 \cdots \hat \phi_n]} + \sum _{i = 2}^n \nord{\mathcal{C}[\wick{\c {\hat \phi}_1 \cdots \c {\hat \phi}_i \cdots \hat \phi_n}]}\\
+			& =\ \nord{\mathcal{C}[\hat \phi_1 \cdots \hat \phi_n]}
+		\end{align*}
+		by identifying
+		\[
+			[\hat \phi_1^+ , \hat \phi_i] = [\hat \phi_1^+, \hat \phi_i^-] = \Delta_\text{F}(x_1 - x_i).
+		\]
+	\end{proof}
+
+	Back to $\phi^4$-theory, consider
+	\begin{align*}
+		\mel{0}{\hat S}{0} & = \mel{0}{\mathcal{T}\left[ \exp(\frac{1}{\mathrm{i}}\frac{\lambda}{4!}\int \dd[4]{x}\hat \phi^4(x)) \right]}{0}\\
+		& = \sum _{l=0}^{\infty} \frac{1}{l!} \left( \frac{1}{\mathrm{i}} \frac{\lambda}{4!} \right)^l \int \dd[4]{x_1} \cdots \int \dd[4]{x_l} \mathcal{M}(x_1, \cdots, x_l)
+	\end{align*}
+	with
+	\[
+		\mathcal{M}(x_1,\cdots,x_l) = \mel{0}{\mathcal{T}[\hat \phi^4(x_1)\hat \phi^4(x_2)\cdots \hat \phi^4(x_l)]}{0} = \mel{0}{\nord{\mathcal{C}[\hat \phi^4(x_1)\cdots \hat \phi^4(x_l)]}}{0}.
+	\]
+	
+	Contract all fields, take say
+	\[
+		\mathcal{M} (x_1,x_2) \supset \mel{0}{\wick{\c1{\hat \phi}(x_1) \c1{\hat \phi}(x_1) \c2{\hat \phi}(x_1) \c3{\hat \phi}(x_1) \c3{\hat \phi}(x_2) \c4{\hat \phi}(x_2) \c4{\hat \phi}(x_2) \c2{\hat \phi}(x_2)}}{0}
+	\]
+	we can use diagrams to represent different contributions of contractions.
+	\begin{itemize}
+		\item For each insertion of $\phi^4$ we use a vertex with four `legs' to represent \[
+			\begin{tikzpicture}[baseline=-0.1cm]
+				\begin{feynhand}
+					\vertex [dot] (x) at (0,0) {};
+					\vertex [particle] (a) at (0.5,0.5);
+					\vertex [particle] (b) at (-0.5,0.5);
+					\vertex [particle] (c) at (0.5,-0.5);
+					\vertex [particle] (d) at (-0.5,-0.5);
+					\propag [] (a) to [] (x);
+					\propag [] (b) to [] (x);
+					\propag [] (c) to [] (x);
+					\propag [] (d) to [] (x);
+					\node at (-0.5,0) {$x$};
+				\end{feynhand}
+			\end{tikzpicture} \quad \sim \quad \frac{\lambda}{\mathrm{i}} \int \dd[4]{x};
+		\]
+		\item For each contraction we draw a line that connects a pair of vertices \[
+			\begin{tikzpicture}[baseline=(a.base)]
+				\begin{feynhand}
+					\vertex (a) at (-1,0) {$x_1$};
+					\vertex (b) at (1,0) {$x_2$};
+					\propag [] (a) to [] (b);
+				\end{feynhand}
+			\end{tikzpicture} \quad \sim \quad \Delta_\text{F}(x_1 - x_2).
+		\]
+	\end{itemize}
+
+	Hence, we can represent 
+	\[
+		\mathcal{M}(x_1, x_2) \quad  \supset \quad \begin{tikzpicture}[baseline = -0.1cm]
+			\begin{feynhand}
+				\vertex [particle] (hi) at (0,0);
+				\vertex [dot] (a) at (-1,0) {};
+				\vertex [dot] (b) at (1,0) {};
+				\propag [] (a) to [in = 135, out = 225, loop] (a);
+				\propag [] (b) to [in = 45, out = 315, loop] (b);
+				\propag [] (a) to [out=45, in=135] (b);
+				\propag [] (a) to [out=315, in=225] (b);
+			\end{feynhand}
+		\end{tikzpicture}.
+	\]
+	
+	\subsubsection{Scattering in Scalar-Yukawa Theory}
+	
+	Recall, the Lagrangian is 
+	\[
+		\mathcal{L} = \partial_\mu \psi^* \partial^\mu \psi - M^2 \psi^* \psi + \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{1}{2} m^2 \phi^2 - g \phi \psi^* \psi.
+	\]
+	
+	The interaction picture field operators are
+	\begin{align*}
+		\hat \phi(x) &= \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left[ \hat a _{\vb p} e ^{- \mathrm{i} p \cdot x} + \hat a^{\dagger}_{\vb p} e ^{+ \mathrm{i} p \cdot x} \right]\\
+		\hat \psi(x) &= \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left[ \hat b _{\vb p} e ^{- \mathrm{i} p \cdot x} + \hat c^{\dagger}_{\vb p} e ^{+ \mathrm{i} p \cdot x} \right]\\
+		\hat \psi^{\dagger}(x) &= \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left[ \hat b^{\dagger} _{\vb p} e ^{+ \mathrm{i} p \cdot x} + \hat c_{\vb p} e ^{- \mathrm{i} p \cdot x} \right]
+	\end{align*}
+	with
+	\begin{align*}
+		\hat a^{\dagger} \quad &\text{creates} \quad \text{$\phi$-particle},\\
+		\hat b^{\dagger} \quad &\text{creates} \quad \text{$\psi$-particle},\\
+		\hat c^{\dagger} \quad &\text{creates} \quad \text{$\bar \psi$-particle}.
+	\end{align*}
+	
+	Consider a scattering process
+	\[
+		\psi + \psi \to \psi + \psi.
+	\]
+
+	This process can be seen as \needfig{$\psi \psi$-scattering}.
+
+	The initial and final states are
+	\[
+		\ket{i} = \sqrt{2 E _{\vb p_1}} \sqrt{2 E _{\vb p_2}} \hat b^{\dagger}_{\vb p_1} \hat b^{\dagger}_{\vb p_2} \ket{0} \quad \text{and} \quad \ket{f} = \sqrt{2 E _{\vb p'_1}} \sqrt{2 E _{\vb p'_2}} \hat b^{\dagger} _{\vb p'_1} \hat b^{\dagger}_{\vb p'_2} \ket{0}.
+	\]
+	
+	The scattering amplitude is
+	\[
+		\mathcal{A}_{i \to f} = \mel{f}{\hat S}{i}
+	\]
+	with
+	\[
+		\hat S = \mathcal{T}\left[ \exp(\frac{g}{\mathrm{i}}\int \dd[4]{x} \hat \phi \hat \psi^{\dagger}\hat \psi) \right].
+	\]
+	
+	To get a non-zero answer, we need to bring down the exponential to terms like $\hat b \hat b \hat b^{\dagger} \hat b^{\dagger}$, which implies that the leading contribution occurs at $\mathcal{O}(g^2)$ order as 
+	\[
+		\mathcal{A}_{i \to f}^{(2)} := \frac{1}{2} \left( \frac{g}{\mathrm{i}} \right)^2 \int \dd[4]{x_1} \int \dd[4]{x_2} \mathcal{M}(x_1,x_2)
+	\]
+	with
+	\begin{align*}
+		\mathcal{M}(x_1,x_2) & = \mel{f}{\mathcal{T}[\hat \phi(x_1) \hat \psi^{\dagger}(x_1) \hat \psi(x_1)\hat \phi(x_2) \hat \psi^{\dagger}(x_2) \hat \psi(x_2)]}{i}\\
+		& = \Delta_\text{F}^{(\phi)}(x_1 - x_2) \mel{f}{\nord{\hat \psi^{\dagger}(x_1)\hat \psi(x_1)\hat \psi^{\dagger}(x_2)\hat \psi(x_2)}}{i}\\
+		& = \Delta_\text{F}^{(\phi)}(x_1 - x_2) \mel{f}{\hat \psi^{\dagger}(x_1) \hat \psi^{\dagger}(x_2) \hat \psi(x_1)\hat \psi(x_2)}{i}
+	\end{align*}
+	by applying Wick's theorem and only focusing on the non-zero term.
+	
+
+
+
+
+	
+
 	
 \end{document}
