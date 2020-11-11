@@ -2444,12 +2444,227 @@
 		& = \Delta_\text{F}^{(\phi)}(x_1 - x_2) \mel{f}{\hat \psi^{\dagger}(x_1) \hat \psi^{\dagger}(x_2) \hat \psi(x_1)\hat \psi(x_2)}{i}
 	\end{align*}
 	by applying Wick's theorem and only focusing on the non-zero term.
+
+	An important aside: note that there is a very straightforward extension of contraction to $\hat \psi, \hat \psi^{\dagger}$ operators: \lecnr{15}
+	\[
+		\wick{\c{\hat \psi}(x_1)\c{\hat \psi}^{\dagger}(x_2)}:= \mel{0}{\mathcal{T}[\hat \psi(x_1)\hat \psi^{\dagger}(x_2)]}{0} = \int \ddk{p}{4} \frac{\mathrm{i} e ^{\mathrm{i} p \cdot (x_1 - x_2)}}{p^2 - M^2 + \mathrm{i} \epsilon} = \Delta_\text{F}^{(\psi)}(x_1 - x_2)
+	\]
+	and it is easy to find the contractions below vanishes:
+	\[
+		\wick{\c{\hat \psi}(x_1)\c{\hat \psi}(x_2)} = \wick{\c{\hat \psi^{\dagger}}(x_1) \c{\hat \psi}^{\dagger}(x_2)} = 0.
+	\]
+
+	Now we carry on to evaluate
+	\begin{align*}
+		\mathcal{N} & = \mel{f}{\hat \psi^{\dagger}(x_1)\hat \psi^{\dagger}(x_2) \hat \psi(x_1) \hat \psi(x_2)}{i}\\
+		& = \mel{f}{\hat \psi^{\dagger}(x_1)\hat \psi^{\dagger}(x_2) \1 \hat \psi(x_1) \hat \psi(x_2)}{i}
+	\end{align*}
+	by inserting a complete set of states
+	\[
+		\1 = \sum _{\Psi} \dyad{\Psi}{\Psi}.
+	\]
+
+	We will find that only the vacuum state contributes among $\ket{\Psi}$'s , so
+	\[
+		\mathcal{N} = \mathcal{N}_i \mathcal{N}_f
+	\]
+	with
+	\begin{align*}
+		\mathcal{N}_i & = \mel{0}{\hat \psi(x_1)\hat \psi(x_2)}{i}\\
+		& = \sqrt{2 E _{\vb p_1}} \sqrt{2 E _{\vb p_2}} \int \ddk{\vb p}{3} \int \ddk{\vb q}{3} \frac{1}{2 \sqrt{E _{\vb p} E _{\vb q}}} e ^{-\mathrm{i} p \cdot x_1 - \mathrm{i} q \cdot x_2} \underbrace{\mel{0}{\hat b _{\vb p} \hat b _{\vb q} \hat b^{\dagger}_{\vb p_1}\hat b^{\dagger}_{\vb p_2}}{0}}_{\text{(A)}}.
+	\end{align*}
+
+	Evaluate (A) using
+	\[
+		[\hat b_{\vb p}, \hat b^{\dagger}_{\vb p'}] = (2 \pi)^3 \delta^{(3)} (\vb p - \vb p')
+	\]
+	to get
+	\[
+		\text{(A)} = (2 \pi)^6 \left( \delta ^{(3)}(\vb p_1 - \vb p) \delta ^{(3)}(\vb p_2 - \vb q) + \delta ^{(3)}(\vb p_2 - \vb p) \delta ^{(3)}(\vb p_1 - \vb q)\right).
+	\]
 	
+	Now go back and do the $\vb p$ and $\vb q$ integrals, we have
+	\[
+		\mathcal{N}_i = \mel{0}{\hat \psi(x_1) \hat \psi(x_2)}{i} = \left( e ^{-\mathrm{i} p_1 \cdot x_1 - \mathrm{i} p_2 \cdot x_2} + e ^{- \mathrm{i} p_2 \cdot x_1 - \mathrm{i} p_1 \cdot x_2} \right)
+	\]
+	and a similar calculation for 
+	\[
+		\mathcal{N}_f = \mel{f}{\hat \psi^{\dagger}(x_1)\hat \psi^{\dagger}(x_2)}{0} = \left( e ^{+\mathrm{i} p'_1 \cdot x_1 + \mathrm{i} p'_2 \cdot x_2} + e ^{+ \mathrm{i} p'_2 \cdot x_1 + \mathrm{i} p'_1 \cdot x_2} \right).
+	\]
 
-
-
-
+	Thus
+	\begin{align*}
+		\mathcal{A}^{(2)}_{i \to f} & = \frac{1}{2} \left( \frac{g}{\mathrm{i}} \right)^2 \int \dd[4]{x_1} \int \dd[4]{x_2} \mathcal{N}_f \mathcal{N}_i \int \ddk{k}{4} \frac{\mathrm{i} e ^{\mathrm{i} k \cdot (x_1 - x_2)}}{k^2 - m^2 + \mathrm{i} \epsilon}\\
+		& = \frac{1}{2} \left( \frac{g}{\mathrm{i}} \right)^2 \int \ddk{k}{4} \frac{\mathrm{i}}{k_2 - m_2 + \mathrm{i} \epsilon} \int \dd[4]{x_1} \int \dd[4]{x_2} \times\\
+		& \qquad \times \left[ e ^{\mathrm{i}x_1 \cdot(k + p'_1 - p_1)} e ^{\mathrm{i}x_2 \cdot (k - p'_2 + p_2)} + e ^{\mathrm{i} x_1 \cdot(k + p'_2 - p_1)} e ^{\mathrm{i} x_2 \cdot (k - p'_1 + p_2)} + (x_1 \leftrightarrow x_2)\right].
+	\end{align*}
 	
+	Now do the $x_1, x_2$ integrals,
+	\[
+		\int \dd[4]{x} e ^{\mathrm{i} p \cdot x} = (2 \pi)^4 \delta ^{(4)}(p)
+	\]
+	and do the $k$ integrals which saturate one $\delta$-function, we finally have
+	\[
+		\mathcal{A}^{(2)}_{i \to f} = \mathrm{i} (- \mathrm{i} g)^2 (2 \pi)^4 \delta ^{(4)}(p_1 + p_2 - p'_1 - p'_2) \left[ \frac{1}{(p_1 - p'_1)^2 - m^2 + \mathrm{i} \epsilon} + \frac{1}{(p_1 - p'_2)^2 - m^2 + \mathrm{i} \epsilon} \right].
+	\]
 
+	A few properties of $\mathcal{A}^{(2)}_{i \to f}$:
+	\begin{itemize}
+		\item $\delta ^{(4)}$ imposes conservation of energy and momentum \[
+			p'_1 + p'_2 = p_1 + p_2.
+		\]
+		\item We can check $(p_1 - p'_1)^2, (p_1 - p'_2)^2 < 0$ so we can erase the $\mathrm{i} \epsilon$-prescription if needed. 
+	\end{itemize}
 	
+	\subsection{Feynman Diagrams}
+	
+	Contributions to 
+	\[
+		\mel{f}{\hat S - 1}{i}
+	\]
+	is in one-to-one correspondence to certain \emph{Feynman diagrams}.
+
+	\begin{itemize}
+		\item We first choose a direction of time;
+		\item Draw external line for each particle in $\ket{i}$ and $\ket{f}$; \[
+			\begin{tikzpicture}
+				\begin{feynhand}
+					\vertex (p) at (0,1) {$\psi$};
+					\vertex [particle] (pn) at (3,1);
+					\vertex (ap) at (0,0) {$\bar \psi$};
+					\vertex [particle] (apn) at (3,0);
+					\vertex (f) at (0,-1) {$\phi$};
+					\vertex [particle] (fn) at (3,-1);
+					\propag [fer, mom={$q_1$}] (p) to [] (pn);
+					\propag [antfer, mom={$q_2$}] (ap) to [] (apn);
+					\propag [mom={$q_3$}] (f) to [] (fn);
+					\node (t1) at (5,0);
+					\node (t2) at (6,0);
+					\draw [->] (t1) to (t2);
+					\node (t) at (5.5,0.3) {time};
+				\end{feynhand}
+			\end{tikzpicture}
+		\]
+		\item Connect the external lines together with \emph{vertices} \[
+			\begin{tikzpicture}
+				\begin{feynhand}
+					\vertex [particle] (m) at (0,0);
+					\vertex (i) at (-2.121,0) {};
+					\vertex (f1) at (1.5,1.5) {};
+					\vertex (f2) at (1.5,-1.5) {};
+					\propag [] (i) to [] (m);
+					\propag [fer] (m) to [] (f1);
+					\propag [antfer] (m) to [] (f2);
+				\end{feynhand}
+			\end{tikzpicture}
+		\]
+		\item Draw internal lines connecting vertices.
+	\end{itemize}
+
+	Now, for $\psi \psi \to \psi \psi$ scattering, the leading order diagrams are (where the time flows in \emph{vertical} direction)
+	\[
+		\begin{tikzpicture}
+			\begin{feynhand}
+				\vertex (i1) at (-1,-1) {$p_1$};
+				\vertex (i2) at (3,-1) {$p_2$};
+				\vertex (f1) at (-1,1) {$p'_1$};
+				\vertex (f2) at (3,1) {$p'_2$};
+				\vertex [particle] (a) at (0,0);
+				\vertex [particle] (b) at (2,0);
+				\propag [fer] (i1) to [] (a);
+				\propag [fer] (a) to [] (f1);
+				\propag [fer] (i2) to [] (b);
+				\propag [fer] (b) to [] (f2);
+				\propag [mom={$k$}] (a) to [] (b);
+				\node (c) at (5,0) {$k = p_1 - p'_1$};
+			\end{feynhand}
+		\end{tikzpicture}
+	\]
+	and
+	\[
+		\begin{tikzpicture}
+			\begin{feynhand}
+				\vertex (i1) at (-1,-1) {$p_1$};
+				\vertex (i2) at (3,-1) {$p_2$};
+				\vertex (f1) at (-1,1) {$p'_1$};
+				\vertex (f2) at (3,1) {$p'_2$};
+				\vertex [particle] (a) at (0,0);
+				\vertex [particle] (b) at (2,0);
+				\propag [fer] (i1) to [] (a);
+				\propag [with arrow=0.6] (b) to [] (f1);
+				\propag [fer, top] (a) to [] (f2);
+				\propag [fer] (i2) to [] (b);
+				\propag [mom'={$k$}] (a) to [] (b);
+				\node (c) at (5,0) {$k = p_1 - p'_2$.};
+			\end{feynhand}
+		\end{tikzpicture}
+	\]
+	
+	\subsubsection{Feynman Rules}
+	To translate the diagrams to mathematical expressions, we have the \emph{Feynman rules}.
+	\begin{itemize}
+		\item Assign propagators to each internal line \[
+			\begin{tikzpicture}
+				\begin{feynhand}
+					\vertex (p) at (0,0.5) {};
+					\vertex [particle] (pn) at (3,0.5);
+					\vertex (ap) at (0,0) {};
+					\vertex [particle] (apn) at (3,0);
+					\vertex (f) at (0,-1.5) {};
+					\vertex [particle] (fn) at (3,-1.5);
+					\propag [fer, mom={$k$}] (p) to [] (pn);
+					\propag [antfer, mom'={$k$}] (ap) to [] (apn);
+					\propag [mom={$k'$}] (f) to [] (fn);
+					\node (t) at (5.5,0.25) {$\sim \quad \dfrac{\mathrm{i}}{k^2 - M^2 + \mathrm{i} \epsilon}$ };
+					\node (t) at (5.5,-1.5) {$\sim \quad \dfrac{\mathrm{i}}{k'^2 - m^2 + \mathrm{i} \epsilon}$ };
+				\end{feynhand}
+			\end{tikzpicture}
+		\]
+		\item Each vertex gives \[
+			\begin{tikzpicture}
+				\begin{feynhand}
+					\vertex [particle] (m) at (0,0);
+					\vertex (i) at (-2.121,0) {};
+					\vertex (f1) at (1.5,1.5) {};
+					\vertex (f2) at (1.5,-1.5) {};
+					\propag [mom = {$k_3$}] (i) to [] (m);
+					\propag [fer, revmom={$k_1$}] (m) to [] (f1);
+					\propag [antfer,revmom={$k_2$}] (m) to [] (f2);
+					\node (c) at (5,0) {$\sim \quad (-\mathrm{i} g) (2 \pi)^4 \delta ^{(4)}\left( \displaystyle\sum _{i = 1}^3 k_i\right)$};
+				\end{feynhand} 
+			\end{tikzpicture}
+		\]
+		\item Integrate over internal momenta.
+	\end{itemize}
+	\newpage
+	\section{Fermions}
+	So far, we considered scalar fields,
+	\[
+		\phi(x) \xrightarrow{\text{L.T.}} \phi(\Lambda^{-1} \cdot x)
+	\]
+	under $x^\mu \to x'^\mu = \LT{\mu}{\nu} x ^{\nu}$.
+
+	$\hat \phi$ creates particles with \emph{spin zero}. For a massive particle, the \emph{spin} is the the angular momentum in the rest frame, 
+	\[
+		\mel{\vb 0}{\hat{\vb J}}{\vb 0} = 0.
+	\]
+	
+	The non-relativistic description of spin uses 
+	\[
+		\hat{\vb S} = (\hat S_x, \hat S_y, \hat S_z), \quad \hat S^2, \quad \hat S_z
+	\]
+	and particles are of spin $s = 0, \frac{1}{2}, 1, \frac{3}{2}, \cdots$ has $(2s+1)$-spin states with
+	\[
+		-s \leq s_z \leq s,
+	\]
+	labelled by $\ket{s,s_z}$ satisfying
+	\[
+		\hat S^2 \ket{s,s_z} = s(s+1) \ket{s,s_z} \quad \text{and} \quad \hat S_z \ket{s,s_z} = s_z \ket{s,s_z}.
+	\]
+	
+	Electrons have spin $\frac{1}{2}$, i.e.\ each has two states $\ket{\uparrow}, \ket{\downarrow}$. Now we need a relativistic way to describe such spin.
+
+	\subsection{Relativistic Spin}
+	We need fields which transform in non-trivial representations of Lorentz group.
+
 \end{document}
