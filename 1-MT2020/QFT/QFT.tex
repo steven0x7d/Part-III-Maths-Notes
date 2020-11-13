@@ -2665,6 +2665,192 @@
 	Electrons have spin $\frac{1}{2}$, i.e.\ each has two states $\ket{\uparrow}, \ket{\downarrow}$. Now we need a relativistic way to describe such spin.
 
 	\subsection{Relativistic Spin}
-	We need fields which transform in non-trivial representations of Lorentz group.
+	We need fields which transform in non-trivial representations of Lorentz group. \lecnr{16}
 
+	The Lorentz group is
+	\[
+		G_L = \{\Lambda \in \Mat_4(\mathbb{R}) : \Lambda \eta \Lambda^T = \eta, \det \Lambda = +1\} = \SO(3,1).
+	\]
+	
+	\begin{defi}
+		A \emph{representation $D$ of $G_L$ of dimension $N$} is a smooth map 
+	\[
+		D : G_L \to \Mat_N(\mathbb{C})
+	\]
+	which is also a group homomorphism, i.e.\ 
+	\[
+		D(\Lambda_1) \cdot D(\Lambda_2) = D(\Lambda_1 \cdot \Lambda_2) \quad \forall \Lambda_1, \Lambda_2 \in G_L.
+	\]
+
+	The matrices $D(\Lambda)$ act on vectors in some \emph{representation space} $\mathcal{V} \simeq \mathbb{C}^N$.
+	\end{defi}
+
+	We can explicitly write $D(\Lambda)_{AB}$ for $A,B = 1, \cdots, N$.
+	
+	\begin{defi}
+		A field $\Psi : \mathbb{R} ^{3,1} \to \mathbb{C}^N$ \emph{transforms in the representation $D$ of $G_L$} if, under $x^\mu \to \LT{\mu}{\nu} x^\nu$ we have
+		\[
+			\Psi_A(x) \to \Psi'_A(x) := \sum _{B = 1}^N D(\Lambda)_{AB} \Psi_B(\Lambda^{-1} \cdot x).
+		\]
+	\end{defi}
+
+	\begin{ex}
+		\ 
+		\begin{itemize}
+			\item Scalar field $\phi(x) \to \phi(\Lambda^{-1} \cdot x)$ has $N = 1$, with \emph{trivial representation} $D(\Lambda) = 1, \forall \Lambda \in G_L$;
+			\item 4-vector field $A^\mu (x) \to \LT{\mu}{\nu} A ^\nu(\Lambda^{-1} \cdot x)$ has $N = 4$, with \emph{fundamental representation} $D(\Lambda) = \Lambda$. 
+		\end{itemize}
+	\end{ex}
+
+	We want to construct new representations of $G_L$. We work with the \emph{Lie algebra} $\mathbb{L}(G_L)$ for convenience. We will use the \emph{exponential map}
+	\[
+		\Exp : \mathbb{L}(G_L) \to G_L
+	\]
+	which is bijective in some neighbourhood of identity element.
+
+	\begin{defi}
+		A \emph{representation of Lie algebra $\mathbb{L}(G_L)$} with dimension $N$ is a linear map 
+		\[
+			R : \mathbb{L}(G_L) \to \Mat_N(\mathbb{C})
+		\]
+		which preserves the Lie bracket, i.e.\ $\forall X,Y \in \mathbb{L}(G_L)$ 
+		\[
+			R([X,Y]) = [R(X), R(Y)].
+		\]
+	\end{defi}
+	
+	Given a representation $R$ of $\mathbb{L}(G_L)$, we can define
+	\[
+		D(\Lambda) = \exp(R(X)) \quad \text{for} \quad \Lambda = \Exp(X).
+	\]
+	$D$ yields a representation of the \emph{universal cover} $\tilde G_L = \text{Spin}(3,1) \simeq \SL(2, \mathbb{C})$ of Lorentz group $G_L = \SO(3,1)$. In this case, the covering group $\SL(2,\mathbb{C})$ is not isomorphic to $\SO(3,1)$ but a double cover of it, i.e.\ there exists a global 2:1 map
+	\[
+		e : \tilde G_L \xrightarrow{2:1} G_L.
+	\]
+	(Or we can say, $\SO(3,1) \simeq \SL(2,\mathbb{C})/\mathbb{Z}_2$.)
+
+	For the case of rotations in $\mathbb{R}^3$, 
+	\[
+		G = \SO(3) \quad \text{with cover} \quad \tilde G = \SU(2)
+	\]
+	with a map
+	\[
+		e : \SU(2) \xrightarrow{2:1} \SO(3).
+	\]
+	(Again, we can say $\SO(3) \simeq \SU(2)/\mathbb{Z}_2$.)
+
+	Here we consider \emph{proper Lorentz transformations}, $G_L = \SO(3,1)$ with
+	\[
+		\Lambda = \Exp(\omega)
+	\]
+	and in components 
+	\[
+		\LT{\mu}{\nu} = \delta^\mu_\nu + \omega\indices{^\mu_\nu} + \frac{1}{2} \omega\indices{^\mu_\rho} \omega\indices{^\rho_\nu} + \cdots 
+	\]
+	
+	The condition of $\Lambda \in G_L$ is $\Lambda \eta \Lambda^T = \eta$, so we require 
+	\[
+		\omega ^{\mu \nu} + \omega ^{\nu \mu} = 0.
+	\]
+	Thus the Lie algebra is
+	\[
+		\mathbb{L}(G_L) = \{\omega \in \Mat_4(\mathbb{R}) : \omega + \omega^T = 0\}.
+	\]
+
+	Hence, the number of generators is 
+	\[
+		\frac{1}{2} (4 \times 3) = 6 \quad \sim \quad \text{3 rotations} + \text{3 boosts}.
+	\]
+	
+	The natural basis consists of 
+	\[
+		(M ^{\rho \sigma})^{\mu \nu} = \eta ^{\rho \mu} \eta ^{\sigma \nu} - \eta ^{\sigma \mu} \eta ^{\rho \nu}.
+	\]
+
+	Note that the indices $\rho,\sigma$ labels different generators, while $\mu,\nu$ gives the entries in the representation matrices.
+
+	For example
+	\[
+		(M ^{01})^{\mu \nu} = \mqty(0 & 1 & 0 & 0\\ -1 & 0 & 0 & 0\\ 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0)
+	\]
+	which is the generator of boost along $x$-axis.
+
+	A general element of $\mathbb{L}(G_L)$ is 
+	\[
+		\omega\indices{^\mu_\nu} = \frac{1}{2} \Omega _{\rho \sigma} \left( M ^{\rho \sigma} \right)\indices{^\mu_\nu}
+	\]
+	where we take $\Omega _{\rho \sigma} = - \Omega _{\sigma \rho}$ to be the parameters of a general Lie algebra element.
+
+	The resulting Lie bracket should be 
+	\begin{equation}
+		[M ^{\rho \sigma}, M ^{\tau \nu}] = \eta ^{\sigma \tau} M ^{\rho \nu} - \eta ^{\rho \tau} M ^{\sigma \nu} + \eta ^{\rho \nu} M ^{\sigma \tau} - \eta ^{\sigma \nu} M ^{\rho \tau}.
+		\label{eq:4.1.1}
+	\end{equation}
+
+	The Lie group elements $\Lambda \in G_L$ are then
+	\[
+		\Lambda = \Exp\left( \frac{1}{2} \Omega _{\rho \sigma} M ^{\rho \sigma} \right).
+	\]
+	
+	Now we turn to something else.
+
+	\begin{defi}
+		The \emph{Clifford algebra} with elements $\gamma^0, \gamma^1, \gamma^2, \gamma^3$ are such that the \emph{anticommutators} obey 
+	\begin{equation}
+		\{\gamma^\mu, \gamma^\nu\} := \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2 \eta ^{\mu \nu}.
+		\label{eq:4.1.2}
+	\end{equation}
+	\end{defi}
+
+	We want to find representations of Clifford algebra.
+
+	Introducing the Pauli matrices
+	\[
+		\bm \sigma = \left( \mqty(\pmat{1}),\mqty(\pmat{2}),\mqty(\pmat{3}) \right)
+	\]
+	which obeys (for $i,j = 1,2,3$)
+	\[
+		\{\sigma^i , \sigma^j\} = 2 \delta ^{ij} \1_2.
+	\]
+	
+	\begin{defi}
+		The \emph{simple representation} (unique irrep of Clifford algebra up to conjugation $\gamma^\mu \to V \gamma^\mu V^{-1}$) is 
+	\begin{equation}
+		\gamma^0 = \mqty(0 & \1_2\\ \1_2 & 0), \quad \gamma^i = \mqty(0 & \sigma^i\\ \sigma^i & 0).
+		\label{eq:4.1.3}
+	\end{equation}
+	This is also called the \emph{Weyl representation}.
+	\end{defi}
+
+	Now, define 
+	\begin{equation}
+		S ^{\rho \sigma} := \frac{1}{4} [\gamma^\rho, \gamma^\sigma] = \frac{1}{2} \gamma^\rho \gamma^\sigma - \frac{1}{4} \{\gamma^\rho, \gamma^\sigma\} = \frac{1}{2} \gamma^\rho \gamma^\sigma - \frac{1}{2} \eta ^{\rho \sigma}
+		\label{eq:4.1.4}
+	\end{equation}
+	and check Question 3, Sheet 3, we find
+	\begin{equation}
+		[S ^{\mu \nu}, S ^{\rho \sigma}] = \eta ^{\nu \rho} S ^{\mu \sigma} - \eta ^{\mu \rho} S ^{\nu \sigma} + \eta ^{\mu \sigma} S ^{\nu \rho} - \eta ^{\nu \sigma} S ^{\mu \rho}.
+		\label{eq:4.1.5}
+	\end{equation}
+
+	$S ^{\mu \nu}$ provide a 4d representation of $\mathbb{L}(G_L)$. Exponentiate to give a representation of universal cover $\tilde G_L = \text{Spin}(3,1) \xrightarrow{2:1} G_L = \SO(3,1)$. For 
+	\[
+		\Lambda = \Exp \left( \frac{1}{2} \Omega _{\rho \sigma} M ^{\rho \sigma} \right)
+	\]
+	the new representation is
+	\[
+		S[\Lambda] = \Exp \left( \frac{1}{2} \Omega _{\rho \sigma} S ^{\rho \sigma} \right).
+	\]
+	 
+	It is a new four-dimensional representation 
+	\[
+		S : \tilde G_L \to \Mat_4 (\mathbb{C})
+	\]
+	but not well-defined as $G_L \to \Mat_4(\mathbb{C})$. We call this representation a \emph{spinor representation}.
+	
+	
+	
+	
+	
+	  
 \end{document}
