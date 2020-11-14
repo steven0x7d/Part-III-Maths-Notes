@@ -26,6 +26,7 @@
 \RequirePackage{marginnote}
 \reversemarginpar
 \RequirePackage{tikz-cd}
+\RequirePackage{slashed}
 %----------Title----------
 
 \fancypagestyle{firstpagestyle}{
@@ -119,7 +120,7 @@
 \date{\nterm\ \nyear}
 
 %----------Page Setup----------
-\RequirePackage[paper = a4paper, tmargin = 3cm, bmargin = 3cm, lmargin = 3.25cm, rmargin = 3.25cm]{geometry}
+\RequirePackage[paper = a4paper, tmargin = 3cm, bmargin = 3cm, lmargin = 3cm, rmargin = 3cm]{geometry}
 \setlength{\headheight}{14pt}
 \pagestyle{fancy}
 \fancyhead{}
@@ -140,10 +141,10 @@
 \titleformat*{\subsubsection}{\bfseries}
 \titleformat*{\paragraph}{\sffamily\bfseries}
 
-\setlength{\parskip}{0.5em}
+\setlength{\parskip}{0.25em}
 \setlength{\parindent}{0em}
 \linespread{1.1}
-\numberwithin{equation}{subsection}
+\numberwithin{equation}{section}
 
 %----------Theorem Style Section----------
 
@@ -293,9 +294,9 @@
 \newcommand{\ii}{\mathrm{i}}
 \newcommand{\Rq}{\Rightarrow\qquad}
 \newcommand{\lecnr}[1]{\marginnote{\sffamily\centering\color{Blue} Lecture {#1}\\No-Revise}[0.5em]}
-\newcommand{\lec}[1]{\marginnote{\sffamily\centering\color{Blue} Lecture {#1}}[0.5em]}
+\newcommand{\lec}[1]{\marginnote{\sffamily\centering\color{Gray} Lecture {#1}}[0.5em]}
 \newcommand{\recnr}[1]{\marginnote{\sffamily\centering\color{Blue} Rec {#1}\\No-Revise}[0.5em]}
-\newcommand{\rec}[1]{\marginnote{\sffamily\centering\color{Blue} Rec {#1}}[0.5em]}
+\newcommand{\rec}[1]{\marginnote{\sffamily\centering\color{Gray} Rec {#1}}[0.5em]}
 \DeclareMathOperator{\cpf}{\circ}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\hme}{\xrightarrow{\sim}}
