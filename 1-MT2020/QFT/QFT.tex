@@ -3011,6 +3011,220 @@
 		(\gamma^\mu)^{\dagger} = \gamma^0 \gamma^\mu \gamma^0.
 	\]
 	
+	Now we take the Hermitian conjugte of $S _{\mu \nu}$ \lec{18}
+	\begin{align*}
+		(S _{\mu \nu})^{\dagger} & = \frac{1}{4} \left( [\gamma^\mu, \gamma^\nu] \right)^{\dagger} = \frac{1}{4} \left( [{\gamma^\nu}^{\dagger}, {\gamma^\mu}^{\dagger}] \right)\\
+		& = \frac{1}{4} [\gamma^0 \gamma^\nu \gamma^0, \gamma^0 \gamma^\mu \gamma^0] = \frac{1}{4} \gamma^0 [\gamma^\nu, \gamma^\mu]\gamma^0\\
+		& = - \frac{1}{4} \gamma^0 [\gamma^\mu, \gamma^\nu] \gamma^0
+	\end{align*}
+	i.e.\ we have
+	\[
+		(S ^{\mu \nu})^{\dagger} = - \gamma^0 S ^{\mu \nu}\gamma^0.
+	\]
+	
+	So
+	\begin{align*}
+		S[\Lambda]^{\dagger} & = \left[\Exp \left( \frac{1}{2} \Omega _{\rho \sigma} S ^{\rho \sigma} \right)\right]^{\dagger} = \Exp \left( \frac{1}{2} \Omega _{\rho \sigma} \left( S ^{\rho \sigma} \right)^{\dagger} \right) \\
+		& = \Exp\left( - \frac{1}{2} \Omega _{\rho \sigma} \gamma^0 S ^{\rho \sigma} \gamma^0 \right)\\
+		& = \gamma^0 \Exp \left( - \frac{1}{2} \Omega _{\rho \sigma} S ^{\rho \sigma} \right) \gamma^0
+	\end{align*}
+	thus
+	\begin{equation}
+		\left( S[\Lambda] \right)^{\dagger} = \gamma^0 S[\Lambda]^{-1} \gamma^0.
+		\label{eq:4-11}
+	\end{equation}
+
+	This means $S[\Lambda]$ is not a unitary representation.
+
+	Consider spinor field $\psi^\alpha(x)$, the Hermitian conjugate transforms as 
+	\[
+		\psi^{\dagger}(x) \to \psi^{\dagger}(\Lambda^{-1} \cdot x) S[\Lambda]^{\dagger} = \psi^{\dagger} (\Lambda^{-1} \cdot x) \gamma^0 S[\Lambda]^{-1} \gamma^0.
+	\]
+
+	So, $\psi^{\dagger} \psi$ is \emph{not} a Lorentz scalar. To proceed, we have the following definition.
+
+	\begin{defi}
+		The \emph{Dirac adjoint} of a spinor field $\psi(x)$ is a field 
+		\[
+			\bar \psi(x) : = \psi^{\dagger}(x) \gamma^0.
+		\]
+	\end{defi}	
+
+	Under Lorentz transformation $\Lambda \in G_L$, we have
+	\[
+		\bar \psi(x) \to \bar \psi'(x) = \psi^{\dagger}(\Lambda^{-1} \cdot x) \gamma^0 S[\Lambda]^{-1} \gamma^0 \gamma^0 = \bar \psi(\Lambda^{-1} \cdot x) S[\Lambda]^{-1}.
+	\]
+
+	Now define, 
+	\[
+		\Sigma(x) = \bar \psi(x) \psi(x),
+	\]
+	under Lorentz transformation, it transforms as 
+	\[
+		\Sigma(x) \xrightarrow{\Lambda} \bar \psi(\Lambda^{-1} \cdot x) S[\Lambda]^{-1} S[\Lambda] \psi(\Lambda^{-1} \cdot x) = \bar \psi(\Lambda^{-1}\cdot x) \psi(\Lambda^{-1} \cdot x) = \Sigma(\Lambda^{-1} \cdot x)
+	\]
+	so we can conclude that $\Sigma(x)$ is a scalar field.
+
+	\begin{clm}
+		We can also form vector field
+		\[
+			V^\mu(x) = \bar \psi(x) \gamma^\mu \psi(x).
+		\]
+	\end{clm}
+	\begin{proof}
+		Under Lorentz transformation $\Lambda \in G_L$,
+		\begin{align*}
+			V^\mu(x) & \xrightarrow{\Lambda} \bar \psi(\Lambda^{-1} \cdot x) S[\Lambda]^{-1} \gamma^\mu S[\Lambda] \psi(\Lambda^{-1} \cdot x)\\
+			& \overset{(\ref{eq:4.2.1})}{=} \LT{\mu}{\nu} \bar \psi(\Lambda^{-1} \cdot x) S[\Lambda]^{-1} \gamma^\nu S[\Lambda] \psi(\Lambda^{-1} \cdot x)\\
+			&\ = \LT{\mu}{\nu} V^\nu (\Lambda^{-1} \cdot x).
+		\end{align*}
+	\end{proof}
+
+	\subsection{Dirac Action}
+
+	We want an action for the spinor field. We want it to be 
+	\begin{itemize}
+		\item Lorentz invariant,
+		\item Real.
+	\end{itemize}
+	To achieve this, we work with Lagrangian density 
+	\[
+		S = \int \dd[4]{x} \mathcal{L}(x)
+	\]
+	where 
+	\begin{itemize}
+		\item $\mathcal{L}$ is a scalar field;
+		\item $\mathcal{L}$ is real.	
+	\end{itemize}
+	
+	Write down the \emph{Dirac Lagrangian}
+	\[
+		\mathcal{L}(x) = \mathcal{L}_1 + \mathcal{L}_2 = \bar \psi(x) \mathrm{i} \gamma^\mu \partial_\mu \psi(x) - m \bar \psi(x) \psi(x).
+	\]
+	
+	\begin{clm}
+		$\mathcal{L}(x)$ is a scalar.
+	\end{clm}
+
+	\begin{proof}
+		We can already confirm $\mathcal{L}_2(x)$ is a scalar. It suffices to check $\mathcal{L}_1(x)$. Consider a Lorentz transformation $\Lambda \in G_L$, 
+		\begin{align*}
+			\mathcal{L}_1(x) & = \bar \psi(x) \mathrm{i} \gamma^\mu \partial_\mu \psi(x)\\
+			& \xrightarrow{\Lambda} \bar \psi(\Lambda^{-1} \cdot x) S[\Lambda]^{-1} \mathrm{i} \gamma^\mu \left( \Lambda^{-1} \right)\indices{^\nu_\mu} S[\Lambda] \partial_\nu \psi(\Lambda^{-1} \cdot x)\\
+			& = \mathrm{i} \bar \psi(\Lambda^{-1} \cdot x) \left( S[\Lambda]^{-1} \gamma^\mu S[\Lambda] \right) \left( \Lambda^{-1} \right)\indices{^\nu _\mu} \partial_\nu \psi(\Lambda^{-1} \cdot x)\\
+			& \overset{(\ref{eq:4.2.1})}{=} \mathrm{i} \bar \psi(\Lambda^{-1} \cdot x) \LT{\mu}{\rho} \gamma^\rho \left( \Lambda^{-1} \right)\indices{^\nu_\mu} \partial_\nu \psi(\Lambda^{-1} \cdot x)\\
+			& = \mathrm{i} \bar \psi(\Lambda^{-1} \cdot x) \delta^\nu_\rho \gamma^\rho \partial_\nu \psi(\Lambda^{-1}\cdot x)\\
+			& = \mathrm{i} \bar \psi(\Lambda^{-1} \cdot x) \gamma^\nu \partial_\nu \psi(\Lambda^{-1} \cdot x)\\
+			& = \mathcal{L}_1 (\Lambda^{-1} \cdot x).
+		\end{align*}
+		
+	\end{proof}
+
+	The remarkable fact here is that, the Dirac Lagrangian is \emph{first order} in derivatives! This will lead to interesting consequences later.
+
+	We now use the least action principle to get the equations of motion. The Dirac action is
+	\[
+		S = \int \dd[4]{x} \bar \psi(x) \left( \mathrm{i} \gamma^\mu \partial_\mu - m \right) \psi(x).
+	\]
+	Varying with respect to $\bar \psi$ and demanding $\delta S = 0$, we have the famous \emph{Dirac equation}
+	\begin{equation}
+		\boxed{\left(\mathrm{i} \gamma^\mu \partial_\mu - m\right)\psi(x) = 0}.
+	\end{equation}
+	Similarly, if we vary with respect to $\psi$ and demanding $\delta S = 0$, we have the conjugate equation 
+	\[
+		\mathrm{i} (\partial_\mu \bar \psi) \gamma^\mu + m \bar \psi = 0.
+	\]
+
+	We now introduce a ubiquitous notation in High Energy Physics: for any 4-vector $U_\mu$, we denote 
+	\[
+		\slashed{U} = \gamma^\mu U_\mu.
+	\]
+	
+	In this ``slashed'' notation, the Dirac equation can be written compactly as 
+	\[
+		(\mathrm{i} \slashed \partial - m) \psi = 0.
+	\]
+
+	As for spinor transformation properties, under 
+	\[
+		\Lambda = \Exp \left( \frac{1}{2} \Omega _{\rho \sigma} \mathcal{M}^{\rho \sigma} \right)
+	\]
+	and 
+	\[
+		S[\Lambda] = \Exp\left( \frac{1}{2} \Omega _{\rho \sigma} S ^{\rho \sigma} \right)	
+	\]
+	we already considered \emph{rotations} by setting 
+	\[
+		\Omega _{ij} = - \epsilon _{ijk} \varphi^k,\quad \Omega _{i0} = 0.
+		\tag{R1}
+		\label{eq:4-r1}
+	\]
+	
+	Now we want to study \emph{boosts} by setting
+	\[
+		\Omega _{i0} = - \Omega _{0i} = \chi_i,\quad \Omega _{ij} = 0.
+		\tag{R2}
+		\label{eq:4-r2}
+	\]
+	
+	The relevant generators are
+	\begin{align*}
+		S ^{0i} &= \frac{1}{4} [\gamma^0, \gamma^i] = \frac{1}{2} \gamma^0 \gamma^i - \frac{1}{4} \cancelto{\text{\tiny 0}}{\left\{ \gamma^i, \gamma^0 \right\}}\\
+		& = \frac{1}{2} \mqty(0 & \1_2\\ \1_2 & 0) \mqty(0 &\sigma^i\\ - \sigma^i & 0)\\
+		& = \frac{1}{2} \mqty(- \sigma^i & 0 \\ 0 & \sigma^i).
+	\end{align*}
+	Exponentiating,
+	\[
+		S[\bm \chi] := S[\Lambda]\big|_{\text{(\ref{eq:4-r2})}} = \Exp \left[ \frac{1}{2} \chi^i \smqty(\sigma^i & 0 \\ 0 & - \sigma^i) \right] = \mqty(e ^{\bm \chi \vdot \bm \sigma / 2} & 0 \\ 0 & e ^{-\bm \chi \vdot \bm \sigma/2} ).
+	\]
+	
+	To summarise, under a boost $\bm \chi$
+	\[
+		S[\bm \chi] = \mqty(e ^{\bm \chi \vdot \bm \sigma / 2} & 0 \\ 0 & e ^{- \bm \chi \vdot \bm \sigma / 2}),
+	\]
+	and under rotation about $\bm \varphi$, 
+	\[
+		S[\bm \varphi] = \mqty(e ^{\mathrm{i} \bm \varphi \vdot \bm \sigma/2} & 0 \\ 0 & e ^{\mathrm{i} \bm \varphi \vdot \bm \sigma / 2}).
+	\]
+	As we can see, these matrices are all block diagonal, so the spinor representation of $\tilde G_L$ is \emph{reducible representation}. 
+
+	Define, in the chiral representation
+	\[
+		\gamma^5 := \mqty(\1_2 & 0 \\ 0 & - \1_2),
+	\]
+	it can be shown
+	\[
+		\{\gamma^\mu, \gamma^5\} = 0, \quad \mu = 0,1,2,3
+	\]
+	and 
+	\[
+		\left( \gamma^5 \right)^2 = + \1_4.
+	\]
+	
+	The invariant definition which is true in all bases is
+	\begin{defi}
+		\[
+		\gamma^5 := - \mathrm{i} \gamma^0 \gamma^1 \gamma^2 \gamma^3.
+	\]
+	\end{defi}
+
+	\begin{defi}
+		The \emph{projection operators} obeying $P_+^2 = P_+, P_-^2 = P_-$ are defined as 
+		\[
+			P _{\pm} := \frac{1}{2} \left( \1_2 \pm \gamma^5 \right).
+		\]
+		Specially one can check $P_+ P_- = 0$.
+		
+		The \emph{chiral components} of a spinor field $\psi$ is defined as $\psi_\pm = P_\pm \psi$, so under chiral representation one can write 
+		\[
+			\psi_+ = \mqty(u_+\\0), \quad \psi_- = \mqty(0\\u_-)
+		\]
+		where $u_\pm $ are called \emph{Weyl spinors}.
+	\end{defi}
+
+	
+	
+	
 	
 	
 	
