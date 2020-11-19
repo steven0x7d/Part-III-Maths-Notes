@@ -3222,6 +3222,274 @@
 		where $u_\pm $ are called \emph{Weyl spinors}.
 	\end{defi}
 
+	\subsection{Representation Theory of Lorentz Group} \lec{19}
+	We now want to further discuss the representation theory of Lorentz group and its double cover. Recall that there is a global 2:1 map
+	\[
+		\tilde G_L = \SL(2,\mathbb{C}) \cong \text{Spin}(3,1)^+ \quad \xrightarrow{2:1} \quad G_L = \SO(3,1)^+
+	\]
+	where the ``+'' sign means that we restrict to only the orthochronous transformations.
+
+	To construct representations of Lorentz group and its cover, it is often convenient to work at the level of Lie algebra as
+	\[
+		\mathbb{L}(\SL(2,\mathbb{C})) = \mathbb{L}(\SO(3,1)) = \mathbb{L}(\SO(3,1)^+).
+	\]
+
+	The \emph{complexification} of $\mathbb{L}(\SO(3,1))$ can be shown as 
+	\[
+		\mathbb{L}_\mathbb{C}(\SO(3,1)) \cong \mathbb{L}_\mathbb{C}(\SO(4))
+	\]
+	but
+	\[
+		\mathbb{L}(\SO(4)) \cong \mathbb{L}(\SU(2))\oplus \mathbb{L}(\SU(2)).
+	\]
+	
+	Finite dimensional representations of $\mathbb{L}(\SU(2))$ are classified for $j = 0, \frac{1}{2}, \cdots$, $-j \leq j_z \leq +j$ that
+	\[
+		\dim R_j = 2j + 1
+	\]
+	where $R_j$ is an representation of $\mathbb{L}(\SU(2))$. 
+	
+	Finite dimensional irreps of $\mathbb{L}(\SO(3,1))$ can be related to those of $\mathbb{L}(\SO(4))$ labeled by $(j_+,j_-)$ where $j_+, j_- = 0, \frac{1}{2}, 1, \cdots$ then 
+	\[
+		\dim R _{(j_+, j_-)} = (2j_+ + 1)(2j_- + 1).
+	\]
+	  
+	Then we can draw a table of representations.
+	\begin{center}
+		\begin{tabular}{c|ccc}
+			\hline
+			& $j_+$ & $j_-$ & $D$\\
+			\hline
+			scalar & 0 & 0 & 1\\
+			LH Weyl spinor & $\frac{1}{2}$ & 0 & 2\\
+			RH Weyl spinor & 0 & $\frac{1}{2}$ & 2\\
+			4-vector & $\frac{1}{2}$ & $\frac{1}{2}$ & 4\\ 
+			\hline 
+		\end{tabular}
+	\end{center}
+
+	Dirac spinor representation $S$ can be seen as 
+	\[
+		S \cong \left( \tfrac{1}{2}, 0 \right) \oplus \left( 0, \tfrac{1}{2} \right)
+	\]
+	which is reducible into the LH and RH Weyl spinor irreps.
+
+	\subsection{Solutions of Dirac Equation}
+
+	The Dirac equation is 
+	\[
+		\left( \mathrm{i}\gamma^\mu \partial_\mu - m \1_4 \right) \psi(x) = 0.
+	\]
+	
+	Act with the conjugate operator 
+	\[
+		\left( -\mathrm{i} \gamma^\nu \partial_\nu - m \1_4 \right)
+	\]
+	we have
+	\[
+		\left( \gamma^\mu \gamma^\nu \partial_\nu \partial_\mu + m^2 \1_4 \right) \psi(x) = 0
+	\]
+	using $\frac{1}{2}\left\{ \gamma^\mu, \gamma^\nu \right\} = \eta ^{\mu \nu}\1_4$ and the symmetric property of two derivatives, we have exactly the Klein-Gordon equation
+	\[
+		(\partial_\mu \partial^\mu + m^2) \psi(x) = 0
+	\]
+	i.e., each component of $\psi$ obeys the Klein-Gordon equation.
+
+	Thus, we propose an ansatz 
+	\[
+		\psi \sim e ^{\pm \mathrm{i} p \cdot x}
+	\]
+	where $p^\mu p_\mu = m^2$ with $p^0 = E _{\vb p} = + \sqrt{\abs{\vb p}^2 + m^2}$ and $p^\mu = (E _{\vb p}, \vb p)$.
+	
+	\subsubsection{Positive Frequency Solutions}
+
+	First we look at the \emph{positive frequency solutions}. Use ansatz
+	\[
+		\psi_\alpha(x) = u_\alpha (p) e ^{- \mathrm{i} p \cdot x}
+	\]
+	where $u_\alpha(p)$ is some spinor dependent with $p$. Impose Dirac equation and noting each derivative contributes a copy of 4-momentum, i.e.\ $\partial_\mu \to - \mathrm{i} p_\mu$, we have
+	\[
+		(p^\mu \gamma^\mu - m \1_4) u (p) = 0.
+	\]
+	
+	Solve in rest frame with $p^\mu _{(0)} = (m, \vb 0)$, we have 
+	\[
+		m \left( \gamma^0 - \1_4 \right) u\left(p _{(0)}\right) = 0
+	\]
+	which, in chiral representation, reads 
+	\[
+		m \mqty(- \1_2 & +\1_2\\ + \1_2 & - \1_2) u \left(p _{(0)}\right) = 0.
+	\]
+	So the general solution is 
+	\[
+		u\left( p _{(0)} \right) = \sqrt{m} \mqty(\xi\\ \xi)
+	\]
+	where $\xi$ is a complex 2-component vector.
+
+	Now, perform a boost of rapidity $\eta$ in direction labelled by a unit vector in $\mathbb{R}^3$, $\hat{\vb n}$ to go back to arbitrary inertial frame. Such boost corresponds to a Lorentz group element
+	\[
+		\Lambda[\bm \chi] \in G_L \quad \text{with} \quad \bm \chi = \eta \hat{\vb n}.
+	\]
+	Under such a boost,
+	\[
+		p _{(0)} = (m,0) \quad \xrightarrow{\Lambda} \quad p = (E _{\vb p}, \vb p) = \Lambda[\bm \chi] p _{(0)}
+	\]
+	where
+	\[
+		E _{\vb p} = m \cosh(\eta) \quad \text{and} \quad \vb p = m \sinh(\eta) \hat{\vb n}.
+	\]
+	\begin{exer}
+		Check this.
+	\end{exer}
+
+	Now apply the boost to our solution in the rest frame,
+	\[
+		u(p) = S[\bm \chi] \cdot u\left( p _{(0)} \right) = \sqrt{m} \mqty(e ^{\bm \chi \vdot \bm \sigma/2} & 0 \\ 0 & e ^{- \bm \chi \vdot \bm \sigma/2}) \mqty(\xi \\ \xi) = \sqrt{m} \mqty(e ^{\bm \chi \vdot \sigma/2} \cdot \xi\\e ^{-\bm \chi \vdot \sigma/2} \cdot \xi).
+	\]
+	with $\bm \chi = \eta \hat{\vb n}$.
+
+	To simplify, we expand the (square of above) exponentials
+	\[
+		e ^{\pm \bm \chi \vdot \bm \sigma} = \sum _{m = 0}^{\infty} \left( \frac{1}{(2m)!} (\bm \chi \vdot\bm \sigma)^{2m} \pm \frac{1}{(2m+1)!} (\bm \chi \vdot \bm \sigma)^{2m + 1} \right)
+	\]
+	and noting 
+	\[
+		(\bm \chi \vdot \bm \sigma)^2 = \chi^i \chi^j \sigma^i \sigma^j = \abs{\bm \chi}^2 \1_2 = \eta^2 \1_2
+	\]
+	we have
+	\[
+		e ^{\pm \bm \chi \vdot \bm \sigma} = \cosh(\eta) \1_2 \pm \sinh(\eta) \hat{\vb n} \vdot \bm \sigma.
+	\]
+
+	Then if we rewrite in terms of the components of energy momentum tensor
+	\[
+		m e ^{\pm \bm \chi \vdot \bm \sigma} = p^0 \1_2 \pm \vb p \vdot \bm \sigma
+	\]
+	and define
+	\[
+		\sigma^\mu = (\1_2, \bm \sigma) \quad \text{and} \quad \bar \sigma^\mu = (\1_2, - \bm \sigma)
+	\]
+	we can write compactly
+	\[
+		m e ^{+\bm \chi \vdot \bm \sigma} = \sigma \cdot p = \sigma^\mu p_\mu \quad \text{and} \quad m e ^{-\bm \chi \vdot \bm \sigma} = \bar \sigma \cdot p = \bar \sigma^\mu p_\mu.
+	\]
+	
+	The square roots are
+	\[
+		\sqrt{m} e ^{+ \bm \chi \vdot \bm \sigma / 2} = \sqrt{p \cdot \sigma} \quad \text{and} \quad \sqrt{m} e ^{- \bm \chi \vdot \bm \sigma / 2} = \sqrt{p \cdot \bar \sigma}
+	\]
+	To further clarify what these ``square roots'' mean, consider
+	\[
+		M := p \cdot \sigma = p^0 \1_2 + \bm p \vdot \bm \sigma,
+	\]
+	these are $2 \times 2$ Hermitian matrix $M = M^{\dagger}$. These can always be diagonalised with unitary transformations $U$, such that 
+	\[
+		M = U D U^{\dagger}
+	\]
+	with $D$ diagonal 
+	\[
+		D = \mqty(\lambda_1 & 0\\ 0 & \lambda_2).
+	\]
+	
+	We can define the square root of $D$ as 
+	\[
+		\sqrt{D} : = \mqty(+ \sqrt{\lambda_1} & 0 \\ 0 & + \sqrt{\lambda_2})
+	\]
+	by choosing the sign specifically. Then the square root of the original matrix can be defined as 
+	\[
+		\sqrt{M} := U \sqrt{D} U^{\dagger}.
+	\]
+	One can check indeed
+	\[
+		\sqrt{M} \cdot \sqrt{M} = U \sqrt{D} U^{\dagger} U \sqrt{D} U^{\dagger} = U D U^{\dagger} = M.
+	\]
+	
+	Finally, we can write down the solutions (of positive frequency) as 
+	\[
+		\psi(x) = u(p) e ^{- \mathrm{i} p \cdot x} \quad \text{with} \quad u(p) = \mqty(\sqrt{p \cdot \sigma}\  \xi\\\sqrt{p \cdot \bar \sigma}\ \xi).
+	\]
+	
+	We can choose basis vectors $\xi^s$ with $s = 1,2$ for the 2-component complex vectors, such that 
+	\[
+		(\xi^r)^{\dagger} \cdot \xi^s = \delta ^{rs}.
+	\]
+	For example we can choose 
+	\[
+		\xi^1 = \mqty(1\\0), \quad \xi^2 = \mqty(0\\1).
+	\]
+	
+	Chosen some basis, we have the 2 independent solutions
+	\[
+		u^s(p) = \mqty(\sqrt{p \cdot \sigma}\ \xi^s\\\sqrt{p \cdot \bar \sigma}\ \xi^s) \quad s=1,2.
+	\]
+
+	\subsubsection{Negative Frequency Solutions}
+	
+	For \emph{negative frequency solution}, we can do a similar analysis. Use ansatz
+	\[
+		\psi(x) = v(p) e ^{+ \mathrm{i} p \cdot x}
+	\]
+	and insert into Dirac equation to get 
+	\[
+		(\gamma^\mu p_\mu + m \1_4) v(p) = 0.
+	\]
+	
+	Working in rest frame $p = p _{(0)}$ in chiral representation 
+	\[
+		m \mqty(\1_2 & \1_2 \\ \1_2 & \1_2) v\left( p _{(0)} \right) = 0
+	\]
+	so 
+	\[
+		v\left( p _{(0)} \right) = \sqrt{m} \mqty(\eta \\ -\eta)
+	\]
+	and after some boost 
+	\[
+		p _{(0)} \xrightarrow{\Lambda} p = (E _{\vb p},\vb p), \quad v(p) = S[\Lambda] v\left( p _{(0)} \right)
+	\]
+	to get 
+	\[
+		v(p) = \mqty(\sqrt{p \cdot \sigma}\ \eta\\- \sqrt{p \cdot \bar \sigma}\ \eta).
+	\]
+
+	There are 2 independent solutions as before. We can choose basis vectors $\eta^s$ with $s = 1,2$ such that 
+	\[
+		(\eta^r)^{\dagger}\cdot \eta^s = \delta ^{rs}.
+	\]
+	Under such basis, the solutions are 
+	\[
+		v^s(p) = \mqty(\sqrt{p \cdot \sigma}\ \eta^s\\- \sqrt{p \cdot \bar \sigma}\ \eta^s).
+	\]
+	
+	Note that sometimes we may write $u^s(\vb p)$ and $v^s(\vb p)$ by denoting them using the 3-momentum $\vb p$.
+	
+	\subsubsection{Useful Identities}
+
+	The proofs of the following useful identities are left as exercise in Example Sheet 3.
+	$${u^r}^{\dagger}(p) \cdot u^s(p) = 2p_0 \delta ^{rs},$$
+	$$\bar u^r(p) \cdot u^s(p) = 2m \delta ^{rs},$$
+	\[
+		{v^r}^{\dagger}(p) \cdot v^s(p) = 2 p_0 \delta ^{rs},
+	\]
+	\[
+		\bar v^r (p) \cdot v^s(p) = - 2 m \delta ^{rs},
+	\]
+	\[
+		\bar u^s (p) \cdot v^r(p) = 0,
+	\]
+	\[
+		{u^s}^{\dagger}(p) \cdot v^r(p') = 0, \quad p' = (p^0, - \vb p),
+	\]
+	\[
+		\sum _{s=1}^{2} u^s_\alpha(p) \bar u^s_\beta(p) = \left( \slashed{p} + m \right)_{\alpha \beta},
+	\]
+	\[
+		\sum _{s = 1}^2 v_\alpha^s(p)\bar v_\beta^s(p) = \left( \slashed{p} - m \right) _{\alpha \beta}.
+	\]
+	
+
+
+	
+
 	
 	
 	
