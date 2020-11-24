@@ -3485,16 +3485,393 @@
 	\[
 		\sum _{s = 1}^2 v_\alpha^s(p)\bar v_\beta^s(p) = \left( \slashed{p} - m \right) _{\alpha \beta}.
 	\]
-	
 
+	\subsection{Quantising Spinor Fields} \lec{20}
 
+	Recall that the action is 
+	\[
+		S = \int \dd[4]{x} \mathcal{L}(x)
+	\]
+	with Dirac Lagrangian
+	\[
+		\mathcal{L} = \mathrm{i} \bar \psi(x) \gamma^\mu \partial_\mu \psi(x) - m \bar \psi(x) \psi(x).
+	\]
 	
+	\subsubsection{Symmetries of Dirac Action}
 
+	We've already discussed Lorentz symmetry.
 	
+	\paragraph{Vector Symmetry} Now we consider the \emph{vector symmetry}, namely 
+	\begin{align*}
+		\psi(x) &\to e ^{-\mathrm{i} \alpha} \psi(x)\\
+		\bar \psi(x) &\to e ^{+\mathrm{i} \alpha} \bar \psi(x)
+	\end{align*}
+	with $\alpha \in [0,2 \pi)$ . It has a conserved current 
+	\[
+		j^\mu_V = \bar \psi \gamma^\mu \psi \quad \text{such that} \quad \partial_\mu j^\mu_V = 0
+	\]
+	resulting in a conserved charge 
+	\[
+		Q = \int \dd[3]{\vb x} j^0_V = \int \dd[3]{\vb x} \bar \psi \gamma^0 \psi = \int \dd[3]{\vb x} \psi^{\dagger} \psi.
+	\]
+
+	\paragraph{Axial (Chiral) Symmetry} For massless fermions the \emph{axial} or \emph{chiral symmetry} is
+	\begin{align*}
+		\psi &\to e ^{+\mathrm{i} \alpha \gamma^5} \psi\\
+		\bar \psi &\to e ^{-\mathrm{i} \alpha \gamma^5} \bar \psi.
+	\end{align*}
+
+	\paragraph{Discrete Symmetries} The discrete symmetries are \emph{charge conjugation} $C$, \emph{parity inversion} $P$ and \emph{time reversal} $T$. We will not discuss these here. Please see Peskin and Schroeder for more details.
+
+	\subsubsection{Hamiltonian Formulation}
+	Conjugate momentum of the field $\psi(x)$ is defined as 
+	\[
+		\pi(x) = \pdv{\mathcal{L}(x)}{\dot \psi(x)} = \mathrm{i} \bar \psi(x) \gamma^0 = \mathrm{i} \psi^{\dagger}(x).
+	\]
+
+	The Hamiltonian is 
+	\[
+		H = \int \dd[3]{\vb x} \mathcal{H}(x)
+	\]
+	with the Hamiltonian density
+	\[
+		\mathcal{H}(x) = \pi(x) \dot \psi(x) - \mathcal{L}(x) = \bar \psi(x)\left( - \mathrm{i} \gamma^i \partial_i + m \right) \psi(x).
+	\]
 	
+	Now we expand spinor field in a complete basis of solutions of the Dirac equation as we did for scalar fields, labelled by $p^\mu p_\mu = m^2$, $p_0 > 0$ and $s = 1,2$ as 
+	\[
+		\psi_\alpha(x) = \sum _{s = 1}^2 \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left( b^s _{\vb p} u^s_\alpha(p) e ^{- \mathrm{i}p \cdot x} + c ^{s*}_{\vb p} v^s_\alpha (p) e ^{+ \mathrm{i} p \cdot x} \right)
+	\]
+	and for the conjugate field as 
+	\[
+		\psi^{\dagger}_\alpha(x) = \sum _{s = 1}^2 \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left( b^{s*} _{\vb p} {u^s_\alpha}^{\dagger}(p) e ^{+ \mathrm{i}p \cdot x} + c ^{s}_{\vb p} {v^s_\alpha}^{\dagger} (p) e ^{- \mathrm{i} p \cdot x} \right)
+	\]
+	and we identify $b^s _{\vb p}, c^s _{\vb p}$ as the oscillator variables.
 	
+	\subsubsection{Bosonic vs Fermionic SHO}
+
+	\paragraph{Bosonic} For a (QM) simple harmonic oscillator obeying Bose statistics, we have annihilation and creation operators $\hat a, \hat a^{\dagger}$ obeying commutation relations 
+	\[
+		[\hat a, \hat a^{\dagger}] = 1, \quad [\hat a,\hat a] = [\hat a^{\dagger},\hat a^{\dagger}] = 0.
+	\]
+	We can construct Hamiltonian 
+	\[
+		\hat H = \frac{1}{2} \omega (\hat a^{\dagger}\hat a + \hat a \hat a^{\dagger}) = \omega \left(\hat N + \frac{1}{2}\right)
+	\]
+	where $\hat N = \hat a^{\dagger} \hat a$.
+	The system has 
+	\begin{itemize}
+		\item Ground state $\ket{0}$ with $\hat a \ket{0} = 0$;
+		\item Excited states $\ket{n} = \left( a^{\dagger} \right)^n \ket{0}$ and $\hat N \ket{n} = n \ket{n}$ for $n \geq 0, n \in \mathbb{Z}$.
+	\end{itemize}
 	
+	\paragraph{Fermionic} Let's consider a quantum SHO system with Fermi statistics. We have annihilation and creation operators $\hat b,\hat b^{\dagger}$ obeying \emph{anti-commutation} relations
+	\[
+		\{\hat b, \hat b^{\dagger}\} := \hat b \hat b^{\dagger} + \hat b^{\dagger} \hat b = 1, \quad \{\hat b, \hat b\} = \{\hat b^{\dagger}, \hat b^{\dagger}\} = 0,
+	\]
+	i.e.\ $(\hat b)^2 = (\hat b^{\dagger})^2 = 0$, nilpotent.
 	
+	Then we get a fermionic Hamiltonian as 
+	\[
+		\hat H_F = \frac{1}{2} \omega \left( \hat b^{\dagger} \hat b - \hat b \hat b^{\dagger} \right) = \omega \left(\hat N_F - \frac{1}{2}\right)
+	\]
+	where $\hat N_F$ is the fermionic number operator. As before, 
+	\[
+		[\hat H_F, \hat b] = - \omega \hat b, \quad [\hat H_F, \hat b^{\dagger}] = + \omega \hat b^{\dagger}
+	\]
+	i.e.\ $\hat b^{\dagger},\hat b$ raise and lower energy of the state as usual. 
+
+	The system has 
+	\begin{itemize}
+		\item Ground state $\ket{0}$ such that $\hat b \ket{0} = 0$, i.e.\ $\hat N_F \ket{0} = 0$, $\hat H_F \ket{0} = - \frac{1}{2} \omega \ket{0}$;
+		\item Excited states $\ket{1} := \hat b^{\dagger} \ket{0}$ with $\hat N_F \ket{1} = \ket{1}$ and energy $\hat H_F \ket{1} = + \frac{1}{2} \omega \ket{1}$.
+	\end{itemize}
+	
+	\subsubsection{Spin-Statistics Theorem}
+	The spin-statistics theorem suggests that particles of spin $\frac{1}{2}$ must be quantised as \emph{fermions}. Otherwise, the energy spectrum is unbounded below.
+
+	Quantise in Schr\"odinger picture,
+	\begin{align*}
+		\psi(x) = \psi(\vb x, \text{fixed } t) &\to \hat \psi(\vb x)\\
+		\psi^{\dagger}(x) = \psi^{\dagger}(\vb x, \text{fixed } t) &\to \hat \psi^{\dagger}(\vb x),
+	\end{align*}
+	imposing the canonical anti-commutation relations, we have 
+	\[
+		\{\hat \psi_\alpha(\vb x), \hat \psi^{\dagger}_\beta(\vb y)\} = \1 _{\alpha \beta} \delta ^{(3)}(\vb x - \vb y), \quad \{\hat \psi_\alpha(\vb x), \hat \psi_\beta(\vb y)\} = \{\hat \psi^{\dagger}_\alpha(\vb x),\hat \psi^{\dagger}_\beta(\vb y)\} = 0.
+	\]
+
+	The mode expansion is now 
+	\[
+		\hat \psi_\alpha(\vb x) = \sum _{s = 1}^2 \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left( \hat b _{\vb p} u^s_\alpha(p) e ^{\mathrm{i} \vb p \vdot \vb x} + \hat c^{\dagger}_{\vb p} v^s_\alpha(p) e ^{-\mathrm{i} \vb p \vdot \vb x} \right)
+	\]
+	
+	\begin{exer}[Sheet 3]
+		All anti-commutator vanish 
+		\[
+			\{\hat b, \hat b\} = \{\hat b^{\dagger}, \hat b^{\dagger}\} = \{\hat c, \hat c\} = \{\hat c^{\dagger}, \hat c^{\dagger}\} = \{\hat b, \hat c\} = \{\hat b^{\dagger},\hat c\} = \{\hat b, \hat c^{\dagger}\} = \{\hat b^{\dagger},\hat c^{\dagger}\} = 0
+		\]
+		except
+		\[
+			\{\hat b^s _{\vb p}, \hat b^{r\dagger} _{\vb q}\} = \{\hat c^s _{\vb p}, \hat c^{r\dagger} _{\vb q}\} = (2 \pi)^3 \delta ^{rs} \delta ^{(3)}(\vb p - \vb q).
+		\]
+	\end{exer}
+	
+	We can get the Hamiltonian 
+	\[
+		\hat H = \int \ddk{\vb p}{3} E _{\vb p} \left( \sum _{s = 1}^2 \left( \hat b^{s\dagger}_{\vb p} \hat b^s _{\vb p} + \hat c^{s\dagger}_{\vb p} \hat c^s _{\vb p} \right) - (2 \pi)^3 \delta ^{(3)}(0)\right)
+	\]
+	and the conserved charge (of the vector symmetry) as 
+	\[
+		\hat Q = \int \ddk{\vb p}{3} \sum _{s = 1}^2 \left( \hat b^{s\dagger}_{\vb p} \hat b^s _{\vb p} - \hat c^{s\dagger}_{\vb p} \hat c^s _{\vb p} \right)
+	\]
+	
+	\subsubsection{Particles}
+
+	\paragraph{Vacuum States} We have the vacuum state $\ket{0}$ defined by 
+	\[
+		\hat b^r _{\vb p} \ket{0} = \hat c^r _{\vb p}\ket{0} = 0 \quad \text{for } r=1,2,\ \forall \vb p \in \mathbb{R}^3.
+	\]
+
+	\paragraph{One-particle States} These are defined by
+	\[
+		\ket{\vb p,s} := \hat b^{s\dagger}_{\vb p} \ket{0} 
+	\]
+	with charge $Q = +1$ and energy $E _{\vb p} = \sqrt{\abs{\vb p}^2 + m^2}$, and $s$ is known as the \emph{spin index} --- we have two spin states:
+	\begin{align*}
+		s = 1 &\quad ``\downarrow" \quad \text{with}\quad s_z = - \frac{1}{2},\\
+		s = 2 &\quad ``\uparrow" \quad \text{with} \quad s_z = + \frac{1}{2}.
+	\end{align*}
+	
+	\paragraph{One-antiparticle States} These are 
+	\[
+		\hat c^{s\dagger}_{\vb p}\ket{0}
+	\]
+	with charge $Q = -1$.
+
+	\paragraph{Multi-particle/antiparticle States} These are defined by 
+	\[
+		\ket{\vb p, r; \vb q, s} := \hat b^{r\dagger}_{\vb p}\hat b^{s\dagger}_{\vb q} \ket{0}.
+	\]
+	Interchanging the labels, we have
+	\[
+		\ket{\vb q, s ; \vb p, r} = - \ket{\vb p, r ; \vb q, s}
+	\]
+	by
+	\[
+		\{\hat b^{r\dagger} _{\vb p}, \hat b^{s\dagger}_{\vb q}\} = 0.
+	\]
+	
+	\subsection{Interacting Fermions}\lec{21}
+
+	The Lagrangian is $\mathcal{L} = \mathcal{L}_0 + \mathcal{L} _{\text{int}}$ with the free part 
+	\[
+		\mathcal{L}_0 = \bar \psi (\mathrm{i} \gamma^\mu \partial_\mu - m) \psi.
+	\]
+	
+	To determine the form of the interacting Lagrangian $\mathcal{L} _{\text{int}}$, we first carry out a dimensional analysis:
+	\[
+		[\mathcal{L}] = 4, \quad [\partial] = 1 \quad \Rightarrow \quad [\psi] = [\bar{\psi}] = \frac{3}{2}.
+	\]
+
+	The simplest fermion self-coupling is 
+	\[
+		\mathcal{L} _{\text{int}} = - g_F \left( \psi \bar \psi \right)^2
+	\]
+	with the dimension of coupling constant $[g_F] = 2$, which is irrelevant coupling. However, we prefer relevant or marginal theories. We consider something else.
+
+	\subsubsection{Yukawa Theory}
+	We introduce a real scalar field $\phi(x)$ with mass $\mu$. The Lagrangian now becomes 
+	\[
+		\mathcal{L} = \bar \psi (\mathrm{i} \gamma^\mu \partial_\mu - m) \psi + \frac{1}{2} \partial^\mu \phi \partial_\mu \phi - \frac{1}{2} \mu^2 \phi^2 + \lambda \phi \bar \psi \psi
+	\]
+	where $\lambda$ is called \emph{Yukawa coupling constant}, it has dimension $[\lambda] = 0$, a marginal interaction. 
+
+	We want to calculate the scattering amplitude. Generally, the plan is 
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{feynhand}
+				\vertex (a) at (0,0) {Dyson's Formula};
+				\vertex (b) at (0,-1.5) {$\mathcal{T}$-ordered products};
+				\vertex (c) at (0,-3) {Wick's Theorem};
+				\vertex (d) at (0,-4.5) {Feynman Rules: Propagators and Vertices};
+				\draw [->] (a) to (b) ;
+				\draw [->] (b) to (c);
+				\draw [->] (c) to node[right] {{\color{red}contractions}} (d);
+			\end{feynhand}
+		\end{tikzpicture}
+	\end{center}
+	
+	\subsubsection{Fermion Propagator}
+	Define the fermion propagator 
+	\[
+		S _{\text{F}}(x - y) _{\alpha \beta} = \mel{0}{\mathcal{T}[\hat \psi_\alpha(x)\hat{\bar \psi}_\beta(y)]}{0} := \begin{cases}
+			\mel{0}{\hat \psi_\alpha(x)\hat{\bar \psi}_\beta(y)}{0} & \text{for } x^0 > y^0\\
+			- \mel{0}{\hat{\bar \psi}_\beta(y)\hat \psi_\alpha(x)}{0} & \text{for } x^0 < y^0
+		\end{cases}
+	\]
+	with the fields operators are in Heisenberg picture. If $(x - y)^2 < 0$ then there is no invariant difference between two cases, two cases must then agree and the minus sign comes from the fact that 
+	\[
+		\{\hat \psi_\alpha(x), \hat{\bar \psi}_\beta(y)\} = 0, \quad x \neq y.
+	\]
+	
+	We now want to compute the propagator
+	\[
+		\mel{0}{\mathcal{T}[\hat \psi_\alpha(x) \hat{\bar \psi}_\beta(y)]}{0}.
+	\]
+	We use the mode expansion of the field operators in Heisenberg picture
+	\[
+		\hat \psi_\alpha(x) = \sum _{s = 1}^2 \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left( \hat b^s_{\vb p} u^s_\alpha(p) e ^{- \mathrm{i} p \cdot x} + \hat c^{s\dagger}_{\vb p} v^s_\alpha(p) e ^{+ \mathrm{i} p \cdot x} \right)
+	\]
+	and 
+	\[
+		\hat{\bar \psi}_\alpha(x) = \left( \hat \psi^{\dagger}(x) \gamma^0 \right)_\alpha = \sum _{s = 1}^2 \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left( \hat b^{s\dagger}_{\vb p}\bar u_\alpha(p) e ^{+ \mathrm{i} p \cdot x} + \hat c^s _{\vb p} \bar v^s_\alpha(p) e ^{- \mathrm{i} p \cdot x} \right)
+	\]
+	
+	Compute
+	\begin{align*}
+		\mathcal{M}_+ &:= \mel{0}{\hat \psi_\alpha(x) \hat{\bar \psi}_\beta(y)}{0}\\
+		& = \sum _{r,s = 1}^2 \int \ddk{\vb p}{3} \int \ddk{\vb q}{3} \frac{u_\alpha^s(p)\bar u_\beta^r(q)}{\sqrt{4 E _{\vb p}E _{\vb q}}} e ^{- \mathrm{i} (p\cdot x - q \cdot y)} \underbrace{\mel{0}{\hat b^r _{\vb p} \hat b^{s\dagger}_{\vb q}}{0}}_{(2 \pi)^3 \delta ^{(3)}(\vb p - \vb q) \delta ^{rs}}\\
+		& = \int \ddk{\vb p}{3} \frac{1}{2 E _{\vb p}} e ^{- \mathrm{i} p \cdot (x-y)} \sum _{s = 1}^2 u_\alpha^s(p)\bar u_\beta^s(p)\\
+		& = \int \ddk{\vb p}{3} \frac{1}{2 E _{\vb p}} e ^{- \mathrm{i} p \cdot (x-y)} \left(\slashed{p} + m\right)_{\alpha \beta}.
+	\end{align*}
+	
+	Similarly, we have 
+	\[
+		\mathcal{M}_- := \mel{0}{\hat{\bar \psi}_\beta(y)\hat \psi_\alpha(x)}{0} = \int \ddk{\vb p}{3} \frac{1}{2 E _{\vb p}} e ^{+ \mathrm{i} p \cdot (x-y)} \left( \slashed{p} - m\right)_{\alpha \beta}.
+	\]
+	
+	Then the propagator is 
+	\[
+		S _{\text{F}} (x-y) _{\alpha \beta} = \begin{cases}
+			\mathcal{M}_+ & x^0 > y^0.\\
+			-\mathcal{M}_- & x^0 < y^0.
+		\end{cases}
+	\]
+
+	The integral representation (similar to the Feynman propagator) is
+	\[
+		S _{\text{F}} (x - y) _{\alpha \beta} = \int \ddk{p}{4} \frac{\mathrm{i} \left( \slashed{p} + m \right) _{\alpha \beta}}{p^2 - m^2 + \mathrm{i} \epsilon} e ^{\mathrm{i} p \cdot (x-y)}
+	\]
+	with $\epsilon > 0$ an infinitesimal factor. This is also know as the ``$\mathrm{i} \epsilon$-prescription'' again.
+	
+	\subsubsection{Wick's Theorem for Fermions}
+
+	For fermions we have 
+	\[
+		\mathcal{T}[\hat \psi_\alpha(x)\hat{\bar \psi}_\beta(y)] =\ \nord{\hat \psi_\alpha(x)\hat{\bar \psi}_\beta(y)} +\ \wick{\c{\hat \psi}_\alpha(x) \c{\hat{\bar \psi}}_\beta(y)}.
+	\]
+	
+	Taking vacuum expectation value (VEV), we have
+	\[
+		\wick{\c{\hat \psi}_\alpha(x) \c{\hat{\bar \psi}}_\beta(y)} = \mel{0}{\mathcal{T}[\hat \psi_\alpha(x)\hat{\bar \psi}_\beta(y)]}{0} = S _{\text{F}}(x-y)_{\alpha \beta}.
+	\]
+	\begin{itemize}
+		\item There are no other contractions, i.e. $\wick{\c \psi \c \psi}$ or $\wick{\c {\bar \psi} \c {\bar \psi}}$ vanish;
+		\item All fermionic operators \emph{anti-commute} inside normal ordering, i.e.\ $\nord{\psi_1 \psi_2}\ =\ - \nord{\psi_2 \psi_1}$.
+	\end{itemize} 
+	
+	\begin{thm}
+		Let $\hat \pi$ be an arbitrary product of $\hat \psi \hat{\bar \psi}$ operators at different spacetime points and denote $\hat \psi(x_i) = \hat \psi_i$. Then
+		\[
+			\mathcal T[\hat \pi] =\ \nord{\mathcal{C}[\hat \pi]}
+		\]
+		where $\mathcal{C}$ means sum over all possible contractions.
+	\end{thm}
+
+	\subsubsection{Scattering Amplitudes} 
+	Now we compute the scattering amplitudes of the Yukawa theory. By Dyson's formula
+	\begin{align*}
+		\mathcal{A}_{i \to f} &= \mel{f}{\mathcal{T}\left[ \exp(\frac{1}{\mathrm{i}}\int_{-\infty}^{+\infty}\dd{t} \hat H_I(t)) \right]}{i}\\
+		& = \mel{f}{\mathcal{T}\left[ \exp(\frac{\lambda}{\mathrm{i}}\int \dd[4]{x} \hat \phi(x)\hat{\bar \psi}(x)\hat \psi(x)) \right]}{i}
+	\end{align*}
+
+	For example, we can have an interaction
+	\[
+		\psi + \psi \to \psi + \psi
+	\]
+	with initial state
+	\[
+		\ket{i} : = \ket{p, r ; q, s} = \sqrt{2 E _{\vb p}} \sqrt{2 E _{\vb q}} \hat b^{r\dagger}_{\vb p} \hat b^{s\dagger}_{\vb q} \ket{0}.
+	\]
+
+	\subsubsection{Feynman Rules}
+	Here we choose the convention that time runs vertically upwards.
+	\begin{itemize}
+		\item Initial state: \begin{itemize}
+			\item Incident fermion with 4-momentum $p$ and spin index $r$. This is represented as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (0.5,1) {};
+						\vertex (i) at (-0.5,-1) {$\alpha$};
+						\propag [fer,mom'={$p$}] (i) to [edge label={$r$}] (a);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad u^r_\alpha(p)
+			\]
+			\item Incident anti-fermion as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (0.5,1) {};
+						\vertex (i) at (-0.5,-1) {$\alpha$};
+						\propag [antfer,mom'={$p$}] (i) to [edge label={$r$}] (a);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad v^r_\alpha(p)
+			\]
+		\end{itemize}
+		\item Final state: \begin{itemize}
+			\item Outgoing fermion as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (-0.5,-1) {};
+						\vertex (f) at (0.5,1) {$\alpha$};
+						\propag [fer,mom'={$p$}] (a) to [edge label={$r$}] (f);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad \bar u^r_\alpha(p)
+			\]
+			\item Outgoing anti-fermion as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (-0.5,-1) {};
+						\vertex (f) at (0.5,1) {$\alpha$};
+						\propag [antfer,mom'={$p$}] (a) to [edge label={$r$}] (f);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad \bar v^r_\alpha(p)
+			\]
+		\end{itemize}
+		\item Internal lines correspond to propagators \[
+			\begin{tikzpicture}[baseline=-0.1cm]
+				\begin{feynhand}
+					\vertex (a) at (-1,0) {$\alpha$};
+					\vertex (b) at (1,0) {$\beta$};
+					\propag [fer,mom={$p$}] (a) to [] (b);
+				\end{feynhand}
+			\end{tikzpicture} \quad \sim \quad \frac{\mathrm{i} \left( \slashed{p} + m \right)_{\alpha \beta}}{p^2 - m^2 +\mathrm{i} \epsilon}
+		\]
+		\[
+			\begin{tikzpicture}[baseline=-0.1cm]
+				\begin{feynhand}
+					\vertex (a) at (-1,0) {};
+					\vertex (b) at (1,0) {};
+					\propag [scalar,mom={$p$}] (a) to [] (b);
+				\end{feynhand}
+			\end{tikzpicture} \quad \sim \quad \frac{\mathrm{i} }{p^2 - \mu^2 +\mathrm{i} \epsilon}
+		\]
+		\item Vertex \[
+			\begin{tikzpicture}[baseline]
+				\begin{feynhand}
+					\vertex [dot] (m) at (0,0) {};
+					\vertex (f) at (0,1.9) {$\beta$};
+					\vertex (if) at (-1.414,-1.414) {$\alpha$};
+					\vertex (is) at (1.414,-1.414) {};
+					\propag [fer,mom={$p_1$}] (if) to [] (m);
+					\propag [fer,revmom={$p_2$}] (m) to [] (f);
+					\propag [scalar, mom'={$p_3$}] (is) to [] (m);
+				\end{feynhand}
+			\end{tikzpicture} \quad \sim \quad -\mathrm{i} \lambda (2 \pi)^4 \delta ^{(4)}\left( \sum _{i = 1}^3 p_i \right) \left( \1_4 \right)_{\alpha \beta}
+		\]
+		\item Integrate over all internal momenta \[
+			\int \ddk{p}{4}
+		\]
+	\end{itemize}
 	
 	  
 \end{document}
