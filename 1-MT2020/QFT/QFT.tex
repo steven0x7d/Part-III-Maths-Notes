@@ -3873,5 +3873,181 @@
 		\]
 	\end{itemize}
 	
+	\newpage
+	\section{Gauge Fields} \lec{22}
+	Recall Maxwell's theory of electromagnetism.
+
+	Consider the 4-vector field $A^\mu(x)$, it transforms under Lorentz transformation $\Lambda \in G_L$ as 
+	\[
+		A^\mu (x) \to \LT{\mu}{\nu} A^\nu(\Lambda^{-1} \cdot x)
+	\]
+	and the \emph{field strength} defined as 
+	\[
+		F ^{\mu \nu} = \partial^\mu A^\nu - \partial^\nu A^\mu
+	\]
+	which is invariant under \emph{gauge transformations}
+	\[
+		A^\mu \to A^\mu + \partial^\mu \lambda
+	\]
+	with $\lambda : \mathbb{R}^{3,1} \to \mathbb{R}$ is an arbitrary function.
+	
+	The action is 
+	\[
+		S = \int \dd[4]{x} \mathcal{L}
+	\]
+	where the Lagrangian for Maxwell's theory is
+	\[
+		\mathcal{L} = - \frac{1}{4} F _{\mu \nu} F ^{\mu \nu}.
+	\]
+	
+	The equations of motion are
+	\[
+		\partial_\mu F ^{\mu \nu} = 0
+	\]
+	and the Bianchi identity
+	\[
+		\partial_\mu (\star F ^{\mu \nu}) = 0
+	\]
+	where $\star F ^{\mu \nu} = \frac{1}{2} \epsilon ^{\mu \nu \rho \sigma} F _{\rho \sigma}$ is the Hodge dual of $F ^{\mu \nu}$.
+
+	\subsection{Dynamics}
+	Compute the conjugate momenta, we find
+	\[
+		\pi^\mu = \pdv{\mathcal{L}}{\dot A^\mu} = \begin{cases}
+			0 & \mu = 0,\\
+			- F ^{0i} = E ^{i} & \mu = i = 1,2,3.
+		\end{cases}
+	\]
+
+	Here the difficulty is that one component of the conjugate momentum is zero, hard to impose canonical quantisation conditions!
+
+	The problem is that the configurations of $A ^\mu$ related by a gauge transformation are \emph{physically indistinguishable}. We call the configuration space $\mathcal{A}$. It can be illustrated as \needfig{gauge orbits and gauge fixing} $\mathcal{A}$ is foliated by gauge orbits, we need to ``fix a gauge''. For example, we can use the \emph{Lorenz gauge}
+	\begin{equation}
+		\partial_\mu A^\mu = 0.
+		\label{eq:5.1}
+	\end{equation}
+	This is Lorentz invariant.
+
+	\subsubsection{Dynamics in Lorenz Gauge}
+	We modify the Lagrangian to 
+	\[
+		\mathcal{L}_\xi = - \frac{1}{4} F ^{\mu \nu} F _{\mu \nu} - \underbrace{\frac{1}{2 \xi} \left( \partial_\mu A^\mu \right)^2}_{\text{gauge fixing term}}
+	\]
+	which reduces to $\mathcal{L}$ when (\ref{eq:5.1}) imposed. Further, at $\xi = 1$, we call it ``\emph{Feynman gauge}''.
+
+	Equations of motion in Feynman gauge are 
+	\begin{align*}
+		\partial_\mu \left( \pdv{\mathcal{L}}{(\partial_\mu A_\nu)} \right) &= - \partial_\mu F ^{\mu \nu}
+		- \partial_\mu \left( \eta ^{\mu \nu} (\partial_\rho A^\rho) \right)\\
+		 & = - \partial_\mu \partial^\mu A^\nu + \partial_\mu \partial^\nu A^\mu - \partial^\nu \partial_\mu A^\mu\\
+		 & = - \partial_\mu \partial^\mu A^\nu = 0
+	\end{align*}
+	Thus we have compactly 
+	\[
+		\square A^\mu := (\partial_\rho \partial^\rho) A^\mu = 0
+	\]
+	for $\mu = 0,1,2,3$.
+
+	Canonical momenta can be calculated as 
+	\begin{align*}
+		\pi^0 & = \pdv{\mathcal{L}}{\dot A_0}  = - (\partial_\mu A^\mu)\\
+		\pi^i & = \pdv{\mathcal{L}}{\dot A_i}  = \partial^i A^0 - \dot A^i
+	\end{align*}
+	which are generally non-zero now.
+
+	The strategy of quantisation (Gupta-Bleuler) is to quantise first and then impose Lorenz gauge constraint. 
+
+	In Schr\"odinger picture, working in fixed time $t$ and replacing
+	\begin{align*}
+		A^\mu(t,\vb x) &\to \hat A^\mu(\vb x)\\
+		\pi^\mu(t,\vb x) & \to \hat \pi^\mu(\vb x)
+	\end{align*}
+	we write down the non-vanishing commutators
+	\[
+		[\hat A^\mu(\vb x), \hat \pi^\nu(\vb y)] = \mathrm{i}\eta ^{\mu \nu} \delta ^{(3)}(\vb x - \vb y)
+	\]
+	where we used the bosonic quantisation as the spin of a vector field is 1.
+
+	We now consider the mode expansion of the solutions of the equations of motion 
+	\[
+		\square A^\mu = 0.
+	\]
+	The solution should have form 
+	\[
+		\varepsilon^\mu e ^{\pm \mathrm{i} p \cdot x}
+	\]
+	labelled by 4-momentum $p^\mu$ and an arbitrary \emph{polarisation vector} $\varepsilon^\mu$.
+
+	Note that $p^\mu p_\mu = 0, p^0 \geq 0$ since this should describe photons. We can write the 4-momentum as $p^\mu = (E _{\vb p}, \vb p) = (\abs{\vb p}, \vb p)$. 
+	
+	As for the polarisation vectors $\epsilon^\mu$, we choose $p$-dependent orthonormal basis
+	\[
+		\varepsilon ^{(\lambda)}_\mu (p), \quad \lambda = 0,1,2,3
+	\]
+	such that 
+	\[
+		\varepsilon ^{(\lambda)}_\mu(p) \varepsilon ^{(\rho)}_\nu (p) \eta ^{\mu \nu} = \eta ^{\lambda \rho}
+	\]
+	i.e., $\varepsilon ^{0}$ is timelike, $\varepsilon ^{(i)}$ are spacelike for $i = 1,2,3$.
+
+	\begin{exer}
+		Show that 
+		\[
+			\eta _{\lambda \rho} \varepsilon ^{(\lambda)}_\mu (p) \varepsilon ^{(\rho)} _\nu (p)  = \eta _{\mu \nu}
+		\]
+	\end{exer}
+
+	We choose $\varepsilon ^{(1)}_\mu, \varepsilon ^{(2)}_\mu$ to be \emph{transverse}, i.e.
+	\[
+		p^\mu \varepsilon ^{(i)}_\mu = 0, \quad i = 1,2.
+	\]
+	Particularly, $\varepsilon ^{(3)}_\mu$ is not transverse as $\varepsilon ^{(3)}_\mu p^\mu \neq 0$, it is instead \emph{longitudinal}.
+
+	Now the mode expansion (in Schr\"odinger picture) for the field $\hat A_\mu$ is
+	\begin{equation*}
+		\hat A_\mu (\vb x) = \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 \abs{\vb p}}} \sum _{\lambda = 0}^3 \varepsilon ^{(\lambda)}_\mu(p) \left( \hat a _{\vb p}^\lambda e ^{+ \mathrm{i} \vb p \vdot \vb x} + \hat a^{\lambda\dagger}_{\vb p} e ^{- \mathrm{i} \vb p \vdot \vb x} \right).
+	\end{equation*}
+	and similarly for conjugate momentum
+	\[
+		\hat \pi_\mu(\vb x) = \mathrm{i} \int \ddk{\vb p}{3} \sqrt{\frac{\abs{\vb p}}{2}} \sum_{\lambda = 0}^3 \varepsilon ^{(\lambda)}_\mu(p) \left( \hat a ^{\lambda}_{\vb p} e ^{+ \mathrm{i} \vb p \vdot \vb x} - \hat a^{\lambda\dagger}_{\vb p} e ^{-\mathrm{i} \vb p \vdot \vb x} \right).
+	\]
+	
+	These expansions yield oscillator commutation relations (with others all vanish)
+	\[
+		[\hat a ^{\lambda}_{\vb p}, \hat a ^{\rho\dagger}_{\vb q}] = - \eta ^{\lambda \rho} (2 \pi)^3 \delta ^{(3)}(\vb p - \vb q)
+	\]
+	where the negative sign is due to our metric convention.
+
+	The Hamiltonian is 
+	\[
+		\hat H = \int \ddk{\vb p}{3} \abs{\vb p} \left( \sum _{i = 1}^3 \hat a ^{i\dagger}_{\vb p} \hat a^i _{\vb p} - \hat a ^{0 \dagger}_{\vb p} \hat a^0 _{\vb p} \right)
+	\]
+	where the negative sign raises problem. To resolve this, we first define ``vacuum'' state $\ket{0}$ by 
+	\[
+		\hat a ^{\lambda}_{\vb p} \ket{0} = 0, \qquad \lambda = 0,1,2,3, \quad \vb p \in \mathbb{R}^3.
+	\]
+	Acting creation operators to this ``vacuum'' state, we get the ``big'' Hilbert space 
+	\[
+		\mathcal{H} = \Span _{\mathbb{C}}\left\{ \bigcup_n \hat a^{\lambda_1\dagger}_{\vb p_1} \cdots \hat a^{\lambda_n\dagger} _{\vb p_n} \ket{0}\right\}.
+	\]
+	However, it contains states of negative norms, e.g. 
+	\[
+		\ket{\vb p, 0} = \hat a^{0\dagger} _{\vb p}\ket{0} \quad \text{which has} \quad \braket{\vb p, 0}{\vb q, 0} = - (2 \pi)^3 \delta ^{(3)}(\vb p - \vb q).
+	\]
+	
+	Define the physical Hilbert space $\mathcal{H}_{\text{phy}} \subset \mathcal{H}$ (Gupta-Bleuler) such that 
+	\[
+		\ket{\psi} \in \mathcal{H}_{\text{phy}} \quad \Leftrightarrow \quad \mel{\psi}{\partial_\mu \hat A^\mu}{\psi} = 0
+	\]
+	in Heisenberg picture.
+
+	The upshot is that we remove the unphysical states, leaving only transverse photons
+	\[
+		\ket{\vb p, \ell} = \sqrt{2 \abs{\vb p}} \hat a^{\ell\dagger}_{\vb p} \ket{0} \quad \ell = 1,2
+	\]
+	as physical particles, corresponding to massless particles with energy $E = \abs{\vb p}$.
+
+	
+	
 	  
 \end{document}
