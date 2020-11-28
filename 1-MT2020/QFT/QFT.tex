@@ -3910,7 +3910,7 @@
 	\]
 	where $\star F ^{\mu \nu} = \frac{1}{2} \epsilon ^{\mu \nu \rho \sigma} F _{\rho \sigma}$ is the Hodge dual of $F ^{\mu \nu}$.
 
-	\subsection{Dynamics}
+	\subsection{Dynamics (in Lorenz Gauge)}
 	Compute the conjugate momenta, we find
 	\[
 		\pi^\mu = \pdv{\mathcal{L}}{\dot A^\mu} = \begin{cases}
@@ -3928,7 +3928,6 @@
 	\end{equation}
 	This is Lorentz invariant.
 
-	\subsubsection{Dynamics in Lorenz Gauge}
 	We modify the Lagrangian to 
 	\[
 		\mathcal{L}_\xi = - \frac{1}{4} F ^{\mu \nu} F _{\mu \nu} - \underbrace{\frac{1}{2 \xi} \left( \partial_\mu A^\mu \right)^2}_{\text{gauge fixing term}}
@@ -4047,7 +4046,210 @@
 	\]
 	as physical particles, corresponding to massless particles with energy $E = \abs{\vb p}$.
 
+	\subsection{Photon Propagator}\lec{23}
+
+	The \emph{photon propagator} is defined as 
+	\[
+		\Delta _{\mu \nu} (x - y) := \mel{0}{\mathcal{T}[\hat A_\mu(x)\hat A_\nu(y)]}{0} = \begin{cases}
+			\mathcal{M}_+ & x^0 > y^0,\\
+			\mathcal{M}_- & x^0 < y^0,
+		\end{cases}
+	\]
+	where
+	\begin{align*}
+		\mathcal{M}_+ &:= \mel{0}{\hat A_\mu(x)\hat A_\nu(y)}{0}\\
+		& = \int \ddk{\vb p}{3} \int \ddk{\vb q}{3} \frac{1}{2 \sqrt{\abs{\vb p}\abs{\vb q}}} \sum _{\lambda, \eta = 0}^3 \varepsilon ^{(\lambda)}_\mu(p) \varepsilon ^{(\eta)}_\nu(q) \mel{0}{\hat a^\lambda _{\vb p} e ^{- \mathrm{i} p\cdot x} \cdot \hat a ^{\eta\dagger} _{\vb q} e ^{+ \mathrm{i} q \cdot y}}{0}\\
+		& = \int \ddk{\vb p}{3} \int \ddk{\vb q}{3} \frac{1}{2 \sqrt{\abs{\vb p}\abs{\vb q}}} \sum _{\lambda, \eta = 0}^3 \varepsilon ^{(\lambda)}_\mu(p) \varepsilon ^{(\eta)}_\nu(q) e ^{- \mathrm{i}(p \cdot x - q \cdot y)} \times (- \eta ^{\lambda \eta}) (2 \pi)^3 \delta ^{(3)}(\vb p - \vb q)\\
+		& = - \eta _{\mu \nu} \int \ddk{\vb p}{3} \frac{1}{2 \abs{\vb p}} e ^{- \mathrm{i} p \cdot (x-y)}
+	\end{align*}
+	and similarly
+	\[
+		\mathcal{M}_- := \mel{0}{\hat A_\nu(y)\hat A_\mu(x)}{0} = - \eta _{\mu \nu} \int \ddk{\vb p}{3} \frac{1}{2 \abs{\vb p}} e ^{- \mathrm{i} p \cdot (y-x)}.
+	\]
 	
+	This results in a similar contour integral representation as the scalar Feynman propagator, namely the Feynman photon propagator
+	\[
+		\Delta ^{\text{F}}_{\mu \nu} := \int \ddk{p}{4} \frac{- \mathrm{i} \eta _{\mu \nu}}{p^2 +\mathrm{i} \epsilon} e ^{- \mathrm{i} p \cdot (x-y)}
+	\]
+	with $\epsilon > 0$.
 	
-	  
+	\subsection{Coupling to Matter}
+
+	Consider Maxwell equations with source 
+	\[
+		J^\mu(x) = \left( \rho(x), \vb J(x) \right)
+	\]
+	which is conserved, i.e.\ 
+	\[
+		\partial_\mu J^\mu = 0.
+	\]
+	
+	Electromagnetism couples to the source via 
+	\[
+		\partial_\mu F ^{\mu \nu} = J^\nu,
+	\]
+	which is the equation of motion from action
+	\[
+		S = \int \dd[4]{x} \mathcal{L}(x) \quad \text{with} \quad \mathcal{L} = - \frac{1}{4} F _{\mu \nu} F ^{\mu \nu} - A _{\mu} J^\mu.
+	\]
+	
+	Now turn to the spinor fields
+	\[
+		\mathcal{L}_F = \bar \psi(\mathrm{i} \gamma^\mu \partial_\mu - m) \psi,
+	\]
+	it has a $\U(1)$ global symmetry
+	\[
+		\psi(x) \to e ^{- \mathrm{i} \alpha} \psi(x), \quad \bar \psi(x) \to e ^{+ \mathrm{i} \alpha} \bar \psi(x)
+	\]
+	with $\alpha \in [0, 2 \pi]$, giving conserved current
+	\[
+		J^\mu(x) = \psi(x) \gamma^\mu \psi(x)
+	\]
+	obeying 
+	\[
+		\partial_\mu J^\mu(x) = 0.
+	\]
+	
+	\subsection{Quantum Electrodynamics}
+
+	The Lagrangian is
+	\[
+		\mathcal{L} = - \frac{1}{4} F _{\mu \nu} F ^{\mu \nu} + \bar \psi (\mathrm{i} \gamma^\mu \partial_\mu - m) \psi - e \bar \psi \gamma^\mu \psi A_\mu.
+	\]
+
+	$\mathcal{L}$ is Lorentz invariant as $J^\mu = V^\mu = \bar \psi \gamma^\mu \psi$ is a 4-vector field
+	\[
+		J^\mu (x) \xrightarrow{\Lambda \in G_L} \LT{\mu}{\nu} J^\nu(\Lambda^{-1} \cdot x),
+	\]
+	hence $\bar \psi \gamma^\mu \psi A_\mu$ is a Lorentz scalar.
+
+	\begin{clm}
+		$\mathcal{L}$ is \emph{gauge invariant} by a \emph{local} $\U(1)$ symmetry
+		\begin{align*}
+			\psi(x) &\to e ^{-\mathrm{i} e \alpha(x)} \psi(x),\\
+			\bar \psi(x) &\to e ^{+\mathrm{i} e \alpha(x)} \bar \psi(x),\\
+			A^\mu(x) & \to A^\mu(x) + \partial^\mu \alpha(x),
+		\end{align*}
+		for all function $\alpha: \mathbb{R} ^{3,1} \to \mathbb{R}$.
+	\end{clm}
+	
+	\begin{proof}
+		Define \emph{covariant derivative}
+		\[
+			D_\mu \psi(x) := \partial_\mu \psi(x) + \mathrm{i} e A_\mu(x) \psi(x).
+		\]
+		Under the transformation claimed, we have
+		\begin{align*}
+			D_\mu \psi(x) &\to \partial_\mu \left( e ^{- \mathrm{i} e \alpha(x)} \psi(x) \right) + \mathrm{i} e \left( A_\mu(x) + \partial_\mu \alpha(x) \right) e ^{-\mathrm{i} e \alpha(x)} \psi(x)\\
+			& = e ^{-\mathrm{i} e \alpha(x)}\left( \partial_\mu \psi - \mathrm{i} e \partial_\mu \alpha(x) \psi(x) + \mathrm{i} e A_\mu \psi(x) + \mathrm{i} e \partial_\mu \alpha(x)\psi(x) \right)\\
+			& = e ^{-\mathrm{i} e \alpha(x)} D_\mu \psi.
+		\end{align*}
+		which is indeed \emph{covariant}.
+
+		Now write the Lagrangian as 
+		\[
+			\mathcal{L} = - \frac{1}{4} F _{\mu \nu} F ^{\mu \nu} + \bar \psi(\mathrm{i} \gamma^\mu D_\mu - m)\psi
+		\]
+		which is manifestly gauge invariant.
+	\end{proof}
+
+	To consider such interaction further, we need to investigate whether it is relevant, marginal or irrelevant. Start with a dimensional analysis, 
+	\[
+		[\mathcal{L}] = 4 \quad \Rightarrow \quad [\psi] = [\bar \psi] = \frac{3}{2} \quad \text{and} \quad [A] = 1
+	\]
+	so 
+	\[
+		[\bar \psi \gamma^\mu \psi A_\mu] = 4, \quad [e] = 0
+	\]
+	i.e.\ this coupling with $e$ is \emph{marginal}.
+
+	Actually, the expansion parameter is (restoring the relevant constants, noting that $e$ is the electronic charge)
+	\[
+		\alpha : = \frac{e^2}{4 \pi \hbar c} \approx \frac{1}{137}
+	\]
+	called the \emph{fine structure constant}.
+
+	\subsubsection{$\mu^+ \mu^-$ Pair Creation}
+	We now introduce the heavier cousins of electrons/anti-electrons: the muons $\mu^-$ and anti-muons $\mu^+$. Then, the EM field couples to two spinor fields
+	\[
+		\psi(x) \quad \text{with mass } m_e,
+	\]
+	\[
+		\chi(x) \quad \text{with mass } m_\mu.
+	\]
+	
+	The Lagrangian is 
+	\[
+		\mathcal{L} = - \frac{1}{4} F _{\mu \nu} F ^{\mu \nu} + \bar \psi (\mathrm{i} \gamma^\mu D_\mu - m_e) \psi + \bar \chi (\mathrm{i} \gamma^\mu D_\mu - m_\mu) \chi
+	\]
+	with $D_\mu := \partial_\mu + \mathrm{i} e A_\mu$ as usual.
+	
+	Now write down the mode expansion of the field operators
+	\[
+		\hat \psi_\alpha(x) = \sum _{s = 1}^2 \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 E _{\vb p}}} \left( \hat b^s_{\vb p} u^s_\alpha(p) e ^{- \mathrm{i} p \cdot x} + \hat c^{s\dagger}_{\vb p} v^s_\alpha(p) e ^{+ \mathrm{i} p \cdot x} \right)
+	\]
+	with $E _{\vb p} = \sqrt{\abs{\vb p}^2 + m_e^2}$ and
+	\[
+		\hat \chi_\alpha(x) = \sum _{s = 1}^2 \int \ddk{\vb p}{3} \frac{1}{\sqrt{2 \mathcal{E} _{\vb p}}} \left( \hat d^s_{\vb p} \tilde u^s_\alpha(p) e ^{- \mathrm{i} p \cdot x} + \hat e^{s\dagger}_{\vb p} \tilde v^s_\alpha(p) e ^{+ \mathrm{i} p \cdot x} \right)
+	\]
+	with $\mathcal{E}_{\vb p} = \sqrt{\abs{p}^2 + m_\mu^2}$ the energy, $\tilde u, \tilde v$ the muon spinors and $\hat d, \hat e$ muon operators.
+
+	The non-vanishing anti-commutators are
+	\[
+		\{\hat b^r _{\vb p}, \hat b ^{s\dagger}_{\vb q}\} = \{\hat c^r _{\vb p}, \hat c ^{s\dagger}_{\vb q}\} = \{\hat d^r _{\vb p}, \hat d ^{s\dagger}_{\vb q}\} = \{\hat e^r _{\vb p}, \hat e ^{s\dagger}_{\vb q}\} = \delta ^{rs} (2 \pi)^3 \delta ^{(3)}(\vb p - \vb q).
+	\]
+	
+	The scattering process we are considering is 
+	\needfig{$e^- e^+ \to \mu^- \mu^+$}
+	with initial state
+	\[
+		\ket{i} = \sqrt{2 E _{\vb p}} \sqrt{2 E _{\vb q}}\  \hat b^{s\dagger}_{\vb p} \hat c^{r\dagger}_{\vb q} \ket{0}
+	\]
+	and final state
+	\[
+		\ket{f} = \sqrt{\mathcal{E}_{\vb p'}} \sqrt{2 \mathcal{E}_{\vb q'}}\ \hat d^{r'\dagger}_{\vb p'} \hat e^{s'\dagger}_{\vb q'} \ket{0}.
+	\]
+	
+	The $S$-matrix is
+	\[
+		\hat S = \mathcal{T}\left[ \exp(\frac{1}{\mathrm{i}} \int \dd[4]{x} \hat {\mathcal{H}}_I) \right]
+	\]
+	where the interaction Hamiltonian density is
+	\[
+		\hat{\mathcal{H}}_I = e \hat{\bar \psi} \gamma^\mu \hat \psi \hat A_\mu + e \hat{\bar \chi} \gamma^\mu \hat \chi \hat A_\mu.
+	\]
+	
+	Hence the lowest order contribution to scattering amplitude $\mathcal{A}_{i \to f} = \mel{f}{\hat S}{i}$ is
+	$\mel{f}{\hat O_2}{i}$ with
+	\[
+		\hat O_2 = (-\mathrm{i} e)^2 \int \dd[4]{x} \int \dd[4]{y} \nord{\wick{\hat{\bar \psi}(x) \gamma^\mu \hat \psi(x) \c{\hat A}_\mu(x) \hat{\bar \chi}(x)\gamma^\mu \hat \chi(x) \c{\hat A}_\nu(y)}}
+	\]
+	by using Wick's theorem. 
+
+	By selection rules, we only keep 
+	\[
+		\hat c ^{s_1}_{\vb p_1} \quad \text{from} \quad \hat{\bar \psi}, \qquad \hat b ^{s_2}_{\vb p_2} \quad \text{from} \quad \hat \psi,
+	\]
+	and
+	\[
+		\hat d ^{s_3\dagger}_{\vb p_3} \quad \text{from} \quad \hat{\bar \chi}, \qquad \hat e ^{s_4\dagger}_{\vb p_4} \quad \text{from} \quad \hat \chi
+	\]
+	as 
+	\[
+		\ket{i} \sim \hat b^{s\dagger}_{\vb p} \hat c^{r\dagger}_{\vb q} \ket{0} \quad \text{and} \quad \bra{f} \sim \bra{0} \hat e ^{r'}_{\vb q'} \hat d ^{s'}_{\vb p'}.
+	\]
+	
+	Then 
+	\begin{align*}
+		\mathcal{A}_{i \to f} = &\ \sqrt{2 E _{\vb p}} \sqrt{2 E _{\vb q}} \sqrt{2 \mathcal{E}_{\vb p'}} \sqrt{2 \mathcal{E}_{\vb q'}} \sum _{s_1,s_2,s_3,s_4 = 1}^2 \int \ddk{\vb p_1}{3} \int \ddk{\vb p_2}{3} \int \ddk{\vb p_3}{3} \int \ddk{\vb p_4}{3}\\
+		& \times \frac{(-\mathrm{i} e)^2}{\sqrt{2 E _{\vb p_1}} \sqrt{2 E _{\vb p_2}} \sqrt{2 \mathcal{E}_{\vb p_3}} \sqrt{2 \mathcal{E}_{\vb p_4}}} \int \dd[4]{x}\int \dd[4]{y} \int \ddk{k}{4} \frac{-\mathrm{i} \eta _{\mu \nu}}{k^2 + \mathrm{i} \epsilon} e ^{- \mathrm{i} k \cdot (x - y)}\\
+		& \times \left( \bar v ^{s_1}(p_1) \gamma^\mu u ^{s_2}(p_2) \right) (\bar{\tilde u} ^{s_3}(p_3) \gamma^\nu \tilde v ^{s_4}(p_4)) e ^{- \mathrm{i} x \cdot (p_1 + p_2) + \mathrm{i} y \cdot (p_3 + p_4)}\\
+		& \times \mel{0}{\hat e ^{r'}_{\vb q'} \hat d ^{s'}_{\vb p'} \hat d^{s_3\dagger}_{\vb p_3}\hat e ^{s_4\dagger}_{\vb p_4} \hat c ^{s_1}_{\vb p_1}\hat b ^{s_2}_{\vb p_2} \hat b ^{s\dagger}_{\vb p} \hat c ^{r\dagger}_{\vb q}}{0}
+	\end{align*}
+	where we note
+	\begin{align*}
+		\mel{0}{\hat e ^{r'}_{\vb q'} \hat d ^{s'}_{\vb p'} \hat d^{s_3\dagger}_{\vb p_3}\hat e ^{s_4\dagger}_{\vb p_4} \hat c ^{s_1}_{\vb p_1}\hat b ^{s_2}_{\vb p_2} \hat b ^{s\dagger}_{\vb p} \hat c ^{r\dagger}_{\vb q}}{0} = &\\
+		(2 \pi)^{12} \delta ^{s_1 r} \delta ^{s_2 s} \delta ^{s_3 s'} \delta ^{s_4 r'} &\delta ^{(3)}(\vb p_1 - \vb q) \delta ^{(3)}(\vb p_2 - \vb p) \delta ^{(3)}(\vb p_3 - \vb p') \delta ^{(3)} (\vb p_4 - \vb q').
+	\end{align*}
+	
 \end{document}
