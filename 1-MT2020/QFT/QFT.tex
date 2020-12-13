@@ -3814,7 +3814,7 @@
 						\vertex (i) at (-0.5,-1) {$\alpha$};
 						\propag [antfer,mom'={$p$}] (i) to [edge label={$r$}] (a);
 					\end{feynhand}
-				\end{tikzpicture} \quad \sim \quad v^r_\alpha(p)
+				\end{tikzpicture} \quad \sim \quad \bar v^r_\alpha(p)
 			\]
 		\end{itemize}
 		\item Final state: \begin{itemize}
@@ -3834,7 +3834,7 @@
 						\vertex (f) at (0.5,1) {$\alpha$};
 						\propag [antfer,mom'={$p$}] (a) to [edge label={$r$}] (f);
 					\end{feynhand}
-				\end{tikzpicture} \quad \sim \quad \bar v^r_\alpha(p)
+				\end{tikzpicture} \quad \sim \quad v^r_\alpha(p)
 			\]
 		\end{itemize}
 		\item Internal lines correspond to propagators \[
@@ -4251,5 +4251,447 @@
 		\mel{0}{\hat e ^{r'}_{\vb q'} \hat d ^{s'}_{\vb p'} \hat d^{s_3\dagger}_{\vb p_3}\hat e ^{s_4\dagger}_{\vb p_4} \hat c ^{s_1}_{\vb p_1}\hat b ^{s_2}_{\vb p_2} \hat b ^{s\dagger}_{\vb p} \hat c ^{r\dagger}_{\vb q}}{0} = &\\
 		(2 \pi)^{12} \delta ^{s_1 r} \delta ^{s_2 s} \delta ^{s_3 s'} \delta ^{s_4 r'} &\delta ^{(3)}(\vb p_1 - \vb q) \delta ^{(3)}(\vb p_2 - \vb p) \delta ^{(3)}(\vb p_3 - \vb p') \delta ^{(3)} (\vb p_4 - \vb q').
 	\end{align*}
+	\begin{itemize}
+		\item By doing $\dd[3]{\vb p_i}$ integrals and $\sum _{s_i}$ sums we set \lec{24} \[
+			\vb p_1 = \vb q, \quad \vb p_2 = \vb p, \quad \vb p_3 = \vb p', \quad \vb p_4 = \vb q' 
+		\]
+		and \[
+			s_1 = r, \quad s_2 = s, \quad s_3 = s', \quad s_4 = r'.
+		\]
+		\item Then do $\dd[4]{x}$ and $\dd[4]{y}$ integrals, we get \[
+			(2 \pi)^8 \delta ^{(4)}(p + q - k) \delta ^{(4)} (k - p' - q').
+		\]
+		\item Do $k$ integral, we get \[
+			k = p + q.
+		\]
+	\end{itemize}
+
+	Then the scattering amplitude turns out to be 
+	\[
+		\mathcal{A}_{i \to f} = (-\mathrm{i} e)^2 \frac{1}{(p+q)^2} \times (2 \pi)^4 \delta ^{(4)} (p' + q' - p - q) \times ( \bar v^r(q) \gamma^\mu u^s(p) )( \bar{\tilde u}^{s'}(p')\gamma_\mu \tilde v ^{r'}(q') ).
+	\]
+	
+	\subsubsection{Feynman Rules for QED}
+	Here we still choose the convention that time runs vertically upwards.
+	\begin{itemize}
+		\item Initial state: \begin{itemize}
+			\item Incident electron with 4-momentum $p$ and spin index $s$. This is represented as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (0.5,1) {};
+						\vertex (i) at (-0.5,-1) {$e^-$};
+						\propag [fer,mom'={$p$}] (i) to [edge label={$s$}] (a);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad u^s(p)
+			\]
+			\item Incident positron as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (0.5,1) {};
+						\vertex (i) at (-0.5,-1) {$e^+$};
+						\propag [antfer,mom'={$q$}] (i) to [edge label={$r$}] (a);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad \bar v^r(q)
+			\]
+			\item Incident photon as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (0.5,1) {};
+						\vertex (i) at (-0.5,-1) {$\gamma$};
+						\propag [pho,mom'={$k$}] (i) to [edge label={$\varepsilon$}] (a);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad \varepsilon_\mu(k)
+			\]
+		\end{itemize}
+		\item Final state: \begin{itemize}
+			\item Outgoing electron as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (-0.5,-1) {};
+						\vertex (f) at (0.5,1) {$e^-$};
+						\propag [fer,mom'={$p$}] (a) to [edge label={$s$}] (f);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad \bar u^s(p)
+			\]
+			\item Outgoing positron as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (-0.5,-1) {};
+						\vertex (f) at (0.5,1) {$e^+$};
+						\propag [antfer,mom'={$q$}] (a) to [edge label={$r$}] (f);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad v^r(q)
+			\]
+			\item Outgoing photon as \[
+				\begin{tikzpicture}[baseline=-0.5cm]
+					\begin{feynhand}
+						\vertex [grayblob] (a) at (-0.5,-1) {};
+						\vertex (f) at (0.5,1) {$\gamma$};
+						\propag [pho,mom'={$k$}] (a) to [edge label={$\varepsilon$}] (f);
+					\end{feynhand}
+				\end{tikzpicture} \quad \sim \quad \varepsilon^\mu(k)
+			\]
+		\end{itemize}
+		\item Internal lines correspond to propagators \[
+			\begin{tikzpicture}[baseline=-0.1cm]
+				\begin{feynhand}
+					\vertex (a) at (-1,0) {$\alpha$};
+					\vertex (b) at (1,0) {$\beta$};
+					\propag [fer,mom={$p$}] (a) to [] (b);
+				\end{feynhand}
+			\end{tikzpicture} \quad \sim \quad \frac{\mathrm{i} \left( \slashed{p} + m \right)_{\alpha \beta}}{p^2 - m^2 +\mathrm{i} \epsilon}
+		\]
+		\[
+			\begin{tikzpicture}[baseline=-0.1cm]
+				\begin{feynhand}
+					\vertex (a) at (-1,0) {$\mu$};
+					\vertex (b) at (1,0) {$\nu$};
+					\propag [pho,mom={$k$}] (a) to [] (b);
+				\end{feynhand}
+			\end{tikzpicture} \quad \sim \quad \frac{-\mathrm{i} \eta ^{\mu \nu}}{k^2 +\mathrm{i} \epsilon} \quad \quad \quad
+		\]
+		\item Vertex \[
+			\begin{tikzpicture}[baseline]
+				\begin{feynhand}
+					\vertex [dot] (m) at (0,0) {};
+					\vertex (i) at (0,-1.9) {$\alpha$};
+					\vertex (ff) at (-1.414,1.414) {$\beta$};
+					\vertex (fp) at (1.414,1.414) {$\mu$};
+					\propag [fer,mom={$p$}] (i) to [] (m);
+					\propag [fer,revmom={$p'$}] (m) to [] (ff);
+					\propag [pho, revmom'={$k$}] (m) to [] (fp);
+				\end{feynhand}
+			\end{tikzpicture} \quad \sim \quad - \mathrm{i} e (\gamma^\mu) _{\alpha \beta} \times (2 \pi)^4 \delta ^{(4)}(p + p' + k)
+		\]
+		\item Integrate \[
+			\int \ddk{p}{4}
+		\]
+		over all internal momenta.
+	\end{itemize}
+
+	\subsubsection{Example: $e^+ e^-$ Scattering}
+	\[
+		\begin{tikzpicture}[baseline=(m.base)]
+			\begin{feynhand}
+				\vertex [grayblob] (m) at (0,0) {};
+				\vertex (i1) at (-1.5,-1.5) {$e^-$};
+				\vertex (i2) at (1.5,-1.5) {$e^+$};
+				\vertex (f1) at (-1.5,1.5) {$e^-$};
+				\vertex (f2) at (1.5,1.5) {$e^+$};
+				\propag [fer, mom={$p,s$}] (i1) to [] (m);
+				\propag [fer, mom'={$p',s'$}] (m) to [] (f1);
+				\propag [antfer, mom={$q,r$}] (i2) to [] (m);
+				\propag [antfer, mom'={$q',r'$}] (m) to [] (f2);
+			\end{feynhand}
+		\end{tikzpicture} \overset{\mathcal{O}(\alpha)}{=} \begin{tikzpicture}[baseline=(m.base)]
+			\begin{feynhand}
+				\vertex [particle] (m) at (0,0);
+				\vertex [particle] (m1) at (-0.5,0);
+				\vertex [particle] (m2) at (0.5,0);
+				\vertex (i1) at (-1.5,-1.5) {};
+				\vertex (i2) at (1.5,-1.5) {};
+				\vertex (f1) at (-1.5,1.5) {};
+				\vertex (f2) at (1.5,1.5) {};
+				\propag [fer] (i1) to [] (m1);
+				\propag [fer] (m1) to [] (f1);
+				\propag [antfer] (i2) to [] (m2);
+				\propag [antfer] (m2) to [] (f2);
+				\propag [pho] (m1) to [] (m2);
+			\end{feynhand}
+		\end{tikzpicture} +
+		\begin{tikzpicture}[baseline=(m.base)]
+			\begin{feynhand}
+				\vertex [particle] (m) at (0,0);
+				\vertex [particle] (m1) at (0,-0.5);
+				\vertex [particle] (m2) at (0,0.5);
+				\vertex (i1) at (-1.5,-1.5) {};
+				\vertex (i2) at (1.5,-1.5) {};
+				\vertex (f1) at (-1.5,1.5) {};
+				\vertex (f2) at (1.5,1.5) {};
+				\propag [fer] (i1) to [] (m1);
+				\propag [fer] (m2) to [] (f1);
+				\propag [antfer] (i2) to [] (m1);
+				\propag [antfer] (m2) to [] (f2);
+				\propag [pho] (m1) to [] (m2);
+			\end{feynhand}
+		\end{tikzpicture}
+	\]
+
+	From Feynman rules, we get the scattering amplitude 
+	\[
+		\mathcal{A}_{i \to f} = -\mathrm{i} (-\mathrm{i}e)^2 \times (2 \pi)^4 \delta ^{(4)}(p'+q' - p - q) \left[ - \frac{X}{(p - p')^2} + \frac{Y}{(p+q)^2} \right]
+	\]
+	where
+	\[
+		X = (\bar u ^{s'}(p')\gamma^\mu u^s(p)) (\bar v^r(q)\gamma_\mu v ^{r'}(q'))
+	\]
+	and 
+	\[
+		Y = (\bar v^r(q) \gamma^\mu u^s(p)) (\bar u ^{s'}(p') \gamma_\mu v ^{r'}(q')).
+	\]
+
+	Only $Y$ contributes to $e^- e^+ \to \mu^- \mu^+$.
+
+	\subsubsection{Other QED Processes}
+	\begin{itemize}
+		\item Electron scattering \[
+			e^- + e^- \to e^- + e^-.
+		\]
+		The leading order amplitude is 
+		\[
+			\mathcal{A} = \begin{tikzpicture}[baseline=(m.base)]
+				\begin{feynhand}
+					\vertex [particle] (m) at (0,0);
+					\vertex [particle] (m1) at (-0.5,0);
+					\vertex [particle] (m2) at (0.5,0);
+					\vertex (i1) at (-1.5,-1.5) {};
+					\vertex (i2) at (1.5,-1.5) {};
+					\vertex (f1) at (-1.5,1.5) {};
+					\vertex (f2) at (1.5,1.5) {};
+					\propag [fer, mom'={$p_1$}] (i1) to [] (m1);
+					\propag [fer, mom'={$p'_1$}] (m1) to [] (f1);
+					\propag [fer, mom={$p_2$}] (i2) to [] (m2);
+					\propag [fer, mom={$p'_2$}] (m2) to [] (f2);
+					\propag [pho] (m1) to [] (m2);
+				\end{feynhand}
+			\end{tikzpicture} + 
+		\begin{tikzpicture}[baseline=(m.base)]
+			\begin{feynhand}
+				\vertex [particle] (m) at (0,0);
+				\vertex [particle] (m1) at (-0.5,0);
+				\vertex [particle] (m2) at (0.5,0);
+				\vertex (i1) at (-1.5,-1.5) {};
+				\vertex (i2) at (1.5,-1.5) {};
+				\vertex (f1) at (-1.5,1.5) {};
+				\vertex (f2) at (1.5,1.5) {};
+				\propag [fer, mom'={$p_1$}] (i1) to [] (m1);
+				\propag [fer, mom={$p'_1$}] (m2) to [] (f1);
+				\propag [fer, mom={$p_2$}] (i2) to [] (m2);
+				\propag [fer, mom'={$p'_2$},top] (m1) to [] (f2);
+				\propag [pho] (m1) to [] (m2);
+			\end{feynhand}
+		\end{tikzpicture}
+		\]
+		\item $e^+ e^-$ annihilating into photons \[
+			e^- + e^+ \to \gamma + \gamma.
+		\]
+		The amplitude is
+		\[
+			\mathcal{A} = \begin{tikzpicture}[baseline=(m.base)]
+				\begin{feynhand}
+					\vertex [particle] (m) at (0,0);
+					\vertex [particle] (m1) at (-0.5,0);
+					\vertex [particle] (m2) at (0.5,0);
+					\vertex (i1) at (-1.5,-1.5) {};
+					\vertex (i2) at (1.5,-1.5) {};
+					\vertex (f1) at (-1.5,1.5) {};
+					\vertex (f2) at (1.5,1.5) {};
+					\propag [fer, mom'={$p_1$}] (i1) to [] (m1);
+					\propag [pho, mom'={$p'_1$}] (m1) to [] (f1);
+					\propag [antfer, mom={$p_2$}] (i2) to [] (m2);
+					\propag [pho, mom={$p'_2$}] (m2) to [] (f2);
+					\propag [fer] (m1) to [] (m2);
+				\end{feynhand}
+			\end{tikzpicture} + 
+		\begin{tikzpicture}[baseline=(m.base)]
+			\begin{feynhand}
+				\vertex [particle] (m) at (0,0);
+				\vertex [particle] (m1) at (-0.5,0);
+				\vertex [particle] (m2) at (0.5,0);
+				\vertex (i1) at (-1.5,-1.5) {};
+				\vertex (i2) at (1.5,-1.5) {};
+				\vertex (f1) at (-1.5,1.5) {};
+				\vertex (f2) at (1.5,1.5) {};
+				\propag [fer, mom'={$p_1$}] (i1) to [] (m1);
+				\propag [pho, mom={$p'_1$}] (m2) to [] (f1);
+				\propag [antfer, mom={$p_2$}] (i2) to [] (m2);
+				\propag [pho, mom'={$p'_2$},top] (m1) to [] (f2);
+				\propag [fer] (m1) to [] (m2);
+			\end{feynhand}
+		\end{tikzpicture}
+		\]
+		\item Compton scattering \[
+			\gamma + e^- \to \gamma + e^-
+		\]
+		with amplitude
+		\[
+			\mathcal{A} = \begin{tikzpicture}[baseline=(m.base)]
+				\begin{feynhand}
+					\vertex [particle] (m) at (0,0);
+					\vertex (i1) at (-1,-2) {};
+					\vertex (i2) at (0,-2) {};
+					\vertex (f1) at (-1,2) {};
+					\vertex (f2) at (0,2) {};
+					\vertex [particle] (m1) at (0,-1);
+					\vertex [particle] (m2) at (0,1);
+					\propag [pho, mom={$k$}] (i1) to [] (m1);
+					\propag [fer, mom'={$p$}] (i2) to [] (m1);
+					\propag [pho, mom={$k'$}] (m2) to [] (f1);
+					\propag [fer, mom'={$p'$}] (m2) to [] (f2);
+					\propag [fer] (m1) to [] (m2);
+				\end{feynhand}
+			\end{tikzpicture} + 
+			\begin{tikzpicture}[baseline=(m.base)]
+				\begin{feynhand}
+					\vertex [particle] (m) at (0,0);
+					\vertex (i1) at (-2,-2) {};
+					\vertex (i2) at (0,-2) {};
+					\vertex (f1) at (-2,2) {};
+					\vertex (f2) at (0,2) {};
+					\vertex [particle] (m1) at (0,-1);
+					\vertex [particle] (m2) at (0,1);
+					\propag [pho, mom'={$k$}] (i1) to [] (m2);
+					\propag [fer, mom'={$p$}] (i2) to [] (m1);
+					\propag [pho, mom'={$k'$}, top] (m1) to [] (f1);
+					\propag [fer, mom'={$p'$}] (m2) to [] (f2);
+					\propag [fer] (m1) to [] (m2);
+				\end{feynhand}
+			\end{tikzpicture}
+		\]
+	\end{itemize}
+
+	\subsection{Comparison with Experiment}
+	Colliding beams of particles, the number of events per unit time
+	\[
+		N = F \times \sigma
+	\]
+	where $F$ is called \emph{flux} and $\sigma$ is called \emph{cross section}.
+
+	$N$ is related to probability of a particular process occuring
+	\[
+		P _{i \to f} = \frac{|\mel{f}{\hat S}{i}|^2}{\braket{f}{f} \braket{i}{i}}.
+	\]
+	
+	Relativistic normalisation of single particle states is
+	\[
+		\braket{p}{q} = 2 E _{\vb p} (2 \pi)^3 \delta ^{(3)}(\vb p - \vb q).
+	\]
+
+	But we know that 
+	\[
+		(2 \pi)^3 \delta ^{(3)}(0) = \int \dd[4]{x} 1 = V,
+	\]
+	i.e.\ we can regulate it using the volume of spacetime $V$. 
+
+	\subsubsection{2-2 Scattering}
+	\needfig{2-2 scattering}
+
+	The \emph{differential cross section} is defined as 
+	\[
+		\dd{\sigma} = \frac{1}{F} \dd{P _{i \to f}} = \frac{1}{4 E _{\vb p_1} E _{\vb p_2}} \times \frac{1}{F V} |\mathcal{M} _{i \to f}|^2 \dd{\Pi}.
+	\]
+	$\mathcal{M}_{i \to f}$ is called the \emph{reduced matrix element} by defining it through
+	\[
+		\mathcal{A}_{i \to f} = \mathcal{M}_{i \to f} (2 \pi)^4 \times \delta ^{(4)}(p'_1 + p'_2 - p_1 - p_2).
+	\]
+	The \emph{phase space measure} is 
+	\[
+		\dd{\Pi} = \prod _{i = 1}^{2} \frac{\dd[3]{\vb p'_i}}{2 E _{\vb p'_i}} \times (2 \pi)^4 \delta ^{(4)}(p'_1 + p'_2 - p_1 - p_2)
+	\]
+	The \emph{flux} is
+	\[
+		F = \frac{\abs{\vb v_1 - \vb v_2}}{V}
+	\]
+	where the velocity $\vb v_i$ is from
+	\[
+		\vb v_i = \frac{\vb p_i}{(p^0)_i}.
+	\]
+	
+	The total cross section is
+	\[
+		\sigma = \int \dd{\sigma}
+	\]
+	which presents the sum of final states.
+
+	\subsubsection{Fermion Scattering}
+	For fermion scatterings, we sum over final state spins.	
+	
+	For unpolarised beams, average over inital spin states, e.g.\ for 
+	\[
+		e^+ + e^- \to \mu^+ + \mu^-
+	\]
+	\[
+		\mathcal{M}_{s,r;s',r'} = \mathcal{M}(p,s;q,r \to p',s';q',r') = \frac{e^2}{(p+q)^2} (\bar v^r(q) \gamma^\mu u^s(p)) \times (\bar{\tilde u}^{s'}(p')\gamma_\mu \tilde v ^{r'}(q')).
+	\]
+	The unpolarised differential cross section is proportional to 
+	\[
+		\mathbb{P} := \frac{1}{4} \sum _{r,s = 1}^2 \sum _{r',s'=1}^2\abs{\mathcal{M}_{r,s;r',s'}}^2 = \frac{e^4}{(p + q)^4} A ^{\mu \nu} B _{\mu \nu}
+	\]
+	where 
+	\[
+		A ^{\mu \nu} := \frac{1}{4} \sum _{r,s = 1}^2 (\bar v^r (q) \gamma^\mu u^s(p))^*(\bar v^r (q) \gamma^\nu u^s(p))
+	\]
+	and similar for $B _{\mu \nu}$.
+
+	\paragraph{Evaluating $A ^{\mu \nu}$}
+	Do the conjugation,
+	\begin{align*}
+		(\bar v^r (q) \gamma^\mu u^s(p))^* &= (v^{r\dagger} (q) \gamma^0 \gamma^\mu u^s(p))^*\\
+		& = u^{s\dagger}(p) (\gamma^\mu)^{\dagger} (\gamma^0)^{\dagger} v^r(q)\\
+		& = u^{s\dagger}(p) \gamma^0 \gamma^\mu \gamma^0 \gamma^0 \gamma^0 \gamma^0 v^r(q)\\
+		& = \bar u^s(p) \gamma^\mu v^r(q)
+	\end{align*}
+	and
+	\begin{align*}
+		A ^{\mu \nu} & = \frac{1}{4} \sum _{r,s}^2 (\bar u^s(p) \gamma^\mu v^r(q)) (\bar v^r(q) \gamma^\nu u^s(p))
+	\end{align*}
+	we use 
+	\[
+		\sum_s \bar u^s_\alpha(p) u^s_\beta(p) = \left(\slashed{p} + m_e\right) _{\alpha \beta}
+	\]
+	to get 
+	\begin{align*}
+		A ^{\mu \nu} & = \frac{1}{4} \left( \sum _{s = 1}^2 u^s_\alpha(p) \bar u^s_\beta(p) \right) (\gamma^\mu)_{\beta \delta} \left( \sum _{r = 1}^2 v^r_\delta(q) \bar v^r_\gamma(q) \right) (\gamma^\nu)_{\gamma \alpha}\\
+		& = \frac{1}{4} \Tr\left[ \left( \slashed{p} + m_e \right) \gamma^\mu \left( \slashed{q} - m_e \right) \gamma^\nu \right].
+	\end{align*}
+	
+	In sheet 3, we proved useful trace identities
+	\[
+		\Tr[\gamma^\mu] = \Tr[\gamma^\mu \gamma^\nu \gamma^\rho] = 0
+	\]
+	and 
+	\[
+		\Tr[\gamma^\mu \gamma^\nu] = 4 \eta ^{\mu \nu},
+	\]
+	also,
+	\[
+		\Tr[\gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma] = 4\left( \eta ^{\mu \nu} \eta ^{\rho \sigma} - \eta ^{\mu \rho} \eta ^{\nu \sigma} + \eta ^{\mu \sigma} \eta ^{\nu \rho} \right).
+	\]
+	
+	So 
+	\[
+		A ^{\mu \nu} = p^\mu q^\nu + p^\nu q^\mu - \eta ^{\mu \nu} (p \cdot q + m_e^2).
+	\]
+	
+	\subsubsection{Centre of Mass Frame}
+
+	Note that $m_e \ll m_\mu$ and assume $E \sim m_\mu$ so we can make approximation $m_e \approx 0$. In centre of mass frame, \needfig{CoM collision} we have
+	\[
+		\vb k \vdot \hat{\vb z} = \abs{\vb k}\cos \theta
+	\]
+	where $\abs{\vb k}=\sqrt{E^2 - m_\mu^2}$.
+	
+	On sheet 4, you will evaluate the quantity
+	\[
+		\mathbb{P} = \frac{1}{4} \sum _{r,s,r',s'} \abs{\mathcal{M}_{r,s;r',s'}}^2 \overset{\text{CoM,} m_e = 0}{=} e^4 \left[ \left( 1 + \frac{m_\mu^2}{E^2} \right) + \left( 1 - \frac{m_\mu^2}{E^2} \right) \cos^2\theta \right].
+	\]
+
+	The differential cross section is
+	\[
+		\dv{\sigma}{\Omega} = \frac{1}{16 E^3} \frac{\abs{\vb k}}{16} \mathbb{P} = \frac{\alpha^2}{16E^2} \sqrt{1 - \frac{m_\mu^2}{E^2}}\left[ \left( 1 + \frac{m_\mu^2}{E^2} \right) + \left( 1 - \frac{m_\mu^2}{E^2} \right) \cos^2\theta \right].
+	\]
+	
+	To get the total cross section, we integrate 
+	\[
+		\sigma = \int_{0}^{2 \pi} \dd{\phi} \int_{-1}^{+1} \dd{(\cos \theta)} \dv{\sigma}{\Omega} = \frac{\pi^2 \alpha^2}{E^2} \sqrt{1 - \frac{m_\mu^2}{E^2}} \left( 1 + \frac{1}{2} \frac{m_\mu^2}{E^2} \right).
+	\]
+	
+	A detailed discussion can be found in Chapter 5 of Peskin \& Schroeder.
+
+	\ 
+
+	\begin{center}
+		-- THE END --
+	\end{center}
 	
 \end{document}
