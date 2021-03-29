@@ -1,0 +1,557 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{../../zyancamlec}
+
+\def\ntripos{Mathematical Tripos}
+\def\npart{III}
+\def\ncourse{String Theory}
+\def\nscourse{StrThy}
+\def\nlecturer{R.\ Reid-Edwards}
+\def\nterm{Lent}
+\def\nyear{2021}
+
+\begin{document}
+	\maketitlepage
+	\preliminaries
+
+	\section*{Course Information}
+	
+	String theory is the quantum theory of interacting one-dimensional extended objects (strings). What makes the theory so appealing is that it is a quantum theory that contains gravitational interactions and therefore provides the first tentative steps towards a full quantum theory of gravity. It has become clear that string theory is also much more than this. It has become a framework in which to understand problems in quantum field theory, to ask meaningful questions about what we expect from a quantum theory of gravity, and as a crucible for new ideas in mathematics.
+	
+	This course provides an introduction to String Theory. We begin by generalising the worldline of a particle to the two-dimensional surface swept out by a string. The quantum theory of the embedding of these surfaces in spacetime is governed by a two-dimensional quantum field theory and we shall study the simplest example -- the bosonic string -- in detail.
+	
+	An introduction to relevant ideas in Conformal Field Theory (CFT) will be given. The quantisation of the string will be studied, its spectrum obtained, and the relationship between states on the two dimensional CFT and fields in spacetime will be discussed. We will see the necessity of the critical dimension of spacetime.
+
+	The path integral approach to the theory will be discussed. Fadeev-Popov and BRST methods will be introduced to deal with the redundenceies that appear in the theory. Vertex operators will be introduced and scattering amplitudes will be computed at tree level. Perturbation theory at higher loops and the role played by moduli space of Riemann surfaces will be sketched.
+
+	The course will focus on closed strings but time permitting, open strings and the role of D-branes may be discussed. There may also be some discussion of more stringy phenomena such as symmetry enhancement and duality.
+
+	\section*{Pre-requisites}
+
+	Knowledge of the Quantum Field Theory course in Michaelmas term is assumed. Advanced Quantum Field Theory will complement this course but will not be assumed.
+
+	\newpage
+	
+	\section*{Outline}\lec{1}
+	\begin{itemize}
+		\item Introduction
+		\item Classical String Theory + Quantisation
+		\item Path Integral Quantisation
+		\item Conformal Field Theory (CFT)
+		\item Scattering Amplitudes
+		\item $T$-duality, Open Strings and $D$-branes\footnote{if time permitting}
+	\end{itemize}
+
+	\section*{Books}
+	\begin{itemize}
+		\item Polchinski, \emph{String Theory} Vol.~1
+		\item Schomerus, \emph{A Primer on String Theory}
+		\item Blumenhagen, L\"ust, Theisen, \emph{Basic Concepts in String Theory}
+	\end{itemize}
+
+	\section*{Conventions}
+
+	We use units $\hbar = c = 1$ and metric signature
+	\[
+		\eta _{\mu \nu} = \diag(-1, +1, \cdots, +1).
+	\]
+	\newpage
+
+	\tableofcontents
+	\newpage
+	\maintext
+
+	\section{Introduction}
+	\begin{itemize}
+		\item History in hadron physics (pre-QCD);
+		\item Beginnings of a quantum theory of gravity.
+	\end{itemize}
+	\subsection{Problems with Quantising Gravity}
+
+	\subsubsection{Conceptual Problems}
+
+	\begin{itemize}
+		\item Nature of time in Quantum Gravity?
+		\item $[\pi(t,\vb x), \phi(t,\vb y)] = \mathrm{i} \delta ^{D - 1}(\vb x - \vb y)$ when $\vb x, \vb y$ are timelike separated. It vanishes ($\pi, \phi$ commute) when $\vb x,\vb y$ spacelike separated; \needfig{1}
+		\item Why is the cosmological constant so small?
+		\item How about black hole information paradox?
+	\end{itemize}
+	These are all ``deep problems'', may need new concepts, principles or fundamental starting points other than String Theory.
+	
+	\subsubsection{Technical Problems}
+
+	\begin{ex}[$\varphi^3$ in $D = 6$]
+		In QFT we use perturbation theory: for example, consider $\varphi^3$ theory in $D = 6$ with Lagrangian
+	\[
+		\mathcal{L} = \frac{1}{2} (\partial \varphi)^2 + \frac{1}{2} m^2 \varphi^2 + \frac{\lambda}{3!} \varphi^3.
+	\]
+	
+	1-loop divergences 
+	\[
+		\text{\needfig{2}} \quad \sim \quad \int^\Lambda \dd[6]{p} \frac{1}{(p^2 + m^2)^n} \lambda^n \quad \sim \quad \Lambda ^{6 - 2n} + \cdots
+	\]
+	For $n = 1$ 
+	\[
+		\text{\needfig{2-2}} \quad \sim \quad \Lambda^4 + \cdots
+	\]
+	For $n = 2$ 
+	\[
+		\text{\needfig{2-3}} \quad \sim \quad \Lambda^2 + \cdots
+	\]
+	For $n = 1$ 
+	\[
+		\text{\needfig{2-4}} \quad \sim \quad \ln (\Lambda / m) + \cdots
+	\]
+
+	These divergences can be dealt with by redefining the parameters of the theory, e.g., 
+	\[
+		\lambda \to g = \lambda + \frac{\lambda^3}{2^6 \pi^3}\ln (\Lambda / m) + \cdots 
+	\]
+	 
+	There is no need to add new parameters to the Lagrangian, thus \emph{renormalisable}.
+	\end{ex}
+
+	\begin{ex}[$\varphi^3$ in $D = 8$]
+		Consider 4-point 1-loop divergence, this is not renormalisable.
+	\end{ex}
+	
+	We notice that the dimension of the coupling constant $[\lambda] = 0$ in $D = 6$, but $[\lambda] = - 1$ in $D = 8$, making it not renormalisable. In general $[\lambda] = \frac{1}{2} (3 - D)$.
+	
+	Now how about \emph{General Relativity}? The Einstein-Hilbert action is 
+	\[
+		S = \frac{1}{16 \pi G_N} \int \dd[D]{x} \sqrt{-g} R.
+	\]
+	Choose a background metric $\eta _{\mu \nu}$ and perturb arount it by 
+	\[
+		g _{\mu \nu}(t,\vb x) = \eta _{\mu \nu} + h _{\mu \nu}(t, \vb x)
+	\]
+	so the action is 
+	\[
+		S[h] = \frac{1}{16 \pi G_N} \int \dd[D]{x} \left( h ^{\mu \nu} \square h _{\mu \nu} + \cdots \right).
+	\]
+	
+	The dimension of the coupling constant is $[G_N] = 2 - D$, which is not renormalisable for $D > 2$.
+
+	\begin{cmt} \ 
+		\begin{itemize}
+			\item Divergence may not occur (due to some magical symmetry?);
+			\item Other arguments suggest gravity is not a QFT at high energies.
+		\end{itemize}
+	\end{cmt}
+
+	\subsection{What is String Theory?}
+	What is String Theory? The answer is simply: \emph{we don't know}. However, the starting point is that we replace particles by strings as the fundamental elements of our physics. 
+	
+	As particles have trajectories known as \emph{worldlines}, the strings have their loci as \emph{worldsheets} in the background spacetime.
+	\needfig{3}
+
+	In such theory, the gravitational interaction is included by regarding 
+	\[
+		g _{\mu \nu} = \eta _{\mu \nu} + h _{\mu \nu}
+	\]
+	and treating $h _{\mu \nu}$ as ``graviton''.
+
+	Different from QFT where we can derive Feynman diagrams from Lagrangians, we don't really know the stringy counterpart of such framework, as shown below schematically.
+
+	\needfig{4}
+
+	The worldsheet is usually denoted as $\Sigma$, and we study it by investigating the \emph{embedding} of it into the background spacetime $M_D$, i.e. 
+	\[
+		X : \Sigma \to M_D,\quad (\sigma , \tau) \mapsto X^\mu (\sigma, \tau)
+	\]
+	with $(\sigma,\tau)$ the local coordinates on $\Sigma$ and $X^\mu$ the local coordinates on $M_D$. Note that we won't worry too much about the smooth transitions between patches on the manifold --- they are assumed.
+
+	\needfig{5}
+
+	Subsequently, we are interested in quantising this embedding to obtain a quantum theory of strings.
+
+	\newpage 
+
+	\section{The Classical String} \lec{2}
+
+	In Quantum Mechanics, we treated time as a parameter but the position as an operator: $(t, \hat X)$. Such quantisation is then known as a 1-dimensional QFT, with the only dimension in time. Then in QFT, we ``downgraded'' position as a mere label but instead quantised fields, e.g.\ $\hat \phi(t,\vb x)$. Such procedure is famously known as the \emph{second quantisation}.
+
+	However, in our context of string theory, we use a different route: \emph{first quantisation}, which we ``promote'' time from a parameter to an operator as well. This is as promised that we would quantise the embedding $X^\mu$ as $\hat X^\mu = (\hat T, \hat{\vb X})$.
+
+	\subsection{Particles}
+
+	Before considering strings, we revise the classical dynamics of relativistic particles.
+
+	A particle sweeps out a worldline parametrised by $s$ with action 
+	\[
+		S[X] = - m \int_{s_1}^{s_2} \dd{s}.
+	\]
+	\needfig{6}
+
+	For a more physical understanding, we can introduce proper time $\tau$, and noting the initial/final positions as $X_1^\mu = X^\mu(\tau_1)$. $X_2^\mu = X^\mu (\tau_2)$, with action 
+	\[
+		\boxed{S[X] = - m \int_{\tau_1}^{\tau_2} \dd{t} \sqrt{ - \eta _{\mu \nu} \dot X^\mu \dot X^\nu}, \quad \text{with}\quad \dot X^\mu = \dv{X^\mu}{\tau}} .
+	\]
+	
+	The conjugate momentum is defined as 
+	\[
+		P_\mu (\tau) = \pdv{L}{\dot X^\mu} = - m \frac{\dot X_\mu}{\sqrt{- \dot X^2}}.
+	\]
+
+	It then follows that 
+	\[
+		P^2 + m^2 = 0
+	\]
+	which is the relativistic energy-momentum condition (a.k.a.\ ``mass-shell condition'').
+
+	The action is invariant under reparametrisation:
+	\begin{align*}
+		& \tau \to \tau + \xi(\tau)\\
+		& X^\mu (\tau) \to X^\mu(\tau + \xi(\tau)) = X^\mu(\tau) + \xi(\tau) \dot X^\mu(\tau) + \cdots
+	\end{align*}
+	and to first order 
+	\[
+		\delta X^\mu(\tau) = \xi(\tau) \dot X^\mu(\tau).
+	\]
+	
+	However, such expression of the action has problems: it has a cumbersome square root to treat, also it cannot describe massless particles.
+
+	\subsubsection{Metric Formalism}
+
+	To resolve the problems, we introduce a 1-dimensional metric\footnote{Technically, it is called an \emph{einbein}.} $e(\tau)$ on the worldline. $e(\tau)$ will be an auxiliary field. 
+
+	The new action is now 
+	\[
+		\boxed{S[X,e] = \int \dd{\tau} L = \frac{1}{2} \int \dd{\tau} \left( e^{-1} \eta _{\mu \nu} \dot X^\mu \dot X^\nu - e m^2 \right)}\ .
+	\]
+	
+	The equations of motion can be obtained from the Euler-Lagrange equations (i.e.\ varying the action), for example the $X^\mu$ equation of motion is 
+	\[
+		\dv{\tau}\left(  \pdv{L}{\dot X^\mu} \right) - \pdv{L}{X^\mu} = 0 \quad \Rightarrow \quad \dv{\tau} \left( e^{-1} \dot X^\mu \right) = 0.
+	\]
+	
+	As an auxiliary field, $e(\tau)$ is purely algebraic, so the equation of motion of $e(\tau)$ gives a constraint
+	\[
+		\dot X^2 + e^2 m^2 = 0.
+	\]
+
+	The conjugate momentum is 
+	\[
+		P_\mu = \pdv{L}{\dot X^\mu} = e^{-1} \dot X_\mu
+	\]
+	and putting this together with the above constraint, we preserve the energy-momentum condition
+	\[
+		P^2 + m^2 = 0.
+	\]
+	
+	For a timelike vector, we have $\dot X^2 < 0$ we have 
+	\[
+		e^{-1} = \frac{m}{\abs*{\dot X}}
+	\]
+	and we plug this back into the action $S[X,e]$ to get
+	\begin{align*}
+		S[X,e(X)] & = \frac{1}{2} \int \dd{\tau} e^{-1} \left( \eta _{\mu \nu} \dot X^\mu \dot X^\nu - e^2 m^2 \right)\\
+		& = - m \int \dd{\tau} \abs*{\dot X}\\
+		& = - m \int \dd{\tau} \sqrt{- \eta _{\mu \nu} \dot X^\mu \dot X^\nu}
+	\end{align*}
+	as before.
+
+	\subsubsection{Symmetries}
+	\begin{itemize}
+		\item Worldline reparametrisation \[
+			\delta X^\mu = \xi(\tau)\dot X^\mu, \quad \delta e (\tau) = \dv{\tau}\left( \xi e \right).
+		\]
+		\item Rigid symmetry \[
+			X^\mu (\tau) \to \LT{\mu}{\nu} X^\mu(\tau) + a^\mu
+		\]
+		with $\LT{\mu}{\nu}\in \SO(D - 1,1)$, i.e.\ the Poincar\'e symmetry. 
+	\end{itemize}
+
+	\subsubsection{Quantisation}
+
+	As for the quantisation, it is straightforward to require 
+	\[
+		[X^\mu(\tau), P_\nu (\tau)] = \mathrm{i} \delta^\mu_\nu
+	\]
+	and the mass-shell condition
+	\[
+		(P^2 + m^2) \ket{\phi} = 0.
+	\]
+	
+	\subsection{Classical Strings}
+
+	We generalise the idea of embedding an worldline $\ell$ into a spacetime $M$
+	\[
+		X : \ell \to M
+	\]
+	(call $X$ the \emph{embedding} and $M$ the \emph{target space}) to the embedding of a \emph{worldsheet}	$\Sigma$ into a spacetime $M$
+	\[
+		X : \Sigma \to M.
+	\]
+	
+	\needfig{7}
+
+	In the scope of this course, we mainly focus on \emph{closed strings}, with the spatial coordinate $\sigma$ periodic:
+	\[
+		X^\mu (\tau, \sigma + 2 \pi) = X^\mu (\tau,\sigma).
+	\]
+	
+	\subsubsection{The Nambu-Goto Action}
+
+	The Nambu-Goto action is 
+	\[
+		S[X] = - \frac{1}{2 \pi \alpha'}\int _{\Sigma} \dd{\tau} \dd{\sigma} \sqrt{ - \det \left( \eta _{\mu \nu} \partial_a X^\mu \partial_b X^\nu \right)}
+	\]
+	where $a,b = \tau,\sigma$, and $\alpha'$ is a constant and the only free parameter in the theory!
+
+	The physical meaning of minimising such action is the same as minimising the area of the worldsheet under given boundary conditions.
+
+	We can introduce a length scale, known as the \emph{string length}
+	\[
+		\ell_s = 2 \pi \sqrt{\alpha'}
+	\]
+	and we assume the Planck scale $\ell_p \ll \ell_s$. Another quantity introduced is the \emph{string tension}
+	\[
+		T = \frac{1}{2 \pi \alpha'}.
+	\]
+	
+	We observe that the quantity
+	\[
+		G _{ab} = \eta _{\mu \nu} \partial_a X^\mu \partial_b X^\nu
+	\]
+	is the \emph{induced metric} on $\Sigma$.
+
+	However, similar to the situation met in particle dynamics, it is not convenient to deal with the Nambu-Goto action, especially with its square root. Thus we do a similar trick as the `einbein' technique.
+
+	\subsubsection{The Polyakov Action}
+
+	We introduce an auxiliary field $h _{a b}$ on $\Sigma$, interpreted as the metric of the worldsheet. Then we have the Polyakov action:
+	\[
+		\boxed{S[X,h] = - \frac{1}{4 \pi \alpha'} \int_\Sigma \dd[2]{\sigma} \sqrt{- h } h ^{a b} \eta _{\mu \nu} \partial_a X^\mu \partial_b X^\nu}
+	\]
+	where $\dd[2]{\sigma} = \dd{\tau} \dd{\sigma}$.
+
+	The $h _{a b}$ equation of motion is 
+	\[
+		\delta S = - \frac{1}{2 \pi \alpha'} \int_\Sigma \dd[2]{\sigma} \sqrt{- h } T _{a b}\ \delta h ^{a b} = 0
+	\]
+	where $T _{a b}$ is the stress tensor
+	\[
+		T _{a b} = \frac{4 \pi}{\sqrt{- h}} \frac{\delta S}{\delta h ^{a b}}.
+	\]
+
+	The $h _{a b}$ equation of motion tells us that the stress tensor vanishes. Exercise: show
+	\[
+		T _{a b} = - \frac{1}{\alpha'} \left( \partial_a X^\mu \partial_b X_\mu - \frac{1}{2} h _{a b} h ^{c d} \partial_c X^\mu \partial_d X_\mu \right).
+	\]
+	
+	Note that, the stress tensor is manifestly traceless:
+	\[
+		h ^{a b}T _{a b} = 0
+	\]
+	as $h ^{a b} h _{a b} = 2$.
+
+	The $X^\mu$ equation of motion gives:
+	\[
+		\frac{1}{\sqrt{- h }} \partial_a \left( \sqrt{- h}h ^{a b} \partial_b X^\mu \right) = \square X^\mu = 0
+	\]
+	which is just a wave equation.
+
+	\subsubsection{Classical Equivalence of Polyakov and Nambu-Goto Actions}
+
+	If we denote the induced metric as 
+	\[
+		G _{a b} = \eta _{\mu \nu} \partial_a X^\mu \partial_b X^\nu
+	\]
+	then $T _{a b} = 0$ gives
+	\[
+		G _{a b} - \frac{1}{2} h _{a b}G = 0
+	\]
+	where $G = h ^{a b} G _{a b}$.
+	
+	Consider 
+	\[
+		\det (G _{ab}) = \frac{1}{4} G^2 \det (h _{a b})
+	\]
+	and so
+	\[
+		\sqrt{- h} h ^{a b} \eta _{ \mu \nu} \partial_a X^\mu \partial_b X^\nu = 2 \sqrt{ - \det(G _{a b})}.
+	\]
+
+	\subsubsection{Extending the Polyakov Action}
+
+	\begin{itemize}
+		\item We can generalise the background spacetime from flat to curved: $\eta _{\mu \nu} \to g _{\mu \nu}(X)$ (will be discussed later);
+		\item We may add an Einstein-Hilbert term: \[
+			\frac{\lambda}{4 \pi} \int_\Sigma \dd[2]{\sigma} \sqrt{-h} R(h)
+		\]
+		but in two dimensions, this is exactly proportional to the Euler characteristics:
+		\[
+			\chi = \frac{1}{4 \pi} \int_\Sigma \dd[2]{\sigma} \sqrt{-h}R(h),
+		\]
+		which is a topological invariant;
+		\item We might add a cosmological constant \[
+			\Lambda \int_\Sigma \dd[2]{\sigma}\sqrt{-h}
+		\]
+		then the metric equation of motion gives $T _{a b} \propto -\Lambda h _{a b}$. But the tracelessness of $T _{a b}$ implies the only possible $\Lambda$ is $\Lambda = 0$;
+		\item We can also add other ``background fields'', for example a 2-form \[
+			B(X) = \frac{1}{2} B _{\mu \nu} \dd{X^\mu} \wedge \dd{X^\nu}
+		\]
+		and we pull-back to the worldsheet as 
+		\[
+			- \frac{1}{2 \pi \alpha'} \int_\Sigma B = - \frac{1}{4 \pi \alpha'} \int_\Sigma \dd[2]{\sigma} \sqrt{-h} \epsilon ^{a b} \partial_a X^\mu \partial_b X^\nu B _{\mu \nu}(X).
+		\]
+		Also, for example, we may have a scalar field $\Phi(X)$ in the spacetime, and it couples to the worldsheet via 
+		\[
+			\frac{1}{4 \pi} \int_\Sigma \dd[2]{\sigma} \sqrt{-h} R(h) \Phi(X).
+		\]
+	\end{itemize}
+
+	\subsubsection{Symmetries}
+
+	\begin{itemize}
+		\item Rigid symmetries: (Poincar\'e) \[
+			X^\mu(\tau,\sigma) \to \LT{\mu}{\nu} X^\nu (\tau,\sigma) + a^\mu, \quad h _{a b} \to h _{a b}
+		\]
+		with $\Lambda \in \SO(D-1,1)$;
+		\item Local symmetries: \begin{itemize}
+			\item Reparametrisations: $\sigma^a \to \sigma'^a (\tau,\sigma) = \sigma^a - \xi^a (\tau,\sigma)$, infinitesimally, the embedding and metric change as \[
+				\delta X^\mu = \xi^a \partial_a X^\mu,
+			\]
+			\[
+				\delta h _{a b} = \nabla_a \xi_b + \nabla_b \xi_a,
+			\]
+			\[
+				\delta \sqrt{- h } = \partial_a \left( \xi^a \sqrt{-h} \right).
+			\]
+			\item Weyl transformations: \[
+				X^\mu \to X^\mu,\quad h _{a b}\to e ^{2 \Lambda(\tau,\sigma)} h _{a b}
+			\]
+			with 
+			\[
+				\delta X^\mu = 0, \quad \delta h _{a b} = 2\Lambda h _{a b}.
+			\]
+		\end{itemize}
+	\end{itemize}
+	
+	\subsubsection{Classical Closed String Solutions}\lec{3}
+
+	Recall the two symmetries mentioned above: diffeomorphism invariance and Weyl invariance. We can exploit the diffeomorphism invariance to write the worldsheet metric $h _{a b}$ in the form 
+	\[
+		h _{a b} = e ^{2 \phi} \mqty(-1 & 0\\0 & 1).
+	\]
+	The justification is as following: as a symmetric $2 \times 2$ matrix, $h _{a b}$ has 3 degrees of freedom. Reparametrisation invariance removes 2 of them, and we can regard the final degree of freedom as an overall scaling.
+
+	The above choice is often called the \emph{conformal gauge}.
+
+	Then, the action becomes 
+	\[
+		S[X] = - \frac{1}{4 \pi \alpha'} \int_\Sigma \dd[2]{\sigma} \left(  - \dot X^2 + X'^2 \right)
+	\]
+	where $\dot X^\mu \equiv \partial_\tau X^\mu$, $X'^\mu \equiv \partial_\sigma X^\mu$. Then the $X^\mu$ equation of motion is just simply 
+	\[
+		\square X^\mu \equiv \left( - \pdv[2]{\tau} + \pdv[2]{\sigma} \right) X^\mu = 0,
+	\]
+	which is the 2-dimensional wave equation!
+	
+	The general solution can be written as ``right-moving'' and ``left-moving'' components
+	\[
+		X^\mu (\tau,\sigma) = X^\mu_R (\tau - \sigma) + X^\mu_L (\tau + \sigma)
+	\]
+	where we introduce Fourier modes:
+	\[
+		X^\mu_R (\tau - \sigma) = \frac{1}{2} x^\mu + \frac{\alpha'}{2} p^\mu (\tau - \sigma) + \mathrm{i} \sqrt{\frac{\alpha'}{2}} \sum _{n \neq 0} \frac{\alpha^\mu_n}{n} e ^{- \mathrm{i} n (\tau - \sigma)}
+	\]
+	\[
+		X^\mu_L (\tau + \sigma) = \frac{1}{2} x^\mu + \frac{\alpha'}{2} p^\mu (\tau + \sigma) + \mathrm{i} \sqrt{\frac{\alpha'}{2}} \sum _{n \neq 0} \frac{\tilde \alpha^\mu_n}{n} e ^{- \mathrm{i} n (\tau + \sigma)}
+	\]
+	with the interpretations $x^\mu$ as the centre of mass position, $p^\mu$ as the centre of mass momentum of the string, and $\alpha^\mu_n, \tilde \alpha^\mu_n$ as the vibrational modes.
+
+	We require $X^\mu$ to be real, thus 
+	\[
+		\left( \alpha^\mu_n \right)^* = \alpha^\mu _{-n}
+	\]
+	and the same for $\tilde \alpha^\mu_n$.
+
+	In this course, we often do calculations of one of the left-moving or the right-moving sectors only, and the same procedure should automatically apply to the other.
+	
+	It is useful to define
+	\[
+		\alpha^\mu_0 = \tilde \alpha^\mu_0 = \sqrt{\frac{\alpha'}{2}} p^\mu.
+	\]
+	
+	\subsubsection{Hamiltonian Dynamics}
+
+	We define the conjugate momentum to $X^\mu$ as 
+	\[
+		P_\mu = \pdv{\mathcal{L}}{\dot X^\mu} = \frac{1}{2 \pi \alpha'} \eta _{\mu \nu}\dot X^\nu
+	\]
+	and a Hamiltonian density:
+	\[
+		\mathcal{H} = P_\mu \dot X^\mu - \mathcal{L} = \frac{1}{4 \pi \alpha'} \left( \dot X^2 + X'^2 \right)
+	\]
+	and the Hamiltonian
+	\[
+		H = \frac{1}{4 \pi \alpha'} \int_{0}^{2 \pi} \dd{\sigma} \left( \dot X^2 + X'^2 \right)
+	\]
+	which generates time translation on $\Sigma$:
+	\[
+		X^\mu (\tau, \sigma) = e ^{- \mathrm{i} H t}X^\mu(0,\sigma) e ^{\mathrm{i} H t}.
+	\]
+
+	We introduce a Poisson bracket:
+	\[
+		\left\{ X^\mu (\tau, \sigma), P_\nu (\tau ,\sigma') \right\}_{\mathrm{PB}} = \delta ^\mu_\nu \delta(\sigma - \sigma'),
+	\]
+	in particular $\left\{x^\mu, p_\nu\right\}_{\mathrm{PB}} = \delta^\mu_\nu$.
+	
+	It follows from this that (exercise: show this!)
+	\[
+		\left\{\alpha^\mu_m , \alpha^\nu_n\right\}_{\mathrm{PB}} = - \mathrm{i} m \eta ^{\mu \nu} \delta _{m+n,0}, \quad \left\{\alpha^\mu_m, \tilde \alpha^\nu_n\right\}_{\mathrm{PB}} = 0, \quad \left\{\tilde \alpha^\mu_m , \tilde \alpha^\nu_n\right\}_{\mathrm{PB}} = - \mathrm{i} m \eta ^{\mu \nu} \delta _{m+n,0}.
+	\]
+
+	Here we only show the other way around. For simplicity, set $\tau = 0$,
+	\[
+		X^\mu (\sigma) = x^\mu + \mathrm{i} \sqrt{\frac{\alpha'}{2}} \sum _{n \neq 0} \frac{1}{n} \left( \alpha^\mu_n e ^{\mathrm{i} n \sigma} + \tilde \alpha^\mu_n e ^{- \mathrm{i} n \sigma} \right)
+	\]
+	\[
+		P^\nu (\sigma') = \frac{p^\nu}{2 \pi} + \frac{1}{2 \pi} \sqrt{\frac{1}{2 \alpha'}} \sum _{n \neq 0} \left( \alpha^\nu_n e ^{\mathrm{i} n \sigma'} + \tilde \alpha^\nu_n e ^{- \mathrm{i} n \sigma'} \right)
+	\]
+	
+	Then the Poisson bracket is 
+	\begin{align*}
+		\left\{X^\mu(\sigma), P^\nu (\sigma')\right\}_{\mathrm{PB}} & = \frac{1}{2 \pi} \left\{x^\mu, p^\nu\right\}_{\mathrm{PB}}\\
+		&\ + \frac{\mathrm{i}}{4 \pi}\sum _{m,n\neq 0} \frac{1}{m} \left( \left\{\alpha^\mu_m, \alpha^\nu_n\right\}_{\mathrm{PB}} e ^{\mathrm{i} (m \sigma + n \sigma')} + \left\{\tilde \alpha^\mu_m , \tilde \alpha^\nu_n\right\}_{\mathrm{PB}} e ^{- \mathrm{i} (m \sigma + n \sigma')} \right)\\
+		& = \frac{1}{2 \pi} \eta ^{\mu \nu} + \frac{\eta ^{\mu \nu}}{2 \pi} \sum _{n \neq 0} e ^{\mathrm{i} n(\sigma - \sigma')}\\
+		& = \frac{1}{2 \pi} \eta ^{\mu \nu} \sum _{n = -\infty}^{+ \infty} e ^{\mathrm{i} n (\sigma - \sigma')}\\
+		& = \eta ^{\mu \nu} \delta (\sigma - \sigma')
+	\end{align*}
+	where we have identified the periodic delta function.
+
+	\subsubsection{Classical Stress Tensor and the Witt Algebra}
+
+	Introduce lightcone coordinates on $\Sigma$:
+	\[
+		\sigma^\pm = \tau \pm \sigma
+	\]
+	leaving $\partial_\pm = \frac{1}{2} \left( \partial_\tau \pm \partial_\sigma \right)$. Then the action and equation of motion become
+	\[
+		S[X] = - \frac{1}{2 \pi \alpha'} \int_\Sigma \dd{\sigma^+} \dd{\sigma^-} \partial_+ X^\mu \partial_- X^\nu \eta _{\mu \nu}
+	\]
+	and 
+	\[
+		\partial_+ \partial_- X^\mu = 0.
+	\]
+	
+	The stress tensor becomes:
+	\[
+		T _{++} (\sigma^+) = - \frac{1}{\alpha'} \partial_+ \cdot \partial_+ X, \quad T _{--} (\sigma^-) = - \frac{1}{\alpha'} \partial_- X \cdot \partial_- X
+	\]
+	and $T _{+-}$ vanishes identically (this is basically the trace of $T _{a b}$).
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+\end{document} 

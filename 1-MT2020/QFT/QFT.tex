@@ -68,7 +68,10 @@
 
 	It is typical to consider experiments where some initial state $\ket{i}$ transitions to $\ket{f}$.
 	
-	\needfig{1}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/fig1.pdf}
+	\end{figure}
 
 	The challenge we are facing is to calculate the probability 
 	\[
@@ -1479,7 +1482,10 @@
 
 	\paragraph{Casimir Effect} Consider a set of parallel metal plates in $\mathbb{R}^3$ both with area $A$ in a separation $d$.
 
-	\needfig{Casimir Effect}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/Casimir.pdf}
+	\end{figure}
 		
 	We study the effect due to photon field in real world. Model with massless scalar field $\phi(t,\vb x)$ subject to boundary condition
 	\[
@@ -1919,11 +1925,17 @@
 
 	For the classical consideration, the locality of the theory suggests that the particles move freely for $t \to \pm \infty$.
 
-	\needfig{classical scattering}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/classical-scattering.pdf}
+	\end{figure}
 
 	For quantum theory, just as in the classical case, we assume particles are effectively free in the far past and the far future. Later we will see the subtleties of this assumption.
 
-	\needfig{1}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/quantum-scattering.pdf}
+	\end{figure}
 
 	The reaction amplitude can be written as
 	\[
@@ -2088,7 +2100,10 @@
 
 	Consider the following particle scattering event.
 	
-	\needfig{quantum scattering for $n_i$ initial particles and $n_f$ final particles between time $t = -T/2$ to $t = + T/2$}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/n_i-n_f.pdf}
+	\end{figure}
 	
 	We want to calculate the scattering amplitude
 	\begin{align*}
@@ -2218,7 +2233,10 @@
 			\Delta_\text{F} (x-y) = \int _{C_\text{F}} \ddk{p}{4} \frac{\mathrm{i}}{p^2 - m^2} e ^{-\mathrm{i} p \cdot(x-y)}
 		\end{equation}
 		with a contour $C_\text{F}$ in the $p^0$-complex plane specified as below.
-		\needfig{Feynman contour}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.65\linewidth]{fig/Feynman-contour.pdf}
+		\end{figure}
 	\end{clm}
 	
 	\begin{proof}
@@ -2274,8 +2292,14 @@
 		\Delta_\text{F}(x-y) = \lim _{\epsilon \to 0^+} \int \ddk{p}{4} \frac{\mathrm{i} e ^{- \mathrm{i} p \cdot (x-y)}}{p^2 - m^2 + \mathrm{i} \epsilon}.
 	\]
 	
-	To see this is true, we draw the poles again for the $\mathrm{i}\epsilon$-prescription in the $p^0$-complex plane
-	\needfig{$\mathrm{i}\epsilon$-prescription diagram}. We can safely take $C_\text{F}$ along the real axis.
+	To see this is true, we draw the poles again for the $\mathrm{i}\epsilon$-prescription in the $p^0$-complex plane.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.65\linewidth]{fig/i-epsilon-prescription.pdf}
+	\end{figure}
+	
+	We can safely take $C_\text{F}$ along the real axis.
 
 	To express the relationship between time ordering and normal ordering, we first introduce a set of new definitions.
 
@@ -2417,7 +2441,12 @@
 		\psi + \psi \to \psi + \psi.
 	\]
 
-	This process can be seen as \needfig{$\psi \psi$-scattering}.
+	This process can be seen as below.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/psi-psi-scattering.pdf}
+	\end{figure}
 
 	The initial and final states are
 	\[
@@ -3921,7 +3950,14 @@
 
 	Here the difficulty is that one component of the conjugate momentum is zero, hard to impose canonical quantisation conditions!
 
-	The problem is that the configurations of $A ^\mu$ related by a gauge transformation are \emph{physically indistinguishable}. We call the configuration space $\mathcal{A}$. It can be illustrated as \needfig{gauge orbits and gauge fixing} $\mathcal{A}$ is foliated by gauge orbits, we need to ``fix a gauge''. For example, we can use the \emph{Lorenz gauge}
+	The problem is that the configurations of $A ^\mu$ related by a gauge transformation are \emph{physically indistinguishable}. We call the configuration space $\mathcal{A}$. It can be illustrated as below.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/gauge-fixing.pdf}
+	\end{figure}
+	
+	$\mathcal{A}$ is foliated by gauge orbits, we need to ``fix a gauge''. For example, we can use the \emph{Lorenz gauge}
 	\begin{equation}
 		\partial_\mu A^\mu = 0.
 		\label{eq:5.1}
@@ -4200,14 +4236,19 @@
 	\]
 	
 	The scattering process we are considering is 
-	\needfig{$e^- e^+ \to \mu^- \mu^+$}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/ee-mumu.pdf}
+	\end{figure}
+	
 	with initial state
 	\[
 		\ket{i} = \sqrt{2 E _{\vb p}} \sqrt{2 E _{\vb q}}\  \hat b^{s\dagger}_{\vb p} \hat c^{r\dagger}_{\vb q} \ket{0}
 	\]
 	and final state
 	\[
-		\ket{f} = \sqrt{\mathcal{E}_{\vb p'}} \sqrt{2 \mathcal{E}_{\vb q'}}\ \hat d^{r'\dagger}_{\vb p'} \hat e^{s'\dagger}_{\vb q'} \ket{0}.
+		\ket{f} = \sqrt{2 \mathcal{E}_{\vb p'}} \sqrt{2 \mathcal{E}_{\vb q'}}\ \hat d^{r'\dagger}_{\vb p'} \hat e^{s'\dagger}_{\vb q'} \ket{0}.
 	\]
 	
 	The $S$-matrix is
@@ -4574,7 +4615,11 @@
 	i.e.\ we can regulate it using the volume of spacetime $V$. 
 
 	\subsubsection{2-2 Scattering}
-	\needfig{2-2 scattering}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.45\linewidth]{fig/2-2-scattering.pdf}
+	\end{figure}
 
 	The \emph{differential cross section} is defined as 
 	\[
@@ -4665,11 +4710,16 @@
 	
 	\subsubsection{Centre of Mass Frame}
 
-	Note that $m_e \ll m_\mu$ and assume $E \sim m_\mu$ so we can make approximation $m_e \approx 0$. In centre of mass frame, \needfig{CoM collision} we have
+	Note that $m_e \ll m_\mu$ and assume $E \sim m_\mu$ so we can make approximation $m_e \approx 0$. In centre of mass frame, we have
 	\[
 		\vb k \vdot \hat{\vb z} = \abs{\vb k}\cos \theta
 	\]
 	where $\abs{\vb k}=\sqrt{E^2 - m_\mu^2}$.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.6\linewidth]{fig/com-collision.pdf}
+	\end{figure}
 	
 	On sheet 4, you will evaluate the quantity
 	\[
