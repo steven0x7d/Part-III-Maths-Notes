@@ -1,0 +1,330 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{zyancamlec}[2020/10/03 Z. Yan's Cambridge Lecture Notes Package]
+
+%----------Dependencies----------
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{amsthm}
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{physics}
+\RequirePackage{url}
+\RequirePackage{tensor}
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{mathrsfs}
+\RequirePackage{mathtools}
+\RequirePackage{bm}
+\RequirePackage{bbm}
+\RequirePackage{cancel}
+\RequirePackage{tikz}
+\RequirePackage[shortlabels]{enumitem}
+\RequirePackage{mdframed}
+\RequirePackage[pdftex,hidelinks]{hyperref}
+\RequirePackage{fancyhdr}
+\RequirePackage{marginnote}
+\reversemarginpar
+\RequirePackage{tikz-cd}
+\RequirePackage{slashed}
+%----------Title----------
+
+\fancypagestyle{firstpagestyle}{
+	\fancyhf{}
+	\fancyfoot[C]{--\ \thepage\ --}
+	\renewcommand{\headrulewidth}{0pt} 
+}
+
+\renewcommand{\maketitle}{
+	\thispagestyle{firstpagestyle}
+	\begin{center}
+		{\Large \scshape University of Cambridge \ntripos\par}
+		\vspace*{0.3cm}
+		{\huge \sffamily\@title\par}%
+		\vspace*{0.7cm}
+		{\large\@author\par}%
+		\vspace*{0.3cm}
+		{\@date\par}
+	\end{center}}
+
+\ifx \ntptitlesize\undefined
+	\def\ntptitlesize{\Huge}
+\else
+\fi
+
+\newcommand{\maketitlepage}{\begin{titlepage}%
+		\centering%
+		\vspace*{6cm}%
+		{\LARGE \scshape University of Cambridge \\\ntripos\par}%
+		\vspace*{1cm}
+		{\ntptitlesize \sffamily\@title\par}%
+		\vspace{2cm}%
+		{\Large \@author\par}%
+		\vspace{1cm}%
+		{\large \@date\par}%
+		\vspace*{\fill}%
+		\newpage
+		\thispagestyle{empty}
+		\vspace*{\fill}
+		\begin{center}
+		\begin{minipage}[c]{0.9\textwidth}
+			\textit{These notes may not reflect the full format and content that are actually lectured. I usually modify the notes after the lectures and sometimes my own thinking or interpretation might be blended in. Any mistake or typo should surely be mine. Be cautious if you are using this for self-study or revision.}
+		\end{minipage}
+		\end{center}
+		\vspace*{\fill}
+\end{titlepage}}
+
+%----------Course Information----------
+\ifx \nauthor\undefined
+	\def\nauthor{Zihan Yan}
+\else
+\fi
+
+\ifx \nlecturer\undefined
+	\def\nlecturer{Some Lecturer}
+\else
+\fi
+
+\ifx \nterm\undefined
+	\def\nterm{Some Term}
+\else
+\fi
+
+\ifx \nyear\undefined
+	\def\nyear{Some Year}
+\else
+\fi
+
+\ifx \npart\undefined
+	\def \npart{X}
+\else
+\fi
+
+\ifx \ncourse\undefined
+	\def \ncourse{Some Course}
+\else
+\fi
+
+\ifx \nscourse\undefined
+	\def \nscourse{XYZ}
+\else
+\fi
+
+\ifx \ntripos\undefined
+	\def \ntripos{Some Tripos}
+\else
+\fi
+
+\title{Part \npart\ --\ {\bfseries \ncourse}}
+\author{Based on Lectures by \textit{\nlecturer}\\Notes taken by \textsc{\nauthor}}
+\date{\nterm\ \nyear}
+
+%----------Page Setup----------
+\RequirePackage[paper = a4paper, tmargin = 2.5cm, bmargin = 2.5cm, lmargin = 2.5cm, rmargin = 2.5cm]{geometry}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{{\sffamily\textsl\leftmark}}
+\fancyhead[R]{{\sffamily\nscourse}}
+\fancyfoot{}
+\fancyfoot[L]{{\sffamily Part \npart}}
+\fancyfoot[C]{--\ \thepage\ --}
+\fancyfoot[R]{{\sffamily\nterm\ \nyear}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\newcommand{\preliminaries}{\setcounter{page}{1}\pagenumbering{roman}}
+\newcommand{\maintext}{\setcounter{page}{1}\pagenumbering{arabic}}
+
+\RequirePackage{titlesec}
+\titleformat*{\section}{\Large\scshape\centering}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titleformat*{\paragraph}{\sffamily\bfseries}
+
+\setlength{\parskip}{0.25em}
+\setlength{\parindent}{0em}
+\linespread{1.1}
+\numberwithin{equation}{section}
+
+%----------Theorem Style Section----------
+
+\newtheoremstyle{scthm} % name
+{\topsep}                    % Space above
+{\topsep}                    % Space below
+{\itshape}                   % Body font
+{}                           % Indent amount
+{\large\scshape}                   % Theorem head font
+{.}                          % Punctuation after theorem head
+{.5em}                       % Space after theorem head
+{}  % Theorem head spec (can be left empty, meaning ‘normal’)
+
+\newtheoremstyle{scdef} % name
+{\topsep}                    % Space above
+{\topsep}                    % Space below
+{}                   % Body font
+{}                           % Indent amount
+{\large\scshape}                   % Theorem head font
+{.}                          % Punctuation after theorem head
+{.5em}                       % Space after theorem head
+{}  % Theorem head spec (can be left empty, meaning ‘normal’)
+
+\newcommand{\genthmsty}[2]{\surroundwithmdframed[linecolor={#1}, linewidth=2pt, topline=false, bottomline=false, rightline=false, leftmargin=0pt, innerleftmargin=0.4em, rightmargin=0pt, innerrightmargin=0.5em, innertopmargin=-0.3em, innerbottommargin=0em]{#2}}
+
+\theoremstyle{scthm}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\genthmsty{cyan}{thm}
+\genthmsty{cyan}{thm*}
+
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\genthmsty{cyan}{lem}
+\genthmsty{cyan}{lem*}
+
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\genthmsty{cyan}{prop}
+\genthmsty{cyan}{prop*}
+
+\newtheorem{clm}[thm]{Claim}
+\newtheorem*{clm*}{Claim}
+\genthmsty{cyan}{clm}
+\genthmsty{cyan}{clm*}
+
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
+\genthmsty{cyan}{cor}
+\genthmsty{cyan}{cor*}
+
+\newtheorem{law}[thm]{Law}
+\newtheorem*{law*}{Law}
+\genthmsty{magenta}{law}
+\genthmsty{magenta}{law*}
+
+\newtheorem{pos}{Postulate}
+\newtheorem*{pos*}{Postulate}
+\genthmsty{magenta}{pos}
+\genthmsty{magenta}{pos*}
+
+\newtheorem*{addendum}{Addendum}
+
+\theoremstyle{scdef}
+
+\newtheorem{defi}[thm]{Definition}
+\newtheorem*{defi*}{Definition}
+\genthmsty{gray}{defi}
+\genthmsty{gray}{defi*}
+
+\newtheorem*{nt}{Note}
+
+\newtheorem*{cmt}{Comment}
+\newtheorem*{ntc}{Comment by Note Taker}
+\newtheorem*{prpt}{Properties}
+
+\newtheorem{ex}[thm]{Example}
+\newtheorem*{ex*}{Example}
+\genthmsty{green}{ex}
+\genthmsty{green}{ex*}
+\newtheorem*{aside}{Aside}
+\genthmsty{green}{aside}
+
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem{exer}[thm]{Exercise}
+\newtheorem*{rmk*}{Remark}
+\newtheorem*{exer*}{Exercise}
+\genthmsty{orange}{exer}
+\genthmsty{orange}{exer*}
+\newtheorem*{deri}{Derivation}
+\newtheorem*{hint}{Hint}
+
+
+%----------New Commands/Operators----------
+
+\newcommand{\der}{\partial}
+\newcommand{\del}{\nabla}
+\newcommand{\df}{\vb{d}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\M}{\mathcal M}
+\newcommand{\N}{\mathbb N}
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\g}{\gamma}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\eta}
+\newcommand{\f}{\phi}
+\newcommand{\h}{\theta}
+\renewcommand{\k}{\kappa}
+\renewcommand{\l}{\lambda}
+\newcommand{\m}{\mu}
+\newcommand{\n}{\nu}
+\renewcommand{\o}{\omega}
+\renewcommand{\r}{\rho}
+\newcommand{\s}{\sigma}
+\renewcommand{\t}{\tau}
+\newcommand{\chr}[3]{\left\{\smqty{#1\\ #2\ #3}\right\}}
+\newcommand{\rk}[2]{\left(\smqty{#1\\ #2}\right)}
+\newcommand{\smf}[0]{\mathcal C^{\infty}}
+\newcommand{\ts}[2]{T_{#1}(#2)}
+\newcommand{\cts}[2]{T^{\ast}_{#1}(#2)}
+\renewcommand{\i}{\indices}
+\DeclareMathOperator{\diag}{diag}
+\renewcommand{\L}{\mathcal L}
+\renewcommand{\S}{\mathcal S}
+\newcommand{\G}{\Gamma}
+\newcommand{\conn}[3]{\G^{#1}_{#2#3}}
+\newcommand{\vconn}[3]{{\G'}^{#1}_{#2#3}}
+\newcommand{\0}{\varnothing}
+\newcommand{\smooth}{C^\infty}
+\renewcommand{\O}{\mathcal O}
+\newcommand{\DD}{\mathrm D}
+\newcommand{\Dvv}[1]{\frac{\DD}{\DD #1}}
+\newcommand{\Dv}[2]{\frac{\DD #1}{\DD #2}}
+\newcommand{\LT}[2]{\Lambda\i{^{#1}_{#2}}}
+\newcommand{\iLT}[2]{\Lambda\i{_{#1}^{#2}}}
+\newcommand{\ten}[1]{\underline{\underline{#1}}}
+\renewcommand{\P}{\Psi}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\dbar}{{\mathrm{d}\mkern-7mu\mathchar'26\mkern-2mu}}
+\newcommand{\E}{\mathcal E}
+\newcommand{\ep}{\epsilon}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\Dvt}[1]{\Dv{#1}{t}}
+\newcommand{\pdvt}[1]{\pdv{#1}{t}}
+\newcommand{\D}{\Delta}
+\newcommand{\circled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {#1}}}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\Rq}{\Rightarrow\qquad}
+\newcommand{\lecnr}[1]{\marginnote{\sffamily\centering\color{Blue} Lecture {#1}\\No-Revise}[0.5em]}
+\newcommand{\lec}[1]{\marginnote{\sffamily\centering\color{Gray} Lecture {#1}}[0.5em]}
+\newcommand{\recnr}[1]{\marginnote{\sffamily\centering\color{Blue} Rec {#1}\\No-Revise}[0.5em]}
+\newcommand{\rec}[1]{\marginnote{\sffamily\centering\color{Gray} Rec {#1}}[0.5em]}
+\DeclareMathOperator{\cpf}{\circ}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\hme}{\xrightarrow{\sim}}
+\newcommand{\needfig}[1]{{\color{Purple}[Need figure {#1} here.]}}
+
+\newcommand{\RP}[1]{\mathbb{RP}^{#1}}
+\newcommand{\CP}[1]{\mathbb{CP}^{#1}}
+\newcommand{\Gr}[2]{\mathrm{Gr}({#1},{#2})}
+
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Mat}{Mat}
+\newcommand{\1}{\mathbbm{1}}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Og}{O}
+\DeclareMathOperator{\U}{U}
+\newcommand{\ddp}{\mathcal{D}}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Span}{Span}
+\newcommand{\ddk}[2]{\frac{\dd[#2]{#1}}{(2\pi)^{#2}}}
+\newcommand{\nord}[1]{:\mathrel{#1}:}
+\DeclareMathOperator*{\dRes}{Res}
+\DeclareMathOperator{\Exp}{Exp}
