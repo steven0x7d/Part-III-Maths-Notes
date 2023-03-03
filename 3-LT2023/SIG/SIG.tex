@@ -1992,9 +1992,125 @@ color(400bp)=(transparent!0)}
 
     \begin{clm}
         \begin{equation}
-            \dd{\sigma^\alpha} + \frac{1}{2} \sum_{\beta, \gamma} \sigma^\beta \wedge \sigma^\gamma = 0.
+            \dd{\sigma^\alpha} + \frac{1}{2} \sum_{\beta, \gamma} \sigma^\beta \wedge \sigma^\gamma = 0. \label{eq:MC}
         \end{equation}
     \end{clm}
+
+    \lec{13} 
+    \begin{proof}
+    Assume that $G$ is a matrix Lie group, and define a Mouver-Cartan 1-form 
+    \begin{equation}
+        \rho = g^{-1} \dd{g}
+    \end{equation}
+    it has the following properties: 
+    \begin{itemize}
+        \item $\rho$ is left-invariant: if $g_0 \in G$ is a constant matrix then $(g_0 g)^{-1} \dd{(g_0 g)} = g^{-1} g_0^{-1} g_0 \dd{g} = g^{-1} \dd{g}$;
+        \item $\rho$ is Lie algebra valued: take a curve $g(s)$ in $G$ then $g^{-1} g$ at $s+\epsilon$ is \begin{equation}
+            g^{-1}(s) \left( g(s) + \epsilon \dv{g}{s}\bigg|_{\epsilon = 0} + \cdots \right) = \1 + \epsilon \underbrace{g^{-1} \dot g}_{\in \mathfrak{g}};
+        \end{equation}
+        \end{itemize}
+
+        Calculate 
+        \begin{equation}
+            \dd{\rho} = \dd{(g^{-1} \dd{g})} = - g^{-1} \dd{g} g^{-1} \wedge \dd{g} = - \rho \wedge \rho
+        \end{equation}
+        so we have the Mouver-Cartan equation 
+        \begin{equation}
+            \boxed{\dd{\rho} + \rho \wedge \rho = 0}\,.
+        \end{equation}
+        $\rho$ is a $\mathfrak{g}$-valued 1-form
+        \begin{equation}
+            \rho = \sum_\alpha \sigma^\alpha \otimes T_\alpha
+        \end{equation}
+        where $T_\alpha$'s satisfy
+        \begin{equation}
+            [T_\alpha, T_\beta] = f\indices{_{\alpha \beta}^\gamma} T_\gamma.
+        \end{equation}
+        by using Mouver-Cartan equation, we have 
+        \begin{equation}
+            0 = \dd{\rho} + \rho \wedge \rho = \sum_\alpha \dd{\sigma^\alpha} \otimes T_\alpha + \underbrace{\sum_{\beta,\gamma} \sigma^\beta \wedge \sigma^\gamma \otimes T_{\beta} T_{\gamma}}_{\frac{1}{2} \sum_{\beta,\gamma} \sigma^\beta \wedge \sigma^\gamma [T_\beta, T_\gamma]} = \sum_\alpha \dd{\sigma^\alpha} \otimes T_\alpha + \frac{1}{2} \sum_{\beta,\gamma} \sigma^\beta \wedge \sigma^\gamma f\indices{_{\beta \gamma}^\alpha} \otimes T_\alpha 
+        \end{equation}
+        so we obtain finally
+        \begin{equation}
+            \dd{\sigma^\alpha} + \frac{1}{2} \sum_{\beta,\gamma} \sigma^\beta \wedge \sigma^\gamma f\indices{_{\beta \gamma}^\alpha} = 0.
+        \end{equation}
+    \end{proof}
+    \begin{ex}
+        Take $G$ the 3-dimensional Heisenberg group (Nil group). Any $g \in G$ takes the matrix form 
+        \begin{equation}
+            g = \mqty(1 & x & z\\0 & 1 & y\\0 & 0 & 1) = \1 + x T_1 + y T_2 + z T_3
+        \end{equation}
+        where 
+        \begin{equation}
+            T_1 = \mqty(0 & 1 & 0\\0 & 0 &0\\0 & 0 & 0), \quad T_2 = \mqty(0 & 0 & 0\\0 & 0 &1\\0 & 0 & 0), \quad T_3 = \mqty(0 & 0 & 1\\0 & 0 &0\\0 & 0 & 0)
+        \end{equation}
+        $T_\alpha$, $\alpha = 1,2,3$ span the Lie algebra of $G$ with commutation relations 
+        \begin{equation}
+            [T_1, T_2] = T_3, \quad [T_1, T_3] = 0, \quad [T_2, T_3] = 0
+        \end{equation}
+        where $T_1$ is often interpreted as ``position'', $T_2$ as ``momentum'' and $T_3$ as ``$-\mathrm{i} \hbar\,\text{id}$''.
+
+        Compute the left-invariant one-forms
+        \begin{equation}
+            \rho = g^{-1} \dd{g} = \mqty(1 & - x & xy-z\\0 & 1 & -y\\0 & 0 & 1) \mqty(0 & \dd{x} & \dd{z}\\0 & 0 & \dd{y}\\0 & 0 & 0) = T_1 \dd{x} + T_2 \dd{y} + T_3 (\dd{z} - x \dd{y})
+        \end{equation}
+        and we recognise 
+        \begin{equation}
+            \sigma^1 = \dd{x}, \quad \sigma^2 = \dd{y}, \quad \sigma^3 = \dd{z} - x \dd{y}
+        \end{equation}
+        so 
+        \begin{equation}
+            \dd{\sigma^1} = 0, \quad \dd{\sigma^2} = 0, \quad \dd{\sigma^3} = - \sigma^1 \wedge \sigma^2
+        \end{equation}
+        which agrees with \eqref{eq:MC}.
+
+        The dual left-invariant vector fields are 
+        \begin{equation}
+            L_1 = \pdv{x}, \quad L_2 = \pdv{y} + x \pdv{z}, \quad L_3 = \pdv{z}
+        \end{equation}
+        giving 
+        \begin{equation}
+            [L_1,L_2] = L_3.
+        \end{equation}
+    \end{ex}
+
+    \begin{nt}
+        We could have instead define right-invariant vector fields $R_\alpha$, $\alpha=1,\cdots,n$ and 
+        \begin{equation}
+            [R_\alpha, R_\beta] = - f\indices{_{\alpha \beta}^\gamma}R_\gamma, \quad [R_\alpha, L_\beta] = 0.
+        \end{equation}
+
+        Warning (terminology check): the right-invariant vector fields generate left translations and vice versa.
+    \end{nt}
+
+    \newpage
+    \section{Fibre Bundles}
+
+    Gauge theory is a theory of a connection on a principal fibre bundle over spacetime with the gauge group as its fibres. We can think of fibre bundles as locally product manifolds.
+
+    \needfig{$S^1\times \mathbb{R}$ cylinder vs M\"obius band with local patches highlighted}
+
+    In this example, we call $S^1$ the \emph{base}, and $\mathbb{R}$ the \emph{fibre}.
+
+    \begin{defi}
+        A \emph{fibre bundle} is $(\pi, B, E, F, G)$ where $\pi: E \to B$ is the \emph{bundle projection} from a manifold $E$ (the \emph{total space}) to another manifold $B$ (the \emph{base space}). There exist a covering of $B$ by open sets $U_\alpha$, $\alpha = 1,2,\cdots$, such that $\forall x \in B$, $\exists \phi_\alpha: U_\alpha \times F \to \pi^{-1}(U_\alpha)$ ($F$ is the \emph{fibre}, yet another manifold) such that 
+        \begin{equation}
+            \pi \circ \phi_\alpha(x,f) = x, \quad \forall f \in F.
+        \end{equation}
+        $\phi_\alpha$ are called \emph{local trivialisations}. 
+
+        If $x \in U_\alpha \cap U_\beta$, define $\phi_{\alpha \beta} \equiv \phi_\alpha^{-1} \circ \phi_\beta$, $\phi_{\alpha \beta}(x) \in G$ where $G$ is a Lie group known as the \emph{structure group} and it acts on $F$.
+        
+        It has properties $\phi_{\alpha \alpha} = \text{id}$ (no summation), and for $x \in U_\alpha \cap U_\beta \cap U_\gamma$, $\phi_{\alpha \beta} \circ \phi_{\beta \gamma} = \phi_{\alpha \gamma}$, this is the \emph{cocycle relation}.
+    \end{defi}
+
+    The bundle is \emph{trivial} if $E = B \times F$, and this is always the case if $B$ is contractible.
+
+    If $F=G$ and $G$ acts on itself by left translations, then $E$ is a \emph{principal bundle}. 
+
+    If $F=\mathbb{R}^n$ and $G \subset \GL(n,\mathbb{R})$, then $E$ is a \emph{vector bundle}.
+
+
 
 
 
