@@ -2104,12 +2104,131 @@ color(400bp)=(transparent!0)}
         It has properties $\phi_{\alpha \alpha} = \text{id}$ (no summation), and for $x \in U_\alpha \cap U_\beta \cap U_\gamma$, $\phi_{\alpha \beta} \circ \phi_{\beta \gamma} = \phi_{\alpha \gamma}$, this is the \emph{cocycle relation}.
     \end{defi}
 
-    The bundle is \emph{trivial} if $E = B \times F$, and this is always the case if $B$ is contractible.
+    \begin{rmk}
+        ~
+        \begin{itemize}
+            \item The bundle is \emph{trivial} if $E = B \times F$, and this is always the case if $B$ is contractible;
 
-    If $F=G$ and $G$ acts on itself by left translations, then $E$ is a \emph{principal bundle}. 
+            \item If $F=G$ and $G$ acts on itself by left translations, then $E$ is a \emph{principal bundle};
+        
+            \item If $F=\mathbb{R}^n$ and $G \subset \GL(n,\mathbb{R})$, then $E$ is a \emph{vector bundle}.
+        \end{itemize}
+    \end{rmk}
+    \lec{14}
+    \begin{ex}[Tangent bundle]
+        In a tangent bundle $E = TB$, $E = \cup_{x\in B} T_x B$, $\dim B = n$, $F = \mathbb{R}^n$ and $G = \GL(n,\mathbb{R})$.
+    \end{ex}
 
-    If $F=\mathbb{R}^n$ and $G \subset \GL(n,\mathbb{R})$, then $E$ is a \emph{vector bundle}.
+    \begin{ex}[Magnetic monopole]
+        The magnetic monopole bundle has $B=S^2$, $F = G = \U(1) \simeq S^1$. This is an example for a principal bundle.
 
+        Cover $S^2$ with two open sets $U_+, U_-$: 
+        \begin{equation}
+            U_- = S^2 \backslash \left\{ 0,0,-1 \right\}, \quad U_+ = S^2 \backslash \left\{ 0,0,1 \right\}
+        \end{equation}
+        \needfig{$U_-$ covers all but the south pole, $U_+$ covers all but the north pole}.
+
+        and on $U_- \cap U_+$ use $\theta \in (-\pi/2, \pi/2)$ and $\phi \in (0,2 \pi)$. Choose fibre coordinates $e^{\mathrm{i} \Psi_+}$ over $U_+$ and $e^{\mathrm{i} \Psi_-}$ over $U_-$. In a strip of $U_+ \cap U_-$ of width $\varepsilon$ close to $\theta = 0$, 
+        \begin{equation}
+            e^{\mathrm{i} \Psi_-} = e^{\mathrm{i} \Psi_+} e^{\mathrm{i} n \phi}
+        \end{equation}
+        where $n$ has to be an integer for $E$ to be a manifold. $n$ is called the \emph{monopole number}. 
+
+        If $n=0$, then $E = S^2 \times S^1$, which is a trivial bundle.
+
+        If $n=1$, then $E = S^3$, which is the Hopf bundle. Let us describe it now. The projection goes as
+        \begin{equation}
+            \pi : S^3 \simeq \SU(2) \to \SU(2) / \U(1) \simeq S^2.
+        \end{equation}
+        We can write $S^3$ as a real hypersurface in $\mathbb{C}^2$ as 
+        \begin{equation}
+            S^3 \subset \mathbb{C}^2, \quad S^3 = \left\{ (z_1,z_2) : \abs{z_1}^2 + \abs{z_2}^2 = 1 \right\},
+        \end{equation}
+        and $S^2$ as 
+        \begin{equation}
+            S^2 \simeq \mathbb{CP}^1 = (\mathbb{C}^2 \backslash \left\{ 0 \right\}) / \sim 
+        \end{equation}
+        where 
+        \begin{equation}
+            [z_1, z_2] \sim [\lambda z_1, \lambda z_2], \quad \lambda \in \mathbb{C}^*
+        \end{equation}
+        so in an open set where $z_1 \neq 0$ we can use $z_2 / z_1$ as the coordinate, vice versa when $z_2 \neq 0$.
+
+        The $\U(1)$ action is $(z_1, z_2) \mapsto (z_1 e^{\mathrm{i} \alpha}, z_2 e^{\mathrm{i} \alpha})$ on $S^3$. This preserves the ratio $z_1 / z_2$ or $z_2 / z_1$.
+
+        We describe the fibres by considering the embedding $S^3 \subset \mathbb{C}^2$ intersecting with a complex line in $\mathbb{C}^2$ (which is determined by $A_1 z_1 + A_2 z_2 = 0$, identified with $\mathbb{R}^2 \subset \mathbb{R}^4$), resulting in a circle $S^1$. This is a fibre over $z_1 / z_2$ (or $z_2 / z_1$).
+    \end{ex}
+
+    \begin{defi}[Section]
+        Define a \emph{section} of a bundle to be a smooth map $s : B \to E$ such that 
+        \begin{equation}
+            \pi \circ s = \text{id on } B.
+        \end{equation}
+        \needfig{section of a bundle}
+
+        In physics fields are sections of bundles.
+    \end{defi}
+
+    \begin{prop}
+        A principal bundle is trivial if and only if it admits a global section.
+    \end{prop}
+    \begin{proof}
+        Say $s : B \to E$ is this global section. Define a global trivialisation 
+        \begin{equation}
+            \chi : E \to B \times G, \quad \chi(p) = (\pi(p), g(p))
+        \end{equation}
+        where $g(p)$ is defined by $g(p) s(\pi(p)) = p$, which is well defined as $G$ acts transitively on itself. 
+    \end{proof}
+
+    \subsection{Connection and Curvature}
+    \begin{defi}[Connection]
+        A \emph{connection} on a principal bundle is a $\mathfrak{g}$-valued 1-form $\omega$ on $E$ such that its restriction to fibres is the Mouver-Cartan 1-form. 
+    \end{defi}
+
+    Pick a local trivialisation of $E$, $(x, \gamma)$ where $x \in U \subset B$ and $\gamma \in G$, then 
+    \begin{equation}
+        \omega = \gamma^{-1} A \gamma + \underbrace{\gamma^{-1} \dd{\gamma}}_{\text{MC form on }G} \label{eq:connection on E}
+    \end{equation}
+    on $U$.
+    
+    For some other $U'$ we have 
+    \begin{equation}
+        \omega = (\gamma')^{-1} A' \gamma' + (\gamma')^{-1} \dd{\gamma'}
+    \end{equation}
+    where $\gamma'$ is the fibre coordinate over $U'$, and $A,A'$ are 1-forms on $B$.
+    
+    On $U \cap U'$, $\gamma' = g \gamma$ where $g \in G$ is the transition function $\phi_{U U'}$. Then 
+    \begin{equation}
+        \gamma^{-1} A \gamma + \gamma^{-1} \dd{\gamma} = \gamma^{-1} g^{-1} A' g \gamma + \underbrace{\gamma^{-1} \gamma^{-1} \left( \dd{(g \gamma)} \right)}_{\gamma^{-1} \dd{\gamma} + \gamma^{-1} g^{-1} \dd{g} \gamma}
+    \end{equation}
+    and we multiply by $\gamma$ on the left and $\gamma^{-1}$ on the right to get 
+    \begin{equation}
+        A = g^{-1} A' g + g^{-1} \dd{g} 
+    \end{equation}
+    and by multiply $g$ on the left, $g^{-1}$ on the right we get 
+    \begin{equation}
+        \boxed{A' = g A g^{-1} - (\dd{g})g^{-1}} \label{eq:conn-gauge-tfm}
+    \end{equation}
+    which is the gauge transformation between two gauge potentials. 
+
+    \begin{defi}[Curvature]
+        A \emph{curvature} of a connection on $E$ is a $\mathfrak{g}$-valued 2-form 
+        \begin{equation}
+            \Omega = \dd{\omega} + \omega \wedge \omega.
+        \end{equation}
+    \end{defi}
+
+    With respect to two trivialisations $U, U'$ we have 
+    \begin{equation}
+        \Omega = \begin{dcases}
+            \gamma^{-1} F \gamma & \text{over }U\\
+            (\gamma')^{-1} F' \gamma' & \text{over }U'
+        \end{dcases}
+    \end{equation}
+    where $F, F'$ are 2-forms on $B$ related by a gauge transformation 
+    \begin{equation}
+        F' = g F g^{-1}. \label{eq:curv-gauge-tfm}
+    \end{equation}
 
 
 
